@@ -351,10 +351,22 @@ export default function Home() {
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
       <div className="max-w-5xl mx-auto px-6 py-10">
         <div className="flex justify-between items-start mb-8">
-          <div className="flex items-center gap-3">
-            <RosterMindLogo size={44} />
+          <div className="flex items-center gap-4">
+            <RosterMindLogo size={62} />
             <div>
-              <h1 className="text-3xl font-bold tracking-tight">Roster Mind</h1>
+              <h1
+                className="text-3xl text-neutral-100"
+                style={{
+                  fontFamily: "'Arial Black', 'Arial Bold', Impact, Haettenschweiler, sans-serif",
+                  fontWeight: 900,
+                  fontStyle: 'italic',
+                  letterSpacing: '-0.5px',
+                  transform: 'skewX(-6deg)',
+                  display: 'inline-block'
+                }}
+              >
+                ROSTER<span style={{ color: '#34d399' }}>MIND</span>
+              </h1>
               <p className="text-neutral-400 mt-1 text-sm">Logged in as {user.email}</p>
             </div>
           </div>

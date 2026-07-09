@@ -57,11 +57,23 @@ export default function LoginPage() {
       <div className="w-full max-w-sm">
 
         <div className="flex justify-center mb-4">
-          <RosterMindLogo size={64} />
+          <RosterMindLogo size={90} />
         </div>
 
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold tracking-tight">Roster Mind</h1>
+          <h1
+            className="text-2xl text-neutral-100"
+            style={{
+              fontFamily: "'Arial Black', 'Arial Bold', Impact, Haettenschweiler, sans-serif",
+              fontWeight: 900,
+              fontStyle: 'italic',
+              letterSpacing: '-0.5px',
+              transform: 'skewX(-6deg)',
+              display: 'inline-block'
+            }}
+          >
+            ROSTER<span style={{ color: '#34d399' }}>MIND</span>
+          </h1>
           <p className="text-neutral-400 mt-2 text-sm">
             {isSignUp ? 'Create an account to get started' : 'Log in to your franchises'}
           </p>
