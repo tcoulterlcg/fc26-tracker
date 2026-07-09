@@ -154,6 +154,58 @@ const CLUB_LEAGUE_MAP = {
   'Atlanta United': 'MLS'
 }
 
+const CFB_TEAM_CONFERENCE_MAP = {
+  'Alabama': 'SEC', 'Arkansas': 'SEC', 'Auburn': 'SEC', 'Florida': 'SEC', 'Georgia': 'SEC',
+  'Kentucky': 'SEC', 'LSU': 'SEC', 'Mississippi State': 'SEC', 'Missouri': 'SEC', 'Oklahoma': 'SEC',
+  'Ole Miss': 'SEC', 'South Carolina': 'SEC', 'Tennessee': 'SEC', 'Texas': 'SEC', 'Texas A&M': 'SEC',
+  'Vanderbilt': 'SEC',
+
+  'Illinois': 'Big Ten', 'Indiana': 'Big Ten', 'Iowa': 'Big Ten', 'Maryland': 'Big Ten',
+  'Michigan': 'Big Ten', 'Michigan State': 'Big Ten', 'Minnesota': 'Big Ten', 'Nebraska': 'Big Ten',
+  'Northwestern': 'Big Ten', 'Ohio State': 'Big Ten', 'Oregon': 'Big Ten', 'Penn State': 'Big Ten',
+  'Purdue': 'Big Ten', 'Rutgers': 'Big Ten', 'UCLA': 'Big Ten', 'USC': 'Big Ten',
+  'Washington': 'Big Ten', 'Wisconsin': 'Big Ten',
+
+  'Boston College': 'ACC', 'California': 'ACC', 'Clemson': 'ACC', 'Duke': 'ACC',
+  'Florida State': 'ACC', 'Georgia Tech': 'ACC', 'Louisville': 'ACC', 'Miami': 'ACC',
+  'NC State': 'ACC', 'North Carolina': 'ACC', 'Pittsburgh': 'ACC', 'SMU': 'ACC',
+  'Stanford': 'ACC', 'Syracuse': 'ACC', 'Virginia': 'ACC', 'Virginia Tech': 'ACC',
+  'Wake Forest': 'ACC',
+
+  'Arizona': 'Big 12', 'Arizona State': 'Big 12', 'Baylor': 'Big 12', 'BYU': 'Big 12',
+  'Cincinnati': 'Big 12', 'Colorado': 'Big 12', 'Houston': 'Big 12', 'Iowa State': 'Big 12',
+  'Kansas': 'Big 12', 'Kansas State': 'Big 12', 'Oklahoma State': 'Big 12', 'TCU': 'Big 12',
+  'Texas Tech': 'Big 12', 'UCF': 'Big 12', 'Utah': 'Big 12', 'West Virginia': 'Big 12',
+
+  'Army': 'American Athletic', 'Charlotte': 'American Athletic', 'East Carolina': 'American Athletic',
+  'Florida Atlantic': 'American Athletic', 'Memphis': 'American Athletic', 'Navy': 'American Athletic',
+  'North Texas': 'American Athletic', 'Rice': 'American Athletic', 'South Florida': 'American Athletic',
+  'Temple': 'American Athletic', 'Tulane': 'American Athletic', 'Tulsa': 'American Athletic',
+  'UAB': 'American Athletic', 'UTSA': 'American Athletic',
+
+  'Air Force': 'Mountain West', 'Boise State': 'Mountain West', 'Colorado State': 'Mountain West',
+  'Fresno State': 'Mountain West', 'Hawaii': 'Mountain West', 'Nevada': 'Mountain West',
+  'New Mexico': 'Mountain West', 'San Diego State': 'Mountain West', 'San Jose State': 'Mountain West',
+  'UNLV': 'Mountain West', 'Utah State': 'Mountain West', 'Wyoming': 'Mountain West',
+
+  'Delaware': 'Conference USA', 'FIU': 'Conference USA', 'Jacksonville State': 'Conference USA',
+  'Kennesaw State': 'Conference USA', 'Liberty': 'Conference USA', 'Louisiana Tech': 'Conference USA',
+  'Middle Tennessee': 'Conference USA', 'Missouri State': 'Conference USA', 'New Mexico State': 'Conference USA',
+  'Sam Houston': 'Conference USA', 'UTEP': 'Conference USA', 'Western Kentucky': 'Conference USA',
+
+  'Appalachian State': 'Sun Belt', 'Arkansas State': 'Sun Belt', 'Coastal Carolina': 'Sun Belt',
+  'Georgia Southern': 'Sun Belt', 'Georgia State': 'Sun Belt', 'James Madison': 'Sun Belt',
+  'Louisiana': 'Sun Belt', 'Louisiana Monroe': 'Sun Belt', 'Marshall': 'Sun Belt',
+  'Old Dominion': 'Sun Belt', 'South Alabama': 'Sun Belt', 'Southern Miss': 'Sun Belt',
+  'Texas State': 'Sun Belt', 'Troy': 'Sun Belt',
+
+  'Akron': 'MAC', 'Ball State': 'MAC', 'Bowling Green': 'MAC', 'Buffalo': 'MAC',
+  'Central Michigan': 'MAC', 'Eastern Michigan': 'MAC', 'Kent State': 'MAC', 'Miami (OH)': 'MAC',
+  'Northern Illinois': 'MAC', 'Ohio': 'MAC', 'Toledo': 'MAC', 'Western Michigan': 'MAC',
+
+  'Notre Dame': 'Independent', 'UConn': 'Independent', 'UMass': 'Independent'
+}
+
 function RosterHQLogo({ size }) {
   return (
     <svg width={size} height={size} viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
@@ -200,10 +252,12 @@ export default function Home() {
     const delayDebounce = setTimeout(() => {
       if (selectedGame === 'EA FC 26' && clubName.length >= 2) {
         searchClubs()
+      } else if (selectedGame === 'EA CFB 27' && clubName.length >= 1) {
+        searchCfbTeams()
       } else {
         setClubResults([])
       }
-    }, 300)
+    }, 200)
     return () => clearTimeout(delayDebounce)
   }, [clubName, selectedGame])
 
@@ -252,8 +306,19 @@ export default function Home() {
     }
   }
 
+  const searchCfbTeams = () => {
+    const lower = clubName.toLowerCase()
+    const matches = Object.keys(CFB_TEAM_CONFERENCE_MAP).filter(function(team) {
+      return team.toLowerCase().indexOf(lower) !== -1
+    })
+    setClubResults(matches.slice(0, 6))
+    setShowClubResults(true)
+  }
+
   const applyLeagueForClub = (club) => {
-    if (CLUB_LEAGUE_MAP[club]) {
+    if (selectedGame === 'EA CFB 27' && CFB_TEAM_CONFERENCE_MAP[club]) {
+      setLeague(CFB_TEAM_CONFERENCE_MAP[club])
+    } else if (selectedGame === 'EA FC 26' && CLUB_LEAGUE_MAP[club]) {
       setLeague(CLUB_LEAGUE_MAP[club])
     }
   }
@@ -267,9 +332,7 @@ export default function Home() {
   const handleClubBlur = () => {
     setTimeout(() => {
       setShowClubResults(false)
-      if (selectedGame === 'EA FC 26') {
-        applyLeagueForClub(clubName)
-      }
+      applyLeagueForClub(clubName)
     }, 150)
   }
 
@@ -463,15 +526,15 @@ export default function Home() {
                     </label>
                     <input
                       type="text"
-                      placeholder={selectedGame === 'EA CFB 27' ? 'e.g. Ohio State' : 'Start typing, e.g. Qu...'}
+                      placeholder={selectedGame === 'EA CFB 27' ? 'Start typing, e.g. Ohio...' : 'Start typing, e.g. Qu...'}
                       value={clubName}
                       onChange={(e) => setClubName(e.target.value)}
-                      onFocus={() => selectedGame === 'EA FC 26' && clubResults.length > 0 && setShowClubResults(true)}
+                      onFocus={() => clubResults.length > 0 && setShowClubResults(true)}
                       onBlur={handleClubBlur}
                       className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                       autoFocus
                     />
-                    {selectedGame === 'EA FC 26' && showClubResults && clubResults.length > 0 && (
+                    {showClubResults && clubResults.length > 0 && (
                       <div className="absolute z-20 mt-1 w-full bg-neutral-800 border border-neutral-700 rounded-lg shadow-lg overflow-hidden">
                         {clubResults.map((club, idx) => (
                           <button
@@ -507,7 +570,7 @@ export default function Home() {
                 <p className="text-neutral-500 text-xs mb-4">
                   {selectedGame === 'EA FC 26'
                     ? 'Picking a recognized club auto-fills its league and imports its roster from your player database.'
-                    : 'Player import for EA CFB 27 rosters is coming soon \u2014 you can add players manually for now.'}
+                    : 'Picking a recognized team auto-fills its conference. Player import for CFB 27 rosters is coming soon \u2014 you can add players manually for now.'}
                 </p>
                 <div className="flex gap-2 justify-between">
                   <button
