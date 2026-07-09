@@ -4,6 +4,25 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
 
+function RosterMindLogo({ size }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="emeraldGradLogin" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#34d399" stopOpacity="1" />
+          <stop offset="100%" stopColor="#059669" stopOpacity="1" />
+        </linearGradient>
+      </defs>
+      <rect width="512" height="512" rx="96" fill="#0a0a0a" />
+      <rect x="120" y="120" width="272" height="80" rx="16" fill="url(#emeraldGradLogin)" />
+      <rect x="120" y="216" width="180" height="80" rx="16" fill="#10b981" opacity="0.65" />
+      <rect x="120" y="312" width="272" height="80" rx="16" fill="url(#emeraldGradLogin)" opacity="0.9" />
+      <circle cx="356" cy="256" r="34" fill="#0a0a0a" stroke="#34d399" strokeWidth="8" />
+      <circle cx="356" cy="256" r="10" fill="#34d399" />
+    </svg>
+  )
+}
+
 export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -37,8 +56,12 @@ export default function LoginPage() {
     <div className="min-h-screen bg-neutral-950 text-neutral-100 flex items-center justify-center px-6">
       <div className="w-full max-w-sm">
 
+        <div className="flex justify-center mb-4">
+          <RosterMindLogo size={64} />
+        </div>
+
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold tracking-tight">FC 26 Franchise Tracker</h1>
+          <h1 className="text-2xl font-bold tracking-tight">Roster Mind</h1>
           <p className="text-neutral-400 mt-2 text-sm">
             {isSignUp ? 'Create an account to get started' : 'Log in to your franchises'}
           </p>
