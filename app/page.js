@@ -5,6 +5,14 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
 
+const GAMES = [
+  { id: 'EA FC 26', label: 'EA FC 26', sub: 'Soccer', status: 'live' },
+  { id: 'EA CFB 27', label: 'EA College Football 27', sub: 'College Football', status: 'live' },
+  { id: 'EA NHL 26', label: 'EA NHL 26', sub: 'Hockey', status: 'soon' },
+  { id: 'EA Madden 26', label: 'EA Madden 26', sub: 'Football', status: 'soon' },
+  { id: 'MLB The Show 26', label: 'MLB The Show 26', sub: 'Baseball', status: 'soon' }
+]
+
 const LEAGUES = [
   'Premier League',
   'EFL Championship',
@@ -29,6 +37,20 @@ const LEAGUES = [
   'Süper Lig',
   'A-League',
   'Other / International'
+]
+
+const CFB_CONFERENCES = [
+  'SEC',
+  'Big Ten',
+  'Big 12',
+  'ACC',
+  'American Athletic',
+  'Mountain West',
+  'Conference USA',
+  'Sun Belt',
+  'MAC',
+  'Independent',
+  'Other'
 ]
 
 const CLUB_LEAGUE_MAP = {
@@ -132,7 +154,7 @@ const CLUB_LEAGUE_MAP = {
   'Atlanta United': 'MLS'
 }
 
-function RosterMindLogo({ size }) {
+function RosterHQLogo({ size }) {
   return (
     <svg width={size} height={size} viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -156,6 +178,7 @@ export default function Home() {
   const [franchises, setFranchises] = useState([])
   const [loading, setLoading] = useState(true)
   const [showCreatePanel, setShowCreatePanel] = useState(false)
+  const [selectedGame, setSelectedGame] = useState(null)
   const [clubName, setClubName] = useState('')
   const [league, setLeague] = useState('')
   const [creating, setCreating] = useState(false)
@@ -175,14 +198,14 @@ export default function Home() {
 
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
-      if (clubName.length >= 2) {
+      if (selectedGame === 'EA FC 26' && clubName.length >= 2) {
         searchClubs()
       } else {
         setClubResults([])
       }
     }, 300)
     return () => clearTimeout(delayDebounce)
-  }, [clubName])
+  }, [clubName, selectedGame])
 
   const checkUser = async () => {
     const result = await supabase.auth.getUser()
@@ -244,12 +267,23 @@ export default function Home() {
   const handleClubBlur = () => {
     setTimeout(() => {
       setShowClubResults(false)
-      applyLeagueForClub(clubName)
+      if (selectedGame === 'EA FC 26') {
+        applyLeagueForClub(clubName)
+      }
     }, 150)
+  }
+
+  const handleSelectGame = (game) => {
+    if (game.status !== 'live') return
+    setSelectedGame(game.id)
+    setClubName('')
+    setLeague('')
+    setClubResults([])
   }
 
   const resetCreatePanel = () => {
     setShowCreatePanel(false)
+    setSelectedGame(null)
     setClubName('')
     setLeague('')
     setClubResults([])
@@ -264,6 +298,7 @@ export default function Home() {
         user_id: user.id,
         club_name: clubName,
         league: league,
+        game: selectedGame,
         current_season: 1
       })
       .select()
@@ -277,42 +312,44 @@ export default function Home() {
 
     const newFranchise = franchiseResult.data
 
-    const referenceResult = await supabase
-      .from('player_reference')
-      .select('*')
-      .ilike('active_club', clubName)
+    if (selectedGame === 'EA FC 26') {
+      const referenceResult = await supabase
+        .from('player_reference')
+        .select('*')
+        .ilike('active_club', clubName)
 
-    if (!referenceResult.error && referenceResult.data.length > 0) {
-      const playersToInsert = referenceResult.data.map(function(p) {
-        return {
-          franchise_id: newFranchise.id,
-          name: p.name,
-          position: p.position,
-          age: p.age,
-          overall_rating: p.overall_rating,
-          potential_rating: p.potential_rating,
-          nationality: p.nationality,
-          active_club: p.active_club,
-          status: p.status,
-          owned_by: p.owned_by,
-          squad_number: p.squad_number,
-          contract: p.contract,
-          value_eur: p.value_eur,
-          wage_eur_wk: p.wage_eur_wk,
-          wage: p.wage_eur_wk,
-          gro: p.gro,
-          skill_moves: p.skill_moves,
-          weak_foot: p.weak_foot,
-          work_rate: p.work_rate,
-          height_cm: p.height_cm,
-          weight_kg: p.weight_kg,
-          build: p.build,
-          igs: p.igs,
-          contract_years_remaining: null
-        }
-      })
+      if (!referenceResult.error && referenceResult.data.length > 0) {
+        const playersToInsert = referenceResult.data.map(function(p) {
+          return {
+            franchise_id: newFranchise.id,
+            name: p.name,
+            position: p.position,
+            age: p.age,
+            overall_rating: p.overall_rating,
+            potential_rating: p.potential_rating,
+            nationality: p.nationality,
+            active_club: p.active_club,
+            status: p.status,
+            owned_by: p.owned_by,
+            squad_number: p.squad_number,
+            contract: p.contract,
+            value_eur: p.value_eur,
+            wage_eur_wk: p.wage_eur_wk,
+            wage: p.wage_eur_wk,
+            gro: p.gro,
+            skill_moves: p.skill_moves,
+            weak_foot: p.weak_foot,
+            work_rate: p.work_rate,
+            height_cm: p.height_cm,
+            weight_kg: p.weight_kg,
+            build: p.build,
+            igs: p.igs,
+            contract_years_remaining: null
+          }
+        })
 
-      await supabase.from('players').insert(playersToInsert)
+        await supabase.from('players').insert(playersToInsert)
+      }
     }
 
     setCreating(false)
@@ -352,7 +389,7 @@ export default function Home() {
       <div className="max-w-5xl mx-auto px-6 py-10">
         <div className="flex justify-between items-start mb-8">
           <div className="flex items-center gap-4">
-            <RosterMindLogo size={62} />
+            <RosterHQLogo size={62} />
             <div>
               <h1
                 className="text-3xl text-neutral-100"
@@ -365,7 +402,7 @@ export default function Home() {
                   display: 'inline-block'
                 }}
               >
-                ROSTER<span style={{ color: '#34d399' }}>MIND</span>
+                ROSTER<span style={{ color: '#34d399' }}>HQ</span>
               </h1>
               <p className="text-neutral-400 mt-1 text-sm">Logged in as {user.email}</p>
             </div>
@@ -385,58 +422,110 @@ export default function Home() {
 
         {showCreatePanel ? (
           <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-5 mb-8">
-            <h2 className="text-sm font-semibold mb-4 text-neutral-200">New Franchise</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-              <div className="relative">
-                <label className="block text-xs font-medium text-neutral-400 mb-1">Club Name</label>
-                <input
-                  type="text"
-                  placeholder="Start typing, e.g. Qu..."
-                  value={clubName}
-                  onChange={(e) => setClubName(e.target.value)}
-                  onFocus={() => clubResults.length > 0 && setShowClubResults(true)}
-                  onBlur={handleClubBlur}
-                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                  autoFocus
-                />
-                {showClubResults && clubResults.length > 0 && (
-                  <div className="absolute z-20 mt-1 w-full bg-neutral-800 border border-neutral-700 rounded-lg shadow-lg overflow-hidden">
-                    {clubResults.map((club, idx) => (
-                      <button
-                        type="button"
-                        key={idx}
-                        onClick={() => handleSelectClub(club)}
-                        className="w-full text-left px-3 py-2 hover:bg-neutral-700 text-sm"
-                      >
-                        {club}
-                      </button>
-                    ))}
+            <h2 className="text-sm font-semibold mb-4 text-neutral-200">
+              {selectedGame ? 'New Franchise \u2014 ' + selectedGame : 'Choose a Game'}
+            </h2>
+
+            {!selectedGame ? (
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                {GAMES.map(function(game) {
+                  const isLive = game.status === 'live'
+                  return (
+                    <button
+                      key={game.id}
+                      type="button"
+                      onClick={() => handleSelectGame(game)}
+                      disabled={!isLive}
+                      className={
+                        'text-left rounded-lg p-4 border transition-colors ' +
+                        (isLive
+                          ? 'bg-neutral-800/50 border-neutral-800 hover:border-emerald-600 cursor-pointer'
+                          : 'bg-neutral-800/20 border-neutral-800 cursor-not-allowed opacity-60')
+                      }
+                    >
+                      <p className="font-semibold text-neutral-100 text-sm">{game.label}</p>
+                      <p className="text-neutral-500 text-xs mt-1">{game.sub}</p>
+                      {isLive ? (
+                        <p className="text-emerald-400 text-xs mt-3 font-medium">Available</p>
+                      ) : (
+                        <p className="text-neutral-500 text-xs mt-3 font-medium">Site in progress</p>
+                      )}
+                    </button>
+                  )
+                })}
+              </div>
+            ) : (
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div className="relative">
+                    <label className="block text-xs font-medium text-neutral-400 mb-1">
+                      {selectedGame === 'EA CFB 27' ? 'Team Name' : 'Club Name'}
+                    </label>
+                    <input
+                      type="text"
+                      placeholder={selectedGame === 'EA CFB 27' ? 'e.g. Ohio State' : 'Start typing, e.g. Qu...'}
+                      value={clubName}
+                      onChange={(e) => setClubName(e.target.value)}
+                      onFocus={() => selectedGame === 'EA FC 26' && clubResults.length > 0 && setShowClubResults(true)}
+                      onBlur={handleClubBlur}
+                      className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                      autoFocus
+                    />
+                    {selectedGame === 'EA FC 26' && showClubResults && clubResults.length > 0 && (
+                      <div className="absolute z-20 mt-1 w-full bg-neutral-800 border border-neutral-700 rounded-lg shadow-lg overflow-hidden">
+                        {clubResults.map((club, idx) => (
+                          <button
+                            type="button"
+                            key={idx}
+                            onClick={() => handleSelectClub(club)}
+                            className="w-full text-left px-3 py-2 hover:bg-neutral-700 text-sm"
+                          >
+                            {club}
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-neutral-400 mb-1">League</label>
-                <select
-                  value={league}
-                  onChange={(e) => setLeague(e.target.value)}
-                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                >
-                  <option value="">Select a league...</option>
-                  {LEAGUES.map((l) => (
-                    <option key={l} value={l}>{l}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            <p className="text-neutral-500 text-xs mb-4">
-              Picking a recognized club auto-fills its league. You can still change it manually if needed.
-            </p>
-            <div className="flex gap-2 justify-end">
-              <button onClick={resetCreatePanel} className="text-neutral-400 hover:text-neutral-200 text-sm px-3 py-2">Cancel</button>
-              <button onClick={handleCreateFranchise} disabled={!clubName || creating} className="bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed transition-colors rounded-lg px-4 py-2 text-sm font-semibold">
-                {creating ? 'Creating...' : 'Create Franchise'}
-              </button>
-            </div>
+                  <div>
+                    <label className="block text-xs font-medium text-neutral-400 mb-1">
+                      {selectedGame === 'EA CFB 27' ? 'Conference' : 'League'}
+                    </label>
+                    <select
+                      value={league}
+                      onChange={(e) => setLeague(e.target.value)}
+                      className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                    >
+                      <option value="">
+                        {selectedGame === 'EA CFB 27' ? 'Select a conference...' : 'Select a league...'}
+                      </option>
+                      {(selectedGame === 'EA CFB 27' ? CFB_CONFERENCES : LEAGUES).map((l) => (
+                        <option key={l} value={l}>{l}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                <p className="text-neutral-500 text-xs mb-4">
+                  {selectedGame === 'EA FC 26'
+                    ? 'Picking a recognized club auto-fills its league and imports its roster from your player database.'
+                    : 'Player import for EA CFB 27 rosters is coming soon \u2014 you can add players manually for now.'}
+                </p>
+                <div className="flex gap-2 justify-between">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedGame(null)}
+                    className="text-neutral-400 hover:text-neutral-200 text-sm px-3 py-2"
+                  >
+                    &larr; Change Game
+                  </button>
+                  <div className="flex gap-2">
+                    <button onClick={resetCreatePanel} className="text-neutral-400 hover:text-neutral-200 text-sm px-3 py-2">Cancel</button>
+                    <button onClick={handleCreateFranchise} disabled={!clubName || creating} className="bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed transition-colors rounded-lg px-4 py-2 text-sm font-semibold">
+                      {creating ? 'Creating...' : 'Create Franchise'}
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         ) : null}
 
@@ -451,6 +540,7 @@ export default function Home() {
                 return (
                   <div key={f.id} className="relative bg-neutral-800/50 border border-neutral-800 hover:border-emerald-600 rounded-lg p-4 transition-colors">
                     <a href={franchiseUrl} className="block">
+                      <p className="text-neutral-500 text-xs font-medium mb-1">{f.game || 'EA FC 26'}</p>
                       <h3 className="font-semibold text-neutral-100 pr-6">{f.club_name}</h3>
                       <p className="text-neutral-400 text-sm mt-1">{f.league ? f.league : 'No league set'}</p>
                       <p className="text-emerald-400 text-xs mt-2 font-medium">Season {f.current_season}</p>

@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
 
-function RosterMindLogo({ size }) {
+function RosterHQLogo({ size }) {
   return (
     <svg width={size} height={size} viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -57,7 +57,7 @@ export default function LoginPage() {
       <div className="w-full max-w-sm">
 
         <div className="flex justify-center mb-4">
-          <RosterMindLogo size={90} />
+          <RosterHQLogo size={90} />
         </div>
 
         <div className="text-center mb-8">
@@ -72,7 +72,7 @@ export default function LoginPage() {
               display: 'inline-block'
             }}
           >
-            ROSTER<span style={{ color: '#34d399' }}>MIND</span>
+            ROSTER<span style={{ color: '#34d399' }}>HQ</span>
           </h1>
           <p className="text-neutral-400 mt-2 text-sm">
             {isSignUp ? 'Create an account to get started' : 'Log in to your franchises'}
