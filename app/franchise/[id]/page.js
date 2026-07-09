@@ -96,10 +96,10 @@ function formatEuro(num) {
 
 function ovrBadgeColor(ovr) {
   if (ovr === null || ovr === undefined) return 'bg-neutral-700'
-  if (ovr >= 90) return 'bg-emerald-600'
-  if (ovr >= 80) return 'bg-emerald-800'
-  if (ovr >= 70) return 'bg-amber-700'
-  return 'bg-neutral-700'
+  if (ovr >= 80) return 'bg-green-600'
+  if (ovr >= 70) return 'bg-yellow-500'
+  if (ovr >= 60) return 'bg-orange-600'
+  return 'bg-red-600'
 }
 
 function OvrBadge({ value, small }) {
