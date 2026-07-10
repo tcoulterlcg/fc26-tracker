@@ -124,14 +124,52 @@ export default function ImportPage() {
     setStatus('')
 
     const tableName = game === 'EA CFB 27' ? 'cfb_player_reference' : 'player_reference'
-    const result = await supabase.from(tableName).insert(preview)
+
+    let existingResult
+    if (game === 'EA CFB 27') {
+      const teams = Array.from(new Set(preview.map(function(p) { return p.team })))
+      existingResult = await supabase.from(tableName).select('team, player_name').in('team', teams)
+    } else {
+      const clubs = Array.from(new Set(preview.map(function(p) { return p.active_club })))
+      existingResult = await supabase.from(tableName).select('active_club, name').in('active_club', clubs)
+    }
+
+    const existingSet = new Set()
+    if (!existingResult.error && existingResult.data) {
+      existingResult.data.forEach(function(row) {
+        if (game === 'EA CFB 27') {
+          existingSet.add(row.team + '||' + row.player_name)
+        } else {
+          existingSet.add(row.active_club + '||' + row.name)
+        }
+      })
+    }
+
+    const newRows = preview.filter(function(p) {
+      const key = game === 'EA CFB 27' ? (p.team + '||' + p.player_name) : (p.active_club + '||' + p.name)
+      return !existingSet.has(key)
+    })
+
+    const skippedCount = preview.length - newRows.length
+
+    if (newRows.length === 0) {
+      setImporting(false)
+      setStatus('All ' + preview.length + ' players already exist in the database. Nothing new to import.')
+      return
+    }
+
+    const result = await supabase.from(tableName).insert(newRows)
 
     setImporting(false)
 
     if (result.error) {
       setStatus('Error: ' + result.error.message)
     } else {
-      setStatus('Successfully imported ' + preview.length + ' players.')
+      let message = 'Successfully imported ' + newRows.length + ' new player' + (newRows.length !== 1 ? 's' : '') + '.'
+      if (skippedCount > 0) {
+        message += ' Skipped ' + skippedCount + ' duplicate' + (skippedCount !== 1 ? 's' : '') + ' already in the database.'
+      }
+      setStatus(message)
       setCsvText('')
       setPreview([])
     }
@@ -154,7 +192,7 @@ export default function ImportPage() {
 
         <h1 className="text-3xl font-bold tracking-tight mt-4 mb-2">Import Players</h1>
         <p className="text-neutral-400 text-sm mb-6">
-          Bulk-add players to your shared player database (used for search/autocomplete).
+          Bulk-add players to your shared player database (used for search/autocomplete). Duplicate team+name combinations are automatically skipped.
         </p>
 
         <div className="flex gap-2 mb-6">
