@@ -56,17 +56,18 @@ const CFB_POSITION_GROUP = {
 
 const CFB_POSITION_ORDER = ['QB', 'HB', 'FB', 'WR', 'TE', 'LT', 'LG', 'C', 'RG', 'RT', 'LE', 'RE', 'DT', 'LOLB', 'MLB', 'ROLB', 'CB', 'FS', 'SS', 'K', 'P', 'LS']
 
-const CFB_GROUPS = [
-  { key: 'qb', label: 'Quarterbacks', side: 'Offense', positions: ['QB'] },
-  { key: 'rb', label: 'Running Backs', side: 'Offense', positions: ['HB', 'FB'] },
-  { key: 'wr', label: 'Wide Receivers', side: 'Offense', positions: ['WR'] },
-  { key: 'te', label: 'Tight Ends', side: 'Offense', positions: ['TE'] },
-  { key: 'ol', label: 'Offensive Line', side: 'Offense', positions: ['LT', 'LG', 'C', 'RG', 'RT'] },
-  { key: 'dl', label: 'Defensive Line', side: 'Defense', positions: ['LE', 'RE', 'DT'] },
-  { key: 'lb', label: 'Linebackers', side: 'Defense', positions: ['LOLB', 'MLB', 'ROLB'] },
-  { key: 'db', label: 'Secondary', side: 'Defense', positions: ['CB', 'FS', 'SS'] },
-  { key: 'st', label: 'Kickers/Punters', side: 'Special Teams', positions: ['K', 'P', 'LS'] }
-]
+const FC_GK_POSITIONS = ['GK']
+const FC_DEF_POSITIONS = ['CB', 'RB', 'LB', 'LWB', 'RWB']
+const FC_FWD_POSITIONS = ['ST', 'LW', 'RW', 'CF']
+
+function fcPositionGroup(position) {
+  if (FC_GK_POSITIONS.indexOf(position) !== -1) return 'GK'
+  if (FC_DEF_POSITIONS.indexOf(position) !== -1) return 'DEF'
+  if (FC_FWD_POSITIONS.indexOf(position) !== -1) return 'FWD'
+  return 'MID'
+}
+
+const FC_POSITION_ORDER = ['GK', 'DEF', 'MID', 'FWD']
 
 const DEPTH_GROUPS = [
   { label: 'Backfield', side: 'Offense', positions: ['QB', 'HB', 'FB'] },
@@ -91,6 +92,81 @@ const CFB_CONFERENCES = [
   'Conference USA', 'Sun Belt', 'MAC', 'Independent', 'Other'
 ]
 
+const CFB_TEAM_CONFERENCE_MAP = {
+  'Alabama': 'SEC', 'Arkansas': 'SEC', 'Auburn': 'SEC', 'Florida': 'SEC', 'Georgia': 'SEC',
+  'Kentucky': 'SEC', 'LSU': 'SEC', 'Mississippi State': 'SEC', 'Missouri': 'SEC', 'Oklahoma': 'SEC',
+  'Ole Miss': 'SEC', 'South Carolina': 'SEC', 'Tennessee': 'SEC', 'Texas': 'SEC', 'Texas A&M': 'SEC', 'Vanderbilt': 'SEC',
+  'Illinois': 'Big Ten', 'Indiana': 'Big Ten', 'Iowa': 'Big Ten', 'Maryland': 'Big Ten',
+  'Michigan': 'Big Ten', 'Michigan State': 'Big Ten', 'Minnesota': 'Big Ten', 'Nebraska': 'Big Ten',
+  'Northwestern': 'Big Ten', 'Ohio State': 'Big Ten', 'Oregon': 'Big Ten', 'Penn State': 'Big Ten',
+  'Purdue': 'Big Ten', 'Rutgers': 'Big Ten', 'UCLA': 'Big Ten', 'USC': 'Big Ten', 'Washington': 'Big Ten', 'Wisconsin': 'Big Ten',
+  'Boston College': 'ACC', 'California': 'ACC', 'Clemson': 'ACC', 'Duke': 'ACC',
+  'Florida State': 'ACC', 'Georgia Tech': 'ACC', 'Louisville': 'ACC', 'Miami': 'ACC',
+  'NC State': 'ACC', 'North Carolina': 'ACC', 'Pittsburgh': 'ACC', 'SMU': 'ACC',
+  'Stanford': 'ACC', 'Syracuse': 'ACC', 'Virginia': 'ACC', 'Virginia Tech': 'ACC', 'Wake Forest': 'ACC',
+  'Arizona': 'Big 12', 'Arizona State': 'Big 12', 'Baylor': 'Big 12', 'BYU': 'Big 12',
+  'Cincinnati': 'Big 12', 'Colorado': 'Big 12', 'Houston': 'Big 12', 'Iowa State': 'Big 12',
+  'Kansas': 'Big 12', 'Kansas State': 'Big 12', 'Oklahoma State': 'Big 12', 'TCU': 'Big 12',
+  'Texas Tech': 'Big 12', 'UCF': 'Big 12', 'Utah': 'Big 12', 'West Virginia': 'Big 12',
+  'Army': 'American Athletic', 'Charlotte': 'American Athletic', 'East Carolina': 'American Athletic',
+  'Florida Atlantic': 'American Athletic', 'Memphis': 'American Athletic', 'Navy': 'American Athletic',
+  'North Texas': 'American Athletic', 'Rice': 'American Athletic', 'South Florida': 'American Athletic',
+  'Temple': 'American Athletic', 'Tulane': 'American Athletic', 'Tulsa': 'American Athletic',
+  'UAB': 'American Athletic', 'UTSA': 'American Athletic',
+  'Air Force': 'Mountain West', 'Boise State': 'Mountain West', 'Colorado State': 'Mountain West',
+  'Fresno State': 'Mountain West', 'Hawaii': 'Mountain West', 'Nevada': 'Mountain West',
+  'New Mexico': 'Mountain West', 'San Diego State': 'Mountain West', 'San Jose State': 'Mountain West',
+  'UNLV': 'Mountain West', 'Utah State': 'Mountain West', 'Wyoming': 'Mountain West',
+  'Delaware': 'Conference USA', 'FIU': 'Conference USA', 'Jacksonville State': 'Conference USA',
+  'Kennesaw State': 'Conference USA', 'Liberty': 'Conference USA', 'Louisiana Tech': 'Conference USA',
+  'Middle Tennessee': 'Conference USA', 'Missouri State': 'Conference USA', 'New Mexico State': 'Conference USA',
+  'Sam Houston': 'Conference USA', 'UTEP': 'Conference USA', 'Western Kentucky': 'Conference USA',
+  'Appalachian State': 'Sun Belt', 'Arkansas State': 'Sun Belt', 'Coastal Carolina': 'Sun Belt',
+  'Georgia Southern': 'Sun Belt', 'Georgia State': 'Sun Belt', 'James Madison': 'Sun Belt',
+  'Louisiana': 'Sun Belt', 'Louisiana Monroe': 'Sun Belt', 'Marshall': 'Sun Belt',
+  'Old Dominion': 'Sun Belt', 'South Alabama': 'Sun Belt', 'Southern Miss': 'Sun Belt',
+  'Texas State': 'Sun Belt', 'Troy': 'Sun Belt',
+  'Akron': 'MAC', 'Ball State': 'MAC', 'Bowling Green': 'MAC', 'Buffalo': 'MAC',
+  'Central Michigan': 'MAC', 'Eastern Michigan': 'MAC', 'Kent State': 'MAC', 'Miami (OH)': 'MAC',
+  'Northern Illinois': 'MAC', 'Ohio': 'MAC', 'Toledo': 'MAC', 'Western Michigan': 'MAC',
+  'Notre Dame': 'Independent', 'UConn': 'Independent', 'UMass': 'Independent',
+  'North Dakota State': 'Other'
+}
+
+const CLASS_ORDER = ['FR', 'SO', 'JR', 'SR', 'FR (RS)', 'SO (RS)', 'JR (RS)', 'SR (RS)']
+
+const CLUB_LEAGUE_MAP = {
+  'Arsenal': 'Premier League', 'Aston Villa': 'Premier League', 'Bournemouth': 'Premier League',
+  'Brentford': 'Premier League', 'Brighton & Hove Albion': 'Premier League', 'Chelsea': 'Premier League',
+  'Crystal Palace': 'Premier League', 'Everton': 'Premier League', 'Fulham': 'Premier League',
+  'Ipswich Town': 'Premier League', 'Leicester City': 'Premier League', 'Liverpool': 'Premier League',
+  'Manchester City': 'Premier League', 'Manchester United': 'Premier League', 'Newcastle United': 'Premier League',
+  'Nottingham Forest': 'Premier League', 'Southampton': 'Premier League', 'Tottenham Hotspur': 'Premier League',
+  'West Ham United': 'Premier League', 'Wolverhampton Wanderers': 'Premier League',
+  'Queens Park Rangers': 'EFL Championship', 'Leeds United': 'EFL Championship', 'Burnley': 'EFL Championship',
+  'Sheffield United': 'EFL Championship', 'West Bromwich Albion': 'EFL Championship', 'Norwich City': 'EFL Championship',
+  'Middlesbrough': 'EFL Championship', 'Coventry City': 'EFL Championship', 'Sunderland': 'EFL Championship',
+  'Watford': 'EFL Championship', 'Stoke City': 'EFL Championship', 'Hull City': 'EFL Championship',
+  'Preston North End': 'EFL Championship', 'Bristol City': 'EFL Championship', 'Cardiff City': 'EFL Championship',
+  'Swansea City': 'EFL Championship', 'Millwall': 'EFL Championship', 'Blackburn Rovers': 'EFL Championship',
+  'Plymouth Argyle': 'EFL Championship', 'Luton Town': 'EFL Championship', 'Derby County': 'EFL Championship',
+  'Portsmouth': 'EFL Championship', 'Oxford United': 'EFL Championship',
+  'Real Madrid': 'La Liga', 'Barcelona': 'La Liga', 'Atlético Madrid': 'La Liga', 'Athletic Club': 'La Liga',
+  'Real Sociedad': 'La Liga', 'Real Betis': 'La Liga', 'Villarreal': 'La Liga', 'Valencia': 'La Liga',
+  'Sevilla': 'La Liga', 'Girona': 'La Liga',
+  'Bayern Munich': 'Bundesliga', 'Borussia Dortmund': 'Bundesliga', 'RB Leipzig': 'Bundesliga',
+  'Bayer Leverkusen': 'Bundesliga', 'Eintracht Frankfurt': 'Bundesliga', 'VfB Stuttgart': 'Bundesliga',
+  'Borussia Mönchengladbach': 'Bundesliga', 'Wolfsburg': 'Bundesliga',
+  'Juventus': 'Serie A', 'Inter Milan': 'Serie A', 'AC Milan': 'Serie A', 'Napoli': 'Serie A',
+  'AS Roma': 'Serie A', 'Lazio': 'Serie A', 'Atalanta': 'Serie A', 'Fiorentina': 'Serie A',
+  'Paris Saint-Germain': 'Ligue 1', 'Marseille': 'Ligue 1', 'Monaco': 'Ligue 1', 'Lyon': 'Ligue 1',
+  'Lille': 'Ligue 1', 'Nice': 'Ligue 1', 'Lens': 'Ligue 1',
+  'Ajax': 'Eredivisie', 'PSV Eindhoven': 'Eredivisie', 'Feyenoord': 'Eredivisie',
+  'Benfica': 'Primeira Liga', 'Porto': 'Primeira Liga', 'Sporting CP': 'Primeira Liga',
+  'Celtic': 'Scottish Premiership', 'Rangers': 'Scottish Premiership',
+  'Inter Miami': 'MLS', 'LA Galaxy': 'MLS', 'LAFC': 'MLS', 'Seattle Sounders': 'MLS', 'Atlanta United': 'MLS'
+}
+
 const COLUMN_ORDER_STORAGE_PREFIX = 'roster_column_order_'
 
 function average(nums) {
@@ -105,6 +181,22 @@ function formatEuro(num) {
   if (num >= 1000000) return '\u20ac' + (num / 1000000).toFixed(1) + 'M'
   if (num >= 1000) return '\u20ac' + (num / 1000).toFixed(0) + 'K'
   return '\u20ac' + num.toFixed(0)
+}
+
+function formatUsd(num) {
+  if (num === null || num === undefined || isNaN(num)) return '$0'
+  if (num >= 1000000) return '$' + (num / 1000000).toFixed(1) + 'M'
+  if (num >= 1000) return '$' + (num / 1000).toFixed(0) + 'K'
+  return '$' + num.toFixed(0)
+}
+
+function formatStatSummary(statsObj) {
+  if (!statsObj) return null
+  const keys = Object.keys(statsObj).filter(function(k) { return statsObj[k] !== null && statsObj[k] !== undefined })
+  if (keys.length === 0) return null
+  return keys.slice(0, 2).map(function(k) {
+    return statsObj[k] + ' ' + k.replace(/_/g, ' ')
+  }).join(' \u00b7 ')
 }
 
 function ovrBadgeColor(ovr) {
@@ -132,6 +224,40 @@ function OvrBadge({ value, small }) {
   )
 }
 
+function median(nums) {
+  const valid = nums.filter(function(n) { return typeof n === 'number' && !isNaN(n) }).slice().sort(function(a, b) { return a - b })
+  if (valid.length === 0) return null
+  const mid = Math.floor(valid.length / 2)
+  return valid.length % 2 === 0 ? (valid[mid - 1] + valid[mid]) / 2 : valid[mid]
+}
+
+function MiniBenchmarkBar({ ownValue, benchmark, isCurrency, decimals }) {
+  if (!benchmark || ownValue === null || ownValue === undefined) {
+    return <p className="text-neutral-600 text-[10px] mt-2">No benchmark data</p>
+  }
+
+  const fmt = function(v) { return isCurrency ? formatEuro(v) : v.toFixed(decimals) }
+  const range = benchmark.max - benchmark.min
+  const pct = function(v) {
+    if (range <= 0) return 50
+    return Math.min(100, Math.max(0, ((v - benchmark.min) / range) * 100))
+  }
+
+  return (
+    <div className="mt-2">
+      <div className="relative w-full h-1.5 bg-neutral-800 rounded-full">
+        <div className="absolute top-1/2 -translate-y-1/2 w-0.5 h-3 bg-neutral-500" style={{ left: pct(benchmark.median) + '%' }} />
+        <div className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-emerald-400 border border-emerald-200" style={{ left: 'calc(' + pct(ownValue) + '% - 5px)' }} />
+      </div>
+      <div className="flex justify-between mt-1">
+        <span className="text-neutral-600 text-[9px]">{fmt(benchmark.min)}</span>
+        <span className="text-neutral-500 text-[9px]">Med {fmt(benchmark.median)}</span>
+        <span className="text-neutral-600 text-[9px]">{fmt(benchmark.max)}</span>
+      </div>
+    </div>
+  )
+}
+
 export default function FranchisePage() {
   const [franchise, setFranchise] = useState(null)
   const [players, setPlayers] = useState([])
@@ -139,7 +265,6 @@ export default function FranchisePage() {
   const [importingRoster, setImportingRoster] = useState(false)
 
   const [activeTab, setActiveTab] = useState('roster')
-  const [expandedGroup, setExpandedGroup] = useState(null)
 
   const [editingLeague, setEditingLeague] = useState(false)
   const [leagueDraft, setLeagueDraft] = useState('')
@@ -174,6 +299,19 @@ export default function FranchisePage() {
   const [seasonSnapshots, setSeasonSnapshots] = useState([])
   const [recordingSnapshot, setRecordingSnapshot] = useState(false)
 
+  const [fcReferenceRows, setFcReferenceRows] = useState(null)
+  const [benchmarkLeague, setBenchmarkLeague] = useState(null)
+
+  const [editingNil, setEditingNil] = useState(false)
+  const [nilDraft, setNilDraft] = useState('')
+  const [savingNil, setSavingNil] = useState(false)
+  const [recruitingSummary, setRecruitingSummary] = useState({ count: 0, avgStars: null })
+  const [recruitingStarsByName, setRecruitingStarsByName] = useState({})
+  const [seasonStatsByName, setSeasonStatsByName] = useState({})
+
+  const [cfbReferenceRows, setCfbReferenceRows] = useState(null)
+  const [benchmarkConference, setBenchmarkConference] = useState(null)
+
   const router = useRouter()
   const params = useParams()
   const supabase = createClient()
@@ -203,6 +341,120 @@ export default function FranchisePage() {
     }, 300)
     return () => clearTimeout(delayDebounce)
   }, [searchTerm, franchise])
+
+  useEffect(() => {
+    if (!franchise || isCfb || fcReferenceRows !== null) return
+
+    const loadReference = async () => {
+      const { data, error } = await supabase
+        .from('player_reference')
+        .select('active_club, age, overall_rating, potential_rating, value_eur, wage_eur_wk')
+
+      if (!error) {
+        setFcReferenceRows(data)
+      }
+    }
+
+    loadReference()
+  }, [franchise, isCfb, fcReferenceRows])
+
+  const fcClubAggregates = useMemo(function() {
+    if (!fcReferenceRows) return []
+
+    const byClub = {}
+    for (let i = 0; i < fcReferenceRows.length; i++) {
+      const p = fcReferenceRows[i]
+      if (!p.active_club) continue
+      if (!byClub[p.active_club]) byClub[p.active_club] = []
+      byClub[p.active_club].push(p)
+    }
+
+    return Object.keys(byClub).map(function(club) {
+      const rows = byClub[club]
+      return {
+        club: club,
+        league: CLUB_LEAGUE_MAP[club] || null,
+        squadSize: rows.length,
+        avgAge: average(rows.map(function(r) { return r.age })),
+        avgOverall: average(rows.map(function(r) { return r.overall_rating })),
+        avgPotential: average(rows.map(function(r) { return r.potential_rating })),
+        totalValue: rows.reduce(function(sum, r) { return sum + (typeof r.value_eur === 'number' ? r.value_eur : 0) }, 0),
+        totalWage: rows.reduce(function(sum, r) { return sum + (typeof r.wage_eur_wk === 'number' ? r.wage_eur_wk : 0) }, 0)
+      }
+    })
+  }, [fcReferenceRows])
+
+  const getBenchmark = (statKey) => {
+    let pool = fcClubAggregates
+    if (benchmarkLeague && benchmarkLeague !== 'ALL') {
+      pool = pool.filter(function(c) { return c.league === benchmarkLeague })
+    }
+    const values = pool.map(function(c) { return c[statKey] }).filter(function(v) { return typeof v === 'number' && !isNaN(v) })
+    if (values.length === 0) return null
+    return {
+      min: Math.min.apply(null, values),
+      max: Math.max.apply(null, values),
+      median: median(values),
+      count: values.length
+    }
+  }
+
+  useEffect(() => {
+    if (!franchise || !isCfb || cfbReferenceRows !== null) return
+
+    const loadCfbReference = async () => {
+      const { data, error } = await supabase
+        .from('cfb_player_reference')
+        .select('team, position, overall_rating')
+
+      if (!error) {
+        setCfbReferenceRows(data)
+      }
+    }
+
+    loadCfbReference()
+  }, [franchise, isCfb, cfbReferenceRows])
+
+  const cfbTeamAggregates = useMemo(function() {
+    if (!cfbReferenceRows) return []
+
+    const byTeam = {}
+    for (let i = 0; i < cfbReferenceRows.length; i++) {
+      const p = cfbReferenceRows[i]
+      if (!p.team) continue
+      if (!byTeam[p.team]) byTeam[p.team] = []
+      byTeam[p.team].push(p)
+    }
+
+    return Object.keys(byTeam).map(function(team) {
+      const rows = byTeam[team]
+      const offenseRatings = rows.filter(function(r) { return CFB_POSITION_GROUP[r.position] === 'Offense' }).map(function(r) { return r.overall_rating })
+      const defenseRatings = rows.filter(function(r) { return CFB_POSITION_GROUP[r.position] === 'Defense' }).map(function(r) { return r.overall_rating })
+      return {
+        team: team,
+        conference: CFB_TEAM_CONFERENCE_MAP[team] || null,
+        squadSize: rows.length,
+        avgOverall: average(rows.map(function(r) { return r.overall_rating })),
+        offenseAvg: average(offenseRatings),
+        defenseAvg: average(defenseRatings)
+      }
+    })
+  }, [cfbReferenceRows])
+
+  const getCfbBenchmark = (statKey) => {
+    let pool = cfbTeamAggregates
+    if (benchmarkConference && benchmarkConference !== 'ALL') {
+      pool = pool.filter(function(c) { return c.conference === benchmarkConference })
+    }
+    const values = pool.map(function(c) { return c[statKey] }).filter(function(v) { return typeof v === 'number' && !isNaN(v) })
+    if (values.length === 0) return null
+    return {
+      min: Math.min.apply(null, values),
+      max: Math.max.apply(null, values),
+      median: median(values),
+      count: values.length
+    }
+  }
 
   const storageKey = () => {
     return COLUMN_ORDER_STORAGE_PREFIX + (isCfb ? 'cfb' : 'fc')
@@ -254,8 +506,64 @@ export default function FranchisePage() {
 
     setFranchise(franchiseData)
     setLeagueDraft(franchiseData.league || '')
+    setBenchmarkLeague(franchiseData.league || 'ALL')
+    setBenchmarkConference(franchiseData.league || 'ALL')
+    setNilDraft(franchiseData.nil_funds !== null && franchiseData.nil_funds !== undefined ? String(franchiseData.nil_funds) : '')
+    if (franchiseData.game === 'EA CFB 27') {
+      await loadRecruitingSummary(franchiseData.current_season)
+      await loadRecruitingStarsByName()
+    }
+    await loadSeasonStatsByName(franchiseData.current_season)
     await loadPlayers()
     setLoading(false)
+  }
+
+  const loadRecruitingSummary = async (season) => {
+    const { data, error } = await supabase
+      .from('recruiting_history')
+      .select('star_rating')
+      .eq('franchise_id', franchiseId)
+      .eq('season', season)
+
+    if (!error && data) {
+      const stars = data.map(function(r) { return r.star_rating }).filter(function(n) { return typeof n === 'number' })
+      setRecruitingSummary({
+        count: data.length,
+        avgStars: stars.length > 0 ? average(stars) : null
+      })
+    }
+  }
+
+  const loadRecruitingStarsByName = async () => {
+    const { data, error } = await supabase
+      .from('recruiting_history')
+      .select('player_name, star_rating, created_at')
+      .eq('franchise_id', franchiseId)
+      .order('created_at', { ascending: true })
+
+    if (!error && data) {
+      const byName = {}
+      for (let i = 0; i < data.length; i++) {
+        byName[data[i].player_name] = data[i].star_rating
+      }
+      setRecruitingStarsByName(byName)
+    }
+  }
+
+  const loadSeasonStatsByName = async (season) => {
+    const { data, error } = await supabase
+      .from('player_season_stats')
+      .select('player_name, stats')
+      .eq('franchise_id', franchiseId)
+      .eq('season', season)
+
+    if (!error && data) {
+      const byName = {}
+      for (let i = 0; i < data.length; i++) {
+        byName[data[i].player_name] = data[i].stats
+      }
+      setSeasonStatsByName(byName)
+    }
   }
 
   const loadPlayers = async () => {
@@ -295,6 +603,24 @@ export default function FranchisePage() {
     if (!error) {
       setFranchise(function(prev) { return Object.assign({}, prev, { league: leagueDraft }) })
       setEditingLeague(false)
+    } else {
+      alert(error.message)
+    }
+  }
+
+  const handleSaveNil = async () => {
+    setSavingNil(true)
+    const parsed = nilDraft.trim() === '' ? null : parseFloat(nilDraft)
+    const { error } = await supabase
+      .from('franchises')
+      .update({ nil_funds: parsed })
+      .eq('id', franchiseId)
+
+    setSavingNil(false)
+
+    if (!error) {
+      setFranchise(function(prev) { return Object.assign({}, prev, { nil_funds: parsed }) })
+      setEditingNil(false)
     } else {
       alert(error.message)
     }
@@ -638,69 +964,103 @@ export default function FranchisePage() {
     if (isCfb) {
       const offenseRatings = []
       const defenseRatings = []
-      const positionBuckets = {}
 
       for (let i = 0; i < players.length; i++) {
         const p = players[i]
         const group = CFB_POSITION_GROUP[p.position]
         if (group === 'Offense' && typeof p.overall_rating === 'number') offenseRatings.push(p.overall_rating)
         if (group === 'Defense' && typeof p.overall_rating === 'number') defenseRatings.push(p.overall_rating)
-
-        if (p.position) {
-          if (!positionBuckets[p.position]) positionBuckets[p.position] = []
-          if (typeof p.overall_rating === 'number') positionBuckets[p.position].push(p.overall_rating)
-        }
       }
 
-      const positionAverages = CFB_POSITION_ORDER
-        .filter(function(pos) { return positionBuckets[pos] && positionBuckets[pos].length > 0 })
-        .map(function(pos) {
-          return {
-            position: pos,
-            group: CFB_POSITION_GROUP[pos],
-            count: positionBuckets[pos].length,
-            avg: average(positionBuckets[pos])
-          }
-        })
-
-      const sortedOffense = players
-        .filter(function(p) { return CFB_POSITION_GROUP[p.position] === 'Offense' && typeof p.overall_rating === 'number' })
-        .slice()
-        .sort(function(a, b) { return b.overall_rating - a.overall_rating })
-        .slice(0, 3)
-
-      const sortedDefense = players
-        .filter(function(p) { return CFB_POSITION_GROUP[p.position] === 'Defense' && typeof p.overall_rating === 'number' })
-        .slice()
-        .sort(function(a, b) { return b.overall_rating - a.overall_rating })
-        .slice(0, 3)
-
-      const groupAverages = CFB_GROUPS.map(function(g) {
-        const ratings = []
-        for (let i = 0; i < players.length; i++) {
-          if (g.positions.indexOf(players[i].position) !== -1 && typeof players[i].overall_rating === 'number') {
-            ratings.push(players[i].overall_rating)
-          }
+      const classCounts = {}
+      const classOveralls = {}
+      const classDevCounts = {}
+      const classRecruitStars = {}
+      for (let i = 0; i < players.length; i++) {
+        const p = players[i]
+        const cls = p.cfb_class || 'Unknown'
+        classCounts[cls] = (classCounts[cls] || 0) + 1
+        if (!classOveralls[cls]) classOveralls[cls] = []
+        if (typeof p.overall_rating === 'number') classOveralls[cls].push(p.overall_rating)
+        if (!classDevCounts[cls]) classDevCounts[cls] = {}
+        const d = p.dev_trait || 'Normal'
+        classDevCounts[cls][d] = (classDevCounts[cls][d] || 0) + 1
+        const starRating = recruitingStarsByName[p.name]
+        if (typeof starRating === 'number') {
+          if (!classRecruitStars[cls]) classRecruitStars[cls] = []
+          classRecruitStars[cls].push(starRating)
         }
+      }
+      const knownClasses = CLASS_ORDER.filter(function(c) { return classCounts[c] })
+      const unknownClasses = Object.keys(classCounts).filter(function(c) { return CLASS_ORDER.indexOf(c) === -1 })
+      const classBreakdown = knownClasses.concat(unknownClasses).map(function(c) {
         return {
-          key: g.key,
-          label: g.label,
-          side: g.side,
-          positions: g.positions,
-          avg: average(ratings),
-          count: ratings.length
+          label: c,
+          count: classCounts[c],
+          avgOverall: average(classOveralls[c] || []),
+          devCounts: Object.keys(classDevCounts[c] || {}).map(function(d) { return { label: d, count: classDevCounts[c][d] } }),
+          avgRecruitStars: classRecruitStars[c] && classRecruitStars[c].length > 0 ? average(classRecruitStars[c]) : null
         }
-      }).filter(function(g) { return g.count > 0 })
+      })
+
+      const sideBreakdown = ['Offense', 'Defense', 'Special Teams'].map(function(side) {
+        const sidePlayers = players.filter(function(p) { return CFB_POSITION_GROUP[p.position] === side })
+        if (sidePlayers.length === 0) return null
+
+        const depthGroupsForSide = DEPTH_GROUPS.filter(function(g) { return g.side === side })
+
+        const groups = depthGroupsForSide
+          .map(function(depthGroup) {
+            const groupPlayers = sidePlayers.filter(function(p) { return depthGroup.positions.indexOf(p.position) !== -1 })
+            if (groupPlayers.length === 0) return null
+
+            const positions = depthGroup.positions
+              .map(function(pos) {
+                const posPlayers = groupPlayers.filter(function(p) { return p.position === pos })
+                if (posPlayers.length === 0) return null
+                const posDevCounts = {}
+                for (let i = 0; i < posPlayers.length; i++) {
+                  const d = posPlayers[i].dev_trait || 'Normal'
+                  posDevCounts[d] = (posDevCounts[d] || 0) + 1
+                }
+                return {
+                  position: pos,
+                  count: posPlayers.length,
+                  devCounts: Object.keys(posDevCounts).map(function(d) { return { label: d, count: posDevCounts[d] } })
+                }
+              })
+              .filter(function(p) { return p !== null })
+
+            const topPlayers = groupPlayers
+              .filter(function(p) { return typeof p.overall_rating === 'number' })
+              .slice()
+              .sort(function(a, b) { return b.overall_rating - a.overall_rating })
+              .slice(0, 3)
+
+            return {
+              label: depthGroup.label,
+              count: groupPlayers.length,
+              avgOverall: average(groupPlayers.map(function(p) { return p.overall_rating })),
+              positions: positions,
+              topPlayers: topPlayers
+            }
+          })
+          .filter(function(g) { return g !== null })
+
+        return {
+          side: side,
+          count: sidePlayers.length,
+          groups: groups
+        }
+      }).filter(function(s) { return s !== null })
 
       return {
         squadSize: players.length,
         avgOverall: average(overalls),
         offenseAvg: average(offenseRatings),
         defenseAvg: average(defenseRatings),
-        positionAverages: positionAverages,
-        topOffense: sortedOffense,
-        topDefense: sortedDefense,
-        groupAverages: groupAverages
+        classBreakdown: classBreakdown,
+        sideBreakdown: sideBreakdown
       }
     }
 
@@ -717,13 +1077,41 @@ export default function FranchisePage() {
       return sum + (typeof w === 'number' && !isNaN(w) ? w : 0)
     }, 0)
 
+    const topPlayers = players
+      .filter(function(p) { return typeof p.overall_rating === 'number' })
+      .slice()
+      .sort(function(a, b) { return b.overall_rating - a.overall_rating })
+      .slice(0, 5)
+
+    const fcPosBuckets = {}
+    for (let i = 0; i < players.length; i++) {
+      const p = players[i]
+      const group = fcPositionGroup(p.position)
+      if (!fcPosBuckets[group]) fcPosBuckets[group] = []
+      fcPosBuckets[group].push(p)
+    }
+    const fcGroupAverages = FC_POSITION_ORDER
+      .filter(function(g) { return fcPosBuckets[g] && fcPosBuckets[g].length > 0 })
+      .map(function(g) {
+        const rows = fcPosBuckets[g]
+        return {
+          key: g,
+          label: g,
+          count: rows.length,
+          avgOverall: average(rows.map(function(r) { return r.overall_rating })),
+          avgPotential: average(rows.map(function(r) { return r.potential_rating }))
+        }
+      })
+
     return {
       squadSize: players.length,
       avgAge: average(ages),
       avgOverall: average(overalls),
       avgPotential: average(potentials),
       totalValue: totalValue,
-      totalWage: totalWage
+      totalWage: totalWage,
+      topPlayers: topPlayers,
+      fcGroupAverages: fcGroupAverages
     }
   }, [players, isCfb])
 
@@ -1064,42 +1452,242 @@ export default function FranchisePage() {
           </div>
         )}
 
-        {!isCfb && players.length > 0 && (
-          <div className="grid grid-cols-2 gap-3 mb-6 md:grid-cols-3 lg:grid-cols-6">
-            <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
-              <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Squad Size</p>
-              <p className="text-2xl font-semibold text-neutral-100">{teamStats.squadSize}</p>
+        {isCfb && players.length > 0 && (
+          <div className="mb-6">
+            <div className="flex justify-end mb-2">
+              <select
+                value={benchmarkConference || 'ALL'}
+                onChange={(e) => setBenchmarkConference(e.target.value)}
+                className="bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-1.5 text-xs font-semibold text-neutral-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              >
+                <option value="ALL">All Conferences</option>
+                {CFB_CONFERENCES.map((c) => (
+                  <option key={c} value={c}>{c}</option>
+                ))}
+              </select>
             </div>
-            <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
-              <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Avg Age</p>
-              <p className="text-2xl font-semibold text-neutral-100">
-                {teamStats.avgAge !== null ? teamStats.avgAge.toFixed(1) : '-'}
-              </p>
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6 mb-3">
+              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Squad Size</p>
+                <p className="text-2xl font-semibold text-neutral-100">{teamStats.squadSize}</p>
+                <MiniBenchmarkBar ownValue={teamStats.squadSize} benchmark={getCfbBenchmark('squadSize')} isCurrency={false} decimals={0} />
+              </div>
+              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Avg Overall</p>
+                <p className="text-2xl font-semibold text-emerald-400">
+                  {teamStats.avgOverall !== null ? teamStats.avgOverall.toFixed(1) : '-'}
+                </p>
+                <MiniBenchmarkBar ownValue={teamStats.avgOverall} benchmark={getCfbBenchmark('avgOverall')} isCurrency={false} decimals={1} />
+              </div>
+              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Offense</p>
+                <p className="text-2xl font-semibold text-neutral-100">
+                  {teamStats.offenseAvg !== null ? teamStats.offenseAvg.toFixed(0) : '-'}
+                </p>
+                <MiniBenchmarkBar ownValue={teamStats.offenseAvg} benchmark={getCfbBenchmark('offenseAvg')} isCurrency={false} decimals={0} />
+              </div>
+              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Defense</p>
+                <p className="text-2xl font-semibold text-neutral-100">
+                  {teamStats.defenseAvg !== null ? teamStats.defenseAvg.toFixed(0) : '-'}
+                </p>
+                <MiniBenchmarkBar ownValue={teamStats.defenseAvg} benchmark={getCfbBenchmark('defenseAvg')} isCurrency={false} decimals={0} />
+              </div>
+              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">NIL Funds</p>
+                {editingNil ? (
+                  <div className="flex items-center gap-1">
+                    <input
+                      type="number"
+                      value={nilDraft}
+                      onChange={(e) => setNilDraft(e.target.value)}
+                      placeholder="0"
+                      className="w-full bg-neutral-800 border border-neutral-700 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      autoFocus
+                    />
+                    <button onClick={handleSaveNil} disabled={savingNil} className="text-emerald-400 hover:text-emerald-300 text-xs font-semibold whitespace-nowrap">
+                      {savingNil ? '...' : 'Save'}
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <p className="text-2xl font-semibold text-neutral-100">{formatUsd(franchise.nil_funds || 0)}</p>
+                    <button onClick={() => setEditingNil(true)} className="text-neutral-500 hover:text-emerald-400 text-xs font-medium">Edit</button>
+                  </div>
+                )}
+              </div>
+              <a href={'/franchise/' + franchiseId + '/recruiting-history'} className="bg-neutral-900 border border-neutral-800 hover:border-emerald-600 rounded-xl p-4 transition-colors">
+                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Recruiting Class</p>
+                <p className="text-2xl font-semibold text-neutral-100">
+                  {recruitingSummary.count}
+                  {recruitingSummary.avgStars !== null && (
+                    <span className="text-yellow-400 text-sm font-normal ml-1">{recruitingSummary.avgStars.toFixed(1)}&#9733;</span>
+                  )}
+                </p>
+              </a>
             </div>
-            <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
-              <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Avg Overall</p>
-              <p className="text-2xl font-semibold text-emerald-400">
-                {teamStats.avgOverall !== null ? teamStats.avgOverall.toFixed(1) : '-'}
-              </p>
+
+            <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4 mb-3">
+              <p className="text-neutral-500 text-xs uppercase tracking-wide mb-2">Class Breakdown &middot; {teamStats.squadSize} players</p>
+              {teamStats.classBreakdown && teamStats.classBreakdown.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+                  {teamStats.classBreakdown.map(function(c) {
+                    return (
+                      <div key={c.label} className="bg-neutral-800/50 rounded-lg px-3 py-2">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="text-neutral-200 text-sm font-semibold">{c.label}</span>
+                          <span className="text-neutral-400 text-xs">{c.count} players</span>
+                          {c.avgOverall !== null && (
+                            <span className={'text-xs font-semibold ' + statTextColor(c.avgOverall)}>{c.avgOverall.toFixed(1)} OVR</span>
+                          )}
+                          {c.avgRecruitStars !== null && (
+                            <span className="text-yellow-400 text-xs">{c.avgRecruitStars.toFixed(1)}&#9733;</span>
+                          )}
+                        </div>
+                        <div className="flex flex-wrap gap-x-3 gap-y-0.5 mt-1">
+                          {c.devCounts.map(function(d) {
+                            return (
+                              <span key={d.label} className="text-neutral-500 text-xs">
+                                {d.label} <span className="text-neutral-300 font-medium">{d.count}</span>
+                              </span>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              ) : (
+                <p className="text-neutral-500 text-sm">-</p>
+              )}
             </div>
+
             <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
-              <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Avg Potential</p>
-              <p className="text-2xl font-semibold text-neutral-100">
-                {teamStats.avgPotential !== null ? teamStats.avgPotential.toFixed(1) : '-'}
-              </p>
-            </div>
-            <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
-              <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Team Value</p>
-              <p className="text-2xl font-semibold text-neutral-100">{formatEuro(teamStats.totalValue)}</p>
-            </div>
-            <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
-              <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Weekly Wages</p>
-              <p className="text-2xl font-semibold text-neutral-100">{formatEuro(teamStats.totalWage)}</p>
+              <p className="text-neutral-500 text-xs uppercase tracking-wide mb-3">Positional Breakdown</p>
+              {teamStats.sideBreakdown && teamStats.sideBreakdown.length > 0 ? (
+                <div className="space-y-4">
+                  {teamStats.sideBreakdown.map(function(s) {
+                    return (
+                      <div key={s.side}>
+                        <p className="text-neutral-200 text-sm font-semibold mb-2">
+                          {s.side} <span className="text-neutral-400 font-normal">{s.count} players</span>
+                        </p>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                          {s.groups.map(function(g) {
+                            return (
+                              <div key={g.label} className="bg-neutral-800/50 rounded-lg p-2">
+                                <p className="text-neutral-300 text-[11px] font-semibold uppercase tracking-wide mb-1 truncate">
+                                  {g.label} <span className="text-neutral-500 font-normal normal-case">&middot; {g.count}</span>
+                                  {g.avgOverall !== null && (
+                                    <span className={'font-normal normal-case ml-1 ' + statTextColor(g.avgOverall)}>{g.avgOverall.toFixed(1)}</span>
+                                  )}
+                                </p>
+                                <div className="flex gap-2">
+                                  <div className="flex-1 min-w-0 flex flex-wrap content-start gap-1">
+                                    {g.positions.map(function(p) {
+                                      return (
+                                        <div key={p.position} className="bg-neutral-900 rounded px-1.5 py-0.5">
+                                          <div className="flex items-center gap-1">
+                                            <span className="text-neutral-200 text-[11px] font-semibold">{p.position}</span>
+                                            <span className="text-neutral-500 text-[9px]">{p.count}</span>
+                                          </div>
+                                          <div className="flex flex-wrap gap-x-1">
+                                            {p.devCounts.map(function(d) {
+                                              return (
+                                                <span key={d.label} className="text-neutral-500 text-[9px]">
+                                                  {d.label} <span className="text-neutral-300 font-medium">{d.count}</span>
+                                                </span>
+                                              )
+                                            })}
+                                          </div>
+                                        </div>
+                                      )
+                                    })}
+                                  </div>
+                                  {g.topPlayers && g.topPlayers.length > 0 && (
+                                    <div className="w-20 flex-shrink-0 space-y-0.5 border-l border-neutral-700/50 pl-2">
+                                      {g.topPlayers.map(function(p) {
+                                        return (
+                                          <div key={p.id} className="flex items-center justify-between gap-0.5">
+                                            <span className="text-neutral-300 text-[9px] truncate">{p.name}</span>
+                                            <OvrBadge value={p.overall_rating} small />
+                                          </div>
+                                        )
+                                      })}
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              ) : (
+                <p className="text-neutral-500 text-sm">-</p>
+              )}
             </div>
           </div>
         )}
 
-        <div className="flex gap-1 mb-6 border-b border-neutral-800">
+        {!isCfb && players.length > 0 && (
+          <>
+            <div className="flex justify-end mb-2">
+              <select
+                value={benchmarkLeague || 'ALL'}
+                onChange={(e) => setBenchmarkLeague(e.target.value)}
+                className="bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-1.5 text-xs font-semibold text-neutral-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              >
+                <option value="ALL">All Leagues</option>
+                {LEAGUES.map((l) => (
+                  <option key={l} value={l}>{l}</option>
+                ))}
+              </select>
+            </div>
+            <div className="grid grid-cols-2 gap-3 mb-6 md:grid-cols-3 lg:grid-cols-6">
+              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Squad Size</p>
+                <p className="text-2xl font-semibold text-neutral-100">{teamStats.squadSize}</p>
+                <MiniBenchmarkBar ownValue={teamStats.squadSize} benchmark={getBenchmark('squadSize')} isCurrency={false} decimals={0} />
+              </div>
+              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Avg Age</p>
+                <p className="text-2xl font-semibold text-neutral-100">
+                  {teamStats.avgAge !== null ? teamStats.avgAge.toFixed(1) : '-'}
+                </p>
+                <MiniBenchmarkBar ownValue={teamStats.avgAge} benchmark={getBenchmark('avgAge')} isCurrency={false} decimals={1} />
+              </div>
+              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Avg Overall</p>
+                <p className="text-2xl font-semibold text-emerald-400">
+                  {teamStats.avgOverall !== null ? teamStats.avgOverall.toFixed(1) : '-'}
+                </p>
+                <MiniBenchmarkBar ownValue={teamStats.avgOverall} benchmark={getBenchmark('avgOverall')} isCurrency={false} decimals={1} />
+              </div>
+              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Avg Potential</p>
+                <p className="text-2xl font-semibold text-neutral-100">
+                  {teamStats.avgPotential !== null ? teamStats.avgPotential.toFixed(1) : '-'}
+                </p>
+                <MiniBenchmarkBar ownValue={teamStats.avgPotential} benchmark={getBenchmark('avgPotential')} isCurrency={false} decimals={1} />
+              </div>
+              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Team Value</p>
+                <p className="text-2xl font-semibold text-neutral-100">{formatEuro(teamStats.totalValue)}</p>
+                <MiniBenchmarkBar ownValue={teamStats.totalValue} benchmark={getBenchmark('totalValue')} isCurrency={true} decimals={0} />
+              </div>
+              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Weekly Wages</p>
+                <p className="text-2xl font-semibold text-neutral-100">{formatEuro(teamStats.totalWage)}</p>
+                <MiniBenchmarkBar ownValue={teamStats.totalWage} benchmark={getBenchmark('totalWage')} isCurrency={true} decimals={0} />
+              </div>
+            </div>
+          </>
+        )}
+
+        <div className="flex gap-1 mb-6 border-b border-neutral-800 flex-wrap">
           <button
             onClick={() => setActiveTab('roster')}
             className={
@@ -1129,6 +1717,33 @@ export default function FranchisePage() {
           >
             Progression
           </button>
+          <a
+            href={'/franchise/' + franchiseId + '/stats'}
+            className="px-4 py-2 text-sm font-semibold border-b-2 border-transparent text-neutral-500 hover:text-neutral-300"
+          >
+            Stats
+          </a>
+          <a
+            href={'/franchise/' + franchiseId + '/team-needs'}
+            className="px-4 py-2 text-sm font-semibold border-b-2 border-transparent text-neutral-500 hover:text-neutral-300"
+          >
+            Team Needs
+          </a>
+          {isCfb ? (
+            <a
+              href={'/franchise/' + franchiseId + '/recruiting-history'}
+              className="px-4 py-2 text-sm font-semibold border-b-2 border-transparent text-neutral-500 hover:text-neutral-300"
+            >
+              Recruiting History
+            </a>
+          ) : (
+            <a
+              href={'/franchise/' + franchiseId + '/transfer-history'}
+              className="px-4 py-2 text-sm font-semibold border-b-2 border-transparent text-neutral-500 hover:text-neutral-300"
+            >
+              Transfer History
+            </a>
+          )}
         </div>
 
         {activeTab === 'progression' && (
@@ -1223,100 +1838,55 @@ export default function FranchisePage() {
           </div>
         )}
 
-        {isCfb && activeTab === 'roster' && players.length > 0 && (
+        {!isCfb && activeTab === 'roster' && players.length > 0 && (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-5">
-                <h2 className="text-sm font-semibold mb-3 text-neutral-200">Top Offensive Players</h2>
-                <div className="space-y-2">
-                  {teamStats.topOffense.length === 0 ? (
-                    <p className="text-neutral-500 text-sm">No offensive players yet.</p>
-                  ) : (
-                    teamStats.topOffense.map(function(p) {
-                      return (
-                        <div key={p.id} className="flex items-center justify-between bg-neutral-800/50 border border-neutral-800 rounded-lg px-3 py-2">
-                          <div>
-                            <span className="font-medium text-neutral-100">{p.name}</span>
-                            <span className="text-neutral-500 text-xs ml-2">{p.position}{p.jersey_number ? ' #' + p.jersey_number : ''}</span>
-                          </div>
+            <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-5 mb-6">
+              <h2 className="text-sm font-semibold mb-3 text-neutral-200">Top Players</h2>
+              <div className="space-y-2">
+                {teamStats.topPlayers && teamStats.topPlayers.length > 0 ? (
+                  teamStats.topPlayers.map(function(p) {
+                    return (
+                      <div key={p.id} className="flex items-center justify-between bg-neutral-800/50 border border-neutral-800 rounded-lg px-3 py-2">
+                        <div>
+                          <span className="font-medium text-neutral-100">{p.name}</span>
+                          <span className="text-neutral-500 text-xs ml-2">
+                            {p.position}{p.active_club ? ' \u00b7 ' + p.active_club : ''}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <span className="text-neutral-400 text-xs">POT {p.potential_rating !== null && p.potential_rating !== undefined ? p.potential_rating : '-'}</span>
                           <OvrBadge value={p.overall_rating} small />
                         </div>
-                      )
-                    })
-                  )}
-                </div>
-              </div>
-
-              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-5">
-                <h2 className="text-sm font-semibold mb-3 text-neutral-200">Top Defensive Players</h2>
-                <div className="space-y-2">
-                  {teamStats.topDefense.length === 0 ? (
-                    <p className="text-neutral-500 text-sm">No defensive players yet.</p>
-                  ) : (
-                    teamStats.topDefense.map(function(p) {
-                      return (
-                        <div key={p.id} className="flex items-center justify-between bg-neutral-800/50 border border-neutral-800 rounded-lg px-3 py-2">
-                          <div>
-                            <span className="font-medium text-neutral-100">{p.name}</span>
-                            <span className="text-neutral-500 text-xs ml-2">{p.position}{p.jersey_number ? ' #' + p.jersey_number : ''}</span>
-                          </div>
-                          <OvrBadge value={p.overall_rating} small />
-                        </div>
-                      )
-                    })
-                  )}
-                </div>
+                      </div>
+                    )
+                  })
+                ) : (
+                  <p className="text-neutral-500 text-sm">No players yet.</p>
+                )}
               </div>
             </div>
 
             <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-5 mb-6">
               <h2 className="text-sm font-semibold text-neutral-200">Position Group Averages</h2>
-              <p className="text-neutral-500 text-xs mb-3">Tap a group to see individual position breakdowns.</p>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
-                {teamStats.groupAverages.map(function(g) {
-                  const isExpanded = expandedGroup === g.key
+              <p className="text-neutral-500 text-xs mb-3">Average overall and potential by position group.</p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                {teamStats.fcGroupAverages && teamStats.fcGroupAverages.map(function(g) {
                   return (
-                    <button
-                      key={g.key}
-                      type="button"
-                      onClick={() => setExpandedGroup(isExpanded ? null : g.key)}
-                      className={
-                        'flex items-center justify-between rounded-lg border px-3 py-2.5 text-left transition-colors ' +
-                        (isExpanded ? 'bg-emerald-900/30 border-emerald-600' : 'bg-neutral-800/50 border-neutral-800 hover:border-neutral-700')
-                      }
-                    >
-                      <span className="text-sm text-neutral-200">{g.label}</span>
-                      <OvrBadge value={Math.round(g.avg)} small />
-                    </button>
+                    <div key={g.key} className="bg-neutral-800/50 border border-neutral-800 rounded-lg px-3 py-2.5">
+                      <div className="flex justify-between items-center mb-1">
+                        <span className="text-sm text-neutral-200 font-medium">{g.label}</span>
+                        <span className="text-neutral-500 text-xs">({g.count})</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <OvrBadge value={g.avgOverall !== null ? Math.round(g.avgOverall) : null} small />
+                        <span className="text-neutral-500 text-xs">
+                          POT {g.avgPotential !== null ? Math.round(g.avgPotential) : '-'}
+                        </span>
+                      </div>
+                    </div>
                   )
                 })}
               </div>
-
-              {expandedGroup && (
-                <div className="mt-4 bg-neutral-800/40 border border-neutral-800 rounded-lg p-4">
-                  <h3 className="text-xs font-semibold text-neutral-400 uppercase tracking-wide mb-3">
-                    {CFB_GROUPS.find(function(g) { return g.key === expandedGroup }).label} &mdash; by position
-                  </h3>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                    {teamStats.positionAverages
-                      .filter(function(pa) {
-                        const group = CFB_GROUPS.find(function(g) { return g.key === expandedGroup })
-                        return group.positions.indexOf(pa.position) !== -1
-                      })
-                      .map(function(pa) {
-                        return (
-                          <div key={pa.position} className="flex items-center justify-between bg-neutral-900 border border-neutral-800 rounded-lg px-3 py-2">
-                            <div>
-                              <span className="text-sm text-neutral-200 font-medium">{pa.position}</span>
-                              <span className="text-neutral-500 text-xs ml-1.5">({pa.count})</span>
-                            </div>
-                            <OvrBadge value={Math.round(pa.avg)} small />
-                          </div>
-                        )
-                      })}
-                  </div>
-                </div>
-              )}
             </div>
           </>
         )}

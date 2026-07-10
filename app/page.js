@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import React from 'react'
 import { useEffect, useState, useMemo } from 'react'
@@ -99,6 +99,47 @@ const CFB_TEAM_CONFERENCE_MAP = {
   'North Dakota State': 'Other'
 }
 
+const CFB_MASCOTS = {
+  'Alabama': 'Crimson Tide', 'Arkansas': 'Razorbacks', 'Auburn': 'Tigers', 'Florida': 'Gators', 'Georgia': 'Bulldogs',
+  'Kentucky': 'Wildcats', 'LSU': 'Tigers', 'Mississippi State': 'Bulldogs', 'Missouri': 'Tigers', 'Oklahoma': 'Sooners',
+  'Ole Miss': 'Rebels', 'South Carolina': 'Gamecocks', 'Tennessee': 'Volunteers', 'Texas': 'Longhorns', 'Texas A&M': 'Aggies', 'Vanderbilt': 'Commodores',
+  'Illinois': 'Fighting Illini', 'Indiana': 'Hoosiers', 'Iowa': 'Hawkeyes', 'Maryland': 'Terrapins',
+  'Michigan': 'Wolverines', 'Michigan State': 'Spartans', 'Minnesota': 'Golden Gophers', 'Nebraska': 'Cornhuskers',
+  'Northwestern': 'Wildcats', 'Ohio State': 'Buckeyes', 'Oregon': 'Ducks', 'Penn State': 'Nittany Lions',
+  'Purdue': 'Boilermakers', 'Rutgers': 'Scarlet Knights', 'UCLA': 'Bruins', 'USC': 'Trojans', 'Washington': 'Huskies', 'Wisconsin': 'Badgers',
+  'Boston College': 'Eagles', 'California': 'Golden Bears', 'Clemson': 'Tigers', 'Duke': 'Blue Devils',
+  'Florida State': 'Seminoles', 'Georgia Tech': 'Yellow Jackets', 'Louisville': 'Cardinals', 'Miami': 'Hurricanes',
+  'NC State': 'Wolfpack', 'North Carolina': 'Tar Heels', 'Pittsburgh': 'Panthers', 'SMU': 'Mustangs',
+  'Stanford': 'Cardinal', 'Syracuse': 'Orange', 'Virginia': 'Cavaliers', 'Virginia Tech': 'Hokies', 'Wake Forest': 'Demon Deacons',
+  'Arizona': 'Wildcats', 'Arizona State': 'Sun Devils', 'Baylor': 'Bears', 'BYU': 'Cougars',
+  'Cincinnati': 'Bearcats', 'Colorado': 'Buffaloes', 'Houston': 'Cougars', 'Iowa State': 'Cyclones',
+  'Kansas': 'Jayhawks', 'Kansas State': 'Wildcats', 'Oklahoma State': 'Cowboys', 'TCU': 'Horned Frogs',
+  'Texas Tech': 'Red Raiders', 'UCF': 'Knights', 'Utah': 'Utes', 'West Virginia': 'Mountaineers',
+  'Army': 'Black Knights', 'Charlotte': '49ers', 'East Carolina': 'Pirates',
+  'Florida Atlantic': 'Owls', 'Memphis': 'Tigers', 'Navy': 'Midshipmen',
+  'North Texas': 'Mean Green', 'Rice': 'Owls', 'South Florida': 'Bulls',
+  'Temple': 'Owls', 'Tulane': 'Green Wave', 'Tulsa': 'Golden Hurricane',
+  'UAB': 'Blazers', 'UTSA': 'Roadrunners',
+  'Air Force': 'Falcons', 'Boise State': 'Broncos', 'Colorado State': 'Rams',
+  'Fresno State': 'Bulldogs', 'Hawaii': 'Rainbow Warriors', 'Nevada': 'Wolf Pack',
+  'New Mexico': 'Lobos', 'San Diego State': 'Aztecs', 'San Jose State': 'Spartans',
+  'UNLV': 'Rebels', 'Utah State': 'Aggies', 'Wyoming': 'Cowboys',
+  'Delaware': 'Blue Hens', 'FIU': 'Panthers', 'Jacksonville State': 'Gamecocks',
+  'Kennesaw State': 'Owls', 'Liberty': 'Flames', 'Louisiana Tech': 'Bulldogs',
+  'Middle Tennessee': 'Blue Raiders', 'Missouri State': 'Bears', 'New Mexico State': 'Aggies',
+  'Sam Houston': 'Bearkats', 'UTEP': 'Miners', 'Western Kentucky': 'Hilltoppers',
+  'Appalachian State': 'Mountaineers', 'Arkansas State': 'Red Wolves', 'Coastal Carolina': 'Chanticleers',
+  'Georgia Southern': 'Eagles', 'Georgia State': 'Panthers', 'James Madison': 'Dukes',
+  'Louisiana': "Ragin' Cajuns", 'Louisiana Monroe': 'Warhawks', 'Marshall': 'Thundering Herd',
+  'Old Dominion': 'Monarchs', 'South Alabama': 'Jaguars', 'Southern Miss': 'Golden Eagles',
+  'Texas State': 'Bobcats', 'Troy': 'Trojans',
+  'Akron': 'Zips', 'Ball State': 'Cardinals', 'Bowling Green': 'Falcons', 'Buffalo': 'Bulls',
+  'Central Michigan': 'Chippewas', 'Eastern Michigan': 'Eagles', 'Kent State': 'Golden Flashes', 'Miami (OH)': 'RedHawks',
+  'Northern Illinois': 'Huskies', 'Ohio': 'Bobcats', 'Toledo': 'Rockets', 'Western Michigan': 'Broncos',
+  'Notre Dame': 'Fighting Irish', 'UConn': 'Huskies', 'UMass': 'Minutemen',
+  'North Dakota State': 'Bison'
+}
+
 const CFB_POSITION_GROUP = {
   'QB': 'Offense', 'HB': 'Offense', 'FB': 'Offense', 'WR': 'Offense', 'TE': 'Offense',
   'LT': 'Offense', 'LG': 'Offense', 'C': 'Offense', 'RG': 'Offense', 'RT': 'Offense',
@@ -108,6 +149,46 @@ const CFB_POSITION_GROUP = {
 }
 
 const CLASS_ORDER = ['FR', 'SO', 'JR', 'SR', 'FR (RS)', 'SO (RS)', 'JR (RS)', 'SR (RS)']
+
+const FC_GK_POSITIONS = ['GK']
+const FC_DEF_POSITIONS = ['CB', 'RB', 'LB', 'LWB', 'RWB']
+const FC_FWD_POSITIONS = ['ST', 'LW', 'RW', 'CF']
+
+function fcPositionGroup(position) {
+  if (FC_GK_POSITIONS.indexOf(position) !== -1) return 'GK'
+  if (FC_DEF_POSITIONS.indexOf(position) !== -1) return 'DEF'
+  if (FC_FWD_POSITIONS.indexOf(position) !== -1) return 'FWD'
+  return 'MID'
+}
+
+const FC_POSITION_ORDER = ['GK', 'DEF', 'MID', 'FWD']
+
+const FC_STAT_DEFS = {
+  overall: { label: 'Overall', isCurrency: false, decimals: 1, get: function(s) { return s.avgOverall } },
+  potential: { label: 'Potential', isCurrency: false, decimals: 0, get: function(s) { return s.avgPotential } },
+  value: { label: 'Club Value', isCurrency: true, get: function(s) { return s.totalValue } },
+  wages: { label: 'Weekly Wages', isCurrency: true, get: function(s) { return s.totalWage } }
+}
+const FC_DEFAULT_ORDER = [
+  { key: 'overall', enabled: true },
+  { key: 'potential', enabled: true },
+  { key: 'value', enabled: true },
+  { key: 'wages', enabled: true }
+]
+
+const CFB_STAT_DEFS = {
+  overall: { label: 'Overall', isCurrency: false, decimals: 1, get: function(s) { return s.avgOverall } },
+  offense: { label: 'Offense', isCurrency: false, decimals: 0, get: function(s) { return s.offenseAvg } },
+  defense: { label: 'Defense', isCurrency: false, decimals: 0, get: function(s) { return s.defenseAvg } }
+}
+const CFB_DEFAULT_ORDER = [
+  { key: 'overall', enabled: true },
+  { key: 'offense', enabled: true },
+  { key: 'defense', enabled: true }
+]
+
+const FC_STAT_STORAGE_KEY = 'roster_hq_card_stats_fc'
+const CFB_STAT_STORAGE_KEY = 'roster_hq_card_stats_cfb'
 
 function average(nums) {
   const valid = nums.filter(function(n) { return typeof n === 'number' && !isNaN(n) })
@@ -131,20 +212,74 @@ function tierChipColor(avg) {
   return 'bg-red-900/40 text-red-400'
 }
 
-function statTextColor(avg) {
-  if (avg === null || avg === undefined) return 'text-neutral-500'
-  if (avg >= 80) return 'text-green-400'
-  if (avg >= 70) return 'text-yellow-400'
-  if (avg >= 60) return 'text-orange-400'
-  return 'text-red-400'
-}
-
 function tierLabel(avg) {
   if (avg === null || avg === undefined) return 'No Roster'
   if (avg >= 85) return 'Elite'
   if (avg >= 75) return 'Contender'
   if (avg >= 65) return 'Building'
   return 'Rebuilding'
+}
+
+function gradientForValue(avg) {
+  if (avg === null || avg === undefined) return 'from-neutral-600 to-neutral-800'
+  if (avg >= 80) return 'from-green-400 to-green-700'
+  if (avg >= 70) return 'from-yellow-400 to-yellow-700'
+  if (avg >= 60) return 'from-orange-400 to-orange-700'
+  return 'from-red-400 to-red-700'
+}
+
+function starRating(avg) {
+  if (avg === null || avg === undefined) return 0
+  if (avg >= 88) return 5
+  if (avg >= 78) return 4
+  if (avg >= 68) return 3
+  if (avg >= 58) return 2
+  return 1
+}
+
+function StarDisplay({ count }) {
+  return (
+    <span className="text-yellow-400 text-xs">
+      {'\u2605'.repeat(count)}{'\u2606'.repeat(5 - count)}
+    </span>
+  )
+}
+
+function StackedStat({ label, value, isCurrency, decimals }) {
+  const displayVal = isCurrency
+    ? formatEuro(value)
+    : (value !== null && value !== undefined ? value.toFixed(decimals) : '-')
+  const gradient = isCurrency ? 'from-neutral-600 to-neutral-800' : gradientForValue(value)
+  return (
+    <div className={'rounded-lg px-4 py-2 text-center bg-gradient-to-b ' + gradient + ' min-w-[92px]'}>
+      <p className="text-white/70 text-[10px] uppercase tracking-wide">{label}</p>
+      <p className="text-white font-bold text-xl leading-tight">{displayVal}</p>
+    </div>
+  )
+}
+
+function TeamLogo({ url, size }) {
+  if (url) {
+    return (
+      <img
+        src={url}
+        alt=""
+        className="rounded-lg object-contain"
+        style={{ width: size, height: size }}
+        onError={(e) => { e.target.style.display = 'none' }}
+      />
+    )
+  }
+  return (
+    <div
+      className="rounded-lg bg-neutral-800 border border-neutral-700 flex items-center justify-center text-neutral-600"
+      style={{ width: size, height: size }}
+    >
+      <svg width={size * 0.5} height={size * 0.5} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z" />
+      </svg>
+    </div>
+  )
 }
 
 function RosterHQLogo({ size }) {
@@ -204,6 +339,23 @@ async function importRosterForGame(supabase, game, franchiseId, teamName) {
   return 0
 }
 
+async function fetchWikipediaThumbnail(titles) {
+  for (let i = 0; i < titles.length; i++) {
+    try {
+      const res = await fetch('https://en.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(titles[i]))
+      if (res.ok) {
+        const data = await res.json()
+        if (data.thumbnail && data.thumbnail.source) {
+          return data.thumbnail.source
+        }
+      }
+    } catch (e) {
+      // ignore, try next candidate
+    }
+  }
+  return null
+}
+
 export default function Home() {
   const [user, setUser] = useState(null)
   const [franchises, setFranchises] = useState([])
@@ -221,6 +373,13 @@ export default function Home() {
   const [deletingId, setDeletingId] = useState(null)
   const [confirmDeleteId, setConfirmDeleteId] = useState(null)
 
+  const [showCustomizePanel, setShowCustomizePanel] = useState(false)
+  const [fcStatOrder, setFcStatOrder] = useState(FC_DEFAULT_ORDER)
+  const [cfbStatOrder, setCfbStatOrder] = useState(CFB_DEFAULT_ORDER)
+  const [dragInfo, setDragInfo] = useState({ game: null, key: null })
+
+  const [logoCache, setLogoCache] = useState({})
+
   const router = useRouter()
   const supabase = createClient()
 
@@ -229,6 +388,7 @@ export default function Home() {
 
   useEffect(() => {
     checkUser()
+    loadStatSettings()
   }, [])
 
   useEffect(() => {
@@ -243,6 +403,115 @@ export default function Home() {
     }, 200)
     return () => clearTimeout(delayDebounce)
   }, [clubName, selectedGame])
+
+  useEffect(() => {
+    if (franchises.length === 0) return
+    let cancelled = false
+
+    const loadLogos = async () => {
+      for (let i = 0; i < franchises.length; i++) {
+        const f = franchises[i]
+        if (logoCache[f.id] !== undefined) continue
+
+        const isCfb = f.game === 'EA CFB 27'
+        let candidates
+        if (isCfb) {
+          const mascot = CFB_MASCOTS[f.club_name]
+          candidates = mascot
+            ? [f.club_name + ' ' + mascot + ' football', f.club_name + ' ' + mascot]
+            : [f.club_name + ' football team']
+        } else {
+          candidates = [f.club_name + ' F.C.', f.club_name + ' FC']
+        }
+
+        const url = await fetchWikipediaThumbnail(candidates)
+        if (!cancelled) {
+          setLogoCache(function(prev) { return Object.assign({}, prev, { [f.id]: url }) })
+        }
+      }
+    }
+
+    loadLogos()
+    return () => { cancelled = true }
+  }, [franchises])
+
+  const loadStatSettings = () => {
+    try {
+      const savedFc = window.localStorage.getItem(FC_STAT_STORAGE_KEY)
+      if (savedFc) {
+        const parsed = JSON.parse(savedFc)
+        const validKeys = Object.keys(FC_STAT_DEFS)
+        const filtered = parsed.filter(function(s) { return validKeys.indexOf(s.key) !== -1 })
+        const missing = validKeys.filter(function(k) { return !filtered.some(function(s) { return s.key === k }) })
+        setFcStatOrder(filtered.concat(missing.map(function(k) { return { key: k, enabled: true } })))
+      }
+    } catch (e) {
+      // ignore
+    }
+    try {
+      const savedCfb = window.localStorage.getItem(CFB_STAT_STORAGE_KEY)
+      if (savedCfb) {
+        const parsed = JSON.parse(savedCfb)
+        const validKeys = Object.keys(CFB_STAT_DEFS)
+        const filtered = parsed.filter(function(s) { return validKeys.indexOf(s.key) !== -1 })
+        const missing = validKeys.filter(function(k) { return !filtered.some(function(s) { return s.key === k }) })
+        setCfbStatOrder(filtered.concat(missing.map(function(k) { return { key: k, enabled: true } })))
+      }
+    } catch (e) {
+      // ignore
+    }
+  }
+
+  const saveFcStatOrder = (order) => {
+    setFcStatOrder(order)
+    try {
+      window.localStorage.setItem(FC_STAT_STORAGE_KEY, JSON.stringify(order))
+    } catch (e) {
+      // ignore
+    }
+  }
+
+  const saveCfbStatOrder = (order) => {
+    setCfbStatOrder(order)
+    try {
+      window.localStorage.setItem(CFB_STAT_STORAGE_KEY, JSON.stringify(order))
+    } catch (e) {
+      // ignore
+    }
+  }
+
+  const toggleStat = (game, key) => {
+    if (game === 'fc') {
+      const next = fcStatOrder.map(function(s) { return s.key === key ? Object.assign({}, s, { enabled: !s.enabled }) : s })
+      saveFcStatOrder(next)
+    } else {
+      const next = cfbStatOrder.map(function(s) { return s.key === key ? Object.assign({}, s, { enabled: !s.enabled }) : s })
+      saveCfbStatOrder(next)
+    }
+  }
+
+  const handleStatDragStart = (game, key) => {
+    setDragInfo({ game: game, key: key })
+  }
+
+  const handleStatDragOver = (e) => {
+    e.preventDefault()
+  }
+
+  const handleStatDrop = (game, targetKey) => {
+    if (dragInfo.game !== game || !dragInfo.key || dragInfo.key === targetKey) {
+      setDragInfo({ game: null, key: null })
+      return
+    }
+    const order = game === 'fc' ? fcStatOrder.slice() : cfbStatOrder.slice()
+    const fromIdx = order.findIndex(function(s) { return s.key === dragInfo.key })
+    const toIdx = order.findIndex(function(s) { return s.key === targetKey })
+    const [moved] = order.splice(fromIdx, 1)
+    order.splice(toIdx, 0, moved)
+    if (game === 'fc') saveFcStatOrder(order)
+    else saveCfbStatOrder(order)
+    setDragInfo({ game: null, key: null })
+  }
 
   const checkUser = async () => {
     const result = await supabase.auth.getUser()
@@ -414,6 +683,14 @@ export default function Home() {
     router.push('/franchise/' + id)
   }
 
+  const displayName = (f) => {
+    if (f.game === 'EA CFB 27') {
+      const mascot = CFB_MASCOTS[f.club_name]
+      return mascot ? f.club_name + ' ' + mascot : f.club_name
+    }
+    return f.club_name
+  }
+
   const franchiseStats = useMemo(function() {
     const stats = {}
     for (let i = 0; i < franchises.length; i++) {
@@ -453,14 +730,36 @@ export default function Home() {
       } else {
         const potentials = roster.map(function(p) { return p.potential_rating })
         const values = roster.map(function(p) { return p.value_eur })
+        const wages = roster.map(function(p) { return p.wage_eur_wk })
         const totalValue = values.reduce(function(sum, v) {
           return sum + (typeof v === 'number' && !isNaN(v) ? v : 0)
         }, 0)
+        const totalWage = wages.reduce(function(sum, w) {
+          return sum + (typeof w === 'number' && !isNaN(w) ? w : 0)
+        }, 0)
+
+        const posBuckets = {}
+        for (let j = 0; j < roster.length; j++) {
+          const p = roster[j]
+          const group = fcPositionGroup(p.position)
+          if (!posBuckets[group]) posBuckets[group] = []
+          if (typeof p.overall_rating === 'number') posBuckets[group].push(p.overall_rating)
+        }
+
+        const positionBreakdown = FC_POSITION_ORDER
+          .filter(function(g) { return posBuckets[g] && posBuckets[g].length > 0 })
+          .map(function(g) {
+            const avg = average(posBuckets[g])
+            return { label: g, count: posBuckets[g].length, avg: avg, stars: starRating(avg) }
+          })
+
         stats[f.id] = {
           squadSize: roster.length,
           avgOverall: avgOverall,
           avgPotential: average(potentials),
-          totalValue: totalValue
+          totalValue: totalValue,
+          totalWage: totalWage,
+          positionBreakdown: positionBreakdown
         }
       }
     }
@@ -474,7 +773,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
       <div className="max-w-6xl mx-auto px-6 py-10">
-        <div className="flex justify-between items-start mb-8">
+        <div className="flex justify-between items-start mb-8 flex-wrap gap-4">
           <div className="flex items-center gap-4">
             <RosterHQLogo size={62} />
             <div>
@@ -494,12 +793,18 @@ export default function Home() {
               <p className="text-neutral-400 mt-1 text-sm">Logged in as {user.email}</p>
             </div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             <button onClick={() => setShowCreatePanel(!showCreatePanel)} className="bg-emerald-600 hover:bg-emerald-500 transition-colors rounded-lg px-4 py-2 text-sm font-semibold whitespace-nowrap">
               {showCreatePanel ? 'Cancel' : '+ New Franchise'}
             </button>
+            <a href="/player-databases" className="border border-neutral-700 hover:border-neutral-600 hover:bg-neutral-900 transition-colors rounded-lg px-4 py-2 text-sm font-medium text-neutral-300 flex items-center">
+              Player Databases
+            </a>
             <a href="/import" className="border border-neutral-700 hover:border-neutral-600 hover:bg-neutral-900 transition-colors rounded-lg px-4 py-2 text-sm font-medium text-neutral-300 flex items-center">
               Import Players
+            </a>
+            <a href="/profile" className="border border-neutral-700 hover:border-neutral-600 hover:bg-neutral-900 transition-colors rounded-lg px-4 py-2 text-sm font-medium text-neutral-300 flex items-center">
+              Profile
             </a>
             <button onClick={handleLogout} className="border border-neutral-700 hover:border-neutral-600 hover:bg-neutral-900 transition-colors rounded-lg px-4 py-2 text-sm font-medium text-neutral-300">
               Log Out
@@ -567,7 +872,7 @@ export default function Home() {
                             onClick={() => handleSelectClub(club)}
                             className="w-full text-left px-3 py-2 hover:bg-neutral-700 text-sm"
                           >
-                            {club}
+                            {selectedGame === 'EA CFB 27' && CFB_MASCOTS[club] ? club + ' ' + CFB_MASCOTS[club] : club}
                           </button>
                         ))}
                       </div>
@@ -615,7 +920,80 @@ export default function Home() {
         ) : null}
 
         <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
-          <h2 className="text-lg font-semibold mb-4">Your Franchises</h2>
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-lg font-semibold">Your Franchises</h2>
+            <button
+              onClick={() => setShowCustomizePanel(!showCustomizePanel)}
+              className="text-neutral-400 hover:text-neutral-200 text-xs font-medium border border-neutral-700 rounded-lg px-3 py-1.5"
+            >
+              {showCustomizePanel ? 'Close Customization' : 'Customize Cards'}
+            </button>
+          </div>
+
+          {showCustomizePanel && (
+            <div className="bg-neutral-800/50 border border-neutral-800 rounded-xl p-5 mb-6">
+              <p className="text-neutral-500 text-xs mb-4">
+                Check to show a stat, drag to reorder. Applies to all cards of that game type.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="text-xs font-semibold text-emerald-400 uppercase tracking-wide mb-2">EA FC 26 Stats</h3>
+                  <div className="space-y-1.5">
+                    {fcStatOrder.map(function(s) {
+                      const def = FC_STAT_DEFS[s.key]
+                      return (
+                        <div
+                          key={s.key}
+                          draggable
+                          onDragStart={() => handleStatDragStart('fc', s.key)}
+                          onDragOver={handleStatDragOver}
+                          onDrop={() => handleStatDrop('fc', s.key)}
+                          className="flex items-center gap-2 bg-neutral-900 border border-neutral-700 rounded-lg px-3 py-2 cursor-move select-none"
+                        >
+                          <span className="text-neutral-600 text-xs">&#8942;&#8942;</span>
+                          <input
+                            type="checkbox"
+                            checked={s.enabled}
+                            onChange={() => toggleStat('fc', s.key)}
+                            className="accent-emerald-600"
+                          />
+                          <span className="text-sm text-neutral-200">{def.label}</span>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-xs font-semibold text-emerald-400 uppercase tracking-wide mb-2">EA CFB 27 Stats</h3>
+                  <div className="space-y-1.5">
+                    {cfbStatOrder.map(function(s) {
+                      const def = CFB_STAT_DEFS[s.key]
+                      return (
+                        <div
+                          key={s.key}
+                          draggable
+                          onDragStart={() => handleStatDragStart('cfb', s.key)}
+                          onDragOver={handleStatDragOver}
+                          onDrop={() => handleStatDrop('cfb', s.key)}
+                          className="flex items-center gap-2 bg-neutral-900 border border-neutral-700 rounded-lg px-3 py-2 cursor-move select-none"
+                        >
+                          <span className="text-neutral-600 text-xs">&#8942;&#8942;</span>
+                          <input
+                            type="checkbox"
+                            checked={s.enabled}
+                            onChange={() => toggleStat('cfb', s.key)}
+                            className="accent-emerald-600"
+                          />
+                          <span className="text-sm text-neutral-200">{def.label}</span>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
           {franchises.length === 0 ? (
             <p className="text-neutral-500 text-sm">No franchises yet. Click "+ New Franchise" above to get started.</p>
           ) : (
@@ -624,17 +1002,21 @@ export default function Home() {
                 var franchiseUrl = "/franchise/" + f.id
                 const isCfb = f.game === 'EA CFB 27'
                 const stats = franchiseStats[f.id] || { squadSize: 0, avgOverall: null }
+                const statOrder = isCfb ? cfbStatOrder : fcStatOrder
+                const statDefs = isCfb ? CFB_STAT_DEFS : FC_STAT_DEFS
+                const enabledStats = statOrder.filter(function(s) { return s.enabled })
+                const logoUrl = logoCache[f.id]
 
                 return (
                   <div key={f.id} className="relative bg-neutral-800/50 border border-neutral-800 hover:border-emerald-600 rounded-xl p-5 transition-colors">
                     <a href={franchiseUrl} onClick={(e) => { e.preventDefault(); goToFranchise(f.id) }} className="absolute inset-0 z-0" aria-label={'Open ' + f.club_name}></a>
 
                     <div className="relative z-10 pointer-events-none">
-                      <div className="flex justify-between items-start mb-3">
-                        <div>
+                      <div className="flex justify-between items-start gap-4 mb-3">
+                        <div className="flex-1 min-w-0">
                           <p className="text-neutral-500 text-xs font-medium mb-1">{f.game || 'EA FC 26'}</p>
-                          <h3 className="font-bold text-neutral-100 text-xl pr-16">{f.club_name}</h3>
-                          <div className="flex items-center gap-2 mt-0.5">
+                          <h3 className="font-bold text-neutral-100 text-xl">{displayName(f)}</h3>
+                          <div className="flex items-center gap-2 mt-0.5 flex-wrap">
                             <p className="text-neutral-400 text-sm">
                               {f.league ? f.league : 'No league set'} &middot; Season {f.current_season}
                             </p>
@@ -642,68 +1024,66 @@ export default function Home() {
                               {tierLabel(stats.avgOverall)}
                             </span>
                           </div>
+                          <div className="mt-4">
+                            <TeamLogo url={logoUrl} size={72} />
+                          </div>
+                        </div>
+
+                        <div className="flex flex-col gap-2 flex-shrink-0">
+                          {enabledStats.map(function(s) {
+                            const def = statDefs[s.key]
+                            const value = def.get(stats)
+                            return (
+                              <StackedStat
+                                key={s.key}
+                                label={def.label}
+                                value={value}
+                                isCurrency={!!def.isCurrency}
+                                decimals={def.decimals}
+                              />
+                            )
+                          })}
                         </div>
                       </div>
 
                       {isCfb ? (
-                        <>
-                          <div className="grid grid-cols-3 gap-3 mb-3">
-                            <div className="bg-neutral-900/60 rounded-lg p-2.5">
-                              <p className="text-neutral-500 text-[10px] uppercase tracking-wide">Overall</p>
-                              <p className={'font-semibold text-sm mt-0.5 ' + statTextColor(stats.avgOverall)}>
-                                {stats.avgOverall !== null ? stats.avgOverall.toFixed(1) : '-'}
-                              </p>
+                        <div className="bg-neutral-900/60 rounded-lg p-2.5 mt-2">
+                          <p className="text-neutral-500 text-[10px] uppercase tracking-wide mb-1.5">
+                            Class Breakdown &middot; {stats.squadSize} players
+                          </p>
+                          {stats.classBreakdown && stats.classBreakdown.length > 0 ? (
+                            <div className="flex flex-wrap gap-x-2 gap-y-0.5">
+                              {stats.classBreakdown.map(function(c) {
+                                return (
+                                  <span key={c.label} className="text-neutral-200 text-xs font-medium whitespace-nowrap">
+                                    {c.label} <span className="text-neutral-400">{c.count}</span>
+                                  </span>
+                                )
+                              })}
                             </div>
-                            <div className="bg-neutral-900/60 rounded-lg p-2.5">
-                              <p className="text-neutral-500 text-[10px] uppercase tracking-wide">Offense</p>
-                              <p className={'font-semibold text-sm mt-0.5 ' + statTextColor(stats.offenseAvg)}>
-                                {stats.offenseAvg !== null ? stats.offenseAvg.toFixed(0) : '-'}
-                              </p>
-                            </div>
-                            <div className="bg-neutral-900/60 rounded-lg p-2.5">
-                              <p className="text-neutral-500 text-[10px] uppercase tracking-wide">Defense</p>
-                              <p className={'font-semibold text-sm mt-0.5 ' + statTextColor(stats.defenseAvg)}>
-                                {stats.defenseAvg !== null ? stats.defenseAvg.toFixed(0) : '-'}
-                              </p>
-                            </div>
-                          </div>
-                          <div className="bg-neutral-900/60 rounded-lg p-2.5">
-                            <p className="text-neutral-500 text-[10px] uppercase tracking-wide mb-1.5">
-                              Class Breakdown &middot; {stats.squadSize} players
-                            </p>
-                            {stats.classBreakdown && stats.classBreakdown.length > 0 ? (
-                              <div className="flex flex-wrap gap-x-2 gap-y-0.5">
-                                {stats.classBreakdown.map(function(c) {
-                                  return (
-                                    <span key={c.label} className="text-neutral-200 text-xs font-medium whitespace-nowrap">
-                                      {c.label} <span className="text-neutral-400">{c.count}</span>
-                                    </span>
-                                  )
-                                })}
-                              </div>
-                            ) : (
-                              <p className="text-neutral-500 text-xs">-</p>
-                            )}
-                          </div>
-                        </>
+                          ) : (
+                            <p className="text-neutral-500 text-xs">-</p>
+                          )}
+                        </div>
                       ) : (
-                        <div className="grid grid-cols-3 gap-3">
-                          <div className="bg-neutral-900/60 rounded-lg p-2.5">
-                            <p className="text-neutral-500 text-[10px] uppercase tracking-wide">Overall</p>
-                            <p className={'font-semibold text-sm mt-0.5 ' + statTextColor(stats.avgOverall)}>
-                              {stats.avgOverall !== null ? stats.avgOverall.toFixed(1) : '-'}
-                            </p>
-                          </div>
-                          <div className="bg-neutral-900/60 rounded-lg p-2.5">
-                            <p className="text-neutral-500 text-[10px] uppercase tracking-wide">Potential</p>
-                            <p className={'font-semibold text-sm mt-0.5 ' + statTextColor(stats.avgPotential)}>
-                              {stats.avgPotential !== null ? stats.avgPotential.toFixed(0) : '-'}
-                            </p>
-                          </div>
-                          <div className="bg-neutral-900/60 rounded-lg p-2.5">
-                            <p className="text-neutral-500 text-[10px] uppercase tracking-wide">Club Value</p>
-                            <p className="text-neutral-100 font-semibold text-sm mt-0.5">{formatEuro(stats.totalValue)}</p>
-                          </div>
+                        <div className="bg-neutral-900/60 rounded-lg p-2.5 mt-2">
+                          <p className="text-neutral-500 text-[10px] uppercase tracking-wide mb-1.5">
+                            Position Breakdown &middot; {stats.squadSize} players
+                          </p>
+                          {stats.positionBreakdown && stats.positionBreakdown.length > 0 ? (
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                              {stats.positionBreakdown.map(function(p) {
+                                return (
+                                  <div key={p.label} className="flex items-center justify-between bg-neutral-800/60 rounded-md px-2 py-1">
+                                    <span className="text-neutral-200 text-xs font-semibold">{p.label} <span className="text-neutral-400 font-normal">{p.count}</span></span>
+                                    <StarDisplay count={p.stars} />
+                                  </div>
+                                )
+                              })}
+                            </div>
+                          ) : (
+                            <p className="text-neutral-500 text-xs">-</p>
+                          )}
                         </div>
                       )}
                     </div>
@@ -716,7 +1096,7 @@ export default function Home() {
                         <button onClick={(e) => { e.stopPropagation(); setConfirmDeleteId(null) }} className="text-neutral-400 hover:text-neutral-200 text-xs px-2 py-1">Cancel</button>
                       </div>
                     ) : (
-                      <button onClick={(e) => { e.stopPropagation(); setConfirmDeleteId(f.id) }} className="absolute top-5 right-5 z-20 text-neutral-500 hover:text-red-400 text-xs font-medium">Delete</button>
+                      <button onClick={(e) => { e.stopPropagation(); setConfirmDeleteId(f.id) }} className="absolute top-1 right-1 z-20 text-neutral-500 hover:text-red-400 text-xs font-medium">Delete</button>
                     )}
                   </div>
                 )
