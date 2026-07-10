@@ -78,6 +78,19 @@ const DEPTH_GROUPS = [
   { label: 'Specialists', side: 'Special Teams', positions: ['K', 'P', 'LS'] }
 ]
 
+const LEAGUES = [
+  'Premier League', 'EFL Championship', 'EFL League One', 'EFL League Two',
+  'La Liga', 'La Liga 2', 'Bundesliga', 'Bundesliga 2', 'Serie A', 'Serie B',
+  'Ligue 1', 'Ligue 2', 'Eredivisie', 'Primeira Liga', 'Belgian Pro League',
+  'Scottish Premiership', 'MLS', 'Liga MX', 'Brasileirão', 'Saudi Pro League',
+  'Süper Lig', 'A-League', 'Other / International'
+]
+
+const CFB_CONFERENCES = [
+  'SEC', 'Big Ten', 'Big 12', 'ACC', 'American Athletic', 'Mountain West',
+  'Conference USA', 'Sun Belt', 'MAC', 'Independent', 'Other'
+]
+
 const COLUMN_ORDER_STORAGE_PREFIX = 'roster_column_order_'
 
 function average(nums) {
@@ -102,6 +115,14 @@ function ovrBadgeColor(ovr) {
   return 'bg-red-600'
 }
 
+function statTextColor(v) {
+  if (v === null || v === undefined) return 'text-neutral-500'
+  if (v >= 80) return 'text-green-400'
+  if (v >= 70) return 'text-yellow-400'
+  if (v >= 60) return 'text-orange-400'
+  return 'text-red-400'
+}
+
 function OvrBadge({ value, small }) {
   if (value === null || value === undefined) return <span className="text-neutral-500">-</span>
   return (
@@ -119,6 +140,10 @@ export default function FranchisePage() {
 
   const [activeTab, setActiveTab] = useState('roster')
   const [expandedGroup, setExpandedGroup] = useState(null)
+
+  const [editingLeague, setEditingLeague] = useState(false)
+  const [leagueDraft, setLeagueDraft] = useState('')
+  const [savingLeague, setSavingLeague] = useState(false)
 
   const [showAddPanel, setShowAddPanel] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
@@ -146,6 +171,9 @@ export default function FranchisePage() {
   const [depthDragId, setDepthDragId] = useState(null)
   const [depthDragOverId, setDepthDragOverId] = useState(null)
 
+  const [seasonSnapshots, setSeasonSnapshots] = useState([])
+  const [recordingSnapshot, setRecordingSnapshot] = useState(false)
+
   const router = useRouter()
   const params = useParams()
   const supabase = createClient()
@@ -161,6 +189,7 @@ export default function FranchisePage() {
   useEffect(() => {
     if (franchise) {
       loadColumnOrder()
+      loadSnapshots()
     }
   }, [franchise])
 
@@ -224,6 +253,7 @@ export default function FranchisePage() {
     }
 
     setFranchise(franchiseData)
+    setLeagueDraft(franchiseData.league || '')
     await loadPlayers()
     setLoading(false)
   }
@@ -237,6 +267,36 @@ export default function FranchisePage() {
 
     if (!error) {
       setPlayers(data)
+    }
+  }
+
+  const loadSnapshots = async () => {
+    const { data, error } = await supabase
+      .from('season_snapshots')
+      .select('*')
+      .eq('franchise_id', franchiseId)
+      .order('season', { ascending: true })
+      .order('created_at', { ascending: true })
+
+    if (!error) {
+      setSeasonSnapshots(data)
+    }
+  }
+
+  const handleSaveLeague = async () => {
+    setSavingLeague(true)
+    const { error } = await supabase
+      .from('franchises')
+      .update({ league: leagueDraft })
+      .eq('id', franchiseId)
+
+    setSavingLeague(false)
+
+    if (!error) {
+      setFranchise(function(prev) { return Object.assign({}, prev, { league: leagueDraft }) })
+      setEditingLeague(false)
+    } else {
+      alert(error.message)
     }
   }
 
@@ -330,7 +390,7 @@ export default function FranchisePage() {
         .from('cfb_player_reference')
         .select('*')
         .ilike('player_name', `%${searchTerm}%`)
-        .limit(5)
+        .limit(6)
 
       if (!error) {
         setSearchResults(data)
@@ -341,7 +401,7 @@ export default function FranchisePage() {
         .from('player_reference')
         .select('*')
         .ilike('name', `%${searchTerm}%`)
-        .limit(5)
+        .limit(6)
 
       if (!error) {
         setSearchResults(data)
@@ -755,6 +815,66 @@ export default function FranchisePage() {
     setDepthDragOverId(null)
   }
 
+  const currentSeasonSnapshots = useMemo(function() {
+    return seasonSnapshots.filter(function(s) { return s.season === franchise.current_season })
+  }, [seasonSnapshots, franchise])
+
+  const hasStartSnapshot = currentSeasonSnapshots.some(function(s) { return s.label === 'Start' })
+  const hasEndSnapshot = currentSeasonSnapshots.some(function(s) { return s.label === 'End' })
+
+  const recordSnapshot = async (label) => {
+    setRecordingSnapshot(true)
+
+    const payload = {
+      franchise_id: franchiseId,
+      season: franchise.current_season,
+      label: label,
+      squad_size: teamStats.squadSize,
+      avg_overall: teamStats.avgOverall
+    }
+
+    if (isCfb) {
+      payload.offense_avg = teamStats.offenseAvg
+      payload.defense_avg = teamStats.defenseAvg
+    } else {
+      payload.avg_potential = teamStats.avgPotential
+    }
+
+    const { error } = await supabase.from('season_snapshots').insert(payload)
+
+    if (error) {
+      alert(error.message)
+      setRecordingSnapshot(false)
+      return
+    }
+
+    if (label === 'End') {
+      const nextSeason = franchise.current_season + 1
+      await supabase.from('franchises').update({ current_season: nextSeason }).eq('id', franchiseId)
+      setFranchise(function(prev) { return Object.assign({}, prev, { current_season: nextSeason }) })
+    }
+
+    await loadSnapshots()
+    setRecordingSnapshot(false)
+  }
+
+  const groupedBySeason = useMemo(function() {
+    const seasons = Array.from(new Set(seasonSnapshots.map(function(s) { return s.season }))).sort(function(a, b) { return a - b })
+    return seasons.map(function(season) {
+      const start = seasonSnapshots.find(function(s) { return s.season === season && s.label === 'Start' })
+      const end = seasonSnapshots.find(function(s) { return s.season === season && s.label === 'End' })
+      return { season: season, start: start, end: end }
+    })
+  }, [seasonSnapshots])
+
+  const deltaDisplay = (startVal, endVal, decimals) => {
+    if (startVal === null || startVal === undefined || endVal === null || endVal === undefined) return null
+    const diff = endVal - startVal
+    const sign = diff > 0 ? '+' : ''
+    const color = diff > 0 ? 'text-green-400' : diff < 0 ? 'text-red-400' : 'text-neutral-400'
+    return <span className={color}>{sign}{diff.toFixed(decimals)}</span>
+  }
+
   if (loading || !columnOrder) {
     return (
       <div className="min-h-screen bg-neutral-950 flex items-center justify-center text-neutral-400">
@@ -775,7 +895,47 @@ export default function FranchisePage() {
           <div>
             <p className="text-neutral-500 text-xs font-medium mb-1">{franchise.game || 'EA FC 26'}</p>
             <h1 className="text-3xl font-bold tracking-tight">{franchise.club_name}</h1>
-            <p className="text-neutral-400 mt-1">{franchise.league} &middot; Season {franchise.current_season}</p>
+            <div className="flex items-center gap-2 mt-1">
+              {editingLeague ? (
+                <>
+                  <select
+                    value={leagueDraft}
+                    onChange={(e) => setLeagueDraft(e.target.value)}
+                    className="bg-neutral-800 border border-neutral-700 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  >
+                    <option value="">
+                      {isCfb ? 'Select a conference...' : 'Select a league...'}
+                    </option>
+                    {(isCfb ? CFB_CONFERENCES : LEAGUES).map((l) => (
+                      <option key={l} value={l}>{l}</option>
+                    ))}
+                  </select>
+                  <button
+                    onClick={handleSaveLeague}
+                    disabled={savingLeague}
+                    className="text-emerald-400 hover:text-emerald-300 text-xs font-semibold"
+                  >
+                    {savingLeague ? 'Saving...' : 'Save'}
+                  </button>
+                  <button
+                    onClick={() => { setEditingLeague(false); setLeagueDraft(franchise.league || '') }}
+                    className="text-neutral-500 hover:text-neutral-300 text-xs"
+                  >
+                    Cancel
+                  </button>
+                </>
+              ) : (
+                <>
+                  <p className="text-neutral-400">{franchise.league || 'No ' + (isCfb ? 'conference' : 'league') + ' set'} &middot; Season {franchise.current_season}</p>
+                  <button
+                    onClick={() => setEditingLeague(true)}
+                    className="text-neutral-500 hover:text-emerald-400 text-xs font-medium"
+                  >
+                    Edit
+                  </button>
+                </>
+              )}
+            </div>
           </div>
 
           <div className="flex gap-2">
@@ -819,9 +979,25 @@ export default function FranchisePage() {
                       type="button"
                       key={p.id}
                       onClick={() => handleSelectPlayer(p)}
-                      className="w-full text-left px-3 py-2 hover:bg-neutral-700 flex justify-between items-center text-sm"
+                      className="w-full text-left px-3 py-2 hover:bg-neutral-700 flex justify-between items-start text-sm"
                     >
-                      <span>{isCfb ? p.player_name : p.name} <span className="text-neutral-400">&middot; {p.position}</span></span>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-medium text-neutral-100">{isCfb ? p.player_name : p.name}</span>
+                          <span className="text-neutral-400 text-xs">{p.position}</span>
+                        </div>
+                        <p className="text-neutral-500 text-xs mt-0.5">
+                          {isCfb ? (
+                            <>
+                              {p.team || 'Unknown team'} &middot; {p.class || '-'} &middot; {p.dev_trait || 'Normal'}
+                            </>
+                          ) : (
+                            <>
+                              {p.active_club || 'Unknown club'} &middot; Age {p.age || '-'} &middot; POT {p.potential_rating !== null && p.potential_rating !== undefined ? p.potential_rating : '-'} &middot; {p.nationality || '-'}
+                            </>
+                          )}
+                        </p>
+                      </div>
                       <OvrBadge value={p.overall_rating} small />
                     </button>
                   ))}
@@ -923,17 +1099,17 @@ export default function FranchisePage() {
           </div>
         )}
 
-        {isCfb && (
-          <div className="flex gap-1 mb-6 border-b border-neutral-800">
-            <button
-              onClick={() => setActiveTab('roster')}
-              className={
-                'px-4 py-2 text-sm font-semibold border-b-2 -mb-px transition-colors ' +
-                (activeTab === 'roster' ? 'border-emerald-500 text-emerald-400' : 'border-transparent text-neutral-500 hover:text-neutral-300')
-              }
-            >
-              Roster
-            </button>
+        <div className="flex gap-1 mb-6 border-b border-neutral-800">
+          <button
+            onClick={() => setActiveTab('roster')}
+            className={
+              'px-4 py-2 text-sm font-semibold border-b-2 -mb-px transition-colors ' +
+              (activeTab === 'roster' ? 'border-emerald-500 text-emerald-400' : 'border-transparent text-neutral-500 hover:text-neutral-300')
+            }
+          >
+            Roster
+          </button>
+          {isCfb && (
             <button
               onClick={() => setActiveTab('depth')}
               className={
@@ -943,6 +1119,107 @@ export default function FranchisePage() {
             >
               Depth Chart
             </button>
+          )}
+          <button
+            onClick={() => setActiveTab('progression')}
+            className={
+              'px-4 py-2 text-sm font-semibold border-b-2 -mb-px transition-colors ' +
+              (activeTab === 'progression' ? 'border-emerald-500 text-emerald-400' : 'border-transparent text-neutral-500 hover:text-neutral-300')
+            }
+          >
+            Progression
+          </button>
+        </div>
+
+        {activeTab === 'progression' && (
+          <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 mb-6">
+            <div className="flex justify-between items-start mb-4">
+              <div>
+                <h2 className="text-lg font-semibold">Season Progression</h2>
+                <p className="text-neutral-500 text-xs mt-1">Track where your team started vs. ended each season.</p>
+              </div>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => recordSnapshot('Start')}
+                  disabled={hasStartSnapshot || recordingSnapshot || players.length === 0}
+                  className="border border-emerald-600 text-emerald-400 hover:bg-emerald-600 hover:text-white transition-colors rounded-lg px-3 py-2 text-xs font-semibold disabled:opacity-30 disabled:cursor-not-allowed whitespace-nowrap"
+                >
+                  Record Season {franchise.current_season} Start
+                </button>
+                <button
+                  onClick={() => recordSnapshot('End')}
+                  disabled={!hasStartSnapshot || hasEndSnapshot || recordingSnapshot || players.length === 0}
+                  className="bg-emerald-600 hover:bg-emerald-500 transition-colors rounded-lg px-3 py-2 text-xs font-semibold disabled:opacity-30 disabled:cursor-not-allowed whitespace-nowrap"
+                >
+                  Record Season {franchise.current_season} End &amp; Advance
+                </button>
+              </div>
+            </div>
+
+            {players.length === 0 && (
+              <p className="text-neutral-500 text-sm">Add players to your roster before recording a snapshot.</p>
+            )}
+
+            {groupedBySeason.length === 0 ? (
+              <p className="text-neutral-500 text-sm mt-2">No snapshots recorded yet. Click "Record Season {franchise.current_season} Start" to begin tracking.</p>
+            ) : (
+              <div className="overflow-x-auto mt-2">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="text-neutral-400 text-xs uppercase tracking-wide border-b border-neutral-800">
+                      <th className="text-left py-2 px-3">Season</th>
+                      <th className="text-left py-2 px-3">Start OVR</th>
+                      <th className="text-left py-2 px-3">End OVR</th>
+                      <th className="text-left py-2 px-3">OVR &Delta;</th>
+                      {isCfb ? (
+                        <>
+                          <th className="text-left py-2 px-3">Start Off/Def</th>
+                          <th className="text-left py-2 px-3">End Off/Def</th>
+                        </>
+                      ) : (
+                        <>
+                          <th className="text-left py-2 px-3">Start POT</th>
+                          <th className="text-left py-2 px-3">End POT</th>
+                        </>
+                      )}
+                      <th className="text-left py-2 px-3">Squad Size</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {groupedBySeason.map(function(row, idx) {
+                      const startOvr = row.start ? row.start.avg_overall : null
+                      const endOvr = row.end ? row.end.avg_overall : null
+                      return (
+                        <tr key={row.season} className={(idx % 2 === 0 ? 'bg-transparent' : 'bg-neutral-800/40') + ' border-b border-neutral-800/60'}>
+                          <td className="py-2.5 px-3 font-medium text-neutral-100">Season {row.season}</td>
+                          <td className={'py-2.5 px-3 ' + statTextColor(startOvr)}>{startOvr !== null ? startOvr.toFixed(1) : '-'}</td>
+                          <td className={'py-2.5 px-3 ' + statTextColor(endOvr)}>{endOvr !== null ? endOvr.toFixed(1) : 'In progress'}</td>
+                          <td className="py-2.5 px-3">{deltaDisplay(startOvr, endOvr, 1) || '-'}</td>
+                          {isCfb ? (
+                            <>
+                              <td className="py-2.5 px-3 text-neutral-300">
+                                {row.start ? (row.start.offense_avg !== null ? row.start.offense_avg.toFixed(0) : '-') + ' / ' + (row.start.defense_avg !== null ? row.start.defense_avg.toFixed(0) : '-') : '-'}
+                              </td>
+                              <td className="py-2.5 px-3 text-neutral-300">
+                                {row.end ? (row.end.offense_avg !== null ? row.end.offense_avg.toFixed(0) : '-') + ' / ' + (row.end.defense_avg !== null ? row.end.defense_avg.toFixed(0) : '-') : '-'}
+                              </td>
+                            </>
+                          ) : (
+                            <>
+                              <td className="py-2.5 px-3 text-neutral-300">{row.start && row.start.avg_potential !== null ? row.start.avg_potential.toFixed(1) : '-'}</td>
+                              <td className="py-2.5 px-3 text-neutral-300">{row.end && row.end.avg_potential !== null ? row.end.avg_potential.toFixed(1) : '-'}</td>
+                            </>
+                          )}
+                          <td className="py-2.5 px-3 text-neutral-300">
+                            {row.start ? row.start.squad_size : '-'} &rarr; {row.end ? row.end.squad_size : '-'}
+                          </td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         )}
 
@@ -1103,7 +1380,7 @@ export default function FranchisePage() {
           </div>
         )}
 
-        {(!isCfb || activeTab === 'roster') && (
+        {activeTab === 'roster' && (
           <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
             <div className="flex justify-end items-center mb-4">
               <div className="flex items-center gap-4">
