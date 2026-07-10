@@ -95,7 +95,8 @@ const CFB_TEAM_CONFERENCE_MAP = {
   'Akron': 'MAC', 'Ball State': 'MAC', 'Bowling Green': 'MAC', 'Buffalo': 'MAC',
   'Central Michigan': 'MAC', 'Eastern Michigan': 'MAC', 'Kent State': 'MAC', 'Miami (OH)': 'MAC',
   'Northern Illinois': 'MAC', 'Ohio': 'MAC', 'Toledo': 'MAC', 'Western Michigan': 'MAC',
-  'Notre Dame': 'Independent', 'UConn': 'Independent', 'UMass': 'Independent'
+  'Notre Dame': 'Independent', 'UConn': 'Independent', 'UMass': 'Independent',
+  'North Dakota State': 'Other'
 }
 
 const CFB_POSITION_GROUP = {
@@ -167,7 +168,7 @@ function RosterHQLogo({ size }) {
 
 async function importRosterForGame(supabase, game, franchiseId, teamName) {
   if (game === 'EA FC 26') {
-    const referenceResult = await supabase.from('player_reference').select('*').ilike('active_club', teamName)
+    const referenceResult = await supabase.from('player_reference').select('*').ilike('active_club', '%' + teamName + '%')
     if (!referenceResult.error && referenceResult.data.length > 0) {
       const playersToInsert = referenceResult.data.map(function(p) {
         return {
@@ -185,7 +186,7 @@ async function importRosterForGame(supabase, game, franchiseId, teamName) {
     return 0
   }
   if (game === 'EA CFB 27') {
-    const referenceResult = await supabase.from('cfb_player_reference').select('*').ilike('team', teamName)
+    const referenceResult = await supabase.from('cfb_player_reference').select('*').ilike('team', '%' + teamName + '%')
     if (!referenceResult.error && referenceResult.data.length > 0) {
       const playersToInsert = referenceResult.data.map(function(p) {
         return {

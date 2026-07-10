@@ -247,7 +247,7 @@ export default function FranchisePage() {
       const referenceResult = await supabase
         .from('cfb_player_reference')
         .select('*')
-        .ilike('team', franchise.club_name)
+        .ilike('team', '%' + franchise.club_name + '%')
 
       if (!referenceResult.error && referenceResult.data.length > 0) {
         const playersToInsert = referenceResult.data.map(function(p) {
@@ -280,7 +280,7 @@ export default function FranchisePage() {
       const referenceResult = await supabase
         .from('player_reference')
         .select('*')
-        .ilike('active_club', franchise.club_name)
+        .ilike('active_club', '%' + franchise.club_name + '%')
 
       if (!referenceResult.error && referenceResult.data.length > 0) {
         const playersToInsert = referenceResult.data.map(function(p) {
