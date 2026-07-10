@@ -1,7 +1,7 @@
 ﻿'use client'
 
 import React from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
 
@@ -14,196 +14,136 @@ const GAMES = [
 ]
 
 const LEAGUES = [
-  'Premier League',
-  'EFL Championship',
-  'EFL League One',
-  'EFL League Two',
-  'La Liga',
-  'La Liga 2',
-  'Bundesliga',
-  'Bundesliga 2',
-  'Serie A',
-  'Serie B',
-  'Ligue 1',
-  'Ligue 2',
-  'Eredivisie',
-  'Primeira Liga',
-  'Belgian Pro League',
-  'Scottish Premiership',
-  'MLS',
-  'Liga MX',
-  'Brasileirão',
-  'Saudi Pro League',
-  'Süper Lig',
-  'A-League',
-  'Other / International'
+  'Premier League', 'EFL Championship', 'EFL League One', 'EFL League Two',
+  'La Liga', 'La Liga 2', 'Bundesliga', 'Bundesliga 2', 'Serie A', 'Serie B',
+  'Ligue 1', 'Ligue 2', 'Eredivisie', 'Primeira Liga', 'Belgian Pro League',
+  'Scottish Premiership', 'MLS', 'Liga MX', 'Brasileirão', 'Saudi Pro League',
+  'Süper Lig', 'A-League', 'Other / International'
 ]
 
 const CFB_CONFERENCES = [
-  'SEC',
-  'Big Ten',
-  'Big 12',
-  'ACC',
-  'American Athletic',
-  'Mountain West',
-  'Conference USA',
-  'Sun Belt',
-  'MAC',
-  'Independent',
-  'Other'
+  'SEC', 'Big Ten', 'Big 12', 'ACC', 'American Athletic', 'Mountain West',
+  'Conference USA', 'Sun Belt', 'MAC', 'Independent', 'Other'
 ]
 
 const CLUB_LEAGUE_MAP = {
-  'Arsenal': 'Premier League',
-  'Aston Villa': 'Premier League',
-  'Bournemouth': 'Premier League',
-  'Brentford': 'Premier League',
-  'Brighton & Hove Albion': 'Premier League',
-  'Chelsea': 'Premier League',
-  'Crystal Palace': 'Premier League',
-  'Everton': 'Premier League',
-  'Fulham': 'Premier League',
-  'Ipswich Town': 'Premier League',
-  'Leicester City': 'Premier League',
-  'Liverpool': 'Premier League',
-  'Manchester City': 'Premier League',
-  'Manchester United': 'Premier League',
-  'Newcastle United': 'Premier League',
-  'Nottingham Forest': 'Premier League',
-  'Southampton': 'Premier League',
-  'Tottenham Hotspur': 'Premier League',
-  'West Ham United': 'Premier League',
-  'Wolverhampton Wanderers': 'Premier League',
-
-  'Queens Park Rangers': 'EFL Championship',
-  'Leeds United': 'EFL Championship',
-  'Burnley': 'EFL Championship',
-  'Sheffield United': 'EFL Championship',
-  'West Bromwich Albion': 'EFL Championship',
-  'Norwich City': 'EFL Championship',
-  'Middlesbrough': 'EFL Championship',
-  'Coventry City': 'EFL Championship',
-  'Sunderland': 'EFL Championship',
-  'Watford': 'EFL Championship',
-  'Stoke City': 'EFL Championship',
-  'Hull City': 'EFL Championship',
-  'Preston North End': 'EFL Championship',
-  'Bristol City': 'EFL Championship',
-  'Cardiff City': 'EFL Championship',
-  'Swansea City': 'EFL Championship',
-  'Millwall': 'EFL Championship',
-  'Blackburn Rovers': 'EFL Championship',
-  'Plymouth Argyle': 'EFL Championship',
-  'Luton Town': 'EFL Championship',
-  'Derby County': 'EFL Championship',
-  'Portsmouth': 'EFL Championship',
-  'Oxford United': 'EFL Championship',
-
-  'Real Madrid': 'La Liga',
-  'Barcelona': 'La Liga',
-  'Atlético Madrid': 'La Liga',
-  'Athletic Club': 'La Liga',
-  'Real Sociedad': 'La Liga',
-  'Real Betis': 'La Liga',
-  'Villarreal': 'La Liga',
-  'Valencia': 'La Liga',
-  'Sevilla': 'La Liga',
-  'Girona': 'La Liga',
-
-  'Bayern Munich': 'Bundesliga',
-  'Borussia Dortmund': 'Bundesliga',
-  'RB Leipzig': 'Bundesliga',
-  'Bayer Leverkusen': 'Bundesliga',
-  'Eintracht Frankfurt': 'Bundesliga',
-  'VfB Stuttgart': 'Bundesliga',
-  'Borussia Mönchengladbach': 'Bundesliga',
-  'Wolfsburg': 'Bundesliga',
-
-  'Juventus': 'Serie A',
-  'Inter Milan': 'Serie A',
-  'AC Milan': 'Serie A',
-  'Napoli': 'Serie A',
-  'AS Roma': 'Serie A',
-  'Lazio': 'Serie A',
-  'Atalanta': 'Serie A',
-  'Fiorentina': 'Serie A',
-
-  'Paris Saint-Germain': 'Ligue 1',
-  'Marseille': 'Ligue 1',
-  'Monaco': 'Ligue 1',
-  'Lyon': 'Ligue 1',
-  'Lille': 'Ligue 1',
-  'Nice': 'Ligue 1',
-  'Lens': 'Ligue 1',
-
-  'Ajax': 'Eredivisie',
-  'PSV Eindhoven': 'Eredivisie',
-  'Feyenoord': 'Eredivisie',
-
-  'Benfica': 'Primeira Liga',
-  'Porto': 'Primeira Liga',
-  'Sporting CP': 'Primeira Liga',
-
-  'Celtic': 'Scottish Premiership',
-  'Rangers': 'Scottish Premiership',
-
-  'Inter Miami': 'MLS',
-  'LA Galaxy': 'MLS',
-  'LAFC': 'MLS',
-  'Seattle Sounders': 'MLS',
-  'Atlanta United': 'MLS'
+  'Arsenal': 'Premier League', 'Aston Villa': 'Premier League', 'Bournemouth': 'Premier League',
+  'Brentford': 'Premier League', 'Brighton & Hove Albion': 'Premier League', 'Chelsea': 'Premier League',
+  'Crystal Palace': 'Premier League', 'Everton': 'Premier League', 'Fulham': 'Premier League',
+  'Ipswich Town': 'Premier League', 'Leicester City': 'Premier League', 'Liverpool': 'Premier League',
+  'Manchester City': 'Premier League', 'Manchester United': 'Premier League', 'Newcastle United': 'Premier League',
+  'Nottingham Forest': 'Premier League', 'Southampton': 'Premier League', 'Tottenham Hotspur': 'Premier League',
+  'West Ham United': 'Premier League', 'Wolverhampton Wanderers': 'Premier League',
+  'Queens Park Rangers': 'EFL Championship', 'Leeds United': 'EFL Championship', 'Burnley': 'EFL Championship',
+  'Sheffield United': 'EFL Championship', 'West Bromwich Albion': 'EFL Championship', 'Norwich City': 'EFL Championship',
+  'Middlesbrough': 'EFL Championship', 'Coventry City': 'EFL Championship', 'Sunderland': 'EFL Championship',
+  'Watford': 'EFL Championship', 'Stoke City': 'EFL Championship', 'Hull City': 'EFL Championship',
+  'Preston North End': 'EFL Championship', 'Bristol City': 'EFL Championship', 'Cardiff City': 'EFL Championship',
+  'Swansea City': 'EFL Championship', 'Millwall': 'EFL Championship', 'Blackburn Rovers': 'EFL Championship',
+  'Plymouth Argyle': 'EFL Championship', 'Luton Town': 'EFL Championship', 'Derby County': 'EFL Championship',
+  'Portsmouth': 'EFL Championship', 'Oxford United': 'EFL Championship',
+  'Real Madrid': 'La Liga', 'Barcelona': 'La Liga', 'Atlético Madrid': 'La Liga', 'Athletic Club': 'La Liga',
+  'Real Sociedad': 'La Liga', 'Real Betis': 'La Liga', 'Villarreal': 'La Liga', 'Valencia': 'La Liga',
+  'Sevilla': 'La Liga', 'Girona': 'La Liga',
+  'Bayern Munich': 'Bundesliga', 'Borussia Dortmund': 'Bundesliga', 'RB Leipzig': 'Bundesliga',
+  'Bayer Leverkusen': 'Bundesliga', 'Eintracht Frankfurt': 'Bundesliga', 'VfB Stuttgart': 'Bundesliga',
+  'Borussia Mönchengladbach': 'Bundesliga', 'Wolfsburg': 'Bundesliga',
+  'Juventus': 'Serie A', 'Inter Milan': 'Serie A', 'AC Milan': 'Serie A', 'Napoli': 'Serie A',
+  'AS Roma': 'Serie A', 'Lazio': 'Serie A', 'Atalanta': 'Serie A', 'Fiorentina': 'Serie A',
+  'Paris Saint-Germain': 'Ligue 1', 'Marseille': 'Ligue 1', 'Monaco': 'Ligue 1', 'Lyon': 'Ligue 1',
+  'Lille': 'Ligue 1', 'Nice': 'Ligue 1', 'Lens': 'Ligue 1',
+  'Ajax': 'Eredivisie', 'PSV Eindhoven': 'Eredivisie', 'Feyenoord': 'Eredivisie',
+  'Benfica': 'Primeira Liga', 'Porto': 'Primeira Liga', 'Sporting CP': 'Primeira Liga',
+  'Celtic': 'Scottish Premiership', 'Rangers': 'Scottish Premiership',
+  'Inter Miami': 'MLS', 'LA Galaxy': 'MLS', 'LAFC': 'MLS', 'Seattle Sounders': 'MLS', 'Atlanta United': 'MLS'
 }
 
 const CFB_TEAM_CONFERENCE_MAP = {
   'Alabama': 'SEC', 'Arkansas': 'SEC', 'Auburn': 'SEC', 'Florida': 'SEC', 'Georgia': 'SEC',
   'Kentucky': 'SEC', 'LSU': 'SEC', 'Mississippi State': 'SEC', 'Missouri': 'SEC', 'Oklahoma': 'SEC',
-  'Ole Miss': 'SEC', 'South Carolina': 'SEC', 'Tennessee': 'SEC', 'Texas': 'SEC', 'Texas A&M': 'SEC',
-  'Vanderbilt': 'SEC',
-
+  'Ole Miss': 'SEC', 'South Carolina': 'SEC', 'Tennessee': 'SEC', 'Texas': 'SEC', 'Texas A&M': 'SEC', 'Vanderbilt': 'SEC',
   'Illinois': 'Big Ten', 'Indiana': 'Big Ten', 'Iowa': 'Big Ten', 'Maryland': 'Big Ten',
   'Michigan': 'Big Ten', 'Michigan State': 'Big Ten', 'Minnesota': 'Big Ten', 'Nebraska': 'Big Ten',
   'Northwestern': 'Big Ten', 'Ohio State': 'Big Ten', 'Oregon': 'Big Ten', 'Penn State': 'Big Ten',
-  'Purdue': 'Big Ten', 'Rutgers': 'Big Ten', 'UCLA': 'Big Ten', 'USC': 'Big Ten',
-  'Washington': 'Big Ten', 'Wisconsin': 'Big Ten',
-
+  'Purdue': 'Big Ten', 'Rutgers': 'Big Ten', 'UCLA': 'Big Ten', 'USC': 'Big Ten', 'Washington': 'Big Ten', 'Wisconsin': 'Big Ten',
   'Boston College': 'ACC', 'California': 'ACC', 'Clemson': 'ACC', 'Duke': 'ACC',
   'Florida State': 'ACC', 'Georgia Tech': 'ACC', 'Louisville': 'ACC', 'Miami': 'ACC',
   'NC State': 'ACC', 'North Carolina': 'ACC', 'Pittsburgh': 'ACC', 'SMU': 'ACC',
-  'Stanford': 'ACC', 'Syracuse': 'ACC', 'Virginia': 'ACC', 'Virginia Tech': 'ACC',
-  'Wake Forest': 'ACC',
-
+  'Stanford': 'ACC', 'Syracuse': 'ACC', 'Virginia': 'ACC', 'Virginia Tech': 'ACC', 'Wake Forest': 'ACC',
   'Arizona': 'Big 12', 'Arizona State': 'Big 12', 'Baylor': 'Big 12', 'BYU': 'Big 12',
   'Cincinnati': 'Big 12', 'Colorado': 'Big 12', 'Houston': 'Big 12', 'Iowa State': 'Big 12',
   'Kansas': 'Big 12', 'Kansas State': 'Big 12', 'Oklahoma State': 'Big 12', 'TCU': 'Big 12',
   'Texas Tech': 'Big 12', 'UCF': 'Big 12', 'Utah': 'Big 12', 'West Virginia': 'Big 12',
-
   'Army': 'American Athletic', 'Charlotte': 'American Athletic', 'East Carolina': 'American Athletic',
   'Florida Atlantic': 'American Athletic', 'Memphis': 'American Athletic', 'Navy': 'American Athletic',
   'North Texas': 'American Athletic', 'Rice': 'American Athletic', 'South Florida': 'American Athletic',
   'Temple': 'American Athletic', 'Tulane': 'American Athletic', 'Tulsa': 'American Athletic',
   'UAB': 'American Athletic', 'UTSA': 'American Athletic',
-
   'Air Force': 'Mountain West', 'Boise State': 'Mountain West', 'Colorado State': 'Mountain West',
   'Fresno State': 'Mountain West', 'Hawaii': 'Mountain West', 'Nevada': 'Mountain West',
   'New Mexico': 'Mountain West', 'San Diego State': 'Mountain West', 'San Jose State': 'Mountain West',
   'UNLV': 'Mountain West', 'Utah State': 'Mountain West', 'Wyoming': 'Mountain West',
-
   'Delaware': 'Conference USA', 'FIU': 'Conference USA', 'Jacksonville State': 'Conference USA',
   'Kennesaw State': 'Conference USA', 'Liberty': 'Conference USA', 'Louisiana Tech': 'Conference USA',
   'Middle Tennessee': 'Conference USA', 'Missouri State': 'Conference USA', 'New Mexico State': 'Conference USA',
   'Sam Houston': 'Conference USA', 'UTEP': 'Conference USA', 'Western Kentucky': 'Conference USA',
-
   'Appalachian State': 'Sun Belt', 'Arkansas State': 'Sun Belt', 'Coastal Carolina': 'Sun Belt',
   'Georgia Southern': 'Sun Belt', 'Georgia State': 'Sun Belt', 'James Madison': 'Sun Belt',
   'Louisiana': 'Sun Belt', 'Louisiana Monroe': 'Sun Belt', 'Marshall': 'Sun Belt',
   'Old Dominion': 'Sun Belt', 'South Alabama': 'Sun Belt', 'Southern Miss': 'Sun Belt',
   'Texas State': 'Sun Belt', 'Troy': 'Sun Belt',
-
   'Akron': 'MAC', 'Ball State': 'MAC', 'Bowling Green': 'MAC', 'Buffalo': 'MAC',
   'Central Michigan': 'MAC', 'Eastern Michigan': 'MAC', 'Kent State': 'MAC', 'Miami (OH)': 'MAC',
   'Northern Illinois': 'MAC', 'Ohio': 'MAC', 'Toledo': 'MAC', 'Western Michigan': 'MAC',
-
   'Notre Dame': 'Independent', 'UConn': 'Independent', 'UMass': 'Independent'
+}
+
+const CFB_POSITION_GROUP = {
+  'QB': 'Offense', 'HB': 'Offense', 'FB': 'Offense', 'WR': 'Offense', 'TE': 'Offense',
+  'LT': 'Offense', 'LG': 'Offense', 'C': 'Offense', 'RG': 'Offense', 'RT': 'Offense',
+  'LE': 'Defense', 'RE': 'Defense', 'DT': 'Defense', 'LOLB': 'Defense', 'MLB': 'Defense',
+  'ROLB': 'Defense', 'CB': 'Defense', 'FS': 'Defense', 'SS': 'Defense',
+  'K': 'Special Teams', 'P': 'Special Teams', 'LS': 'Special Teams'
+}
+
+const CLASS_ORDER = ['FR', 'SO', 'JR', 'SR', 'FR (RS)', 'SO (RS)', 'JR (RS)', 'SR (RS)']
+
+function average(nums) {
+  const valid = nums.filter(function(n) { return typeof n === 'number' && !isNaN(n) })
+  if (valid.length === 0) return null
+  const sum = valid.reduce(function(a, b) { return a + b }, 0)
+  return sum / valid.length
+}
+
+function formatEuro(num) {
+  if (num === null || num === undefined || isNaN(num)) return '\u20ac0'
+  if (num >= 1000000) return '\u20ac' + (num / 1000000).toFixed(1) + 'M'
+  if (num >= 1000) return '\u20ac' + (num / 1000).toFixed(0) + 'K'
+  return '\u20ac' + num.toFixed(0)
+}
+
+function tierChipColor(avg) {
+  if (avg === null || avg === undefined) return 'bg-neutral-800 text-neutral-400'
+  if (avg >= 80) return 'bg-green-900/40 text-green-400'
+  if (avg >= 70) return 'bg-yellow-900/40 text-yellow-400'
+  if (avg >= 60) return 'bg-orange-900/40 text-orange-400'
+  return 'bg-red-900/40 text-red-400'
+}
+
+function statTextColor(avg) {
+  if (avg === null || avg === undefined) return 'text-neutral-500'
+  if (avg >= 80) return 'text-green-400'
+  if (avg >= 70) return 'text-yellow-400'
+  if (avg >= 60) return 'text-orange-400'
+  return 'text-red-400'
+}
+
+function tierLabel(avg) {
+  if (avg === null || avg === undefined) return 'No Roster'
+  if (avg >= 85) return 'Elite'
+  if (avg >= 75) return 'Contender'
+  if (avg >= 65) return 'Building'
+  return 'Rebuilding'
 }
 
 function RosterHQLogo({ size }) {
@@ -266,6 +206,7 @@ async function importRosterForGame(supabase, game, franchiseId, teamName) {
 export default function Home() {
   const [user, setUser] = useState(null)
   const [franchises, setFranchises] = useState([])
+  const [playersByFranchise, setPlayersByFranchise] = useState({})
   const [loading, setLoading] = useState(true)
   const [showCreatePanel, setShowCreatePanel] = useState(false)
   const [selectedGame, setSelectedGame] = useState(null)
@@ -322,6 +263,28 @@ export default function Home() {
       .order('created_at', { ascending: false })
     if (!result.error) {
       setFranchises(result.data)
+      await loadPlayersForFranchises(result.data.map(function(f) { return f.id }))
+    }
+  }
+
+  const loadPlayersForFranchises = async (franchiseIds) => {
+    if (!franchiseIds || franchiseIds.length === 0) {
+      setPlayersByFranchise({})
+      return
+    }
+    const result = await supabase
+      .from('players')
+      .select('*')
+      .in('franchise_id', franchiseIds)
+
+    if (!result.error) {
+      const grouped = {}
+      for (let i = 0; i < result.data.length; i++) {
+        const p = result.data[i]
+        if (!grouped[p.franchise_id]) grouped[p.franchise_id] = []
+        grouped[p.franchise_id].push(p)
+      }
+      setPlayersByFranchise(grouped)
     }
   }
 
@@ -450,13 +413,66 @@ export default function Home() {
     router.push('/franchise/' + id)
   }
 
+  const franchiseStats = useMemo(function() {
+    const stats = {}
+    for (let i = 0; i < franchises.length; i++) {
+      const f = franchises[i]
+      const roster = playersByFranchise[f.id] || []
+      const isCfb = f.game === 'EA CFB 27'
+      const overalls = roster.map(function(p) { return p.overall_rating })
+      const avgOverall = average(overalls)
+
+      if (isCfb) {
+        const offenseRatings = []
+        const defenseRatings = []
+        const classCounts = {}
+        for (let j = 0; j < roster.length; j++) {
+          const p = roster[j]
+          const group = CFB_POSITION_GROUP[p.position]
+          if (group === 'Offense' && typeof p.overall_rating === 'number') offenseRatings.push(p.overall_rating)
+          if (group === 'Defense' && typeof p.overall_rating === 'number') defenseRatings.push(p.overall_rating)
+
+          const cls = p.cfb_class || 'Unknown'
+          classCounts[cls] = (classCounts[cls] || 0) + 1
+        }
+
+        const knownClasses = CLASS_ORDER.filter(function(c) { return classCounts[c] })
+        const unknownClasses = Object.keys(classCounts).filter(function(c) { return CLASS_ORDER.indexOf(c) === -1 })
+        const classBreakdown = knownClasses.concat(unknownClasses).map(function(c) {
+          return { label: c, count: classCounts[c] }
+        })
+
+        stats[f.id] = {
+          squadSize: roster.length,
+          avgOverall: avgOverall,
+          offenseAvg: average(offenseRatings),
+          defenseAvg: average(defenseRatings),
+          classBreakdown: classBreakdown
+        }
+      } else {
+        const potentials = roster.map(function(p) { return p.potential_rating })
+        const values = roster.map(function(p) { return p.value_eur })
+        const totalValue = values.reduce(function(sum, v) {
+          return sum + (typeof v === 'number' && !isNaN(v) ? v : 0)
+        }, 0)
+        stats[f.id] = {
+          squadSize: roster.length,
+          avgOverall: avgOverall,
+          avgPotential: average(potentials),
+          totalValue: totalValue
+        }
+      }
+    }
+    return stats
+  }, [franchises, playersByFranchise])
+
   if (loading) {
     return React.createElement('div', { className: 'min-h-screen bg-neutral-950 flex items-center justify-center text-neutral-400' }, 'Loading...')
   }
 
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
-      <div className="max-w-5xl mx-auto px-6 py-10">
+      <div className="max-w-6xl mx-auto px-6 py-10">
         <div className="flex justify-between items-start mb-8">
           <div className="flex items-center gap-4">
             <RosterHQLogo size={62} />
@@ -602,27 +618,104 @@ export default function Home() {
           {franchises.length === 0 ? (
             <p className="text-neutral-500 text-sm">No franchises yet. Click "+ New Franchise" above to get started.</p>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
               {franchises.map(function(f) {
                 var franchiseUrl = "/franchise/" + f.id
+                const isCfb = f.game === 'EA CFB 27'
+                const stats = franchiseStats[f.id] || { squadSize: 0, avgOverall: null }
+
                 return (
-                  <div key={f.id} className="relative bg-neutral-800/50 border border-neutral-800 hover:border-emerald-600 rounded-lg p-4 transition-colors min-h-[100px]">
+                  <div key={f.id} className="relative bg-neutral-800/50 border border-neutral-800 hover:border-emerald-600 rounded-xl p-5 transition-colors">
                     <a href={franchiseUrl} onClick={(e) => { e.preventDefault(); goToFranchise(f.id) }} className="absolute inset-0 z-0" aria-label={'Open ' + f.club_name}></a>
+
                     <div className="relative z-10 pointer-events-none">
-                      <p className="text-neutral-500 text-xs font-medium mb-1">{f.game || 'EA FC 26'}</p>
-                      <h3 className="font-semibold text-neutral-100 pr-6">{f.club_name}</h3>
-                      <p className="text-neutral-400 text-sm mt-1">{f.league ? f.league : 'No league set'}</p>
-                      <p className="text-emerald-400 text-xs mt-2 font-medium">Season {f.current_season}</p>
+                      <div className="flex justify-between items-start mb-3">
+                        <div>
+                          <p className="text-neutral-500 text-xs font-medium mb-1">{f.game || 'EA FC 26'}</p>
+                          <h3 className="font-bold text-neutral-100 text-xl pr-16">{f.club_name}</h3>
+                          <div className="flex items-center gap-2 mt-0.5">
+                            <p className="text-neutral-400 text-sm">
+                              {f.league ? f.league : 'No league set'} &middot; Season {f.current_season}
+                            </p>
+                            <span className={'text-xs font-semibold px-2 py-0.5 rounded-full whitespace-nowrap ' + tierChipColor(stats.avgOverall)}>
+                              {tierLabel(stats.avgOverall)}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {isCfb ? (
+                        <>
+                          <div className="grid grid-cols-3 gap-3 mb-3">
+                            <div className="bg-neutral-900/60 rounded-lg p-2.5">
+                              <p className="text-neutral-500 text-[10px] uppercase tracking-wide">Overall</p>
+                              <p className={'font-semibold text-sm mt-0.5 ' + statTextColor(stats.avgOverall)}>
+                                {stats.avgOverall !== null ? stats.avgOverall.toFixed(1) : '-'}
+                              </p>
+                            </div>
+                            <div className="bg-neutral-900/60 rounded-lg p-2.5">
+                              <p className="text-neutral-500 text-[10px] uppercase tracking-wide">Offense</p>
+                              <p className={'font-semibold text-sm mt-0.5 ' + statTextColor(stats.offenseAvg)}>
+                                {stats.offenseAvg !== null ? stats.offenseAvg.toFixed(0) : '-'}
+                              </p>
+                            </div>
+                            <div className="bg-neutral-900/60 rounded-lg p-2.5">
+                              <p className="text-neutral-500 text-[10px] uppercase tracking-wide">Defense</p>
+                              <p className={'font-semibold text-sm mt-0.5 ' + statTextColor(stats.defenseAvg)}>
+                                {stats.defenseAvg !== null ? stats.defenseAvg.toFixed(0) : '-'}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="bg-neutral-900/60 rounded-lg p-2.5">
+                            <p className="text-neutral-500 text-[10px] uppercase tracking-wide mb-1.5">
+                              Class Breakdown &middot; {stats.squadSize} players
+                            </p>
+                            {stats.classBreakdown && stats.classBreakdown.length > 0 ? (
+                              <div className="flex flex-wrap gap-x-2 gap-y-0.5">
+                                {stats.classBreakdown.map(function(c) {
+                                  return (
+                                    <span key={c.label} className="text-neutral-200 text-xs font-medium whitespace-nowrap">
+                                      {c.label} <span className="text-neutral-400">{c.count}</span>
+                                    </span>
+                                  )
+                                })}
+                              </div>
+                            ) : (
+                              <p className="text-neutral-500 text-xs">-</p>
+                            )}
+                          </div>
+                        </>
+                      ) : (
+                        <div className="grid grid-cols-3 gap-3">
+                          <div className="bg-neutral-900/60 rounded-lg p-2.5">
+                            <p className="text-neutral-500 text-[10px] uppercase tracking-wide">Overall</p>
+                            <p className={'font-semibold text-sm mt-0.5 ' + statTextColor(stats.avgOverall)}>
+                              {stats.avgOverall !== null ? stats.avgOverall.toFixed(1) : '-'}
+                            </p>
+                          </div>
+                          <div className="bg-neutral-900/60 rounded-lg p-2.5">
+                            <p className="text-neutral-500 text-[10px] uppercase tracking-wide">Potential</p>
+                            <p className={'font-semibold text-sm mt-0.5 ' + statTextColor(stats.avgPotential)}>
+                              {stats.avgPotential !== null ? stats.avgPotential.toFixed(0) : '-'}
+                            </p>
+                          </div>
+                          <div className="bg-neutral-900/60 rounded-lg p-2.5">
+                            <p className="text-neutral-500 text-[10px] uppercase tracking-wide">Club Value</p>
+                            <p className="text-neutral-100 font-semibold text-sm mt-0.5">{formatEuro(stats.totalValue)}</p>
+                          </div>
+                        </div>
+                      )}
                     </div>
+
                     {confirmDeleteId === f.id ? (
-                      <div className="absolute top-3 right-3 z-20 flex gap-1 bg-neutral-900 border border-neutral-700 rounded-lg p-1">
+                      <div className="absolute top-5 right-5 z-20 flex gap-1 bg-neutral-900 border border-neutral-700 rounded-lg p-1">
                         <button onClick={(e) => { e.stopPropagation(); handleDeleteFranchise(f.id) }} disabled={deletingId === f.id} className="text-red-400 hover:text-red-300 text-xs font-semibold px-2 py-1">
                           {deletingId === f.id ? '...' : 'Confirm'}
                         </button>
                         <button onClick={(e) => { e.stopPropagation(); setConfirmDeleteId(null) }} className="text-neutral-400 hover:text-neutral-200 text-xs px-2 py-1">Cancel</button>
                       </div>
                     ) : (
-                      <button onClick={(e) => { e.stopPropagation(); setConfirmDeleteId(f.id) }} className="absolute top-3 right-3 z-20 text-neutral-500 hover:text-red-400 text-xs font-medium">Delete</button>
+                      <button onClick={(e) => { e.stopPropagation(); setConfirmDeleteId(f.id) }} className="absolute top-5 right-5 z-20 text-neutral-500 hover:text-red-400 text-xs font-medium">Delete</button>
                     )}
                   </div>
                 )

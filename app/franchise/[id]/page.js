@@ -575,15 +575,6 @@ export default function FranchisePage() {
   const teamStats = useMemo(function() {
     const overalls = players.map(function(p) { return p.overall_rating })
 
-    let topPlayer = null
-    for (let i = 0; i < players.length; i++) {
-      if (typeof players[i].overall_rating === 'number') {
-        if (!topPlayer || players[i].overall_rating > topPlayer.overall_rating) {
-          topPlayer = players[i]
-        }
-      }
-    }
-
     if (isCfb) {
       const offenseRatings = []
       const defenseRatings = []
@@ -647,7 +638,6 @@ export default function FranchisePage() {
         offenseAvg: average(offenseRatings),
         defenseAvg: average(defenseRatings),
         positionAverages: positionAverages,
-        topPlayer: topPlayer,
         topOffense: sortedOffense,
         topDefense: sortedDefense,
         groupAverages: groupAverages
@@ -673,8 +663,7 @@ export default function FranchisePage() {
       avgOverall: average(overalls),
       avgPotential: average(potentials),
       totalValue: totalValue,
-      totalWage: totalWage,
-      topPlayer: topPlayer
+      totalWage: totalWage
     }
   }, [players, isCfb])
 
@@ -931,19 +920,6 @@ export default function FranchisePage() {
               <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Weekly Wages</p>
               <p className="text-2xl font-semibold text-neutral-100">{formatEuro(teamStats.totalWage)}</p>
             </div>
-          </div>
-        )}
-
-        {players.length > 0 && teamStats.topPlayer && (
-          <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4 mb-6 flex items-center justify-between">
-            <div>
-              <p className="text-neutral-500 text-xs uppercase tracking-wide mb-0.5">Best Player</p>
-              <p className="font-semibold text-neutral-100">
-                {teamStats.topPlayer.name}
-                <span className="text-neutral-400 font-normal"> &middot; {teamStats.topPlayer.position}</span>
-              </p>
-            </div>
-            <OvrBadge value={teamStats.topPlayer.overall_rating} />
           </div>
         )}
 
