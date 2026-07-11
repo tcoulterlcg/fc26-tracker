@@ -418,7 +418,7 @@ export default function Home() {
         if (isCfb) {
           const mascot = CFB_MASCOTS[f.club_name]
           candidates = mascot
-            ? [f.club_name + ' ' + mascot + ' football', f.club_name + ' ' + mascot]
+            ? [f.club_name + ' ' + mascot, f.club_name + ' ' + mascot + ' football']
             : [f.club_name + ' football team']
         } else {
           candidates = [f.club_name + ' F.C.', f.club_name + ' FC']
@@ -797,6 +797,9 @@ export default function Home() {
             <button onClick={() => setShowCreatePanel(!showCreatePanel)} className="bg-emerald-600 hover:bg-emerald-500 transition-colors rounded-lg px-4 py-2 text-sm font-semibold whitespace-nowrap">
               {showCreatePanel ? 'Cancel' : '+ New Franchise'}
             </button>
+            <a href="/leaderboards" className="border border-neutral-700 hover:border-neutral-600 hover:bg-neutral-900 transition-colors rounded-lg px-4 py-2 text-sm font-medium text-neutral-300 flex items-center">
+              Leaderboards
+            </a>
             <a href="/player-databases" className="border border-neutral-700 hover:border-neutral-600 hover:bg-neutral-900 transition-colors rounded-lg px-4 py-2 text-sm font-medium text-neutral-300 flex items-center">
               Player Databases
             </a>
