@@ -266,6 +266,10 @@ export default function FranchisePage() {
 
   const [activeTab, setActiveTab] = useState('roster')
 
+  const [tabOrder, setTabOrder] = useState(null)
+  const [dragTabKey, setDragTabKey] = useState(null)
+  const [dragOverTabKey, setDragOverTabKey] = useState(null)
+
   const [editingLeague, setEditingLeague] = useState(false)
   const [leagueDraft, setLeagueDraft] = useState('')
   const [savingLeague, setSavingLeague] = useState(false)
@@ -330,6 +334,69 @@ export default function FranchisePage() {
       loadSnapshots()
     }
   }, [franchise])
+
+  useEffect(() => {
+    if (!franchise) return
+    const tabStorageKey = 'roster_hq_tab_order_' + (isCfb ? 'cfb' : 'fc')
+    const defaultOrder = isCfb
+      ? ['dashboard', 'roster', 'depth', 'progression', 'teamstats', 'playerstats', 'teamneeds', 'history']
+      : ['dashboard', 'roster', 'progression', 'teamstats', 'playerstats', 'teamneeds', 'history']
+    try {
+      const saved = window.localStorage.getItem(tabStorageKey)
+      if (saved) {
+        const parsed = JSON.parse(saved)
+        const valid = parsed.filter(function(k) { return defaultOrder.indexOf(k) !== -1 })
+        const missing = defaultOrder.filter(function(k) { return valid.indexOf(k) === -1 })
+        setTabOrder(valid.concat(missing))
+        return
+      }
+    } catch (e) {
+      // ignore
+    }
+    setTabOrder(defaultOrder)
+  }, [franchise, isCfb])
+
+  const saveTabOrder = (order) => {
+    setTabOrder(order)
+    try {
+      window.localStorage.setItem('roster_hq_tab_order_' + (isCfb ? 'cfb' : 'fc'), JSON.stringify(order))
+    } catch (e) {
+      // ignore
+    }
+  }
+
+  const handleTabDragStart = (key) => {
+    setDragTabKey(key)
+  }
+
+  const handleTabDragOver = (e, key) => {
+    e.preventDefault()
+    if (key !== dragOverTabKey) {
+      setDragOverTabKey(key)
+    }
+  }
+
+  const handleTabDrop = (e, targetKey) => {
+    e.preventDefault()
+    if (!dragTabKey || dragTabKey === targetKey) {
+      setDragTabKey(null)
+      setDragOverTabKey(null)
+      return
+    }
+    const order = tabOrder.slice()
+    const fromIdx = order.indexOf(dragTabKey)
+    const toIdx = order.indexOf(targetKey)
+    order.splice(fromIdx, 1)
+    order.splice(toIdx, 0, dragTabKey)
+    saveTabOrder(order)
+    setDragTabKey(null)
+    setDragOverTabKey(null)
+  }
+
+  const handleTabDragEnd = () => {
+    setDragTabKey(null)
+    setDragOverTabKey(null)
+  }
 
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
@@ -1263,7 +1330,22 @@ export default function FranchisePage() {
     return <span className={color}>{sign}{diff.toFixed(decimals)}</span>
   }
 
-  if (loading || !columnOrder) {
+  const TAB_DEFS = {
+    dashboard: { type: 'tab', label: 'Dashboard' },
+    roster: { type: 'tab', label: 'Roster' },
+    depth: { type: 'tab', label: 'Depth Chart', cfbOnly: true },
+    progression: { type: 'tab', label: 'Progression' },
+    teamstats: { type: 'link', label: 'Team Stats', href: '/franchise/' + franchiseId + '/team-stats' },
+    playerstats: { type: 'link', label: 'Player Stats', href: '/franchise/' + franchiseId + '/stats' },
+    teamneeds: { type: 'link', label: 'Team Needs', href: '/franchise/' + franchiseId + '/team-needs' },
+    history: {
+      type: 'link',
+      label: isCfb ? 'Recruiting History' : 'Transfer History',
+      href: '/franchise/' + franchiseId + (isCfb ? '/recruiting-history' : '/transfer-history')
+    }
+  }
+
+  if (loading || !columnOrder || !tabOrder) {
     return (
       <div className="min-h-screen bg-neutral-950 flex items-center justify-center text-neutral-400">
         Loading...
@@ -1452,299 +1534,292 @@ export default function FranchisePage() {
           </div>
         )}
 
-        {isCfb && players.length > 0 && (
-          <div className="mb-6">
-            <div className="flex justify-end mb-2">
-              <select
-                value={benchmarkConference || 'ALL'}
-                onChange={(e) => setBenchmarkConference(e.target.value)}
-                className="bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-1.5 text-xs font-semibold text-neutral-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+
+        <div className="flex gap-1 mb-6 border-b border-neutral-800 flex-wrap">
+          {tabOrder.map(function(key) {
+            const def = TAB_DEFS[key]
+            if (!def) return null
+            if (def.cfbOnly && !isCfb) return null
+            const isDragOver = dragOverTabKey === key && dragTabKey !== key
+            const sharedClassName =
+              'px-4 py-2 text-sm font-semibold border-b-2 -mb-px transition-colors cursor-move select-none ' +
+              (isDragOver ? 'border-emerald-300 bg-emerald-900/20 ' : '') +
+              (def.type === 'tab' && activeTab === key
+                ? 'border-emerald-500 text-emerald-400'
+                : 'border-transparent text-neutral-500 hover:text-neutral-300')
+
+            if (def.type === 'tab') {
+              return (
+                <button
+                  key={key}
+                  draggable
+                  onDragStart={() => handleTabDragStart(key)}
+                  onDragOver={(e) => handleTabDragOver(e, key)}
+                  onDrop={(e) => handleTabDrop(e, key)}
+                  onDragEnd={handleTabDragEnd}
+                  onClick={() => setActiveTab(key)}
+                  className={sharedClassName}
+                >
+                  {def.label}
+                </button>
+              )
+            }
+
+            return (
+              <a
+                key={key}
+                draggable
+                onDragStart={() => handleTabDragStart(key)}
+                onDragOver={(e) => handleTabDragOver(e, key)}
+                onDrop={(e) => handleTabDrop(e, key)}
+                onDragEnd={handleTabDragEnd}
+                href={def.href}
+                className={sharedClassName}
               >
-                <option value="ALL">All Conferences</option>
-                {CFB_CONFERENCES.map((c) => (
-                  <option key={c} value={c}>{c}</option>
-                ))}
-              </select>
-            </div>
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6 mb-3">
-              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
-                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Squad Size</p>
-                <p className="text-2xl font-semibold text-neutral-100">{teamStats.squadSize}</p>
-                <MiniBenchmarkBar ownValue={teamStats.squadSize} benchmark={getCfbBenchmark('squadSize')} isCurrency={false} decimals={0} />
+                {def.label}
+              </a>
+            )
+          })}
+        </div>
+
+        {activeTab === 'dashboard' && (
+          <>
+          {isCfb && players.length > 0 && (
+            <div className="mb-6">
+              <div className="flex justify-end mb-2">
+                <select
+                  value={benchmarkConference || 'ALL'}
+                  onChange={(e) => setBenchmarkConference(e.target.value)}
+                  className="bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-1.5 text-xs font-semibold text-neutral-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                >
+                  <option value="ALL">All Conferences</option>
+                  {CFB_CONFERENCES.map((c) => (
+                    <option key={c} value={c}>{c}</option>
+                  ))}
+                </select>
               </div>
-              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
-                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Avg Overall</p>
-                <p className="text-2xl font-semibold text-emerald-400">
-                  {teamStats.avgOverall !== null ? teamStats.avgOverall.toFixed(1) : '-'}
-                </p>
-                <MiniBenchmarkBar ownValue={teamStats.avgOverall} benchmark={getCfbBenchmark('avgOverall')} isCurrency={false} decimals={1} />
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6 mb-3">
+                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                  <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Squad Size</p>
+                  <p className="text-2xl font-semibold text-neutral-100">{teamStats.squadSize}</p>
+                  <MiniBenchmarkBar ownValue={teamStats.squadSize} benchmark={getCfbBenchmark('squadSize')} isCurrency={false} decimals={0} />
+                </div>
+                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                  <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Avg Overall</p>
+                  <p className="text-2xl font-semibold text-emerald-400">
+                    {teamStats.avgOverall !== null ? teamStats.avgOverall.toFixed(1) : '-'}
+                  </p>
+                  <MiniBenchmarkBar ownValue={teamStats.avgOverall} benchmark={getCfbBenchmark('avgOverall')} isCurrency={false} decimals={1} />
+                </div>
+                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                  <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Offense</p>
+                  <p className="text-2xl font-semibold text-neutral-100">
+                    {teamStats.offenseAvg !== null ? teamStats.offenseAvg.toFixed(0) : '-'}
+                  </p>
+                  <MiniBenchmarkBar ownValue={teamStats.offenseAvg} benchmark={getCfbBenchmark('offenseAvg')} isCurrency={false} decimals={0} />
+                </div>
+                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                  <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Defense</p>
+                  <p className="text-2xl font-semibold text-neutral-100">
+                    {teamStats.defenseAvg !== null ? teamStats.defenseAvg.toFixed(0) : '-'}
+                  </p>
+                  <MiniBenchmarkBar ownValue={teamStats.defenseAvg} benchmark={getCfbBenchmark('defenseAvg')} isCurrency={false} decimals={0} />
+                </div>
+                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                  <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">NIL Funds</p>
+                  {editingNil ? (
+                    <div className="flex items-center gap-1">
+                      <input
+                        type="number"
+                        value={nilDraft}
+                        onChange={(e) => setNilDraft(e.target.value)}
+                        placeholder="0"
+                        className="w-full bg-neutral-800 border border-neutral-700 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                        autoFocus
+                      />
+                      <button onClick={handleSaveNil} disabled={savingNil} className="text-emerald-400 hover:text-emerald-300 text-xs font-semibold whitespace-nowrap">
+                        {savingNil ? '...' : 'Save'}
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2">
+                      <p className="text-2xl font-semibold text-neutral-100">{formatUsd(franchise.nil_funds || 0)}</p>
+                      <button onClick={() => setEditingNil(true)} className="text-neutral-500 hover:text-emerald-400 text-xs font-medium">Edit</button>
+                    </div>
+                  )}
+                </div>
+                <a href={'/franchise/' + franchiseId + '/recruiting-history'} className="bg-neutral-900 border border-neutral-800 hover:border-emerald-600 rounded-xl p-4 transition-colors">
+                  <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Recruiting Class</p>
+                  <p className="text-2xl font-semibold text-neutral-100">
+                    {recruitingSummary.count}
+                    {recruitingSummary.avgStars !== null && (
+                      <span className="text-yellow-400 text-sm font-normal ml-1">{recruitingSummary.avgStars.toFixed(1)}&#9733;</span>
+                    )}
+                  </p>
+                </a>
               </div>
-              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
-                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Offense</p>
-                <p className="text-2xl font-semibold text-neutral-100">
-                  {teamStats.offenseAvg !== null ? teamStats.offenseAvg.toFixed(0) : '-'}
-                </p>
-                <MiniBenchmarkBar ownValue={teamStats.offenseAvg} benchmark={getCfbBenchmark('offenseAvg')} isCurrency={false} decimals={0} />
-              </div>
-              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
-                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Defense</p>
-                <p className="text-2xl font-semibold text-neutral-100">
-                  {teamStats.defenseAvg !== null ? teamStats.defenseAvg.toFixed(0) : '-'}
-                </p>
-                <MiniBenchmarkBar ownValue={teamStats.defenseAvg} benchmark={getCfbBenchmark('defenseAvg')} isCurrency={false} decimals={0} />
-              </div>
-              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
-                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">NIL Funds</p>
-                {editingNil ? (
-                  <div className="flex items-center gap-1">
-                    <input
-                      type="number"
-                      value={nilDraft}
-                      onChange={(e) => setNilDraft(e.target.value)}
-                      placeholder="0"
-                      className="w-full bg-neutral-800 border border-neutral-700 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                      autoFocus
-                    />
-                    <button onClick={handleSaveNil} disabled={savingNil} className="text-emerald-400 hover:text-emerald-300 text-xs font-semibold whitespace-nowrap">
-                      {savingNil ? '...' : 'Save'}
-                    </button>
+
+              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4 mb-3">
+                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-2">Class Breakdown &middot; {teamStats.squadSize} players</p>
+                {teamStats.classBreakdown && teamStats.classBreakdown.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+                    {teamStats.classBreakdown.map(function(c) {
+                      return (
+                        <div key={c.label} className="bg-neutral-800/50 rounded-lg px-3 py-2">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="text-neutral-200 text-sm font-semibold">{c.label}</span>
+                            <span className="text-neutral-400 text-xs">{c.count} players</span>
+                            {c.avgOverall !== null && (
+                              <span className={'text-xs font-semibold ' + statTextColor(c.avgOverall)}>{c.avgOverall.toFixed(1)} OVR</span>
+                            )}
+                            {c.avgRecruitStars !== null && (
+                              <span className="text-yellow-400 text-xs">{c.avgRecruitStars.toFixed(1)}&#9733;</span>
+                            )}
+                          </div>
+                          <div className="flex flex-wrap gap-x-3 gap-y-0.5 mt-1">
+                            {c.devCounts.map(function(d) {
+                              return (
+                                <span key={d.label} className="text-neutral-500 text-xs">
+                                  {d.label} <span className="text-neutral-300 font-medium">{d.count}</span>
+                                </span>
+                              )
+                            })}
+                          </div>
+                        </div>
+                      )
+                    })}
                   </div>
                 ) : (
-                  <div className="flex items-center gap-2">
-                    <p className="text-2xl font-semibold text-neutral-100">{formatUsd(franchise.nil_funds || 0)}</p>
-                    <button onClick={() => setEditingNil(true)} className="text-neutral-500 hover:text-emerald-400 text-xs font-medium">Edit</button>
-                  </div>
+                  <p className="text-neutral-500 text-sm">-</p>
                 )}
               </div>
-              <a href={'/franchise/' + franchiseId + '/recruiting-history'} className="bg-neutral-900 border border-neutral-800 hover:border-emerald-600 rounded-xl p-4 transition-colors">
-                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Recruiting Class</p>
-                <p className="text-2xl font-semibold text-neutral-100">
-                  {recruitingSummary.count}
-                  {recruitingSummary.avgStars !== null && (
-                    <span className="text-yellow-400 text-sm font-normal ml-1">{recruitingSummary.avgStars.toFixed(1)}&#9733;</span>
-                  )}
-                </p>
-              </a>
-            </div>
 
-            <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4 mb-3">
-              <p className="text-neutral-500 text-xs uppercase tracking-wide mb-2">Class Breakdown &middot; {teamStats.squadSize} players</p>
-              {teamStats.classBreakdown && teamStats.classBreakdown.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-                  {teamStats.classBreakdown.map(function(c) {
-                    return (
-                      <div key={c.label} className="bg-neutral-800/50 rounded-lg px-3 py-2">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <span className="text-neutral-200 text-sm font-semibold">{c.label}</span>
-                          <span className="text-neutral-400 text-xs">{c.count} players</span>
-                          {c.avgOverall !== null && (
-                            <span className={'text-xs font-semibold ' + statTextColor(c.avgOverall)}>{c.avgOverall.toFixed(1)} OVR</span>
-                          )}
-                          {c.avgRecruitStars !== null && (
-                            <span className="text-yellow-400 text-xs">{c.avgRecruitStars.toFixed(1)}&#9733;</span>
-                          )}
-                        </div>
-                        <div className="flex flex-wrap gap-x-3 gap-y-0.5 mt-1">
-                          {c.devCounts.map(function(d) {
-                            return (
-                              <span key={d.label} className="text-neutral-500 text-xs">
-                                {d.label} <span className="text-neutral-300 font-medium">{d.count}</span>
-                              </span>
-                            )
-                          })}
-                        </div>
-                      </div>
-                    )
-                  })}
-                </div>
-              ) : (
-                <p className="text-neutral-500 text-sm">-</p>
-              )}
-            </div>
-
-            <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
-              <p className="text-neutral-500 text-xs uppercase tracking-wide mb-3">Positional Breakdown</p>
-              {teamStats.sideBreakdown && teamStats.sideBreakdown.length > 0 ? (
-                <div className="space-y-4">
-                  {teamStats.sideBreakdown.map(function(s) {
-                    return (
-                      <div key={s.side}>
-                        <p className="text-neutral-200 text-sm font-semibold mb-2">
-                          {s.side} <span className="text-neutral-400 font-normal">{s.count} players</span>
-                        </p>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-                          {s.groups.map(function(g) {
-                            return (
-                              <div key={g.label} className="bg-neutral-800/50 rounded-lg p-2">
-                                <p className="text-neutral-300 text-[11px] font-semibold uppercase tracking-wide mb-1 truncate">
-                                  {g.label} <span className="text-neutral-500 font-normal normal-case">&middot; {g.count}</span>
-                                  {g.avgOverall !== null && (
-                                    <span className={'font-normal normal-case ml-1 ' + statTextColor(g.avgOverall)}>{g.avgOverall.toFixed(1)}</span>
-                                  )}
-                                </p>
-                                <div className="flex gap-2">
-                                  <div className="flex-1 min-w-0 flex flex-wrap content-start gap-1">
-                                    {g.positions.map(function(p) {
-                                      return (
-                                        <div key={p.position} className="bg-neutral-900 rounded px-1.5 py-0.5">
-                                          <div className="flex items-center gap-1">
-                                            <span className="text-neutral-200 text-[11px] font-semibold">{p.position}</span>
-                                            <span className="text-neutral-500 text-[9px]">{p.count}</span>
-                                          </div>
-                                          <div className="flex flex-wrap gap-x-1">
-                                            {p.devCounts.map(function(d) {
-                                              return (
-                                                <span key={d.label} className="text-neutral-500 text-[9px]">
-                                                  {d.label} <span className="text-neutral-300 font-medium">{d.count}</span>
-                                                </span>
-                                              )
-                                            })}
-                                          </div>
-                                        </div>
-                                      )
-                                    })}
-                                  </div>
-                                  {g.topPlayers && g.topPlayers.length > 0 && (
-                                    <div className="w-20 flex-shrink-0 space-y-0.5 border-l border-neutral-700/50 pl-2">
-                                      {g.topPlayers.map(function(p) {
+              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-3">Positional Breakdown</p>
+                {teamStats.sideBreakdown && teamStats.sideBreakdown.length > 0 ? (
+                  <div className="space-y-4">
+                    {teamStats.sideBreakdown.map(function(s) {
+                      return (
+                        <div key={s.side}>
+                          <p className="text-neutral-200 text-sm font-semibold mb-2">
+                            {s.side} <span className="text-neutral-400 font-normal">{s.count} players</span>
+                          </p>
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                            {s.groups.map(function(g) {
+                              return (
+                                <div key={g.label} className="bg-neutral-800/50 rounded-lg p-2">
+                                  <p className="text-neutral-300 text-[11px] font-semibold uppercase tracking-wide mb-1 truncate">
+                                    {g.label} <span className="text-neutral-500 font-normal normal-case">&middot; {g.count}</span>
+                                    {g.avgOverall !== null && (
+                                      <span className={'font-normal normal-case ml-1 ' + statTextColor(g.avgOverall)}>{g.avgOverall.toFixed(1)}</span>
+                                    )}
+                                  </p>
+                                  <div className="flex gap-2">
+                                    <div className="flex-1 min-w-0 flex flex-wrap content-start gap-1">
+                                      {g.positions.map(function(p) {
                                         return (
-                                          <div key={p.id} className="flex items-center justify-between gap-0.5">
-                                            <span className="text-neutral-300 text-[9px] truncate">{p.name}</span>
-                                            <OvrBadge value={p.overall_rating} small />
+                                          <div key={p.position} className="bg-neutral-900 rounded px-1.5 py-0.5">
+                                            <div className="flex items-center gap-1">
+                                              <span className="text-neutral-200 text-[11px] font-semibold">{p.position}</span>
+                                              <span className="text-neutral-500 text-[9px]">{p.count}</span>
+                                            </div>
+                                            <div className="flex flex-wrap gap-x-1">
+                                              {p.devCounts.map(function(d) {
+                                                return (
+                                                  <span key={d.label} className="text-neutral-500 text-[9px]">
+                                                    {d.label} <span className="text-neutral-300 font-medium">{d.count}</span>
+                                                  </span>
+                                                )
+                                              })}
+                                            </div>
                                           </div>
                                         )
                                       })}
                                     </div>
-                                  )}
+                                    {g.topPlayers && g.topPlayers.length > 0 && (
+                                      <div className="w-20 flex-shrink-0 space-y-0.5 border-l border-neutral-700/50 pl-2">
+                                        {g.topPlayers.map(function(p) {
+                                          return (
+                                            <div key={p.id} className="flex items-center justify-between gap-0.5">
+                                              <span className="text-neutral-300 text-[9px] truncate">{p.name}</span>
+                                              <OvrBadge value={p.overall_rating} small />
+                                            </div>
+                                          )
+                                        })}
+                                      </div>
+                                    )}
+                                  </div>
                                 </div>
-                              </div>
-                            )
-                          })}
+                              )
+                            })}
+                          </div>
                         </div>
-                      </div>
-                    )
-                  })}
-                </div>
-              ) : (
-                <p className="text-neutral-500 text-sm">-</p>
-              )}
+                      )
+                    })}
+                  </div>
+                ) : (
+                  <p className="text-neutral-500 text-sm">-</p>
+                )}
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {!isCfb && players.length > 0 && (
-          <>
-            <div className="flex justify-end mb-2">
-              <select
-                value={benchmarkLeague || 'ALL'}
-                onChange={(e) => setBenchmarkLeague(e.target.value)}
-                className="bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-1.5 text-xs font-semibold text-neutral-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-              >
-                <option value="ALL">All Leagues</option>
-                {LEAGUES.map((l) => (
-                  <option key={l} value={l}>{l}</option>
-                ))}
-              </select>
-            </div>
-            <div className="grid grid-cols-2 gap-3 mb-6 md:grid-cols-3 lg:grid-cols-6">
-              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
-                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Squad Size</p>
-                <p className="text-2xl font-semibold text-neutral-100">{teamStats.squadSize}</p>
-                <MiniBenchmarkBar ownValue={teamStats.squadSize} benchmark={getBenchmark('squadSize')} isCurrency={false} decimals={0} />
+          {!isCfb && players.length > 0 && (
+            <>
+              <div className="flex justify-end mb-2">
+                <select
+                  value={benchmarkLeague || 'ALL'}
+                  onChange={(e) => setBenchmarkLeague(e.target.value)}
+                  className="bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-1.5 text-xs font-semibold text-neutral-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                >
+                  <option value="ALL">All Leagues</option>
+                  {LEAGUES.map((l) => (
+                    <option key={l} value={l}>{l}</option>
+                  ))}
+                </select>
               </div>
-              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
-                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Avg Age</p>
-                <p className="text-2xl font-semibold text-neutral-100">
-                  {teamStats.avgAge !== null ? teamStats.avgAge.toFixed(1) : '-'}
-                </p>
-                <MiniBenchmarkBar ownValue={teamStats.avgAge} benchmark={getBenchmark('avgAge')} isCurrency={false} decimals={1} />
+              <div className="grid grid-cols-2 gap-3 mb-6 md:grid-cols-3 lg:grid-cols-6">
+                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                  <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Squad Size</p>
+                  <p className="text-2xl font-semibold text-neutral-100">{teamStats.squadSize}</p>
+                  <MiniBenchmarkBar ownValue={teamStats.squadSize} benchmark={getBenchmark('squadSize')} isCurrency={false} decimals={0} />
+                </div>
+                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                  <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Avg Age</p>
+                  <p className="text-2xl font-semibold text-neutral-100">
+                    {teamStats.avgAge !== null ? teamStats.avgAge.toFixed(1) : '-'}
+                  </p>
+                  <MiniBenchmarkBar ownValue={teamStats.avgAge} benchmark={getBenchmark('avgAge')} isCurrency={false} decimals={1} />
+                </div>
+                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                  <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Avg Overall</p>
+                  <p className="text-2xl font-semibold text-emerald-400">
+                    {teamStats.avgOverall !== null ? teamStats.avgOverall.toFixed(1) : '-'}
+                  </p>
+                  <MiniBenchmarkBar ownValue={teamStats.avgOverall} benchmark={getBenchmark('avgOverall')} isCurrency={false} decimals={1} />
+                </div>
+                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                  <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Avg Potential</p>
+                  <p className="text-2xl font-semibold text-neutral-100">
+                    {teamStats.avgPotential !== null ? teamStats.avgPotential.toFixed(1) : '-'}
+                  </p>
+                  <MiniBenchmarkBar ownValue={teamStats.avgPotential} benchmark={getBenchmark('avgPotential')} isCurrency={false} decimals={1} />
+                </div>
+                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                  <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Team Value</p>
+                  <p className="text-2xl font-semibold text-neutral-100">{formatEuro(teamStats.totalValue)}</p>
+                  <MiniBenchmarkBar ownValue={teamStats.totalValue} benchmark={getBenchmark('totalValue')} isCurrency={true} decimals={0} />
+                </div>
+                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                  <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Weekly Wages</p>
+                  <p className="text-2xl font-semibold text-neutral-100">{formatEuro(teamStats.totalWage)}</p>
+                  <MiniBenchmarkBar ownValue={teamStats.totalWage} benchmark={getBenchmark('totalWage')} isCurrency={true} decimals={0} />
+                </div>
               </div>
-              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
-                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Avg Overall</p>
-                <p className="text-2xl font-semibold text-emerald-400">
-                  {teamStats.avgOverall !== null ? teamStats.avgOverall.toFixed(1) : '-'}
-                </p>
-                <MiniBenchmarkBar ownValue={teamStats.avgOverall} benchmark={getBenchmark('avgOverall')} isCurrency={false} decimals={1} />
-              </div>
-              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
-                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Avg Potential</p>
-                <p className="text-2xl font-semibold text-neutral-100">
-                  {teamStats.avgPotential !== null ? teamStats.avgPotential.toFixed(1) : '-'}
-                </p>
-                <MiniBenchmarkBar ownValue={teamStats.avgPotential} benchmark={getBenchmark('avgPotential')} isCurrency={false} decimals={1} />
-              </div>
-              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
-                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Team Value</p>
-                <p className="text-2xl font-semibold text-neutral-100">{formatEuro(teamStats.totalValue)}</p>
-                <MiniBenchmarkBar ownValue={teamStats.totalValue} benchmark={getBenchmark('totalValue')} isCurrency={true} decimals={0} />
-              </div>
-              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
-                <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Weekly Wages</p>
-                <p className="text-2xl font-semibold text-neutral-100">{formatEuro(teamStats.totalWage)}</p>
-                <MiniBenchmarkBar ownValue={teamStats.totalWage} benchmark={getBenchmark('totalWage')} isCurrency={true} decimals={0} />
-              </div>
-            </div>
+            </>
+          )}
           </>
         )}
-
-        <div className="flex gap-1 mb-6 border-b border-neutral-800 flex-wrap">
-          <button
-            onClick={() => setActiveTab('roster')}
-            className={
-              'px-4 py-2 text-sm font-semibold border-b-2 -mb-px transition-colors ' +
-              (activeTab === 'roster' ? 'border-emerald-500 text-emerald-400' : 'border-transparent text-neutral-500 hover:text-neutral-300')
-            }
-          >
-            Roster
-          </button>
-          {isCfb && (
-            <button
-              onClick={() => setActiveTab('depth')}
-              className={
-                'px-4 py-2 text-sm font-semibold border-b-2 -mb-px transition-colors ' +
-                (activeTab === 'depth' ? 'border-emerald-500 text-emerald-400' : 'border-transparent text-neutral-500 hover:text-neutral-300')
-              }
-            >
-              Depth Chart
-            </button>
-          )}
-          <button
-            onClick={() => setActiveTab('progression')}
-            className={
-              'px-4 py-2 text-sm font-semibold border-b-2 -mb-px transition-colors ' +
-              (activeTab === 'progression' ? 'border-emerald-500 text-emerald-400' : 'border-transparent text-neutral-500 hover:text-neutral-300')
-            }
-          >
-            Progression
-          </button>
-          <a
-            href={'/franchise/' + franchiseId + '/stats'}
-            className="px-4 py-2 text-sm font-semibold border-b-2 border-transparent text-neutral-500 hover:text-neutral-300"
-          >
-            Stats
-          </a>
-          <a
-            href={'/franchise/' + franchiseId + '/team-needs'}
-            className="px-4 py-2 text-sm font-semibold border-b-2 border-transparent text-neutral-500 hover:text-neutral-300"
-          >
-            Team Needs
-          </a>
-          {isCfb ? (
-            <a
-              href={'/franchise/' + franchiseId + '/recruiting-history'}
-              className="px-4 py-2 text-sm font-semibold border-b-2 border-transparent text-neutral-500 hover:text-neutral-300"
-            >
-              Recruiting History
-            </a>
-          ) : (
-            <a
-              href={'/franchise/' + franchiseId + '/transfer-history'}
-              className="px-4 py-2 text-sm font-semibold border-b-2 border-transparent text-neutral-500 hover:text-neutral-300"
-            >
-              Transfer History
-            </a>
-          )}
-        </div>
 
         {activeTab === 'progression' && (
           <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 mb-6">
@@ -1838,7 +1913,7 @@ export default function FranchisePage() {
           </div>
         )}
 
-        {!isCfb && activeTab === 'roster' && players.length > 0 && (
+        {!isCfb && activeTab === 'dashboard' && players.length > 0 && (
           <>
             <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-5 mb-6">
               <h2 className="text-sm font-semibold mb-3 text-neutral-200">Top Players</h2>
