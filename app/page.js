@@ -28,28 +28,36 @@ const CFB_CONFERENCES = [
 
 const CLUB_LEAGUE_MAP = {
   'Arsenal': 'Premier League', 'Aston Villa': 'Premier League', 'Bournemouth': 'Premier League',
-  'Brentford': 'Premier League', 'Brighton & Hove Albion': 'Premier League', 'Chelsea': 'Premier League',
-  'Crystal Palace': 'Premier League', 'Everton': 'Premier League', 'Fulham': 'Premier League',
-  'Ipswich Town': 'Premier League', 'Leicester City': 'Premier League', 'Liverpool': 'Premier League',
+  'Brentford': 'Premier League', 'Brighton & Hove Albion': 'Premier League', 'Burnley': 'Premier League',
+  'Chelsea': 'Premier League', 'Crystal Palace': 'Premier League', 'Everton': 'Premier League',
+  'Fulham': 'Premier League', 'Leeds United': 'Premier League', 'Liverpool': 'Premier League',
   'Manchester City': 'Premier League', 'Manchester United': 'Premier League', 'Newcastle United': 'Premier League',
-  'Nottingham Forest': 'Premier League', 'Southampton': 'Premier League', 'Tottenham Hotspur': 'Premier League',
+  'Nottingham Forest': 'Premier League', 'Sunderland': 'Premier League', 'Tottenham Hotspur': 'Premier League',
   'West Ham United': 'Premier League', 'Wolverhampton Wanderers': 'Premier League',
-  'Queens Park Rangers': 'EFL Championship', 'Leeds United': 'EFL Championship', 'Burnley': 'EFL Championship',
-  'Sheffield United': 'EFL Championship', 'West Bromwich Albion': 'EFL Championship', 'Norwich City': 'EFL Championship',
-  'Middlesbrough': 'EFL Championship', 'Coventry City': 'EFL Championship', 'Sunderland': 'EFL Championship',
-  'Watford': 'EFL Championship', 'Stoke City': 'EFL Championship', 'Hull City': 'EFL Championship',
-  'Preston North End': 'EFL Championship', 'Bristol City': 'EFL Championship', 'Cardiff City': 'EFL Championship',
-  'Swansea City': 'EFL Championship', 'Millwall': 'EFL Championship', 'Blackburn Rovers': 'EFL Championship',
-  'Plymouth Argyle': 'EFL Championship', 'Luton Town': 'EFL Championship', 'Derby County': 'EFL Championship',
-  'Portsmouth': 'EFL Championship', 'Oxford United': 'EFL Championship',
+  'Birmingham City': 'EFL Championship', 'Blackburn Rovers': 'EFL Championship', 'Bristol City': 'EFL Championship',
+  'Charlton Athletic': 'EFL Championship', 'Coventry City': 'EFL Championship', 'Derby County': 'EFL Championship',
+  'Hull City': 'EFL Championship', 'Ipswich Town': 'EFL Championship', 'Leicester City': 'EFL Championship',
+  'Middlesbrough': 'EFL Championship', 'Millwall': 'EFL Championship', 'Norwich City': 'EFL Championship',
+  'Oxford United': 'EFL Championship', 'Portsmouth': 'EFL Championship', 'Preston North End': 'EFL Championship',
+  'Queens Park Rangers': 'EFL Championship', 'Sheffield United': 'EFL Championship', 'Sheffield Wednesday': 'EFL Championship',
+  'Southampton': 'EFL Championship', 'Stoke City': 'EFL Championship', 'Swansea City': 'EFL Championship',
+  'Watford': 'EFL Championship', 'West Bromwich Albion': 'EFL Championship', 'Wrexham': 'EFL Championship',
   'Real Madrid': 'La Liga', 'Barcelona': 'La Liga', 'Atlético Madrid': 'La Liga', 'Athletic Club': 'La Liga',
   'Real Sociedad': 'La Liga', 'Real Betis': 'La Liga', 'Villarreal': 'La Liga', 'Valencia': 'La Liga',
   'Sevilla': 'La Liga', 'Girona': 'La Liga',
   'Bayern Munich': 'Bundesliga', 'Borussia Dortmund': 'Bundesliga', 'RB Leipzig': 'Bundesliga',
   'Bayer Leverkusen': 'Bundesliga', 'Eintracht Frankfurt': 'Bundesliga', 'VfB Stuttgart': 'Bundesliga',
   'Borussia Mönchengladbach': 'Bundesliga', 'Wolfsburg': 'Bundesliga',
-  'Juventus': 'Serie A', 'Inter Milan': 'Serie A', 'AC Milan': 'Serie A', 'Napoli': 'Serie A',
-  'AS Roma': 'Serie A', 'Lazio': 'Serie A', 'Atalanta': 'Serie A', 'Fiorentina': 'Serie A',
+  'Inter Milan': 'Serie A', 'Napoli': 'Serie A', 'AS Roma': 'Serie A', 'Como': 'Serie A',
+  'AC Milan': 'Serie A', 'Juventus': 'Serie A', 'Atalanta': 'Serie A', 'Bologna': 'Serie A',
+  'Lazio': 'Serie A', 'Udinese': 'Serie A', 'Sassuolo': 'Serie A', 'Torino': 'Serie A',
+  'Parma': 'Serie A', 'Cagliari': 'Serie A', 'Fiorentina': 'Serie A', 'Genoa': 'Serie A',
+  'Lecce': 'Serie A', 'Cremonese': 'Serie A', 'Hellas Verona': 'Serie A', 'Pisa': 'Serie A',
+  'Venezia': 'Serie B', 'Frosinone': 'Serie B', 'Monza': 'Serie B', 'Palermo': 'Serie B',
+  'Catanzaro': 'Serie B', 'Modena': 'Serie B', 'Juve Stabia': 'Serie B', 'Avellino': 'Serie B',
+  'Mantova': 'Serie B', 'Padova': 'Serie B', 'Cesena': 'Serie B', 'Carrarese': 'Serie B',
+  'Sampdoria': 'Serie B', 'Virtus Entella': 'Serie B', 'Empoli': 'Serie B', 'Südtirol': 'Serie B',
+  'Bari': 'Serie B', 'Reggiana': 'Serie B', 'Spezia': 'Serie B', 'Pescara': 'Serie B',
   'Paris Saint-Germain': 'Ligue 1', 'Marseille': 'Ligue 1', 'Monaco': 'Ligue 1', 'Lyon': 'Ligue 1',
   'Lille': 'Ligue 1', 'Nice': 'Ligue 1', 'Lens': 'Ligue 1',
   'Ajax': 'Eredivisie', 'PSV Eindhoven': 'Eredivisie', 'Feyenoord': 'Eredivisie',
@@ -558,26 +566,13 @@ export default function Home() {
     }
   }
 
-  const searchClubs = async () => {
-    const result = await supabase
-      .from('player_reference')
-      .select('active_club')
-      .ilike('active_club', '%' + clubName + '%')
-      .limit(50)
-
-    if (!result.error) {
-      const uniqueClubs = []
-      const seen = {}
-      for (let i = 0; i < result.data.length; i++) {
-        const club = result.data[i].active_club
-        if (club && !seen[club]) {
-          seen[club] = true
-          uniqueClubs.push(club)
-        }
-      }
-      setClubResults(uniqueClubs.slice(0, 6))
-      setShowClubResults(true)
-    }
+  const searchClubs = () => {
+    const lower = clubName.toLowerCase()
+    const matches = Object.keys(CLUB_LEAGUE_MAP).filter(function(club) {
+      return club.toLowerCase().indexOf(lower) !== -1
+    })
+    setClubResults(matches.slice(0, 6))
+    setShowClubResults(true)
   }
 
   const searchCfbTeams = () => {
