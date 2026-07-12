@@ -709,92 +709,97 @@ export default function FranchisePage() {
     }
   }
 
+  // Resolve which reference rows to import for this franchise. Prefer an exact
+  // (case-insensitive) club match; only fall back to a substring match when it
+  // resolves to a single team — so a name like "Miami" never silently pulls
+  // both "Miami (FL)" and "Miami (OH)".
+  const resolveRosterRows = async (table, col) => {
+    let res = await supabase.from(table).select('*').ilike(col, franchise.club_name)
+    if (res.error) return { error: res.error.message }
+    if (res.data.length > 0) return { rows: res.data }
+    res = await supabase.from(table).select('*').ilike(col, '%' + franchise.club_name + '%')
+    if (res.error) return { error: res.error.message }
+    const teams = Array.from(new Set(res.data.map(function(r) { return r[col] })))
+    if (teams.length > 1) return { ambiguous: teams }
+    return { rows: res.data }
+  }
+
   const handleImportRoster = async () => {
     setImportingRoster(true)
 
-    if (isCfb) {
-      const referenceResult = await supabase
-        .from('cfb_player_reference')
-        .select('*')
-        .ilike('team', '%' + franchise.club_name + '%')
+    const table = isCfb ? 'cfb_player_reference' : 'player_reference'
+    const col = isCfb ? 'team' : 'active_club'
+    const resolved = await resolveRosterRows(table, col)
 
-      if (!referenceResult.error && referenceResult.data.length > 0) {
-        const playersToInsert = referenceResult.data.map(function(p) {
-          return {
-            franchise_id: franchiseId,
-            name: p.player_name,
-            position: p.position,
-            overall_rating: p.overall_rating,
-            jersey_number: p.jersey_number,
-            cfb_class: p.class,
-            archetype: p.archetype,
-            dev_trait: p.dev_trait,
-            speed: p.speed,
-            strength: p.strength,
-            agility: p.agility,
-            acceleration: p.acceleration,
-            change_of_direction: p.change_of_direction,
-            injury: p.injury,
-            stamina: p.stamina,
-            awareness: p.awareness,
-            nil_value: p.nil_value
-          }
-        })
-
-        await supabase.from('players').insert(playersToInsert)
-        await loadPlayers()
-      } else {
-        alert('No players found in the database for "' + franchise.club_name + '". Try importing player data first.')
-      }
-    } else {
-      const referenceResult = await supabase
-        .from('player_reference')
-        .select('*')
-        .ilike('active_club', '%' + franchise.club_name + '%')
-
-      if (!referenceResult.error && referenceResult.data.length > 0) {
-        const playersToInsert = referenceResult.data.map(function(p) {
-          return {
-            franchise_id: franchiseId,
-            name: p.name,
-            position: p.position,
-            age: p.age,
-            overall_rating: p.overall_rating,
-            potential_rating: p.potential_rating,
-            pace: p.pace,
-            shooting: p.shooting,
-            passing: p.passing,
-            dribbling: p.dribbling,
-            defending: p.defending,
-            physical: p.physical,
-            nationality: p.nationality,
-            active_club: p.active_club,
-            status: p.status,
-            owned_by: p.owned_by,
-            squad_number: p.squad_number,
-            contract: p.contract,
-            value_eur: p.value_eur,
-            wage_eur_wk: p.wage_eur_wk,
-            wage: p.wage_eur_wk,
-            gro: p.gro,
-            skill_moves: p.skill_moves,
-            weak_foot: p.weak_foot,
-            work_rate: p.work_rate,
-            height_cm: p.height_cm,
-            weight_kg: p.weight_kg,
-            build: p.build,
-            igs: p.igs,
-            contract_years_remaining: null
-          }
-        })
-
-        await supabase.from('players').insert(playersToInsert)
-        await loadPlayers()
-      } else {
-        alert('No players found in the database for "' + franchise.club_name + '". Try importing player data first.')
-      }
+    if (resolved.ambiguous) {
+      alert('"' + franchise.club_name + '" matches multiple teams in the database: ' + resolved.ambiguous.join(', ') + '. Rename the franchise to match one exactly, then import.')
+      setImportingRoster(false)
+      return
+    }
+    if (resolved.error || !resolved.rows || resolved.rows.length === 0) {
+      alert('No players found in the database for "' + franchise.club_name + '". Try importing player data first.')
+      setImportingRoster(false)
+      return
     }
 
+    const playersToInsert = resolved.rows.map(function(p) {
+      if (isCfb) {
+        return {
+          franchise_id: franchiseId,
+          name: p.player_name,
+          position: p.position,
+          overall_rating: p.overall_rating,
+          jersey_number: p.jersey_number,
+          cfb_class: p.class,
+          archetype: p.archetype,
+          dev_trait: p.dev_trait,
+          speed: p.speed,
+          strength: p.strength,
+          agility: p.agility,
+          acceleration: p.acceleration,
+          change_of_direction: p.change_of_direction,
+          injury: p.injury,
+          stamina: p.stamina,
+          awareness: p.awareness,
+          nil_value: p.nil_value
+        }
+      }
+      return {
+        franchise_id: franchiseId,
+        name: p.name,
+        position: p.position,
+        age: p.age,
+        overall_rating: p.overall_rating,
+        potential_rating: p.potential_rating,
+        pace: p.pace,
+        shooting: p.shooting,
+        passing: p.passing,
+        dribbling: p.dribbling,
+        defending: p.defending,
+        physical: p.physical,
+        nationality: p.nationality,
+        active_club: p.active_club,
+        status: p.status,
+        owned_by: p.owned_by,
+        squad_number: p.squad_number,
+        contract: p.contract,
+        value_eur: p.value_eur,
+        wage_eur_wk: p.wage_eur_wk,
+        wage: p.wage_eur_wk,
+        gro: p.gro,
+        skill_moves: p.skill_moves,
+        weak_foot: p.weak_foot,
+        work_rate: p.work_rate,
+        height_cm: p.height_cm,
+        weight_kg: p.weight_kg,
+        build: p.build,
+        igs: p.igs,
+        contract_years_remaining: null
+      }
+    })
+
+    await supabase.from('players').insert(playersToInsert)
+    await loadPlayers()
     setImportingRoster(false)
   }
 
