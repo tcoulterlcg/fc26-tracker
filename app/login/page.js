@@ -53,76 +53,70 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-100 flex items-center justify-center px-6">
+    <div className="min-h-screen bg-neutral-950 text-neutral-100 flex items-center justify-center px-6 py-12">
       <div className="w-full max-w-sm">
 
-        <div className="flex justify-center mb-4">
+        <div className="flex justify-center mb-5">
           <RosterHQLogo size={90} />
         </div>
 
         <div className="text-center mb-8">
-          <h1
-            className="text-2xl text-neutral-100"
-            style={{
-              fontFamily: "'Arial Black', 'Arial Bold', Impact, Haettenschweiler, sans-serif",
-              fontWeight: 900,
-              fontStyle: 'italic',
-              letterSpacing: '-0.5px',
-              transform: 'skewX(-6deg)',
-              display: 'inline-block'
-            }}
-          >
-            ROSTER<span style={{ color: '#34d399' }}>HQ</span>
+          <h1 className="inline-block text-3xl font-bold uppercase tracking-[0.18em] text-neutral-100">
+            ROSTER<span className="text-emerald-400">HQ</span>
           </h1>
           <p className="text-neutral-400 mt-2 text-sm">
             {isSignUp ? 'Create an account to get started' : 'Log in to your franchises'}
           </p>
         </div>
 
-        <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
-          <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="bg-neutral-900/60 border border-neutral-800 rounded-xl p-6 sm:p-8">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-xs font-medium text-neutral-400 mb-1">Email</label>
+              <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Email</label>
               <input
                 type="email"
                 placeholder="you@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 placeholder:text-neutral-600 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-neutral-400 mb-1">Password</label>
+              <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Password</label>
               <input
                 type="password"
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 placeholder:text-neutral-600 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 required
               />
             </div>
 
             {error ? (
-              <p className="text-red-400 text-sm">{error}</p>
+              <div className="rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2">
+                <p className="text-red-400 text-sm">{error}</p>
+              </div>
             ) : null}
 
             <button
               type="submit"
-              className="w-full bg-emerald-600 hover:bg-emerald-500 transition-colors rounded-lg px-4 py-2.5 text-sm font-semibold"
+              className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold uppercase tracking-[0.14em] transition-colors rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-neutral-950"
             >
               {isSignUp ? 'Sign Up' : 'Log In'}
             </button>
           </form>
 
-          <button
-            onClick={() => setIsSignUp(!isSignUp)}
-            className="w-full text-center mt-4 text-sm text-neutral-400 hover:text-neutral-200 transition-colors"
-          >
-            {isSignUp ? 'Already have an account? Log in' : "Don't have an account? Sign up"}
-          </button>
+          <div className="mt-6 pt-5 border-t border-neutral-800">
+            <button
+              onClick={() => setIsSignUp(!isSignUp)}
+              className="w-full text-center text-sm text-emerald-400 hover:text-emerald-300 transition-colors rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            >
+              {isSignUp ? 'Already have an account? Log in' : "Don't have an account? Sign up"}
+            </button>
+          </div>
         </div>
 
       </div>

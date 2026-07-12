@@ -184,23 +184,25 @@ export default function ImportPage() {
 
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
-      <div className="max-w-5xl mx-auto px-6 py-10">
+      <div className="max-w-5xl mx-auto px-6 py-12">
 
-        <a href="/" className="text-emerald-400 hover:text-emerald-300 text-sm font-medium">
+        <a href="/" className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 text-sm font-medium transition-colors">
           &larr; Back to Franchises
         </a>
 
-        <h1 className="text-3xl font-bold tracking-tight mt-4 mb-2">Import Players</h1>
-        <p className="text-neutral-400 text-sm mb-6">
-          Bulk-add players to your shared player database (used for search/autocomplete). Duplicate team+name combinations are automatically skipped.
-        </p>
+        <div className="mt-6 mb-8">
+          <h1 className="text-4xl font-bold uppercase tracking-tight leading-none">Import Players</h1>
+          <p className="text-neutral-400 text-sm mt-3 max-w-2xl">
+            Bulk-add players to your shared player database (used for search/autocomplete). Duplicate team+name combinations are automatically skipped.
+          </p>
+        </div>
 
-        <div className="flex gap-2 mb-6">
+        <div className="flex gap-2 mb-8">
           <button
             type="button"
             onClick={() => handleGameChange('EA FC 26')}
             className={
-              'px-4 py-2 rounded-lg text-sm font-semibold transition-colors ' +
+              'px-4 py-2 rounded-lg text-sm font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 ' +
               (game === 'EA FC 26'
                 ? 'bg-emerald-600 text-white'
                 : 'bg-neutral-800 text-neutral-400 hover:text-neutral-200')
@@ -212,7 +214,7 @@ export default function ImportPage() {
             type="button"
             onClick={() => handleGameChange('EA CFB 27')}
             className={
-              'px-4 py-2 rounded-lg text-sm font-semibold transition-colors ' +
+              'px-4 py-2 rounded-lg text-sm font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 ' +
               (game === 'EA CFB 27'
                 ? 'bg-emerald-600 text-white'
                 : 'bg-neutral-800 text-neutral-400 hover:text-neutral-200')
@@ -222,46 +224,46 @@ export default function ImportPage() {
           </button>
         </div>
 
-        <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 mb-6">
-          <h2 className="text-sm font-semibold mb-3 text-neutral-200">Expected Columns (in order)</h2>
-          <div className="bg-neutral-800 rounded-lg p-3 text-xs font-mono text-neutral-300 leading-relaxed">
+        <div className="bg-neutral-900/60 border border-neutral-800 rounded-xl p-6 mb-6">
+          <h2 className="text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-3">Expected Columns (in order)</h2>
+          <div className="bg-neutral-950/60 border border-neutral-800 rounded-lg px-4 py-3 text-xs font-mono text-neutral-300 leading-relaxed">
             {game === 'EA CFB 27'
               ? 'Team | Player | Pos | No. | Height | Weight | Class | Archetype | OVR | Dev Trait | Speed | Strength | Agility | Acceleration | Change of Direction | Injury | Stamina | Awareness'
               : 'Name | Position | Age | Overall_Rating | Potential_Rating | Nationality | Active Club | Status | Owned By | Squad# | Contract | Value | Wage | GRO | SM | WF | WR | Height | Weight | Build | IGS'
             }
           </div>
-          <p className="text-neutral-500 text-xs mt-2">
+          <p className="text-neutral-500 text-xs mt-3 leading-relaxed">
             Include the header row if you like — it's detected and skipped automatically. Copying directly from a spreadsheet preserves tabs between columns, which this importer expects.
           </p>
         </div>
 
-        <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 mb-6">
-          <label className="block text-xs font-medium text-neutral-400 mb-2">Paste Spreadsheet Data</label>
+        <div className="bg-neutral-900/60 border border-neutral-800 rounded-xl p-6 mb-6">
+          <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-3">Paste Spreadsheet Data</label>
           <textarea
             value={csvText}
             onChange={(e) => setCsvText(e.target.value)}
             rows={10}
-            className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+            className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm font-mono text-neutral-100 leading-relaxed resize-y focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
           />
           <button
             onClick={handlePreview}
             disabled={!csvText.trim()}
-            className="mt-3 bg-neutral-700 hover:bg-neutral-600 disabled:opacity-40 disabled:cursor-not-allowed transition-colors rounded-lg px-4 py-2 text-sm font-semibold"
+            className="mt-4 bg-neutral-700 hover:bg-neutral-600 text-neutral-100 disabled:opacity-40 disabled:cursor-not-allowed transition-colors rounded-lg px-4 py-2 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500"
           >
             Preview
           </button>
         </div>
 
         {preview.length > 0 && (
-          <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 mb-6">
-            <h2 className="text-sm font-semibold mb-4 text-neutral-200">
+          <div className="bg-neutral-900/60 border border-neutral-800 rounded-xl p-6 mb-6">
+            <h2 className="text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-4">
               Preview ({preview.length} players)
             </h2>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto -mx-3">
               {game === 'EA CFB 27' ? (
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="text-neutral-400 text-xs uppercase tracking-wide border-b border-neutral-800">
+                    <tr className="text-neutral-400 text-[11px] uppercase tracking-wide border-b border-neutral-800">
                       <th className="text-left py-2 px-3">Team</th>
                       <th className="text-left py-2 px-3">Player</th>
                       <th className="text-left py-2 px-3">Pos</th>
@@ -273,7 +275,7 @@ export default function ImportPage() {
                   </thead>
                   <tbody>
                     {preview.map((p, idx) => (
-                      <tr key={idx} className="border-b border-neutral-800/60">
+                      <tr key={idx} className="border-b border-neutral-800/60 hover:bg-neutral-800/40 transition-colors">
                         <td className="py-2 px-3 text-neutral-300">{p.team}</td>
                         <td className="py-2 px-3 font-medium">{p.player_name}</td>
                         <td className="py-2 px-3 text-neutral-300">{p.position}</td>
@@ -288,7 +290,7 @@ export default function ImportPage() {
               ) : (
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="text-neutral-400 text-xs uppercase tracking-wide border-b border-neutral-800">
+                    <tr className="text-neutral-400 text-[11px] uppercase tracking-wide border-b border-neutral-800">
                       <th className="text-left py-2 px-3">Name</th>
                       <th className="text-left py-2 px-3">Pos</th>
                       <th className="text-left py-2 px-3">Age</th>
@@ -300,7 +302,7 @@ export default function ImportPage() {
                   </thead>
                   <tbody>
                     {preview.map((p, idx) => (
-                      <tr key={idx} className="border-b border-neutral-800/60">
+                      <tr key={idx} className="border-b border-neutral-800/60 hover:bg-neutral-800/40 transition-colors">
                         <td className="py-2 px-3 font-medium">{p.name}</td>
                         <td className="py-2 px-3 text-neutral-300">{p.position}</td>
                         <td className="py-2 px-3 text-neutral-300">{p.age}</td>
@@ -318,7 +320,7 @@ export default function ImportPage() {
             <button
               onClick={handleImport}
               disabled={importing}
-              className="mt-4 w-full bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 transition-colors rounded-lg px-4 py-2.5 text-sm font-semibold"
+              className="mt-6 w-full bg-emerald-600 hover:bg-emerald-500 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors rounded-lg px-4 py-2.5 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500"
             >
               {importing ? 'Importing...' : 'Import ' + preview.length + ' Players'}
             </button>
@@ -326,9 +328,18 @@ export default function ImportPage() {
         )}
 
         {status && (
-          <p className={status.startsWith('Error') ? 'text-red-400 text-sm' : 'text-emerald-400 text-sm'}>
-            {status}
-          </p>
+          <div
+            className={
+              'rounded-xl border px-4 py-3 ' +
+              (status.startsWith('Error')
+                ? 'border-red-500/30 bg-red-500/5'
+                : 'border-emerald-500/30 bg-emerald-500/5')
+            }
+          >
+            <p className={status.startsWith('Error') ? 'text-red-400 text-sm font-medium' : 'text-emerald-400 text-sm font-medium'}>
+              {status}
+            </p>
+          </div>
         )}
 
       </div>
