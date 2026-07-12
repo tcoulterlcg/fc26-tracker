@@ -190,30 +190,30 @@ export default function StatsPage() {
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
       <div className="max-w-5xl mx-auto px-6 py-10">
 
-        <a href={'/franchise/' + franchiseId} className="text-emerald-400 hover:text-emerald-300 text-sm font-medium">
+        <a href={'/franchise/' + franchiseId} className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 text-sm font-medium transition-colors">
           &larr; Back to {franchise.club_name}
         </a>
 
-        <h1 className="text-3xl font-bold tracking-tight mt-4 mb-1">Stats Import</h1>
-        <p className="text-neutral-400 text-sm mb-6">
+        <h1 className="text-4xl font-bold uppercase tracking-tight mt-5 mb-1.5">Stats Import</h1>
+        <p className="text-neutral-400 text-sm mb-8">
           Upload a photo of your in-game stats screen. Season {franchise.current_season}.
         </p>
 
-        <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 mb-6">
-          <label className="block text-xs font-medium text-neutral-400 mb-2">Upload Stats Screenshot</label>
+        <div className="bg-neutral-900/60 border border-neutral-800 rounded-xl p-6 mb-6">
+          <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-3">Upload Stats Screenshot</label>
           <input
             type="file"
             accept="image/*"
             capture="environment"
             onChange={handleFileChange}
-            className="block w-full text-sm text-neutral-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-emerald-600 file:text-white hover:file:bg-emerald-500 file:cursor-pointer"
+            className="block w-full text-sm text-neutral-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-emerald-600 file:text-white hover:file:bg-emerald-500 file:cursor-pointer file:transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded-lg"
           />
-          <p className="text-neutral-500 text-xs mt-2">
+          <p className="text-neutral-500 text-xs mt-3">
             On an iPhone, this opens your camera or photo library. Works best with a clear, well-lit photo of the whole screen.
           </p>
 
           {analyzing && (
-            <p className="text-emerald-400 text-sm mt-4">Analyzing photo, this can take a few seconds...</p>
+            <p className="text-emerald-400 text-sm mt-4 animate-pulse">Analyzing photo, this can take a few seconds...</p>
           )}
 
           {error && (
@@ -226,92 +226,92 @@ export default function StatsPage() {
         </div>
 
         {extracted && (
-          <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 mb-6">
-            <h2 className="text-sm font-semibold text-neutral-200 mb-1">Review Before Saving</h2>
-            <p className="text-neutral-500 text-xs mb-4">
+          <div className="bg-neutral-900/60 border border-neutral-800 rounded-xl p-6 mb-6">
+            <h2 className="text-xl font-bold uppercase tracking-wide text-neutral-100 mb-1">Review Before Saving</h2>
+            <p className="text-neutral-400 text-sm mb-6">
               Double-check everything below — AI extraction can make mistakes. Edit any field before saving.
             </p>
 
-            <h3 className="text-xs font-semibold text-neutral-400 uppercase tracking-wide mb-2">Season Record</h3>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
+            <h3 className="text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-3">Season Record</h3>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8">
               <div>
-                <label className="block text-xs text-neutral-500 mb-1">Wins</label>
+                <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Wins</label>
                 <input
                   type="number"
                   value={extracted.team_summary && extracted.team_summary.wins !== null && extracted.team_summary.wins !== undefined ? extracted.team_summary.wins : ''}
                   onChange={(e) => updateTeamField('wins', e.target.value)}
-                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm"
+                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm tabular-nums focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 />
               </div>
               <div>
-                <label className="block text-xs text-neutral-500 mb-1">Losses</label>
+                <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Losses</label>
                 <input
                   type="number"
                   value={extracted.team_summary && extracted.team_summary.losses !== null && extracted.team_summary.losses !== undefined ? extracted.team_summary.losses : ''}
                   onChange={(e) => updateTeamField('losses', e.target.value)}
-                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm"
+                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm tabular-nums focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 />
               </div>
               <div>
-                <label className="block text-xs text-neutral-500 mb-1">Ties</label>
+                <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Ties</label>
                 <input
                   type="number"
                   value={extracted.team_summary && extracted.team_summary.ties !== null && extracted.team_summary.ties !== undefined ? extracted.team_summary.ties : ''}
                   onChange={(e) => updateTeamField('ties', e.target.value)}
-                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm"
+                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm tabular-nums focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 />
               </div>
               <div>
-                <label className="block text-xs text-neutral-500 mb-1">Points For</label>
+                <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Points For</label>
                 <input
                   type="number"
                   value={extracted.team_summary && extracted.team_summary.points_for !== null && extracted.team_summary.points_for !== undefined ? extracted.team_summary.points_for : ''}
                   onChange={(e) => updateTeamField('points_for', e.target.value)}
-                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm"
+                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm tabular-nums focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 />
               </div>
               <div>
-                <label className="block text-xs text-neutral-500 mb-1">Points Against</label>
+                <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Points Against</label>
                 <input
                   type="number"
                   value={extracted.team_summary && extracted.team_summary.points_against !== null && extracted.team_summary.points_against !== undefined ? extracted.team_summary.points_against : ''}
                   onChange={(e) => updateTeamField('points_against', e.target.value)}
-                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm"
+                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm tabular-nums focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 />
               </div>
             </div>
 
             {extracted.player_stats && extracted.player_stats.length > 0 && (
               <>
-                <h3 className="text-xs font-semibold text-neutral-400 uppercase tracking-wide mb-2">Player Stats</h3>
-                <div className="space-y-3 mb-4">
+                <h3 className="text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-3">Player Stats</h3>
+                <div className="space-y-3 mb-6">
                   {extracted.player_stats.map(function(p, idx) {
                     return (
-                      <div key={idx} className="bg-neutral-800/50 border border-neutral-800 rounded-lg p-3">
-                        <div className="flex justify-between items-center mb-2">
+                      <div key={idx} className="bg-neutral-950/50 border border-neutral-800 rounded-lg p-4">
+                        <div className="flex justify-between items-center gap-3 mb-3">
                           <input
                             type="text"
                             value={p.name || ''}
                             onChange={(e) => updatePlayerName(idx, e.target.value)}
-                            className="bg-neutral-900 border border-neutral-700 rounded px-2 py-1 text-sm font-medium w-48"
+                            className="bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-1.5 text-sm font-semibold w-48 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                           />
                           <button
                             onClick={() => removePlayerRow(idx)}
-                            className="text-red-400 hover:text-red-300 text-xs font-medium"
+                            className="text-red-400 hover:text-red-300 text-[10px] font-semibold uppercase tracking-[0.14em] transition-colors"
                           >
                             Remove
                           </button>
                         </div>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
                           {Object.keys(p.stats || {}).map(function(statKey) {
                             return (
                               <div key={statKey}>
-                                <label className="block text-[10px] text-neutral-500 mb-0.5 capitalize">{statKey.replace(/_/g, ' ')}</label>
+                                <label className="block text-[10px] text-neutral-500 font-semibold uppercase tracking-[0.14em] mb-1">{statKey.replace(/_/g, ' ')}</label>
                                 <input
                                   type="number"
                                   value={p.stats[statKey] !== null && p.stats[statKey] !== undefined ? p.stats[statKey] : ''}
                                   onChange={(e) => updatePlayerStat(idx, statKey, e.target.value)}
-                                  className="w-full bg-neutral-900 border border-neutral-700 rounded px-2 py-1 text-xs"
+                                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-xs tabular-nums focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                                 />
                               </div>
                             )
@@ -327,7 +327,7 @@ export default function StatsPage() {
             <button
               onClick={handleSave}
               disabled={saving}
-              className="w-full bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 transition-colors rounded-lg px-4 py-2.5 text-sm font-semibold"
+              className="w-full bg-emerald-600 hover:bg-emerald-500 text-white disabled:opacity-40 transition-colors rounded-lg px-4 py-2.5 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-neutral-950"
             >
               {saving ? 'Saving...' : 'Save to Season ' + franchise.current_season}
             </button>
@@ -335,12 +335,12 @@ export default function StatsPage() {
         )}
 
         {teamHistory.length > 0 && (
-          <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 mb-6">
-            <h2 className="text-sm font-semibold text-neutral-200 mb-3">Season Records</h2>
+          <div className="bg-neutral-900/60 border border-neutral-800 rounded-xl p-6 mb-6">
+            <h2 className="text-xl font-bold uppercase tracking-wide text-neutral-100 mb-4">Season Records</h2>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="text-neutral-400 text-xs uppercase tracking-wide border-b border-neutral-800">
+                  <tr className="text-neutral-400 text-[11px] uppercase tracking-wide border-b border-neutral-800">
                     <th className="text-left py-2 px-3">Season</th>
                     <th className="text-left py-2 px-3">W</th>
                     <th className="text-left py-2 px-3">L</th>
@@ -352,13 +352,13 @@ export default function StatsPage() {
                 <tbody>
                   {teamHistory.map(function(row, idx) {
                     return (
-                      <tr key={row.id} className={(idx % 2 === 0 ? 'bg-transparent' : 'bg-neutral-800/40') + ' border-b border-neutral-800/60'}>
-                        <td className="py-2 px-3 font-medium">Season {row.season}</td>
-                        <td className="py-2 px-3 text-green-400">{row.wins !== null ? row.wins : '-'}</td>
-                        <td className="py-2 px-3 text-red-400">{row.losses !== null ? row.losses : '-'}</td>
-                        <td className="py-2 px-3 text-neutral-400">{row.ties !== null ? row.ties : '-'}</td>
-                        <td className="py-2 px-3 text-neutral-300">{row.points_for !== null ? row.points_for : '-'}</td>
-                        <td className="py-2 px-3 text-neutral-300">{row.points_against !== null ? row.points_against : '-'}</td>
+                      <tr key={row.id} className="border-b border-neutral-800/60 hover:bg-neutral-800/40 transition-colors">
+                        <td className="py-2.5 px-3 font-semibold">Season {row.season}</td>
+                        <td className="py-2.5 px-3 text-emerald-400 tabular-nums">{row.wins !== null ? row.wins : '-'}</td>
+                        <td className="py-2.5 px-3 text-red-400 tabular-nums">{row.losses !== null ? row.losses : '-'}</td>
+                        <td className="py-2.5 px-3 text-neutral-400 tabular-nums">{row.ties !== null ? row.ties : '-'}</td>
+                        <td className="py-2.5 px-3 text-neutral-300 tabular-nums">{row.points_for !== null ? row.points_for : '-'}</td>
+                        <td className="py-2.5 px-3 text-neutral-300 tabular-nums">{row.points_against !== null ? row.points_against : '-'}</td>
                       </tr>
                     )
                   })}
@@ -369,24 +369,24 @@ export default function StatsPage() {
         )}
 
         {playerHistory.length > 0 && (
-          <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
-            <h2 className="text-sm font-semibold text-neutral-200 mb-3">Player Stats History</h2>
-            <div className="space-y-4">
+          <div className="bg-neutral-900/60 border border-neutral-800 rounded-xl p-6">
+            <h2 className="text-xl font-bold uppercase tracking-wide text-neutral-100 mb-4">Player Stats History</h2>
+            <div className="space-y-6">
               {Array.from(new Set(playerHistory.map(function(p) { return p.season }))).sort(function(a, b) { return a - b }).map(function(season) {
                 const seasonPlayers = playerHistory.filter(function(p) { return p.season === season })
                 return (
                   <div key={season}>
-                    <h3 className="text-xs font-semibold text-emerald-400 uppercase tracking-wide mb-2">Season {season}</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    <h3 className="text-emerald-400 text-[10px] font-semibold uppercase tracking-[0.14em] mb-3">Season {season}</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
                       {seasonPlayers.map(function(p) {
                         return (
-                          <div key={p.id} className="bg-neutral-800/50 border border-neutral-800 rounded-lg p-2.5">
-                            <p className="font-medium text-neutral-100 text-sm mb-1">{p.player_name}</p>
-                            <div className="flex flex-wrap gap-x-3 gap-y-0.5">
+                          <div key={p.id} className="bg-neutral-950/50 border border-neutral-800 rounded-lg p-3.5 hover:bg-neutral-800/40 transition-colors">
+                            <p className="font-semibold text-neutral-100 text-sm mb-1.5">{p.player_name}</p>
+                            <div className="flex flex-wrap gap-x-3 gap-y-1">
                               {Object.keys(p.stats || {}).map(function(k) {
                                 return (
                                   <span key={k} className="text-xs text-neutral-400">
-                                    {k.replace(/_/g, ' ')}: <span className="text-neutral-200">{p.stats[k]}</span>
+                                    {k.replace(/_/g, ' ')}: <span className="text-neutral-200 tabular-nums">{p.stats[k]}</span>
                                   </span>
                                 )
                               })}
