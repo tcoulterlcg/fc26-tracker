@@ -1,0 +1,85 @@
+Ohio State|Jeremiah Smith|WR|4|6'3"|215|SO|Speedster|98|Star|95|79|95|96|93|96|93|91
+Ohio State|Caleb Downs|FS|2|6'0"|205|JR|Box Specialist|96|Star|93|72|95|95|92|96|98|85
+Ohio State|Carnell Tate|WR|17|6'3"|191|JR|Speedster|93|Star|91|70|92|93|89|91|89|92
+Ohio State|Arvell Reese|MLB|8|6'4"|238|JR|Signal Caller|92|Star|85|79|84|92|82|88|87|95
+Ohio State|Sonny Styles|ROLB|0|6'5"|235|SR|Signal Caller|92|Star|93|83|87|91|83|92|95|89
+Ohio State|Julian Sayin|QB|10|6'1"|203|SO|Pocket Passer|91|Normal|81|61|84|87|83|87|89|83
+Ohio State|Davison Igbinosun|CB|1|6'2"|195|SR|Bump and Run|90|Star|93|71|91|94|88|93|92|91
+Ohio State|Max Klare|TE|86|6'5"|236||Physical Route Runner|90|Impact|82|76|83|87|76|90|91|88
+Ohio State|Jermaine Mathews Jr.|CB|7|5'11"|189|JR|Field|87|Star|93|60|93|93|92|89|91|86
+Ohio State|CJ Donaldson|HB|12|6'2"|232|SR|Elusive Bruiser|87|Impact|86|83|81|89|81|96|87|87
+Ohio State|Caden Curry|LE|92|6'3"|260|SR|Power Rusher|87|Star|80|88|84|88|68|85|78|87
+Ohio State|Carson Hinzman|C|75|6'5"|300||Pass Protector|86|Star|67|87|68|80|58|88|86|89
+Ohio State|James Peoples|HB|20|5'10"|203|SO|East/West Playmaker|86|Star|91|70|91|95|91|89|88|75
+Ohio State|Eddrick Houston|DT|96|6'3"|270|SO|Pure Power|85|Star|79|89|79|90|72|90|83|78
+Ohio State|Kenyatta Jackson Jr.|LE|97|6'6"|265||Speed Rusher|85|Star|80|83|78|90|67|82|78|83
+Ohio State|Ethan Onianwa|LT|78|6'7"|145||Raw Strength|85|Impact|57|96|61|64|60|95|88|87
+Ohio State|Beau Atkinson|RE|14|6'6"|265||Power Rusher|84|Impact|79|85|76|85|66|89|83|89
+Ohio State|Austin Siereveld|RT|67|6'5"|320||Raw Strength|84|Impact|63|89|69|71|53|92|82|85
+Ohio State|Kayden McDonald|DT|98|6'3"|326|JR|Pure Power|83|Star|68|92|65|76|47|94|87|83
+Ohio State|C.J. Hicks|RE|11|6'3"|233||Speed Rusher|83|Impact|87|78|88|92|82|90|85|87
+Ohio State|Will Kacmarek|TE|89|6'6"|260||Physical Route Runner|83|Normal|77|81|72|79|70|93|88|84
+Ohio State|Bo Jackson|HB|25|6'0"|210|FR|East/West Playmaker|82|Impact|90|73|89|93|88|92|84|72
+Ohio State|Lincoln Kienholz|QB|3|6'2"|214|JR|Dual Threat|82|Star|84|65|85|85|84|90|87|77
+Ohio State|Jelani Thurman|TE|15|6'6"|258|JR|Physical Route Runner|82|Star|84|82|84|90|80|92|89|77
+Ohio State|Devin Sanchez|CB|6|6'2"|185|FR|Bump and Run|81|Star|94|58|95|95|93|91|85|70
+Ohio State|Luke Montgomery|LG|51|6'5"|308|JR|Pass Protector|80|Star|65|86|74|77|59|90|85|70
+Ohio State|Tavien St. Clair|QB|9|6'4"|225|FR|Dual Threat|80|Star|88|73|86|86|85|95|84|69
+Ohio State|Brandon Inniss|WR|1|6'0"|203|JR|Elusive Route Runner|80|Star|91|68|91|93|92|82|85|80
+Ohio State|Lorenzo Styles Jr.|CB|3|6'1"|195||Bump and Run|79|Star|93|66|91|96|88|86|87|86
+Ohio State|Tywone Malone Jr.|DT|95|6'4"|301||Pure Power|79|Star|63|94|63|74|46|99|84|81
+Ohio State|Anthony Rogers|HB|21|5'8"|190|FR|East/West Playmaker|79|Impact|92|66|91|94|91|88|83|62
+Ohio State|Tegra Tshabola|RG|77|6'6"|327||Raw Strength|79|Star|57|93|68|66|53|88|84|77
+Ohio State|Malik Hartford|SS|9|6'2"|194|JR|Hybrid|79|Star|90|66|89|93|89|91|89|75
+Ohio State|Bennett Christian|TE|85|6'6"|260||Pure Possession|79|Impact|76|79|75|82|73|89|89|79
+Ohio State|Aaron Scott Jr.|CB|5|6'0"|185|SO|Zone|78|Star|91|64|90|94|89|80|85|65
+Ohio State|Maxwell Roy|DT|93|6'3"|285|FR|Pure Power|78|Impact|72|86|69|80|65|95|75|64
+Ohio State|Jaylen McClain|SS|18|6'0"|192|SO|Hybrid|78|Impact|91|59|90|93|86|81|83|71
+Ohio State|Mylan Graham|WR|5|6'1"|195|SO|Route Artist|78|Star|93|52|96|95|92|71|87|72
+Ohio State|Quincy Porter|WR|11|6'4"|205|FR|Contested Specialist|78|Star|91|69|87|92|85|93|83|73
+Ohio State|Trayvon Fuller|CB|46|5'10"|189|SO|Zone|77|Star|91|62|91|95|93|85|85|67
+Ohio State|Jason Moore|DT|94|6'6"|305||Speed Rusher|77|Star|77|82|77|85|71|94|86|73
+Ohio State|Joshua Mickens|RE|52|6'3"|233||Speed Rusher|77|Star|80|93|77|92|70|83|81|53
+Ohio State|Logan George|RE|48|6'4"|249|JR|Power Rusher|77|Impact|77|79|75|83|72|92|77|79
+Ohio State|Bryce West|CB|12|5'11"|196|SO|Bump and Run|76|Star|94|57|95|96|97|75|90|68
+Ohio State|Sam Williams-Dixon|HB|24|5'11"|203|SO|East/West Playmaker|76|Impact|90|68|89|95|92|85|84|63
+Ohio State|Eric Neaves|LG|50|6'5"|317|SO|Agile|76|Star|61|87|73|75|64|89|86|51
+Ohio State|Joe McGuire|P|42|6'2"|212|JR|Power|76|Normal|61|66|55|62|54|92|86|65
+Ohio State|Keenan Nelson Jr.|SS|16|6'0"|185||Hybrid|76|Impact|89|64|86|91|84|85|91|76
+Ohio State|Bryson Rodgers|WR|13|6'2"|185||Speedster|76|Impact|91|58|89|92|88|85|87|75
+Ohio State|Faheem Delane|FS|10|6'1"|210|FR|Box Specialist|75|Impact|89|66|85|91|83|91|82|72
+Ohio State|Ian Moore|LT|69|6'6"|309|SO|Raw Strength|75|Star|62|92|71|70|62|86|82|55
+Ohio State|Payton Pierce|MLB|26|6'2"|223|SO|Signal Caller|75|Impact|82|79|82|87|78|85|84|74
+Ohio State|Phillip Daniels|RT|70|6'5"|315||Raw Strength|75|Impact|65|88|65|71|56|84|84|82
+Ohio State|Nate Roberts|TE|83|6'5"|235|FR|Physical Route Runner|75|Impact|80|72|81|83|76|93|80|73
+Ohio State|Jayden Fielding|K|38|6'2"|175|SR|Accurate|74|Normal|70|49|70|74|68|82|83|62
+Ohio State|Eric Mensah|LE|90|6'2"|290|SO|Pure Power|74|Impact|71|93|72|78|58|93|74|64
+Ohio State|Zion Grady|LE|15|6'4"|246|FR|Power Rusher|74|Star|82|68|80|89|74|89|77|74
+Ohio State|Carter Lowe|LT|74|6'6"|341|FR|Raw Strength|74|Impact|64|91|64|71|57|90|79|69
+Ohio State|Dominic Kirks|RE|55|6'4"|255|SO|Pure Power|74|Star|77|82|77|86|69|79|75|72
+Ohio State|Garrett Stover|ROLB|23|6'1"|220|SO|Lurker|74|Star|85|67|86|91|80|78|83|72
+Ohio State|Phillip Bell|WR|7|6'1"|195|FR|Elusive Route Runner|74|Impact|87|63|91|91|87|91|77|70
+Ohio State|Joshua Padilla|C|62|6'4"|295|JR|Agile|73|Impact|61|91|67|76|53|84|83|68
+Ohio State|Jarquez Carter|DT|91|6'1"|285|FR|Pure Power|73|Impact|70|83|71|79|64|89|77|65
+Ohio State|Isaiah West|HB|32|5'10"|210|FR|East/West Playmaker|73|Normal|87|71|86|90|84|88|78|63
+Ohio State|Jackson Courville|K|96|5'10"|180|JR|Power|73|Normal|69|51|69|65|63|85|86|61
+Ohio State|Riley Pettijohn|ROLB|20|6'2"|220|FR|Lurker|73|Impact|87|64|82|91|77|88|80|69
+Ohio State|Deontae Armstrong|RT|72|6'6"|298|SO|Pass Protector|73|Impact|72|80|79|82|61|76|94|71
+Ohio State|Trajen Odom|DT|88|6'3"|285|FR|Pure Power|72|Normal|68|84|66|74|61|87|74|69
+Ohio State|Tarvos Alford|ROLB|17|6'1"|225|FR|Lurker|72|Normal|84|65|79|87|76|92|81|72
+Ohio State|De'Zie Jones|WR|8|5'10"|185|FR|Elusive Route Runner|72|Impact|90|54|90|92|88|94|82|74
+Ohio State|Miles Lockhart|CB|13|5'9"|193|SO|Boundary|71|Impact|88|61|87|90|84|80|88|57
+Ohio State|Will Smith Jr.|DT|53|6'4"|804||Pure Power|71|Normal|72|86|71|73|53|82|92|77
+Ohio State|DeShawn Stewart|FS|24|6'0"|195|FR|Coverage Specialist|71|Normal|89|61|87|88|84|90|82|67
+Ohio State|Nick McLarty|P|19|6'7"|255|SO|Power|71|Normal|55|51|56|62|46|90|82|53
+Ohio State|Gabe VanSickle|RG|58|6'5"|285|SO|Raw Strength|71|Impact|59|89|70|70|52|82|81|49
+Ohio State|Cody Haddad|SS|30|5'11"|175|FR|Hybrid|71|Normal|88|59|86|90|84|92|79|69
+Ohio State|Maxence LeBlanc|TE|88|6'4"|227|SO|Vertical Threat|71|Impact|82|66|85|89|82|75|87|68
+Ohio State|Bodpegn Miller|WR|18|6'3"|180|FR|Speedster|71|Impact|87|62|87|89|86|88|79|72
+Ohio State|Devontae Armstrong|LG|73|6'5"|303|SO|Pass Protector|69|Impact|63|84|74|79|63|81|85|53
+Ohio State|Jake Cook|LG|76|6'4"|295|FR|Raw Strength|69|Impact|63|82|64|71|55|89|76|72
+Ohio State|David Adolph|WR|82|6'5"|209|SR|Contested Specialist|69|Impact|85|73|84|87|82|86|80|78
+Ohio State|Eli Brickhandler|QB|6|6'2"|195||Pocket Passer|68|Normal|76|52|77|79|75|80|85|68
+Ohio State|Julian Goines-Jackson|RG|63|6'1"|315|SR|Agile|67|Normal|53|88|66|65|54|90|80|70
+Ohio State|Leroy Roker III|FS|28|6'0"|175|SO|Coverage Specialist|66|Impact|88|55|84|82|77|88|74|61
+Ohio State|John Ferlmann|TE|43|6'3"|228||Physical Route Runner|56|Normal|72|68|73|79|70|77|92|69
