@@ -3,10 +3,14 @@
 // Replicates the app's handleImportRoster mapping, but deletes the franchise's
 // existing players first for a true replace.
 //
-// SAFE BY DEFAULT: pass explicit franchise ids as args. With no args it just
-// lists CFB franchises (dry run) and exits without writing anything.
-//   node scripts/cfb-refresh-franchises.mjs                      # list only
-//   node scripts/cfb-refresh-franchises.mjs <franchiseId> [...]  # refresh those
+// SAFE BY DEFAULT: with no args it lists CFB franchises (dry run) and exits.
+// Otherwise pass one or more targets:
+//   "<franchiseClubName>"                     -> map via team ILIKE %club_name%
+//   "<franchiseClubName>::<exactReferenceTeam>" -> map to an exact team
+// The exact form is needed for ambiguous names (e.g. "Miami" would otherwise
+// match both "Miami (FL)" and "Miami (OH)"). Each club_name must resolve to
+// exactly one EA CFB 27 franchise, else it is skipped.
+//   node scripts/cfb-refresh-franchises.mjs "Miami::Miami (FL)" "Miami (OH)::Miami (OH)"
 import { readFileSync } from 'node:fs'
 import { createClient } from '@supabase/supabase-js'
 
@@ -19,32 +23,37 @@ for (const line of envText.split(/\r?\n/)) {
 }
 const sb = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, { auth: { persistSession: false } })
 
-const ids = process.argv.slice(2)
+const args = process.argv.slice(2)
 const { data: all } = await sb.from('franchises').select('id, club_name, game').eq('game', 'EA CFB 27')
 
-if (ids.length === 0) {
-  console.log('Dry run — CFB franchises (pass ids to refresh):')
-  for (const f of all) console.log(`  ${f.id}  ${f.club_name}`)
+if (args.length === 0) {
+  console.log('Dry run — current EA CFB 27 franchises (pass "ClubName" or "ClubName::ExactTeam" to refresh):')
+  for (const f of all) console.log(`  ${f.club_name}  (${f.id})`)
   process.exit(0)
 }
 
-for (const id of ids) {
-  const f = all.find(x => x.id === id)
-  if (!f) { console.log(`SKIP ${id}: not a current EA CFB 27 franchise`); continue }
-  const ref = await sb.from('cfb_player_reference').select('*').ilike('team', '%' + f.club_name + '%')
-  const matched = [...new Set((ref.data || []).map(r => r.team))]
-  if (matched.length !== 1) { console.log(`SKIP ${f.club_name}: matched ${matched.length} teams (${matched.join(', ')})`); continue }
+for (const arg of args) {
+  const [clubName, exactTeam] = arg.split('::')
+  const matches = all.filter(f => f.club_name === clubName)
+  if (matches.length !== 1) { console.log(`SKIP "${clubName}": ${matches.length} franchises match that club_name`); continue }
+  const f = matches[0]
 
-  const del = await sb.from('players').delete().eq('franchise_id', id)
-  if (del.error) { console.log(`ERR ${f.club_name} delete: ${del.error.message}`); continue }
+  const ref = exactTeam
+    ? await sb.from('cfb_player_reference').select('*').eq('team', exactTeam)
+    : await sb.from('cfb_player_reference').select('*').ilike('team', '%' + clubName + '%')
+  const teamsMatched = [...new Set((ref.data || []).map(r => r.team))]
+  if (teamsMatched.length !== 1) { console.log(`SKIP "${clubName}": reference matched ${teamsMatched.length} teams (${teamsMatched.join(', ')}) — use ClubName::ExactTeam`); continue }
+
+  const del = await sb.from('players').delete().eq('franchise_id', f.id)
+  if (del.error) { console.log(`ERR ${clubName} delete: ${del.error.message}`); continue }
   const rows = ref.data.map(p => ({
-    franchise_id: id, name: p.player_name, position: p.position, overall_rating: p.overall_rating,
+    franchise_id: f.id, name: p.player_name, position: p.position, overall_rating: p.overall_rating,
     jersey_number: p.jersey_number, cfb_class: p.class, archetype: p.archetype, dev_trait: p.dev_trait,
     speed: p.speed, strength: p.strength, agility: p.agility, acceleration: p.acceleration,
     change_of_direction: p.change_of_direction, injury: p.injury, stamina: p.stamina,
     awareness: p.awareness, nil_value: p.nil_value,
   }))
   const ins = await sb.from('players').insert(rows)
-  if (ins.error) { console.log(`ERR ${f.club_name} insert: ${ins.error.message}`); continue }
-  console.log(`REFRESHED ${f.club_name} (team=${matched[0]}): ${rows.length} players`)
+  if (ins.error) { console.log(`ERR ${clubName} insert: ${ins.error.message}`); continue }
+  console.log(`REFRESHED "${clubName}" from team "${teamsMatched[0]}": ${rows.length} players (all with NIL)`)
 }
