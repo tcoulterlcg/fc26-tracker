@@ -228,12 +228,13 @@ function tierLabel(avg) {
   return 'Rebuilding'
 }
 
-function gradientForValue(avg) {
-  if (avg === null || avg === undefined) return 'from-neutral-600 to-neutral-800'
-  if (avg >= 80) return 'from-green-400 to-green-700'
-  if (avg >= 70) return 'from-yellow-400 to-yellow-700'
-  if (avg >= 60) return 'from-orange-400 to-orange-700'
-  return 'from-red-400 to-red-700'
+function valueColorForTier(avg) {
+  if (avg === null || avg === undefined) return 'text-neutral-500'
+  if (avg >= 85) return 'text-emerald-400'
+  if (avg >= 80) return 'text-green-400'
+  if (avg >= 72) return 'text-amber-400'
+  if (avg >= 64) return 'text-orange-400'
+  return 'text-red-400'
 }
 
 function starRating(avg) {
@@ -257,35 +258,34 @@ function StackedStat({ label, value, isCurrency, decimals }) {
   const displayVal = isCurrency
     ? formatEuro(value)
     : (value !== null && value !== undefined ? value.toFixed(decimals) : '-')
-  const gradient = isCurrency ? 'from-neutral-600 to-neutral-800' : gradientForValue(value)
+  const valueColor = isCurrency ? 'text-neutral-100' : valueColorForTier(value)
   return (
-    <div className={'rounded-lg px-4 py-2 text-center bg-gradient-to-b ' + gradient + ' min-w-[92px]'}>
-      <p className="text-white/70 text-[10px] uppercase tracking-wide">{label}</p>
-      <p className="text-white font-bold text-xl leading-tight">{displayVal}</p>
+    <div className="rounded-lg px-4 py-2 text-center bg-neutral-900/70 border border-neutral-800 min-w-[92px]">
+      <p className="text-neutral-500 text-[9px] font-semibold uppercase tracking-[0.14em] mb-0.5">{label}</p>
+      <p className={'font-bold text-2xl leading-none ' + valueColor}>{displayVal}</p>
     </div>
   )
 }
 
 function TeamLogo({ url, size }) {
-  if (url) {
-    return (
-      <img
-        src={url}
-        alt=""
-        className="rounded-lg object-contain"
-        style={{ width: size, height: size }}
-        onError={(e) => { e.target.style.display = 'none' }}
-      />
-    )
-  }
   return (
     <div
-      className="rounded-lg bg-neutral-800 border border-neutral-700 flex items-center justify-center text-neutral-600"
+      className="rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center overflow-hidden"
       style={{ width: size, height: size }}
     >
-      <svg width={size * 0.5} height={size * 0.5} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z" />
-      </svg>
+      {url ? (
+        <img
+          src={url}
+          alt=""
+          className="object-contain"
+          style={{ width: size * 0.7, height: size * 0.7 }}
+          onError={(e) => { e.target.style.display = 'none' }}
+        />
+      ) : (
+        <svg width={size * 0.42} height={size * 0.42} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-neutral-600">
+          <path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z" />
+        </svg>
+      )}
     </div>
   )
 }
