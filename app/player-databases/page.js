@@ -143,6 +143,7 @@ export default function PlayerDatabasesPage() {
                         <th className="text-left py-2 px-3">Class</th>
                         <th className="text-left py-2 px-3">OVR</th>
                         <th className="text-left py-2 px-3">Dev Trait</th>
+                        <th className="text-left py-2 px-3">NIL</th>
                       </>
                     ) : (
                       <>
@@ -166,6 +167,7 @@ export default function PlayerDatabasesPage() {
                             <td className="py-2.5 px-3 text-neutral-400">{p.class}</td>
                             <td className={'py-2.5 px-3 font-bold tabular-nums ' + ovrColor(p.overall_rating)}>{p.overall_rating}</td>
                             <td className="py-2.5 px-3 text-neutral-400">{p.dev_trait}</td>
+                            <td className="py-2.5 px-3 text-neutral-300 tabular-nums">{p.nil_value != null ? p.nil_value.toLocaleString() : '-'}</td>
                           </>
                         ) : (
                           <>

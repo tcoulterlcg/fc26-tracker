@@ -42,6 +42,7 @@ const CFB_COLUMNS = [
   { key: 'archetype', label: 'Archetype' },
   { key: 'overall_rating', label: 'OVR' },
   { key: 'dev_trait', label: 'Dev Trait' },
+  { key: 'nil_value', label: 'NIL' },
   { key: 'speed', label: 'Speed' },
   { key: 'strength', label: 'Strength' },
   { key: 'agility', label: 'Agility' },
@@ -735,7 +736,8 @@ export default function FranchisePage() {
             change_of_direction: p.change_of_direction,
             injury: p.injury,
             stamina: p.stamina,
-            awareness: p.awareness
+            awareness: p.awareness,
+            nil_value: p.nil_value
           }
         })
 
@@ -877,6 +879,7 @@ export default function FranchisePage() {
         payload.injury = selectedPlayer.injury
         payload.stamina = selectedPlayer.stamina
         payload.awareness = selectedPlayer.awareness
+        payload.nil_value = selectedPlayer.nil_value
       }
     } else {
       payload.age = age ? parseInt(age) : null
@@ -999,7 +1002,13 @@ export default function FranchisePage() {
     for (let i = 0; i < gameColumns.length; i++) {
       byKey[gameColumns[i].key] = gameColumns[i]
     }
-    return columnOrder.map(function(k) { return byKey[k] }).filter(Boolean)
+    const ordered = columnOrder.map(function(k) { return byKey[k] }).filter(Boolean)
+    // Append any columns missing from a saved order (e.g. newly added NIL column).
+    const inOrder = new Set(columnOrder)
+    for (let i = 0; i < gameColumns.length; i++) {
+      if (!inOrder.has(gameColumns[i].key)) ordered.push(gameColumns[i])
+    }
+    return ordered
   }, [columnOrder, gameColumns])
 
   const handleDragStart = (key) => {
@@ -2208,6 +2217,14 @@ export default function FranchisePage() {
 
                           if (col.key === 'value_eur' || col.key === 'wage_eur_wk') {
                             displayValue = displayValue ? '\u20ac' + displayValue.toLocaleString() : '-'
+                          }
+
+                          if (col.key === 'nil_value') {
+                            return (
+                              <td key={col.key} className="py-2.5 px-3 whitespace-nowrap tabular-nums text-neutral-300">
+                                {typeof displayValue === 'number' ? displayValue.toLocaleString() : '-'}
+                              </td>
+                            )
                           }
 
                           if (RATING_COLUMN_KEYS[col.key]) {

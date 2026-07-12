@@ -7,7 +7,7 @@
 // archetype, then 11 numeric cells: OVR, Dev, NIL, SPD, STR, AGI, ACC, COD,
 // INJ, STA, AWR). We fetch every team's HTML same-origin and parse in-page —
 // no navigation needed. Output is pipe-delimited to match load-cfb:
-//   team|name|pos|jersey|height|weight|class|archetype|ovr|dev|spd|str|agi|acc|cod|inj|sta|awr
+//   team|name|pos|jersey|height|weight|class|archetype|ovr|dev|spd|str|agi|acc|cod|inj|sta|awr|nil
 //
 // Update ROSTER_PATH for each new drop (find it via the "View CFB 27 Ratings"
 // link on the homepage, e.g. /rosters/CFB27/launch-6-30-26).
@@ -39,7 +39,7 @@ function parseTeam(html) {
     }
     const num = i => (c[i]?.textContent || '').trim().replace(/[^0-9]/g, '')
     out.push([team, name, pos, jersey, height, weight, cls, arch, num(1), (c[2]?.textContent || '').trim(),
-      num(4), num(5), num(6), num(7), num(8), num(9), num(10), num(11)].join('|'))
+      num(4), num(5), num(6), num(7), num(8), num(9), num(10), num(11), num(3)].join('|'))
   }
   return out
 }
