@@ -207,17 +207,26 @@ function formatStatSummary(statsObj) {
 
 function ovrBadgeColor(ovr) {
   if (ovr === null || ovr === undefined) return 'bg-neutral-700'
+  if (ovr >= 85) return 'bg-emerald-600'
   if (ovr >= 80) return 'bg-green-600'
-  if (ovr >= 70) return 'bg-yellow-500'
-  if (ovr >= 60) return 'bg-orange-600'
+  if (ovr >= 72) return 'bg-amber-500'
+  if (ovr >= 64) return 'bg-orange-600'
   return 'bg-red-600'
+}
+
+const RATING_COLUMN_KEYS = {
+  potential_rating: true, pace: true, shooting: true, passing: true,
+  dribbling: true, defending: true, physical: true,
+  speed: true, strength: true, agility: true, acceleration: true,
+  change_of_direction: true, injury: true, stamina: true, awareness: true
 }
 
 function statTextColor(v) {
   if (v === null || v === undefined) return 'text-neutral-500'
+  if (v >= 85) return 'text-emerald-400'
   if (v >= 80) return 'text-green-400'
-  if (v >= 70) return 'text-yellow-400'
-  if (v >= 60) return 'text-orange-400'
+  if (v >= 72) return 'text-amber-400'
+  if (v >= 64) return 'text-orange-400'
   return 'text-red-400'
 }
 
@@ -2199,6 +2208,16 @@ export default function FranchisePage() {
 
                           if (col.key === 'value_eur' || col.key === 'wage_eur_wk') {
                             displayValue = displayValue ? '\u20ac' + displayValue.toLocaleString() : '-'
+                          }
+
+                          if (RATING_COLUMN_KEYS[col.key]) {
+                            return (
+                              <td key={col.key} className="py-2.5 px-3 whitespace-nowrap">
+                                {typeof displayValue === 'number'
+                                  ? <span className={'font-bold ' + statTextColor(displayValue)}>{displayValue}</span>
+                                  : <span className="text-neutral-600">-</span>}
+                              </td>
+                            )
                           }
 
                           return (
