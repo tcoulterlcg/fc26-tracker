@@ -339,8 +339,8 @@ export default function FranchisePage() {
     if (!franchise) return
     const tabStorageKey = 'roster_hq_tab_order_' + (isCfb ? 'cfb' : 'fc')
     const defaultOrder = isCfb
-      ? ['dashboard', 'roster', 'depth', 'progression', 'teamstats', 'playerstats', 'teamneeds', 'history']
-      : ['dashboard', 'roster', 'progression', 'teamstats', 'playerstats', 'teamneeds', 'history']
+      ? ['dashboard', 'roster', 'depth', 'rosterphoto', 'progression', 'teamstats', 'playerstats', 'teamneeds', 'history']
+      : ['dashboard', 'roster', 'rosterphoto', 'progression', 'teamstats', 'playerstats', 'teamneeds', 'history']
     try {
       const saved = window.localStorage.getItem(tabStorageKey)
       if (saved) {
@@ -1334,6 +1334,7 @@ export default function FranchisePage() {
     dashboard: { type: 'tab', label: 'Dashboard' },
     roster: { type: 'tab', label: 'Roster' },
     depth: { type: 'tab', label: 'Depth Chart', cfbOnly: true },
+    rosterphoto: { type: 'link', label: 'Import from Photo', href: '/franchise/' + franchiseId + '/roster-photo' },
     progression: { type: 'tab', label: 'Progression' },
     teamstats: { type: 'link', label: 'Team Stats', href: '/franchise/' + franchiseId + '/team-stats' },
     playerstats: { type: 'link', label: 'Player Stats', href: '/franchise/' + franchiseId + '/stats' },
