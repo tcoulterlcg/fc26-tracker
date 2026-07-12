@@ -105,8 +105,10 @@ export default function RecruitingHistoryPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-neutral-950 flex items-center justify-center text-neutral-400">
-        Loading...
+      <div className="min-h-screen bg-neutral-950 flex items-center justify-center">
+        <span className="text-neutral-500 text-xs font-semibold uppercase tracking-[0.14em] animate-pulse">
+          Loading...
+        </span>
       </div>
     )
   }
@@ -114,39 +116,39 @@ export default function RecruitingHistoryPage() {
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
       <div className="max-w-4xl mx-auto px-6 py-10">
-        <a href={'/franchise/' + franchiseId} className="text-emerald-400 hover:text-emerald-300 text-sm font-medium">
+        <a href={'/franchise/' + franchiseId} className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 text-sm font-medium transition-colors">
           &larr; Back to {franchise.club_name}
         </a>
 
-        <h1 className="text-3xl font-bold tracking-tight mt-4 mb-1">Recruiting History</h1>
-        <p className="text-neutral-400 text-sm mb-6">Track your recruiting classes. Season {franchise.current_season}.</p>
+        <h1 className="text-3xl sm:text-4xl font-bold uppercase tracking-wide mt-4 mb-1">Recruiting History</h1>
+        <p className="text-neutral-400 text-sm mb-8">Track your recruiting classes. Season {franchise.current_season}.</p>
 
-        <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 mb-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
+        <div className="bg-neutral-900/60 border border-neutral-800 rounded-xl p-6 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
             <div>
-              <label className="block text-xs font-medium text-neutral-400 mb-1">Player Name</label>
+              <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Player Name</label>
               <input
                 type="text"
                 value={playerName}
                 onChange={(e) => setPlayerName(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-neutral-400 mb-1">Position</label>
+              <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Position</label>
               <input
                 type="text"
                 value={position}
                 onChange={(e) => setPosition(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-neutral-400 mb-1">Star Rating</label>
+              <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Star Rating</label>
               <select
                 value={starRating}
                 onChange={(e) => setStarRating(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
               >
                 <option value="2">2 Star</option>
                 <option value="3">3 Star</option>
@@ -155,20 +157,20 @@ export default function RecruitingHistoryPage() {
               </select>
             </div>
             <div>
-              <label className="block text-xs font-medium text-neutral-400 mb-1">Home State</label>
+              <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Home State</label>
               <input
                 type="text"
                 value={homeState}
                 onChange={(e) => setHomeState(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-neutral-400 mb-1">Status</label>
+              <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Status</label>
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
               >
                 <option value="Committed">Committed</option>
                 <option value="Signed">Signed</option>
@@ -180,21 +182,23 @@ export default function RecruitingHistoryPage() {
           <button
             onClick={handleAddRecruit}
             disabled={saving || !playerName.trim()}
-            className="bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 transition-colors rounded-lg px-4 py-2 text-sm font-semibold"
+            className="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold disabled:opacity-40 disabled:cursor-not-allowed transition-colors rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-neutral-950"
           >
             {saving ? 'Saving...' : 'Add Recruit'}
           </button>
         </div>
 
-        <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
-          <h2 className="text-sm font-semibold text-neutral-200 mb-4">Recruiting Classes ({recruits.length})</h2>
+        <div className="bg-neutral-900/60 border border-neutral-800 rounded-xl p-6">
+          <h2 className="text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-4">Recruiting Classes ({recruits.length})</h2>
           {recruits.length === 0 ? (
-            <p className="text-neutral-500 text-sm">No recruits logged yet.</p>
+            <div className="border border-dashed border-neutral-800 rounded-lg py-10 text-center">
+              <p className="text-neutral-500 text-sm">No recruits logged yet.</p>
+            </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="text-neutral-400 text-xs uppercase tracking-wide border-b border-neutral-800">
+                  <tr className="text-neutral-400 text-[11px] uppercase tracking-wide border-b border-neutral-800">
                     <th className="text-left py-2 px-3">Season</th>
                     <th className="text-left py-2 px-3">Player</th>
                     <th className="text-left py-2 px-3">Pos</th>
@@ -207,15 +211,23 @@ export default function RecruitingHistoryPage() {
                 <tbody>
                   {recruits.map(function(r) {
                     return (
-                      <tr key={r.id} className="border-b border-neutral-800/60">
-                        <td className="py-2 px-3">Season {r.season}</td>
-                        <td className="py-2 px-3 font-medium">{r.player_name}</td>
-                        <td className="py-2 px-3 text-neutral-300">{r.position || '-'}</td>
-                        <td className="py-2 px-3 text-yellow-400">{starDisplay(r.star_rating)}</td>
-                        <td className="py-2 px-3 text-neutral-300">{r.home_state || '-'}</td>
-                        <td className="py-2 px-3 text-neutral-300">{r.status}</td>
-                        <td className="py-2 px-3">
-                          <button onClick={() => handleRemove(r.id)} className="text-red-400 hover:text-red-300 text-xs font-medium">Remove</button>
+                      <tr key={r.id} className="border-b border-neutral-800/60 hover:bg-neutral-800/40 transition-colors">
+                        <td className="py-2.5 px-3 text-neutral-400 whitespace-nowrap">Season {r.season}</td>
+                        <td className="py-2.5 px-3 font-semibold text-neutral-100">{r.player_name}</td>
+                        <td className="py-2.5 px-3">
+                          {r.position ? (
+                            <span className="inline-block rounded-full bg-emerald-900/40 text-emerald-400 px-2.5 py-0.5 text-xs font-semibold">{r.position}</span>
+                          ) : (
+                            <span className="text-neutral-600">-</span>
+                          )}
+                        </td>
+                        <td className="py-2.5 px-3 text-amber-400 tracking-widest whitespace-nowrap">{starDisplay(r.star_rating)}</td>
+                        <td className="py-2.5 px-3 text-neutral-300">{r.home_state || '-'}</td>
+                        <td className="py-2.5 px-3">
+                          <span className="inline-block rounded-full bg-neutral-800/60 border border-neutral-700/70 text-neutral-300 px-2.5 py-0.5 text-xs font-medium">{r.status}</span>
+                        </td>
+                        <td className="py-2.5 px-3 text-right">
+                          <button onClick={() => handleRemove(r.id)} className="text-neutral-500 hover:text-red-400 text-xs font-medium transition-colors">Remove</button>
                         </td>
                       </tr>
                     )

@@ -106,8 +106,11 @@ export default function TransferHistoryPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-neutral-950 flex items-center justify-center text-neutral-400">
-        Loading...
+      <div className="min-h-screen bg-neutral-950 flex items-center justify-center">
+        <div className="flex flex-col items-center gap-3">
+          <div className="h-8 w-8 rounded-full border-2 border-neutral-800 border-t-emerald-500 animate-spin" />
+          <span className="text-neutral-500 text-sm uppercase tracking-[0.14em] font-semibold">Loading...</span>
+        </div>
       </div>
     )
   }
@@ -115,30 +118,32 @@ export default function TransferHistoryPage() {
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
       <div className="max-w-4xl mx-auto px-6 py-10">
-        <a href={'/franchise/' + franchiseId} className="text-emerald-400 hover:text-emerald-300 text-sm font-medium">
+        <a href={'/franchise/' + franchiseId} className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded">
           &larr; Back to {franchise.club_name}
         </a>
 
-        <h1 className="text-3xl font-bold tracking-tight mt-4 mb-1">Transfer History</h1>
-        <p className="text-neutral-400 text-sm mb-6">Log every transfer in or out. Season {franchise.current_season}.</p>
+        <header className="mt-5 mb-8">
+          <h1 className="text-4xl font-bold uppercase tracking-wide leading-none">Transfer History</h1>
+          <p className="text-neutral-400 text-sm mt-2">Log every transfer in or out. Season {franchise.current_season}.</p>
+        </header>
 
-        <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 mb-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
+        <div className="bg-neutral-900/60 border border-neutral-800 rounded-xl p-6 md:p-7 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
             <div>
-              <label className="block text-xs font-medium text-neutral-400 mb-1">Player Name</label>
+              <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Player Name</label>
               <input
                 type="text"
                 value={playerName}
                 onChange={(e) => setPlayerName(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-neutral-400 mb-1">Transfer Type</label>
+              <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Transfer Type</label>
               <select
                 value={transferType}
                 onChange={(e) => setTransferType(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
               >
                 <option value="In">Transfer In</option>
                 <option value="Out">Transfer Out</option>
@@ -147,72 +152,78 @@ export default function TransferHistoryPage() {
               </select>
             </div>
             <div>
-              <label className="block text-xs font-medium text-neutral-400 mb-1">From Club</label>
+              <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">From Club</label>
               <input
                 type="text"
                 value={fromClub}
                 onChange={(e) => setFromClub(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-neutral-400 mb-1">To Club</label>
+              <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">To Club</label>
               <input
                 type="text"
                 value={toClub}
                 onChange={(e) => setToClub(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-neutral-400 mb-1">Fee (&euro;)</label>
+              <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Fee (&euro;)</label>
               <input
                 type="number"
                 value={fee}
                 onChange={(e) => setFee(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
               />
             </div>
           </div>
           <button
             onClick={handleAddTransfer}
             disabled={saving || !playerName.trim()}
-            className="bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 transition-colors rounded-lg px-4 py-2 text-sm font-semibold"
+            className="bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:hover:bg-emerald-600 transition-colors rounded-lg px-5 py-2 text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-neutral-950"
           >
             {saving ? 'Saving...' : 'Add Transfer'}
           </button>
         </div>
 
-        <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
-          <h2 className="text-sm font-semibold text-neutral-200 mb-4">History ({transfers.length})</h2>
+        <div className="bg-neutral-900/60 border border-neutral-800 rounded-xl p-6 md:p-7">
+          <h2 className="text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-4">History ({transfers.length})</h2>
           {transfers.length === 0 ? (
-            <p className="text-neutral-500 text-sm">No transfers logged yet.</p>
+            <div className="border border-dashed border-neutral-800 rounded-lg py-12 text-center">
+              <p className="text-neutral-500 text-sm">No transfers logged yet.</p>
+            </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="text-neutral-400 text-xs uppercase tracking-wide border-b border-neutral-800">
-                    <th className="text-left py-2 px-3">Season</th>
-                    <th className="text-left py-2 px-3">Player</th>
-                    <th className="text-left py-2 px-3">Type</th>
-                    <th className="text-left py-2 px-3">From</th>
-                    <th className="text-left py-2 px-3">To</th>
-                    <th className="text-left py-2 px-3">Fee</th>
-                    <th className="py-2 px-3"></th>
+                  <tr className="text-neutral-400 text-[11px] uppercase tracking-wide border-b border-neutral-800">
+                    <th className="text-left font-semibold py-2.5 px-3">Season</th>
+                    <th className="text-left font-semibold py-2.5 px-3">Player</th>
+                    <th className="text-left font-semibold py-2.5 px-3">Type</th>
+                    <th className="text-left font-semibold py-2.5 px-3">From</th>
+                    <th className="text-left font-semibold py-2.5 px-3">To</th>
+                    <th className="text-right font-semibold py-2.5 px-3">Fee</th>
+                    <th className="py-2.5 px-3"></th>
                   </tr>
                 </thead>
                 <tbody>
                   {transfers.map(function(t) {
                     return (
-                      <tr key={t.id} className="border-b border-neutral-800/60">
-                        <td className="py-2 px-3">Season {t.season}</td>
-                        <td className="py-2 px-3 font-medium">{t.player_name}</td>
-                        <td className="py-2 px-3 text-neutral-300">{t.transfer_type}</td>
-                        <td className="py-2 px-3 text-neutral-300">{t.from_club || '-'}</td>
-                        <td className="py-2 px-3 text-neutral-300">{t.to_club || '-'}</td>
-                        <td className="py-2 px-3 text-neutral-300">{formatEuro(t.fee_eur)}</td>
-                        <td className="py-2 px-3">
-                          <button onClick={() => handleRemove(t.id)} className="text-red-400 hover:text-red-300 text-xs font-medium">Remove</button>
+                      <tr key={t.id} className="border-b border-neutral-800/60 hover:bg-neutral-800/40 transition-colors">
+                        <td className="py-2.5 px-3 text-neutral-400 whitespace-nowrap">Season {t.season}</td>
+                        <td className="py-2.5 px-3 font-medium text-neutral-100">{t.player_name}</td>
+                        <td className="py-2.5 px-3">
+                          <span className={'inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-semibold whitespace-nowrap ' + (t.transfer_type.includes('In') ? 'bg-emerald-900/40 text-emerald-400' : 'bg-red-900/40 text-red-400')}>
+                            {t.transfer_type}
+                          </span>
+                        </td>
+                        <td className="py-2.5 px-3 text-neutral-300">{t.from_club || '-'}</td>
+                        <td className="py-2.5 px-3 text-neutral-300">{t.to_club || '-'}</td>
+                        <td className="py-2.5 px-3 text-right text-neutral-100 font-medium tabular-nums whitespace-nowrap">{formatEuro(t.fee_eur)}</td>
+                        <td className="py-2.5 px-3 text-right">
+                          <button onClick={() => handleRemove(t.id)} className="text-red-400 hover:text-red-300 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded">Remove</button>
                         </td>
                       </tr>
                     )
