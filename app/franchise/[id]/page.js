@@ -2587,10 +2587,13 @@ export default function FranchisePage() {
 
                           // Frozen pane: the name column stays pinned while
                           // the rest of the table scrolls horizontally.
+                          // Names link to the player's profile page.
                           if (col.key === 'name') {
                             return (
-                              <td key={col.key} className="py-2.5 px-3 font-semibold text-neutral-100 whitespace-nowrap sticky left-0 z-10 bg-neutral-900">
-                                {displayValue}
+                              <td key={col.key} className="py-2.5 px-3 whitespace-nowrap sticky left-0 z-10 bg-neutral-900">
+                                <a href={'/franchise/' + franchiseId + '/player/' + p.id} className="font-semibold text-neutral-100 hover:text-violet-300 transition-colors">
+                                  {displayValue}
+                                </a>
                               </td>
                             )
                           }

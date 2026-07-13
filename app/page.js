@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
 import { CFB_CONFERENCES as CFB_CONFERENCE_SCHOOLS, CFB_CONFERENCE_NAMES } from '@/lib/cfbConferences'
 import { CFB_LOGOS } from '@/lib/cfbLogos'
+import { MLB_LOGOS, NHL_LOGOS, NFL_LOGOS } from '@/lib/proLogos'
 import { aliasCanonicalNames } from '@/lib/teamAliases'
 import { MLB_TEAMS, NHL_TEAMS, NFL_TEAMS, MLB_DIVISIONS, NHL_DIVISIONS, NFL_DIVISIONS } from '@/lib/proTeams'
 
@@ -209,7 +210,13 @@ const CFB_DEFAULT_ORDER = [
 
 const FC_STAT_STORAGE_KEY = 'roster_hq_card_stats_fc'
 const CFB_STAT_STORAGE_KEY = 'roster_hq_card_stats_cfb'
-const LOGO_CACHE_KEY = 'roster_hq_logo_cache_v2'
+const LOGO_CACHE_KEY = 'roster_hq_logo_cache_v3'
+const GAME_LOGO_MAPS = {
+  'EA CFB 27': CFB_LOGOS,
+  'MLB The Show 26': MLB_LOGOS,
+  'EA NHL 26': NHL_LOGOS,
+  'EA Madden 26': NFL_LOGOS,
+}
 
 function average(nums) {
   const valid = nums.filter(function(n) { return typeof n === 'number' && !isNaN(n) })
@@ -478,10 +485,11 @@ export default function Home() {
         if (next[f.id] !== undefined) continue
 
         const isCfb = f.game === 'EA CFB 27'
+        const gameMap = GAME_LOGO_MAPS[f.game]
         let url = null
-        if (isCfb && CFB_LOGOS[f.club_name]) {
+        if (gameMap && gameMap[f.club_name]) {
           // Official ESPN mark — clean transparent PNG, no lookup needed.
-          url = CFB_LOGOS[f.club_name]
+          url = gameMap[f.club_name]
         } else {
           const candidates = isCfb
             ? [f.club_name + ' ' + (CFB_MASCOTS[f.club_name] || '') + ' football', f.club_name + ' football team']
