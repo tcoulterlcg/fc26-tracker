@@ -1,0 +1,138 @@
+Air Force|Mountain West
+Akron|MAC
+Alabama|SEC
+Appalachian State|Sun Belt
+Arizona|Big 12
+Arizona State|Big 12
+Arkansas|SEC
+Arkansas State|Sun Belt
+Army|American
+Auburn|SEC
+Ball State|MAC
+Baylor|Big 12
+Boise State|Mountain West
+Boston College|ACC
+Bowling Green|MAC
+Buffalo|MAC
+BYU|Big 12
+California|ACC
+Central Michigan|MAC
+Charlotte|American
+Cincinnati|Big 12
+Clemson|ACC
+Coastal Carolina|Sun Belt
+Colorado|Big 12
+Colorado State|Mountain West
+Delaware|CUSA
+Duke|ACC
+East Carolina|American
+Eastern Michigan|MAC
+FIU|CUSA
+Florida|SEC
+Florida Atlantic|American
+Florida State|ACC
+Fresno State|Mountain West
+Georgia|SEC
+Georgia Southern|Sun Belt
+Georgia State|Sun Belt
+Georgia Tech|ACC
+Hawaii|Mountain West
+Houston|Big 12
+Illinois|Big Ten
+Indiana|Big Ten
+Iowa|Big Ten
+Iowa State|Big 12
+Jacksonville State|CUSA
+James Madison|Sun Belt
+Kansas|Big 12
+Kansas State|Big 12
+Kennesaw State|CUSA
+Kent State|MAC
+Kentucky|SEC
+Liberty|CUSA
+Louisiana|Sun Belt
+Louisiana Tech|CUSA
+Louisville|ACC
+LSU|SEC
+Marshall|Sun Belt
+Maryland|Big Ten
+Memphis|American
+Miami (FL)|ACC
+Miami (OH)|MAC
+Michigan|Big Ten
+Michigan State|Big Ten
+Middle Tennessee|CUSA
+Minnesota|Big Ten
+Mississippi State|SEC
+Missouri|SEC
+Missouri State|CUSA
+Navy|American
+NC State|ACC
+Nebraska|Big Ten
+Nevada|Mountain West
+New Mexico|Mountain West
+New Mexico State|CUSA
+North Carolina|ACC
+North Dakota State|Mountain West
+Northern Illinois|MAC
+North Texas|American
+Northwestern|Big Ten
+Notre Dame|Independent
+Ohio|MAC
+Ohio State|Big Ten
+Oklahoma|SEC
+Oklahoma State|Big 12
+Old Dominion|Sun Belt
+Ole Miss|SEC
+Oregon|Big Ten
+Oregon State|Pac-12
+Penn State|Big Ten
+Pittsburgh|ACC
+Purdue|Big Ten
+Rice|American
+Rutgers|Big Ten
+Sacramento State University|MAC
+Sam Houston|CUSA
+San Diego State|Mountain West
+San Jose State|Mountain West
+SMU|ACC
+South Alabama|Sun Belt
+South Carolina|SEC
+Southern Miss|Sun Belt
+South Florida|American
+Stanford|ACC
+Syracuse|ACC
+TCU|Big 12
+Temple|American
+Tennessee|SEC
+Texas|SEC
+Texas A&M|SEC
+Texas State|Sun Belt
+Texas Tech|Big 12
+Toledo|MAC
+Troy|Sun Belt
+Tulane|American
+Tulsa|American
+UAB|American
+UCF|Big 12
+UCLA|Big Ten
+UConn|Independent
+UL–Monroe|Sun Belt
+UMass|MAC
+UNLV|Mountain West
+USC|Big Ten
+Utah|Big 12
+Utah State|Mountain West
+UTEP|CUSA
+UTSA|American
+Vanderbilt|SEC
+Virginia|ACC
+Virginia Tech|ACC
+Wake Forest|ACC
+Washington|Big Ten
+Washington State|Pac-12
+Western Kentucky|CUSA
+Western Michigan|MAC
+West Virginia|Big 12
+Wisconsin|Big Ten
+Wyoming|Mountain West

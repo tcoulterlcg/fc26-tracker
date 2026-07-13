@@ -4,6 +4,7 @@ import React from 'react'
 import { useEffect, useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
+import { CFB_CONFERENCES as CFB_CONFERENCE_SCHOOLS, CFB_CONFERENCE_NAMES } from '@/lib/cfbConferences'
 
 const GAMES = [
   { id: 'EA FC 26', label: 'EA FC 26', sub: 'Soccer', status: 'live' },
@@ -884,12 +885,29 @@ export default function Home() {
                       <option value="">
                         {selectedGame === 'EA CFB 27' ? 'Select a conference...' : 'Select a league...'}
                       </option>
-                      {(selectedGame === 'EA CFB 27' ? CFB_CONFERENCES : LEAGUES).map((l) => (
+                      {(selectedGame === 'EA CFB 27' ? CFB_CONFERENCE_NAMES : LEAGUES).map((l) => (
                         <option key={l} value={l}>{l}</option>
                       ))}
                     </select>
                   </div>
                 </div>
+                {selectedGame === 'EA CFB 27' && CFB_CONFERENCE_SCHOOLS[league] && (
+                  <div className="mb-4">
+                    <label className="block text-xs font-medium text-neutral-400 mb-1">
+                      Schools in {league}
+                    </label>
+                    <select
+                      value={CFB_CONFERENCE_SCHOOLS[league].includes(clubName) ? clubName : ''}
+                      onChange={(e) => { if (e.target.value) setClubName(e.target.value) }}
+                      className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                    >
+                      <option value="">Select a school...</option>
+                      {CFB_CONFERENCE_SCHOOLS[league].map((s) => (
+                        <option key={s} value={s}>{CFB_MASCOTS[s] ? s + ' ' + CFB_MASCOTS[s] : s}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
                 <p className="text-neutral-500 text-xs mb-4">
                   Picking a recognized team auto-fills its {selectedGame === 'EA CFB 27' ? 'conference' : 'league'} and automatically imports its roster from your player database, if available.
                 </p>
