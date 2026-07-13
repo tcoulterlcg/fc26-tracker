@@ -265,24 +265,26 @@ function StackedStat({ label, value, isCurrency, decimals }) {
 }
 
 function TeamLogo({ url, size }) {
+  if (url) {
+    // Show the crest PNG on its own — no circular frame around it.
+    return (
+      <img
+        src={url}
+        alt=""
+        className="object-contain"
+        style={{ width: size, height: size }}
+        onError={(e) => { e.target.style.display = 'none' }}
+      />
+    )
+  }
   return (
     <div
-      className="rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center overflow-hidden"
+      className="rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center"
       style={{ width: size, height: size }}
     >
-      {url ? (
-        <img
-          src={url}
-          alt=""
-          className="object-contain"
-          style={{ width: size * 0.7, height: size * 0.7 }}
-          onError={(e) => { e.target.style.display = 'none' }}
-        />
-      ) : (
-        <svg width={size * 0.42} height={size * 0.42} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-neutral-600">
-          <path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z" />
-        </svg>
-      )}
+      <svg width={size * 0.42} height={size * 0.42} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-neutral-600">
+        <path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z" />
+      </svg>
     </div>
   )
 }
