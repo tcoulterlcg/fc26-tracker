@@ -151,7 +151,7 @@ export default function TeamNeedsPage() {
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
       <div className="max-w-4xl mx-auto px-6 py-10">
-        <a href={'/franchise/' + franchiseId} className="text-emerald-400 hover:text-emerald-300 text-sm font-medium">
+        <a href={'/franchise/' + franchiseId} className="text-violet-400 hover:text-violet-300 text-sm font-medium">
           &larr; Back to {franchise.club_name}
         </a>
 
@@ -167,7 +167,7 @@ export default function TeamNeedsPage() {
               onChange={(e) => setSearchTerm(e.target.value)}
               onFocus={() => searchResults.length > 0 && setShowResults(true)}
               placeholder={isCfb ? 'Search by player name...' : 'Search by player name...'}
-              className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
             />
             {showResults && searchResults.length > 0 && (
               <div className="absolute z-20 mt-1 w-full bg-neutral-800 border border-neutral-700 rounded-lg shadow-lg overflow-hidden">
@@ -195,7 +195,7 @@ export default function TeamNeedsPage() {
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             placeholder="e.g. Need depth at RB, willing to overpay"
-            className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
           />
         </div>
 

@@ -76,7 +76,7 @@ export default function TestimonialsPage() {
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
       <div className="max-w-3xl mx-auto px-6 py-10">
-        <a href="/" className="text-emerald-400 hover:text-emerald-300 text-sm font-medium">
+        <a href="/" className="text-violet-400 hover:text-violet-300 text-sm font-medium">
           &larr; Back to Franchises
         </a>
 
@@ -88,7 +88,7 @@ export default function TestimonialsPage() {
             return (
               <div key={'curated-' + idx} className="bg-neutral-900 border border-neutral-800 rounded-xl p-5">
                 <p className="text-neutral-200 text-sm mb-2">&ldquo;{t.message}&rdquo;</p>
-                <p className="text-emerald-400 text-xs font-medium">{t.name}</p>
+                <p className="text-violet-400 text-xs font-medium">{t.name}</p>
               </div>
             )
           })}
@@ -97,7 +97,7 @@ export default function TestimonialsPage() {
             return (
               <div key={t.id} className="bg-neutral-900 border border-neutral-800 rounded-xl p-5">
                 <p className="text-neutral-200 text-sm mb-2">&ldquo;{t.message}&rdquo;</p>
-                <p className="text-emerald-400 text-xs font-medium">{t.name}</p>
+                <p className="text-violet-400 text-xs font-medium">{t.name}</p>
               </div>
             )
           })}
@@ -108,7 +108,7 @@ export default function TestimonialsPage() {
 
           {!user ? (
             <p className="text-neutral-500 text-sm">
-              <a href="/login" className="text-emerald-400 hover:text-emerald-300 font-medium">Log in</a> to submit a testimonial.
+              <a href="/login" className="text-violet-400 hover:text-violet-300 font-medium">Log in</a> to submit a testimonial.
             </p>
           ) : (
             <>
@@ -119,7 +119,7 @@ export default function TestimonialsPage() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder={user.email}
-                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                 />
               </div>
               <div className="mb-4">
@@ -129,18 +129,18 @@ export default function TestimonialsPage() {
                   onChange={(e) => setMessage(e.target.value)}
                   rows={4}
                   placeholder="What do you like about Roster HQ?"
-                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                 />
               </div>
               <button
                 onClick={handleSubmit}
                 disabled={submitting || !message.trim()}
-                className="bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 transition-colors rounded-lg px-4 py-2 text-sm font-semibold"
+                className="bg-violet-600 hover:bg-violet-500 disabled:opacity-40 transition-colors rounded-lg px-4 py-2 text-sm font-semibold"
               >
                 {submitting ? 'Submitting...' : 'Submit Testimonial'}
               </button>
               {submitStatus && (
-                <p className="text-emerald-400 text-xs mt-3">{submitStatus}</p>
+                <p className="text-violet-400 text-xs mt-3">{submitStatus}</p>
               )}
             </>
           )}

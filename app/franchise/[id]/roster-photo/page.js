@@ -197,7 +197,7 @@ export default function RosterPhotoPage() {
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
       <div className="max-w-5xl mx-auto px-6 py-10">
 
-        <a href={'/franchise/' + franchiseId} className="text-emerald-400 hover:text-emerald-300 text-sm font-medium">
+        <a href={'/franchise/' + franchiseId} className="text-violet-400 hover:text-violet-300 text-sm font-medium">
           &larr; Back to {franchise.club_name}
         </a>
 
@@ -213,14 +213,14 @@ export default function RosterPhotoPage() {
             accept="image/*"
             capture="environment"
             onChange={handleFileChange}
-            className="block w-full text-sm text-neutral-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-emerald-600 file:text-white hover:file:bg-emerald-500 file:cursor-pointer"
+            className="block w-full text-sm text-neutral-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-violet-600 file:text-white hover:file:bg-violet-500 file:cursor-pointer"
           />
           <p className="text-neutral-500 text-xs mt-2">
             On an iPhone, this opens your camera or photo library. A depth chart screen (players grouped by position, ranked top to bottom) will also set each player's depth order{isCfb ? ' on the Depth Chart tab' : ''}. A flat roster list just updates position/rating/number.
           </p>
 
           {analyzing && (
-            <p className="text-emerald-400 text-sm mt-4">Analyzing photo, this can take a few seconds...</p>
+            <p className="text-violet-400 text-sm mt-4">Analyzing photo, this can take a few seconds...</p>
           )}
 
           {error && (
@@ -228,7 +228,7 @@ export default function RosterPhotoPage() {
           )}
 
           {resultMessage && (
-            <p className="text-emerald-400 text-sm mt-4">{resultMessage}</p>
+            <p className="text-violet-400 text-sm mt-4">{resultMessage}</p>
           )}
         </div>
 
@@ -316,7 +316,7 @@ export default function RosterPhotoPage() {
             <button
               onClick={handleSave}
               disabled={saving}
-              className="mt-4 w-full bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 transition-colors rounded-lg px-4 py-2.5 text-sm font-semibold"
+              className="mt-4 w-full bg-violet-600 hover:bg-violet-500 disabled:opacity-40 transition-colors rounded-lg px-4 py-2.5 text-sm font-semibold"
             >
               {saving ? 'Saving...' : 'Save ' + extracted.length + ' Player' + (extracted.length !== 1 ? 's' : '')}
             </button>

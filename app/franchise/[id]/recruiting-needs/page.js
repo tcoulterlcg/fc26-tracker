@@ -116,7 +116,7 @@ export default function RecruitingHistoryPage() {
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
       <div className="max-w-4xl mx-auto px-6 py-10">
-        <a href={'/franchise/' + franchiseId} className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 text-sm font-medium transition-colors">
+        <a href={'/franchise/' + franchiseId} className="inline-flex items-center gap-1 text-violet-400 hover:text-violet-300 text-sm font-medium transition-colors">
           &larr; Back to {franchise.club_name}
         </a>
 
@@ -131,7 +131,7 @@ export default function RecruitingHistoryPage() {
                 type="text"
                 value={playerName}
                 onChange={(e) => setPlayerName(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
               />
             </div>
             <div>
@@ -140,7 +140,7 @@ export default function RecruitingHistoryPage() {
                 type="text"
                 value={position}
                 onChange={(e) => setPosition(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
               />
             </div>
             <div>
@@ -148,7 +148,7 @@ export default function RecruitingHistoryPage() {
               <select
                 value={starRating}
                 onChange={(e) => setStarRating(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
               >
                 <option value="2">2 Star</option>
                 <option value="3">3 Star</option>
@@ -162,7 +162,7 @@ export default function RecruitingHistoryPage() {
                 type="text"
                 value={homeState}
                 onChange={(e) => setHomeState(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
               />
             </div>
             <div>
@@ -170,7 +170,7 @@ export default function RecruitingHistoryPage() {
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
               >
                 <option value="Committed">Committed</option>
                 <option value="Signed">Signed</option>
@@ -182,7 +182,7 @@ export default function RecruitingHistoryPage() {
           <button
             onClick={handleAddRecruit}
             disabled={saving || !playerName.trim()}
-            className="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold disabled:opacity-40 disabled:cursor-not-allowed transition-colors rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-neutral-950"
+            className="bg-violet-600 hover:bg-violet-500 text-white font-semibold disabled:opacity-40 disabled:cursor-not-allowed transition-colors rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-neutral-950"
           >
             {saving ? 'Saving...' : 'Add Recruit'}
           </button>
@@ -216,7 +216,7 @@ export default function RecruitingHistoryPage() {
                         <td className="py-2.5 px-3 font-semibold text-neutral-100">{r.player_name}</td>
                         <td className="py-2.5 px-3">
                           {r.position ? (
-                            <span className="inline-block rounded-full bg-emerald-900/40 text-emerald-400 px-2.5 py-0.5 text-xs font-semibold">{r.position}</span>
+                            <span className="inline-block rounded-full bg-violet-900/40 text-violet-400 px-2.5 py-0.5 text-xs font-semibold">{r.position}</span>
                           ) : (
                             <span className="text-neutral-600">-</span>
                           )}

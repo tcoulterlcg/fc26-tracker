@@ -231,7 +231,7 @@ function tierLabel(avg) {
 
 function valueColorForTier(avg) {
   if (avg === null || avg === undefined) return 'text-neutral-500'
-  if (avg >= 85) return 'text-emerald-400'
+  if (avg >= 85) return 'text-green-400'
   if (avg >= 80) return 'text-green-400'
   if (avg >= 72) return 'text-amber-400'
   if (avg >= 64) return 'text-orange-400'
@@ -295,15 +295,17 @@ function RosterHQLogo({ size }) {
   return (
     <svg width={size} height={size} viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <linearGradient id="emeraldGradHeader" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#34d399" />
-          <stop offset="100%" stopColor="#059669" />
+        <linearGradient id="violetGradHeader" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#8b5cf6" />
+          <stop offset="100%" stopColor="#6d28d9" />
         </linearGradient>
       </defs>
-      <rect width="512" height="512" rx="120" fill="#0a0a0a" stroke="#262626" strokeWidth="10" />
-      <text x="50%" y="53%" dominantBaseline="central" textAnchor="middle"
-        fontFamily="'Arial Black', Impact, sans-serif" fontWeight="900" fontSize="340"
-        fill="url(#emeraldGradHeader)">R</text>
+      <circle cx="256" cy="256" r="248" fill="url(#violetGradHeader)" />
+      <rect x="150" y="214" width="94" height="30" rx="15" fill="#ddd6fe" />
+      <rect x="150" y="272" width="58" height="30" rx="15" fill="#ddd6fe" opacity="0.6" />
+      <text x="326" y="268" dominantBaseline="central" textAnchor="middle"
+        fontFamily="'Arial Black', Impact, sans-serif" fontWeight="900" fontStyle="italic" fontSize="296"
+        fill="#ffffff">R</text>
     </svg>
   )
 }
@@ -779,14 +781,14 @@ export default function Home() {
                   letterSpacing: '-0.5px'
                 }}
               >
-                ROSTER<span style={{ color: '#34d399' }}>HQ</span>
+                ROSTER<span style={{ color: '#8b5cf6' }}>HQ</span>
               </h1>
-              <p className="text-emerald-500/90 text-[10px] font-semibold uppercase tracking-[0.22em] mt-1.5">Franchise Tracker</p>
+              <p className="text-violet-500/90 text-[10px] font-semibold uppercase tracking-[0.22em] mt-1.5">Franchise Tracker</p>
               <p className="text-neutral-500 mt-1 text-xs">Logged in as {user.email}</p>
             </div>
           </div>
           <div className="flex gap-2 flex-wrap">
-            <button onClick={() => setShowCreatePanel(!showCreatePanel)} className="bg-emerald-600 hover:bg-emerald-500 transition-colors rounded-lg px-4 py-2 text-sm font-semibold whitespace-nowrap">
+            <button onClick={() => setShowCreatePanel(!showCreatePanel)} className="bg-violet-600 hover:bg-violet-500 transition-colors rounded-lg px-4 py-2 text-sm font-semibold whitespace-nowrap">
               {showCreatePanel ? 'Cancel' : '+ New Franchise'}
             </button>
             <a href="/leaderboards" className="border border-neutral-700 hover:border-neutral-600 hover:bg-neutral-900 transition-colors rounded-lg px-4 py-2 text-sm font-medium text-neutral-300 flex items-center">
@@ -826,14 +828,14 @@ export default function Home() {
                       className={
                         'text-left rounded-lg p-4 border transition-colors ' +
                         (isLive
-                          ? 'bg-neutral-800/50 border-neutral-800 hover:border-emerald-600 cursor-pointer'
+                          ? 'bg-neutral-800/50 border-neutral-800 hover:border-violet-600 cursor-pointer'
                           : 'bg-neutral-800/20 border-neutral-800 cursor-not-allowed opacity-60')
                       }
                     >
                       <p className="font-semibold text-neutral-100 text-sm">{game.label}</p>
                       <p className="text-neutral-500 text-xs mt-1">{game.sub}</p>
                       {isLive ? (
-                        <p className="text-emerald-400 text-xs mt-3 font-medium">Available</p>
+                        <p className="text-violet-400 text-xs mt-3 font-medium">Available</p>
                       ) : (
                         <p className="text-neutral-500 text-xs mt-3 font-medium">Site in progress</p>
                       )}
@@ -855,7 +857,7 @@ export default function Home() {
                       onChange={(e) => setClubName(e.target.value)}
                       onFocus={() => clubResults.length > 0 && setShowClubResults(true)}
                       onBlur={handleClubBlur}
-                      className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                      className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                       autoFocus
                     />
                     {showClubResults && clubResults.length > 0 && (
@@ -880,7 +882,7 @@ export default function Home() {
                     <select
                       value={league}
                       onChange={(e) => setLeague(e.target.value)}
-                      className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                      className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                     >
                       <option value="">
                         {selectedGame === 'EA CFB 27' ? 'Select a conference...' : 'Select a league...'}
@@ -899,7 +901,7 @@ export default function Home() {
                     <select
                       value={CFB_CONFERENCE_SCHOOLS[league].includes(clubName) ? clubName : ''}
                       onChange={(e) => { if (e.target.value) setClubName(e.target.value) }}
-                      className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                      className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                     >
                       <option value="">Select a school...</option>
                       {CFB_CONFERENCE_SCHOOLS[league].map((s) => (
@@ -921,7 +923,7 @@ export default function Home() {
                   </button>
                   <div className="flex gap-2">
                     <button onClick={resetCreatePanel} className="text-neutral-400 hover:text-neutral-200 text-sm px-3 py-2">Cancel</button>
-                    <button onClick={handleCreateFranchise} disabled={!clubName || creating} className="bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed transition-colors rounded-lg px-4 py-2 text-sm font-semibold">
+                    <button onClick={handleCreateFranchise} disabled={!clubName || creating} className="bg-violet-600 hover:bg-violet-500 disabled:opacity-40 disabled:cursor-not-allowed transition-colors rounded-lg px-4 py-2 text-sm font-semibold">
                       {creating ? 'Creating...' : 'Create ' + entityLabel}
                     </button>
                   </div>
@@ -949,7 +951,7 @@ export default function Home() {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <h3 className="text-xs font-semibold text-emerald-400 uppercase tracking-wide mb-2">EA FC 26 Stats</h3>
+                  <h3 className="text-xs font-semibold text-violet-400 uppercase tracking-wide mb-2">EA FC 26 Stats</h3>
                   <div className="space-y-1.5">
                     {fcStatOrder.map(function(s) {
                       const def = FC_STAT_DEFS[s.key]
@@ -967,7 +969,7 @@ export default function Home() {
                             type="checkbox"
                             checked={s.enabled}
                             onChange={() => toggleStat('fc', s.key)}
-                            className="accent-emerald-600"
+                            className="accent-violet-600"
                           />
                           <span className="text-sm text-neutral-200">{def.label}</span>
                         </div>
@@ -976,7 +978,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-xs font-semibold text-emerald-400 uppercase tracking-wide mb-2">EA CFB 27 Stats</h3>
+                  <h3 className="text-xs font-semibold text-violet-400 uppercase tracking-wide mb-2">EA CFB 27 Stats</h3>
                   <div className="space-y-1.5">
                     {cfbStatOrder.map(function(s) {
                       const def = CFB_STAT_DEFS[s.key]
@@ -994,7 +996,7 @@ export default function Home() {
                             type="checkbox"
                             checked={s.enabled}
                             onChange={() => toggleStat('cfb', s.key)}
-                            className="accent-emerald-600"
+                            className="accent-violet-600"
                           />
                           <span className="text-sm text-neutral-200">{def.label}</span>
                         </div>
@@ -1020,7 +1022,7 @@ export default function Home() {
                 const logoUrl = logoCache[f.id]
 
                 return (
-                  <div key={f.id} className="relative bg-neutral-800/50 border border-neutral-800 hover:border-emerald-600 rounded-xl p-5 transition-colors">
+                  <div key={f.id} className="relative bg-neutral-800/50 border border-neutral-800 hover:border-violet-600 rounded-xl p-5 transition-colors">
                     <a href={franchiseUrl} onClick={(e) => { e.preventDefault(); goToFranchise(f.id) }} className="absolute inset-0 z-0" aria-label={'Open ' + f.club_name}></a>
 
                     <div className="relative z-10 pointer-events-none">

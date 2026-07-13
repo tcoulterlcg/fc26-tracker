@@ -209,7 +209,7 @@ function formatStatSummary(statsObj) {
 
 function ovrBadgeColor(ovr) {
   if (ovr === null || ovr === undefined) return 'bg-neutral-700'
-  if (ovr >= 85) return 'bg-emerald-600'
+  if (ovr >= 85) return 'bg-green-600'
   if (ovr >= 80) return 'bg-green-600'
   if (ovr >= 72) return 'bg-amber-500'
   if (ovr >= 64) return 'bg-orange-600'
@@ -225,7 +225,7 @@ const RATING_COLUMN_KEYS = {
 
 function statTextColor(v) {
   if (v === null || v === undefined) return 'text-neutral-500'
-  if (v >= 85) return 'text-emerald-400'
+  if (v >= 85) return 'text-green-400'
   if (v >= 80) return 'text-green-400'
   if (v >= 72) return 'text-amber-400'
   if (v >= 64) return 'text-orange-400'
@@ -264,7 +264,7 @@ function MiniBenchmarkBar({ ownValue, benchmark, isCurrency, decimals }) {
     <div className="mt-2">
       <div className="relative w-full h-1.5 bg-neutral-800 rounded-full">
         <div className="absolute top-1/2 -translate-y-1/2 w-0.5 h-3 bg-neutral-500" style={{ left: pct(benchmark.median) + '%' }} />
-        <div className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-emerald-400 border border-emerald-200" style={{ left: 'calc(' + pct(ownValue) + '% - 5px)' }} />
+        <div className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-violet-400 border border-violet-200" style={{ left: 'calc(' + pct(ownValue) + '% - 5px)' }} />
       </div>
       <div className="flex justify-between mt-1">
         <span className="text-neutral-600 text-[9px]">{fmt(benchmark.min)}</span>
@@ -1404,7 +1404,7 @@ export default function FranchisePage() {
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
       <div className="max-w-7xl mx-auto px-6 py-10">
 
-        <a href="/" className="text-emerald-400 hover:text-emerald-300 text-sm font-medium">
+        <a href="/" className="text-violet-400 hover:text-violet-300 text-sm font-medium">
           &larr; Back to Franchises
         </a>
 
@@ -1418,7 +1418,7 @@ export default function FranchisePage() {
                   <select
                     value={leagueDraft}
                     onChange={(e) => setLeagueDraft(e.target.value)}
-                    className="bg-neutral-800 border border-neutral-700 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="bg-neutral-800 border border-neutral-700 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                   >
                     <option value="">
                       {isCfb ? 'Select a conference...' : 'Select a league...'}
@@ -1430,7 +1430,7 @@ export default function FranchisePage() {
                   <button
                     onClick={handleSaveLeague}
                     disabled={savingLeague}
-                    className="text-emerald-400 hover:text-emerald-300 text-xs font-semibold"
+                    className="text-violet-400 hover:text-violet-300 text-xs font-semibold"
                   >
                     {savingLeague ? 'Saving...' : 'Save'}
                   </button>
@@ -1446,7 +1446,7 @@ export default function FranchisePage() {
                   <p className="text-neutral-400">{franchise.league || 'No ' + (isCfb ? 'conference' : 'league') + ' set'} &middot; Season {franchise.current_season}</p>
                   <button
                     onClick={() => setEditingLeague(true)}
-                    className="text-neutral-500 hover:text-emerald-400 text-xs font-medium"
+                    className="text-neutral-500 hover:text-violet-400 text-xs font-medium"
                   >
                     Edit
                   </button>
@@ -1460,20 +1460,20 @@ export default function FranchisePage() {
               <button
                 onClick={handleImportRoster}
                 disabled={importingRoster}
-                className="border border-emerald-600 text-emerald-400 hover:bg-emerald-600 hover:text-white transition-colors rounded-lg px-4 py-2 text-sm font-semibold whitespace-nowrap disabled:opacity-40"
+                className="border border-violet-600 text-violet-400 hover:bg-violet-600 hover:text-white transition-colors rounded-lg px-4 py-2 text-sm font-semibold whitespace-nowrap disabled:opacity-40"
               >
                 {importingRoster ? 'Importing...' : 'Import Roster from Database'}
               </button>
             )}
             <a
               href={'/franchise/' + franchiseId + '/roster-photo'}
-              className="border border-emerald-600 text-emerald-400 hover:bg-emerald-600 hover:text-white transition-colors rounded-lg px-4 py-2 text-sm font-semibold whitespace-nowrap"
+              className="border border-violet-600 text-violet-400 hover:bg-violet-600 hover:text-white transition-colors rounded-lg px-4 py-2 text-sm font-semibold whitespace-nowrap"
             >
               Import from Photo
             </a>
             <button
               onClick={() => setShowAddPanel(!showAddPanel)}
-              className="bg-emerald-600 hover:bg-emerald-500 transition-colors rounded-lg px-4 py-2 text-sm font-semibold whitespace-nowrap"
+              className="bg-violet-600 hover:bg-violet-500 transition-colors rounded-lg px-4 py-2 text-sm font-semibold whitespace-nowrap"
             >
               {showAddPanel ? 'Cancel' : '+ Add Player'}
             </button>
@@ -1492,7 +1492,7 @@ export default function FranchisePage() {
                   setSelectedPlayer(null)
                 }}
                 onFocus={() => searchResults.length > 0 && setShowResults(true)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                 autoFocus
               />
               {showResults && searchResults.length > 0 && (
@@ -1536,7 +1536,7 @@ export default function FranchisePage() {
                     type="text"
                     value={position}
                     onChange={(e) => setPosition(e.target.value)}
-                    className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                   />
                 </div>
                 <div>
@@ -1545,7 +1545,7 @@ export default function FranchisePage() {
                     type="number"
                     value={age}
                     onChange={(e) => setAge(e.target.value)}
-                    className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                   />
                 </div>
                 <div>
@@ -1554,7 +1554,7 @@ export default function FranchisePage() {
                     type="number"
                     value={wage}
                     onChange={(e) => setWage(e.target.value)}
-                    className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                   />
                 </div>
                 <div>
@@ -1563,7 +1563,7 @@ export default function FranchisePage() {
                     type="number"
                     value={contractYears}
                     onChange={(e) => setContractYears(e.target.value)}
-                    className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                   />
                 </div>
               </div>
@@ -1579,7 +1579,7 @@ export default function FranchisePage() {
               <button
                 onClick={handleAddPlayer}
                 disabled={!name}
-                className="bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed transition-colors rounded-lg px-4 py-2 text-sm font-semibold"
+                className="bg-violet-600 hover:bg-violet-500 disabled:opacity-40 disabled:cursor-not-allowed transition-colors rounded-lg px-4 py-2 text-sm font-semibold"
               >
                 Add to Roster
               </button>
@@ -1596,9 +1596,9 @@ export default function FranchisePage() {
             const isDragOver = dragOverTabKey === key && dragTabKey !== key
             const sharedClassName =
               'px-4 py-2 text-sm font-semibold border-b-2 -mb-px transition-colors cursor-move select-none ' +
-              (isDragOver ? 'border-emerald-300 bg-emerald-900/20 ' : '') +
+              (isDragOver ? 'border-violet-300 bg-violet-900/20 ' : '') +
               (def.type === 'tab' && activeTab === key
-                ? 'border-emerald-500 text-emerald-400'
+                ? 'border-violet-500 text-violet-400'
                 : 'border-transparent text-neutral-500 hover:text-neutral-300')
 
             if (def.type === 'tab') {
@@ -1643,7 +1643,7 @@ export default function FranchisePage() {
                 <select
                   value={benchmarkConference || 'ALL'}
                   onChange={(e) => setBenchmarkConference(e.target.value)}
-                  className="bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-1.5 text-xs font-semibold text-neutral-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-1.5 text-xs font-semibold text-neutral-200 focus:outline-none focus:ring-2 focus:ring-violet-500"
                 >
                   <option value="ALL">All Conferences</option>
                   {CFB_CONFERENCES.map((c) => (
@@ -1659,7 +1659,7 @@ export default function FranchisePage() {
                 </div>
                 <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
                   <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Avg Overall</p>
-                  <p className="text-2xl font-semibold text-emerald-400">
+                  <p className="text-2xl font-semibold text-violet-400">
                     {teamStats.avgOverall !== null ? teamStats.avgOverall.toFixed(1) : '-'}
                   </p>
                   <MiniBenchmarkBar ownValue={teamStats.avgOverall} benchmark={getCfbBenchmark('avgOverall')} isCurrency={false} decimals={1} />
@@ -1687,21 +1687,21 @@ export default function FranchisePage() {
                         value={nilDraft}
                         onChange={(e) => setNilDraft(e.target.value)}
                         placeholder="0"
-                        className="w-full bg-neutral-800 border border-neutral-700 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                        className="w-full bg-neutral-800 border border-neutral-700 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                         autoFocus
                       />
-                      <button onClick={handleSaveNil} disabled={savingNil} className="text-emerald-400 hover:text-emerald-300 text-xs font-semibold whitespace-nowrap">
+                      <button onClick={handleSaveNil} disabled={savingNil} className="text-violet-400 hover:text-violet-300 text-xs font-semibold whitespace-nowrap">
                         {savingNil ? '...' : 'Save'}
                       </button>
                     </div>
                   ) : (
                     <div className="flex items-center gap-2">
                       <p className="text-2xl font-semibold text-neutral-100">{formatUsd(franchise.nil_funds || 0)}</p>
-                      <button onClick={() => setEditingNil(true)} className="text-neutral-500 hover:text-emerald-400 text-xs font-medium">Edit</button>
+                      <button onClick={() => setEditingNil(true)} className="text-neutral-500 hover:text-violet-400 text-xs font-medium">Edit</button>
                     </div>
                   )}
                 </div>
-                <a href={'/franchise/' + franchiseId + '/recruiting-history'} className="bg-neutral-900 border border-neutral-800 hover:border-emerald-600 rounded-xl p-4 transition-colors">
+                <a href={'/franchise/' + franchiseId + '/recruiting-history'} className="bg-neutral-900 border border-neutral-800 hover:border-violet-600 rounded-xl p-4 transition-colors">
                   <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Recruiting Class</p>
                   <p className="text-2xl font-semibold text-neutral-100">
                     {recruitingSummary.count}
@@ -1823,7 +1823,7 @@ export default function FranchisePage() {
                 <select
                   value={benchmarkLeague || 'ALL'}
                   onChange={(e) => setBenchmarkLeague(e.target.value)}
-                  className="bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-1.5 text-xs font-semibold text-neutral-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-1.5 text-xs font-semibold text-neutral-200 focus:outline-none focus:ring-2 focus:ring-violet-500"
                 >
                   <option value="ALL">All Leagues</option>
                   {LEAGUES.map((l) => (
@@ -1846,7 +1846,7 @@ export default function FranchisePage() {
                 </div>
                 <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
                   <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Avg Overall</p>
-                  <p className="text-2xl font-semibold text-emerald-400">
+                  <p className="text-2xl font-semibold text-violet-400">
                     {teamStats.avgOverall !== null ? teamStats.avgOverall.toFixed(1) : '-'}
                   </p>
                   <MiniBenchmarkBar ownValue={teamStats.avgOverall} benchmark={getBenchmark('avgOverall')} isCurrency={false} decimals={1} />
@@ -1885,14 +1885,14 @@ export default function FranchisePage() {
                 <button
                   onClick={() => recordSnapshot('Start')}
                   disabled={hasStartSnapshot || recordingSnapshot || players.length === 0}
-                  className="border border-emerald-600 text-emerald-400 hover:bg-emerald-600 hover:text-white transition-colors rounded-lg px-3 py-2 text-xs font-semibold disabled:opacity-30 disabled:cursor-not-allowed whitespace-nowrap"
+                  className="border border-violet-600 text-violet-400 hover:bg-violet-600 hover:text-white transition-colors rounded-lg px-3 py-2 text-xs font-semibold disabled:opacity-30 disabled:cursor-not-allowed whitespace-nowrap"
                 >
                   Record Season {franchise.current_season} Start
                 </button>
                 <button
                   onClick={() => recordSnapshot('End')}
                   disabled={!hasStartSnapshot || hasEndSnapshot || recordingSnapshot || players.length === 0}
-                  className="bg-emerald-600 hover:bg-emerald-500 transition-colors rounded-lg px-3 py-2 text-xs font-semibold disabled:opacity-30 disabled:cursor-not-allowed whitespace-nowrap"
+                  className="bg-violet-600 hover:bg-violet-500 transition-colors rounded-lg px-3 py-2 text-xs font-semibold disabled:opacity-30 disabled:cursor-not-allowed whitespace-nowrap"
                 >
                   Record Season {franchise.current_season} End &amp; Advance
                 </button>
@@ -2033,7 +2033,7 @@ export default function FranchisePage() {
                   if (groupPositions.length === 0) return null
                   return (
                     <div key={depthGroup.label}>
-                      <h3 className="text-xs font-semibold text-emerald-400 uppercase tracking-wide mb-3">{depthGroup.label}</h3>
+                      <h3 className="text-xs font-semibold text-violet-400 uppercase tracking-wide mb-3">{depthGroup.label}</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                         {groupPositions.map(function(d) {
                           return (
@@ -2052,7 +2052,7 @@ export default function FranchisePage() {
                                       onDragEnd={handleDepthDragEnd}
                                       className={
                                         'flex items-center justify-between text-sm rounded-md px-2 py-1.5 cursor-move select-none transition-colors ' +
-                                        (isDragOver ? 'bg-emerald-900/40 border border-emerald-600' : 'bg-neutral-900 border border-neutral-800 hover:border-neutral-700')
+                                        (isDragOver ? 'bg-violet-900/40 border border-violet-600' : 'bg-neutral-900 border border-neutral-800 hover:border-neutral-700')
                                       }
                                     >
                                       <span className="flex items-center gap-2">
@@ -2127,7 +2127,7 @@ export default function FranchisePage() {
                             onDragEnd={handleDragEnd}
                             className={
                               'relative text-left py-2 px-3 whitespace-nowrap cursor-move select-none' +
-                              (isDragOver ? ' bg-emerald-900/30 border-l-2 border-emerald-500' : '')
+                              (isDragOver ? ' bg-violet-900/30 border-l-2 border-violet-500' : '')
                             }
                           >
                             <div className="flex items-center gap-1.5">
@@ -2136,7 +2136,7 @@ export default function FranchisePage() {
                                   e.stopPropagation()
                                   setActiveFilterColumn(activeFilterColumn === col.key ? null : col.key)
                                 }}
-                                className={'cursor-pointer hover:text-emerald-400' + (hasFilter ? ' text-emerald-400' : '')}
+                                className={'cursor-pointer hover:text-violet-400' + (hasFilter ? ' text-violet-400' : '')}
                               >
                                 {col.label}
                               </span>
@@ -2146,7 +2146,7 @@ export default function FranchisePage() {
                                   e.stopPropagation()
                                   toggleSort(col.key)
                                 }}
-                                className={'text-xs ' + (sortField === col.key ? 'text-emerald-400' : 'text-neutral-500 hover:text-neutral-300')}
+                                className={'text-xs ' + (sortField === col.key ? 'text-violet-400' : 'text-neutral-500 hover:text-neutral-300')}
                                 title="Sort"
                               >
                                 {sortIndicator(col.key)}
@@ -2166,7 +2166,7 @@ export default function FranchisePage() {
                                     placeholder={'Type to filter ' + col.label + '...'}
                                     value={filters[col.key] || ''}
                                     onChange={(e) => handleFilterChange(col.key, e.target.value)}
-                                    className="w-full bg-neutral-900 border border-neutral-700 rounded px-2 py-1.5 text-xs mb-2 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                                    className="w-full bg-neutral-900 border border-neutral-700 rounded px-2 py-1.5 text-xs mb-2 focus:outline-none focus:ring-2 focus:ring-violet-500"
                                   />
                                   <div className="max-h-48 overflow-y-auto">
                                     {uniqueValuesForColumn(col.key)

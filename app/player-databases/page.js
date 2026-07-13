@@ -71,7 +71,7 @@ export default function PlayerDatabasesPage() {
 
   const ovrColor = (ovr) => {
     if (ovr === null || ovr === undefined) return 'text-neutral-500'
-    if (ovr >= 85) return 'text-emerald-400'
+    if (ovr >= 85) return 'text-green-400'
     if (ovr >= 80) return 'text-green-400'
     if (ovr >= 72) return 'text-amber-400'
     if (ovr >= 64) return 'text-orange-400'
@@ -81,7 +81,7 @@ export default function PlayerDatabasesPage() {
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
       <div className="max-w-5xl mx-auto px-6 py-10">
-        <a href="/" className="inline-flex items-center text-emerald-400 hover:text-emerald-300 text-sm font-semibold transition-colors">
+        <a href="/" className="inline-flex items-center text-violet-400 hover:text-violet-300 text-sm font-semibold transition-colors">
           &larr; Back to Franchises
         </a>
 
@@ -97,8 +97,8 @@ export default function PlayerDatabasesPage() {
             type="button"
             onClick={() => setGame('EA FC 26')}
             className={
-              'px-4 py-2 rounded-lg text-sm font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 ' +
-              (game === 'EA FC 26' ? 'bg-emerald-600 text-white' : 'bg-neutral-800 text-neutral-400 hover:text-neutral-200')
+              'px-4 py-2 rounded-lg text-sm font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500 ' +
+              (game === 'EA FC 26' ? 'bg-violet-600 text-white' : 'bg-neutral-800 text-neutral-400 hover:text-neutral-200')
             }
           >
             EA FC 26
@@ -107,8 +107,8 @@ export default function PlayerDatabasesPage() {
             type="button"
             onClick={() => setGame('EA CFB 27')}
             className={
-              'px-4 py-2 rounded-lg text-sm font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 ' +
-              (game === 'EA CFB 27' ? 'bg-emerald-600 text-white' : 'bg-neutral-800 text-neutral-400 hover:text-neutral-200')
+              'px-4 py-2 rounded-lg text-sm font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500 ' +
+              (game === 'EA CFB 27' ? 'bg-violet-600 text-white' : 'bg-neutral-800 text-neutral-400 hover:text-neutral-200')
             }
           >
             EA CFB 27
@@ -121,7 +121,7 @@ export default function PlayerDatabasesPage() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder={game === 'EA CFB 27' ? 'Search by player name or team...' : 'Search by player name or club...'}
-            className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm placeholder:text-neutral-500 mb-5 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+            className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm placeholder:text-neutral-500 mb-5 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
           />
 
           {loading && (

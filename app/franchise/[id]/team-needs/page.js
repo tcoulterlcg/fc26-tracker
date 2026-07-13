@@ -6,7 +6,7 @@ import { createClient } from '@/lib/supabase'
 
 function ovrColor(ovr) {
   if (ovr === null || ovr === undefined) return 'text-neutral-500'
-  if (ovr >= 85) return 'text-emerald-400'
+  if (ovr >= 85) return 'text-green-400'
   if (ovr >= 80) return 'text-green-400'
   if (ovr >= 72) return 'text-amber-400'
   if (ovr >= 64) return 'text-orange-400'
@@ -152,7 +152,7 @@ export default function TeamNeedsPage() {
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
       <div className="max-w-4xl mx-auto px-6 py-10">
-        <a href={'/franchise/' + franchiseId} className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 text-sm font-medium rounded focus:outline-none focus:ring-2 focus:ring-emerald-500">
+        <a href={'/franchise/' + franchiseId} className="inline-flex items-center gap-1 text-violet-400 hover:text-violet-300 text-sm font-medium rounded focus:outline-none focus:ring-2 focus:ring-violet-500">
           &larr; Back to {franchise.club_name}
         </a>
 
@@ -168,7 +168,7 @@ export default function TeamNeedsPage() {
               onChange={(e) => setSearchTerm(e.target.value)}
               onFocus={() => searchResults.length > 0 && setShowResults(true)}
               placeholder={isCfb ? 'Search by player name...' : 'Search by player name...'}
-              className="w-full bg-neutral-950/60 border border-neutral-800 rounded-lg px-3.5 py-2.5 text-sm placeholder:text-neutral-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-600"
+              className="w-full bg-neutral-950/60 border border-neutral-800 rounded-lg px-3.5 py-2.5 text-sm placeholder:text-neutral-600 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-600"
             />
             {showResults && searchResults.length > 0 && (
               <div className="absolute z-20 mt-2 w-full bg-neutral-900 border border-neutral-800 rounded-lg shadow-lg shadow-black/40 overflow-hidden">
@@ -182,7 +182,7 @@ export default function TeamNeedsPage() {
                   >
                     <span className="flex items-center gap-2 min-w-0">
                       <span className="font-medium text-neutral-100 truncate">{isCfb ? p.player_name : p.name}</span>
-                      <span className="rounded-full px-2.5 py-0.5 text-xs font-semibold bg-emerald-900/40 text-emerald-400 shrink-0">{p.position}</span>
+                      <span className="rounded-full px-2.5 py-0.5 text-xs font-semibold bg-violet-900/40 text-violet-400 shrink-0">{p.position}</span>
                       <span className="text-neutral-500 text-xs truncate">{isCfb ? p.team : p.active_club}</span>
                     </span>
                     <span className={'font-bold tabular-nums shrink-0 ' + ovrColor(p.overall_rating)}>{p.overall_rating}</span>
@@ -197,7 +197,7 @@ export default function TeamNeedsPage() {
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             placeholder="e.g. Need depth at RB, willing to overpay"
-            className="w-full bg-neutral-950/60 border border-neutral-800 rounded-lg px-3.5 py-2.5 text-sm placeholder:text-neutral-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-600"
+            className="w-full bg-neutral-950/60 border border-neutral-800 rounded-lg px-3.5 py-2.5 text-sm placeholder:text-neutral-600 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-600"
           />
         </div>
 
@@ -215,7 +215,7 @@ export default function TeamNeedsPage() {
                     <div className="min-w-0">
                       <p className="flex items-center gap-2 flex-wrap">
                         <span className="font-semibold text-neutral-100">{t.player_name}</span>
-                        <span className="rounded-full px-2.5 py-0.5 text-xs font-semibold bg-emerald-900/40 text-emerald-400">{t.position}</span>
+                        <span className="rounded-full px-2.5 py-0.5 text-xs font-semibold bg-violet-900/40 text-violet-400">{t.position}</span>
                         <span className="text-neutral-400 text-sm">{t.current_team}</span>
                       </p>
                       {t.notes && <p className="text-neutral-500 text-xs mt-1.5">{t.notes}</p>}
@@ -224,7 +224,7 @@ export default function TeamNeedsPage() {
                       <span className={'font-bold tabular-nums ' + ovrColor(t.overall_rating)}>{t.overall_rating}</span>
                       <button
                         onClick={() => handleRemoveTarget(t.id)}
-                        className="text-red-400 hover:text-red-300 text-xs font-semibold rounded focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                        className="text-red-400 hover:text-red-300 text-xs font-semibold rounded focus:outline-none focus:ring-2 focus:ring-violet-500"
                       >
                         Remove
                       </button>

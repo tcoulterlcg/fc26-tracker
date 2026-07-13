@@ -107,7 +107,7 @@ export default function RecruitingHistoryPage() {
     return (
       <div className="min-h-screen bg-neutral-950 flex items-center justify-center text-neutral-400">
         <div className="flex flex-col items-center gap-3">
-          <div className="h-8 w-8 rounded-full border-2 border-neutral-800 border-t-emerald-500 animate-spin" />
+          <div className="h-8 w-8 rounded-full border-2 border-neutral-800 border-t-violet-500 animate-spin" />
           <span className="text-sm tracking-wide">Loading...</span>
         </div>
       </div>
@@ -117,7 +117,7 @@ export default function RecruitingHistoryPage() {
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
       <div className="max-w-5xl mx-auto px-6 py-10">
-        <a href={'/franchise/' + franchiseId} className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 text-sm font-medium transition-colors">
+        <a href={'/franchise/' + franchiseId} className="inline-flex items-center gap-1.5 text-violet-400 hover:text-violet-300 text-sm font-medium transition-colors">
           &larr; Back to {franchise.club_name}
         </a>
 
@@ -132,7 +132,7 @@ export default function RecruitingHistoryPage() {
                 type="text"
                 value={playerName}
                 onChange={(e) => setPlayerName(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-colors"
               />
             </div>
             <div>
@@ -141,7 +141,7 @@ export default function RecruitingHistoryPage() {
                 type="text"
                 value={position}
                 onChange={(e) => setPosition(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-colors"
               />
             </div>
             <div>
@@ -149,7 +149,7 @@ export default function RecruitingHistoryPage() {
               <select
                 value={starRating}
                 onChange={(e) => setStarRating(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-colors"
               >
                 <option value="2">2 Star</option>
                 <option value="3">3 Star</option>
@@ -163,7 +163,7 @@ export default function RecruitingHistoryPage() {
                 type="text"
                 value={homeState}
                 onChange={(e) => setHomeState(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-colors"
               />
             </div>
             <div>
@@ -171,7 +171,7 @@ export default function RecruitingHistoryPage() {
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-colors"
               >
                 <option value="Committed">Committed</option>
                 <option value="Signed">Signed</option>
@@ -183,7 +183,7 @@ export default function RecruitingHistoryPage() {
           <button
             onClick={handleAddRecruit}
             disabled={saving || !playerName.trim()}
-            className="bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold transition-colors rounded-lg px-5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-neutral-950"
+            className="bg-violet-600 hover:bg-violet-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold transition-colors rounded-lg px-5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-neutral-950"
           >
             {saving ? 'Saving...' : 'Add Recruit'}
           </button>
@@ -219,7 +219,7 @@ export default function RecruitingHistoryPage() {
                         <td className="py-2.5 px-3 text-amber-400 tracking-wide whitespace-nowrap">{starDisplay(r.star_rating)}</td>
                         <td className="py-2.5 px-3 text-neutral-300">{r.home_state || '-'}</td>
                         <td className="py-2.5 px-3">
-                          <span className={'inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold ' + (r.status === 'Decommitted' ? 'bg-neutral-800 text-neutral-400' : 'bg-emerald-900/40 text-emerald-400')}>{r.status}</span>
+                          <span className={'inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold ' + (r.status === 'Decommitted' ? 'bg-neutral-800 text-neutral-400' : 'bg-violet-900/40 text-violet-400')}>{r.status}</span>
                         </td>
                         <td className="py-2.5 px-3 text-right">
                           <button onClick={() => handleRemove(r.id)} className="text-neutral-500 hover:text-red-400 text-xs font-medium transition-colors">Remove</button>

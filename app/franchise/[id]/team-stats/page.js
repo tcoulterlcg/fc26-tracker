@@ -107,7 +107,7 @@ export default function TeamStatsPage() {
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
       <div className="max-w-4xl mx-auto px-6 py-12">
         <h1 className="text-4xl font-bold uppercase tracking-tight mb-1">Team Stats</h1>
-        <p className="text-neutral-400 text-sm mb-8">Season-by-season win/loss record. Editing Season <span className="text-emerald-400 font-semibold">{season}</span>.</p>
+        <p className="text-neutral-400 text-sm mb-8">Season-by-season win/loss record. Editing Season <span className="text-violet-400 font-semibold">{season}</span>.</p>
 
         <div className="bg-neutral-900/60 border border-neutral-800 rounded-xl p-6 mb-8">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-5">
@@ -117,7 +117,7 @@ export default function TeamStatsPage() {
                 type="number"
                 value={season}
                 onChange={(e) => setSeason(e.target.value)}
-                className="w-full bg-neutral-950/60 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-neutral-100 tabular-nums focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="w-full bg-neutral-950/60 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-neutral-100 tabular-nums focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
               />
             </div>
             <div>
@@ -126,7 +126,7 @@ export default function TeamStatsPage() {
                 type="number"
                 value={wins}
                 onChange={(e) => setWins(e.target.value)}
-                className="w-full bg-neutral-950/60 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-neutral-100 tabular-nums focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="w-full bg-neutral-950/60 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-neutral-100 tabular-nums focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
               />
             </div>
             <div>
@@ -135,7 +135,7 @@ export default function TeamStatsPage() {
                 type="number"
                 value={losses}
                 onChange={(e) => setLosses(e.target.value)}
-                className="w-full bg-neutral-950/60 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-neutral-100 tabular-nums focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="w-full bg-neutral-950/60 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-neutral-100 tabular-nums focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
               />
             </div>
             <div>
@@ -144,7 +144,7 @@ export default function TeamStatsPage() {
                 type="number"
                 value={ties}
                 onChange={(e) => setTies(e.target.value)}
-                className="w-full bg-neutral-950/60 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-neutral-100 tabular-nums focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="w-full bg-neutral-950/60 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-neutral-100 tabular-nums focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
               />
             </div>
             <div>
@@ -155,14 +155,14 @@ export default function TeamStatsPage() {
                   value={pointsFor}
                   onChange={(e) => setPointsFor(e.target.value)}
                   placeholder="PF"
-                  className="w-full bg-neutral-950/60 border border-neutral-800 rounded-lg px-2 py-2 text-sm text-neutral-100 tabular-nums placeholder:text-neutral-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                  className="w-full bg-neutral-950/60 border border-neutral-800 rounded-lg px-2 py-2 text-sm text-neutral-100 tabular-nums placeholder:text-neutral-600 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                 />
                 <input
                   type="number"
                   value={pointsAgainst}
                   onChange={(e) => setPointsAgainst(e.target.value)}
                   placeholder="PA"
-                  className="w-full bg-neutral-950/60 border border-neutral-800 rounded-lg px-2 py-2 text-sm text-neutral-100 tabular-nums placeholder:text-neutral-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                  className="w-full bg-neutral-950/60 border border-neutral-800 rounded-lg px-2 py-2 text-sm text-neutral-100 tabular-nums placeholder:text-neutral-600 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                 />
               </div>
             </div>
@@ -170,7 +170,7 @@ export default function TeamStatsPage() {
           <button
             onClick={handleSave}
             disabled={saving || !season.trim()}
-            className="bg-emerald-600 hover:bg-emerald-500 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors rounded-lg px-5 py-2 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-neutral-950"
+            className="bg-violet-600 hover:bg-violet-500 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors rounded-lg px-5 py-2 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-neutral-950"
           >
             {saving ? 'Saving...' : 'Save Season ' + season}
           </button>
@@ -204,7 +204,7 @@ export default function TeamStatsPage() {
                     return (
                       <tr key={row.id} className="border-b border-neutral-800/60 hover:bg-neutral-800/40 transition-colors">
                         <td className="py-2.5 px-3 font-semibold text-neutral-100">Season {row.season}</td>
-                        <td className={'py-2.5 px-3 text-right font-bold tabular-nums ' + (row.wins !== null ? 'text-emerald-400' : 'text-neutral-500')}>{row.wins !== null ? row.wins : '-'}</td>
+                        <td className={'py-2.5 px-3 text-right font-bold tabular-nums ' + (row.wins !== null ? 'text-violet-400' : 'text-neutral-500')}>{row.wins !== null ? row.wins : '-'}</td>
                         <td className={'py-2.5 px-3 text-right font-bold tabular-nums ' + (row.losses !== null ? 'text-red-400' : 'text-neutral-500')}>{row.losses !== null ? row.losses : '-'}</td>
                         <td className={'py-2.5 px-3 text-right tabular-nums ' + (row.ties !== null ? 'text-neutral-300' : 'text-neutral-500')}>{row.ties !== null ? row.ties : '-'}</td>
                         <td className={'py-2.5 px-3 text-right tabular-nums ' + (row.points_for !== null ? 'text-neutral-300' : 'text-neutral-500')}>{row.points_for !== null ? row.points_for : '-'}</td>

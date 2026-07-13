@@ -186,7 +186,7 @@ export default function ImportPage() {
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
       <div className="max-w-5xl mx-auto px-6 py-12">
 
-        <a href="/" className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 text-sm font-medium transition-colors">
+        <a href="/" className="inline-flex items-center gap-1 text-violet-400 hover:text-violet-300 text-sm font-medium transition-colors">
           &larr; Back to Franchises
         </a>
 
@@ -202,9 +202,9 @@ export default function ImportPage() {
             type="button"
             onClick={() => handleGameChange('EA FC 26')}
             className={
-              'px-4 py-2 rounded-lg text-sm font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 ' +
+              'px-4 py-2 rounded-lg text-sm font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500 ' +
               (game === 'EA FC 26'
-                ? 'bg-emerald-600 text-white'
+                ? 'bg-violet-600 text-white'
                 : 'bg-neutral-800 text-neutral-400 hover:text-neutral-200')
             }
           >
@@ -214,9 +214,9 @@ export default function ImportPage() {
             type="button"
             onClick={() => handleGameChange('EA CFB 27')}
             className={
-              'px-4 py-2 rounded-lg text-sm font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 ' +
+              'px-4 py-2 rounded-lg text-sm font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500 ' +
               (game === 'EA CFB 27'
-                ? 'bg-emerald-600 text-white'
+                ? 'bg-violet-600 text-white'
                 : 'bg-neutral-800 text-neutral-400 hover:text-neutral-200')
             }
           >
@@ -243,12 +243,12 @@ export default function ImportPage() {
             value={csvText}
             onChange={(e) => setCsvText(e.target.value)}
             rows={10}
-            className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm font-mono text-neutral-100 leading-relaxed resize-y focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+            className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm font-mono text-neutral-100 leading-relaxed resize-y focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
           />
           <button
             onClick={handlePreview}
             disabled={!csvText.trim()}
-            className="mt-4 bg-neutral-700 hover:bg-neutral-600 text-neutral-100 disabled:opacity-40 disabled:cursor-not-allowed transition-colors rounded-lg px-4 py-2 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="mt-4 bg-neutral-700 hover:bg-neutral-600 text-neutral-100 disabled:opacity-40 disabled:cursor-not-allowed transition-colors rounded-lg px-4 py-2 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-violet-500"
           >
             Preview
           </button>
@@ -281,7 +281,7 @@ export default function ImportPage() {
                         <td className="py-2 px-3 text-neutral-300">{p.position}</td>
                         <td className="py-2 px-3 text-neutral-300">{p.class}</td>
                         <td className="py-2 px-3 text-neutral-300">{p.archetype}</td>
-                        <td className="py-2 px-3 text-emerald-400 font-semibold">{p.overall_rating}</td>
+                        <td className="py-2 px-3 text-violet-400 font-semibold">{p.overall_rating}</td>
                         <td className="py-2 px-3 text-neutral-300">{p.dev_trait}</td>
                       </tr>
                     ))}
@@ -306,7 +306,7 @@ export default function ImportPage() {
                         <td className="py-2 px-3 font-medium">{p.name}</td>
                         <td className="py-2 px-3 text-neutral-300">{p.position}</td>
                         <td className="py-2 px-3 text-neutral-300">{p.age}</td>
-                        <td className="py-2 px-3 text-emerald-400 font-semibold">{p.overall_rating}</td>
+                        <td className="py-2 px-3 text-violet-400 font-semibold">{p.overall_rating}</td>
                         <td className="py-2 px-3 text-neutral-400">{p.potential_rating}</td>
                         <td className="py-2 px-3 text-neutral-300">{p.nationality}</td>
                         <td className="py-2 px-3 text-neutral-300">{p.active_club}</td>
@@ -320,7 +320,7 @@ export default function ImportPage() {
             <button
               onClick={handleImport}
               disabled={importing}
-              className="mt-6 w-full bg-emerald-600 hover:bg-emerald-500 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors rounded-lg px-4 py-2.5 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="mt-6 w-full bg-violet-600 hover:bg-violet-500 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors rounded-lg px-4 py-2.5 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-violet-500"
             >
               {importing ? 'Importing...' : 'Import ' + preview.length + ' Players'}
             </button>
@@ -333,10 +333,10 @@ export default function ImportPage() {
               'rounded-xl border px-4 py-3 ' +
               (status.startsWith('Error')
                 ? 'border-red-500/30 bg-red-500/5'
-                : 'border-emerald-500/30 bg-emerald-500/5')
+                : 'border-violet-500/30 bg-violet-500/5')
             }
           >
-            <p className={status.startsWith('Error') ? 'text-red-400 text-sm font-medium' : 'text-emerald-400 text-sm font-medium'}>
+            <p className={status.startsWith('Error') ? 'text-red-400 text-sm font-medium' : 'text-violet-400 text-sm font-medium'}>
               {status}
             </p>
           </div>

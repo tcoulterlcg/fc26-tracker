@@ -12,7 +12,7 @@ function formatEuro(num) {
 }
 
 function rankColor(rank) {
-  if (rank === 1) return 'text-emerald-400'
+  if (rank === 1) return 'text-violet-400'
   if (rank === 2) return 'text-neutral-300'
   if (rank === 3) return 'text-amber-400'
   return 'text-neutral-500'
@@ -20,7 +20,7 @@ function rankColor(rank) {
 
 function ratingColor(rating) {
   if (rating === null || rating === undefined) return 'text-neutral-500'
-  if (rating >= 85) return 'text-emerald-400'
+  if (rating >= 85) return 'text-green-400'
   if (rating >= 80) return 'text-green-400'
   if (rating >= 72) return 'text-amber-400'
   if (rating >= 64) return 'text-orange-400'
@@ -66,7 +66,7 @@ export default function LeaderboardsPage() {
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
       <div className="max-w-4xl mx-auto px-6 py-10">
-        <a href="/" className="text-emerald-400 hover:text-emerald-300 text-sm font-medium">
+        <a href="/" className="text-violet-400 hover:text-violet-300 text-sm font-medium">
           &larr; Franchise Dashboard
         </a>
 
@@ -102,7 +102,7 @@ export default function LeaderboardsPage() {
                         key={row.user_id}
                         className={
                           'border-b border-neutral-800/60 transition-colors ' +
-                          (isMe ? 'bg-emerald-900/20 hover:bg-emerald-900/30' : 'hover:bg-neutral-800/40')
+                          (isMe ? 'bg-violet-900/20 hover:bg-violet-900/30' : 'hover:bg-neutral-800/40')
                         }
                       >
                         <td className={'py-2.5 px-3 font-bold tabular-nums ' + rankColor(rank)}>
@@ -110,7 +110,7 @@ export default function LeaderboardsPage() {
                         </td>
                         <td className="py-2.5 px-3 font-medium text-neutral-100">
                           {row.top_club_name || 'Unnamed'}
-                          {isMe && <span className="text-emerald-400 text-xs font-normal ml-2">(You)</span>}
+                          {isMe && <span className="text-violet-400 text-xs font-normal ml-2">(You)</span>}
                         </td>
                         <td className="py-2.5 px-3 text-neutral-400">{row.top_game || '-'}</td>
                         <td className="py-2.5 px-3 text-neutral-300 tabular-nums">{row.franchise_count}</td>

@@ -108,7 +108,7 @@ export default function TransferHistoryPage() {
     return (
       <div className="min-h-screen bg-neutral-950 flex items-center justify-center">
         <div className="flex flex-col items-center gap-3">
-          <div className="h-8 w-8 rounded-full border-2 border-neutral-800 border-t-emerald-500 animate-spin" />
+          <div className="h-8 w-8 rounded-full border-2 border-neutral-800 border-t-violet-500 animate-spin" />
           <span className="text-neutral-500 text-sm uppercase tracking-[0.14em] font-semibold">Loading...</span>
         </div>
       </div>
@@ -118,7 +118,7 @@ export default function TransferHistoryPage() {
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
       <div className="max-w-4xl mx-auto px-6 py-10">
-        <a href={'/franchise/' + franchiseId} className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded">
+        <a href={'/franchise/' + franchiseId} className="inline-flex items-center gap-1 text-violet-400 hover:text-violet-300 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500 rounded">
           &larr; Back to {franchise.club_name}
         </a>
 
@@ -135,7 +135,7 @@ export default function TransferHistoryPage() {
                 type="text"
                 value={playerName}
                 onChange={(e) => setPlayerName(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
               />
             </div>
             <div>
@@ -143,7 +143,7 @@ export default function TransferHistoryPage() {
               <select
                 value={transferType}
                 onChange={(e) => setTransferType(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
               >
                 <option value="In">Transfer In</option>
                 <option value="Out">Transfer Out</option>
@@ -157,7 +157,7 @@ export default function TransferHistoryPage() {
                 type="text"
                 value={fromClub}
                 onChange={(e) => setFromClub(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
               />
             </div>
             <div>
@@ -166,7 +166,7 @@ export default function TransferHistoryPage() {
                 type="text"
                 value={toClub}
                 onChange={(e) => setToClub(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
               />
             </div>
             <div>
@@ -175,14 +175,14 @@ export default function TransferHistoryPage() {
                 type="number"
                 value={fee}
                 onChange={(e) => setFee(e.target.value)}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
               />
             </div>
           </div>
           <button
             onClick={handleAddTransfer}
             disabled={saving || !playerName.trim()}
-            className="bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:hover:bg-emerald-600 transition-colors rounded-lg px-5 py-2 text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-neutral-950"
+            className="bg-violet-600 hover:bg-violet-500 disabled:opacity-40 disabled:hover:bg-violet-600 transition-colors rounded-lg px-5 py-2 text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-neutral-950"
           >
             {saving ? 'Saving...' : 'Add Transfer'}
           </button>
@@ -215,7 +215,7 @@ export default function TransferHistoryPage() {
                         <td className="py-2.5 px-3 text-neutral-400 whitespace-nowrap">Season {t.season}</td>
                         <td className="py-2.5 px-3 font-medium text-neutral-100">{t.player_name}</td>
                         <td className="py-2.5 px-3">
-                          <span className={'inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-semibold whitespace-nowrap ' + (t.transfer_type.includes('In') ? 'bg-emerald-900/40 text-emerald-400' : 'bg-red-900/40 text-red-400')}>
+                          <span className={'inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-semibold whitespace-nowrap ' + (t.transfer_type.includes('In') ? 'bg-violet-900/40 text-violet-400' : 'bg-red-900/40 text-red-400')}>
                             {t.transfer_type}
                           </span>
                         </td>
@@ -223,7 +223,7 @@ export default function TransferHistoryPage() {
                         <td className="py-2.5 px-3 text-neutral-300">{t.to_club || '-'}</td>
                         <td className="py-2.5 px-3 text-right text-neutral-100 font-medium tabular-nums whitespace-nowrap">{formatEuro(t.fee_eur)}</td>
                         <td className="py-2.5 px-3 text-right">
-                          <button onClick={() => handleRemove(t.id)} className="text-red-400 hover:text-red-300 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded">Remove</button>
+                          <button onClick={() => handleRemove(t.id)} className="text-red-400 hover:text-red-300 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500 rounded">Remove</button>
                         </td>
                       </tr>
                     )

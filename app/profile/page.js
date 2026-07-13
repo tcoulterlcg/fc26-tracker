@@ -22,9 +22,9 @@ const TIERS = ['Bronze', 'Silver', 'Gold', 'Diamond', 'Master']
 const TIER_COLOR = {
   Bronze: 'bg-neutral-800 text-neutral-400 border border-neutral-700',
   Silver: 'bg-neutral-800 text-neutral-200 border border-neutral-600',
-  Gold: 'bg-emerald-900/30 text-emerald-500 border border-emerald-900',
-  Diamond: 'bg-emerald-900/40 text-emerald-400 border border-emerald-700/60',
-  Master: 'bg-emerald-600/20 text-emerald-300 border border-emerald-500'
+  Gold: 'bg-violet-900/30 text-violet-500 border border-violet-900',
+  Diamond: 'bg-violet-900/40 text-violet-400 border border-violet-700/60',
+  Master: 'bg-violet-600/20 text-violet-300 border border-violet-500'
 }
 
 function getTier(value, thresholds) {
@@ -43,7 +43,7 @@ function BadgePill({ label, tier, value, unit }) {
         {tier ? tier.slice(0, 1) : '-'}
       </div>
       <p className="text-xs font-semibold text-neutral-200">{label}</p>
-      <p className={'text-[10px] font-semibold uppercase tracking-[0.14em] mt-1 ' + (tier ? 'text-emerald-400' : 'text-neutral-600')}>{tier || 'Not yet earned'}</p>
+      <p className={'text-[10px] font-semibold uppercase tracking-[0.14em] mt-1 ' + (tier ? 'text-violet-400' : 'text-neutral-600')}>{tier || 'Not yet earned'}</p>
       <p className="text-[10px] text-neutral-500 mt-1">{value || 0} {unit}</p>
     </div>
   )
@@ -205,7 +205,7 @@ export default function ProfilePage() {
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
       <div className="max-w-5xl mx-auto px-6 py-12">
 
-        <a href="/" className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 text-sm font-medium transition-colors">
+        <a href="/" className="inline-flex items-center gap-1 text-violet-400 hover:text-violet-300 text-sm font-medium transition-colors">
           &larr; Back to Franchises
         </a>
 
@@ -219,7 +219,7 @@ export default function ProfilePage() {
                 onError={(e) => { e.target.style.display = 'none' }}
               />
             ) : (
-              <div className="w-24 h-24 rounded-full bg-neutral-900 border border-neutral-800 ring-2 ring-neutral-800/60 flex items-center justify-center text-3xl font-bold text-emerald-400">
+              <div className="w-24 h-24 rounded-full bg-neutral-900 border border-neutral-800 ring-2 ring-neutral-800/60 flex items-center justify-center text-3xl font-bold text-violet-400">
                 {user.email.charAt(0).toUpperCase()}
               </div>
             )}
@@ -228,7 +228,7 @@ export default function ProfilePage() {
             <h1 className="text-2xl md:text-3xl font-bold tracking-tight break-all">{user.email}</h1>
             <button
               onClick={() => { setEditingAvatar(!editingAvatar); setAvatarDraft(avatarUrl) }}
-              className="text-emerald-400 hover:text-emerald-300 text-xs font-semibold mt-1.5 transition-colors"
+              className="text-violet-400 hover:text-violet-300 text-xs font-semibold mt-1.5 transition-colors"
             >
               {editingAvatar ? 'Cancel' : (avatarUrl ? 'Change profile picture' : 'Add profile picture')}
             </button>
@@ -243,14 +243,14 @@ export default function ProfilePage() {
               value={avatarDraft}
               onChange={(e) => setAvatarDraft(e.target.value)}
               placeholder="https://example.com/your-photo.jpg"
-              className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 placeholder:text-neutral-600 mb-3 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+              className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-neutral-100 placeholder:text-neutral-600 mb-3 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
             />
             {avatarError && <p className="text-red-400 text-xs mb-3">{avatarError}</p>}
             <div className="flex items-center gap-3">
               <button
                 onClick={handleSaveAvatar}
                 disabled={savingAvatar}
-                className="bg-emerald-600 hover:bg-emerald-500 text-white disabled:opacity-40 transition-colors rounded-lg px-5 py-2 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="bg-violet-600 hover:bg-violet-500 text-white disabled:opacity-40 transition-colors rounded-lg px-5 py-2 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-violet-500"
               >
                 {savingAvatar ? 'Saving...' : 'Save'}
               </button>
@@ -296,7 +296,7 @@ export default function ProfilePage() {
                       <p className="text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em]">{f.game || 'EA FC 26'}</p>
                       <h3 className="font-bold text-lg tracking-tight mt-0.5 truncate">{f.club_name}</h3>
                     </div>
-                    <a href={'/franchise/' + f.id} className="shrink-0 text-emerald-400 hover:text-emerald-300 text-xs font-semibold transition-colors">
+                    <a href={'/franchise/' + f.id} className="shrink-0 text-violet-400 hover:text-violet-300 text-xs font-semibold transition-colors">
                       View Franchise &rarr;
                     </a>
                   </div>

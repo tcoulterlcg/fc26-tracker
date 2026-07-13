@@ -190,7 +190,7 @@ export default function StatsPage() {
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
       <div className="max-w-5xl mx-auto px-6 py-10">
 
-        <a href={'/franchise/' + franchiseId} className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 text-sm font-medium transition-colors">
+        <a href={'/franchise/' + franchiseId} className="inline-flex items-center gap-1 text-violet-400 hover:text-violet-300 text-sm font-medium transition-colors">
           &larr; Back to {franchise.club_name}
         </a>
 
@@ -206,14 +206,14 @@ export default function StatsPage() {
             accept="image/*"
             capture="environment"
             onChange={handleFileChange}
-            className="block w-full text-sm text-neutral-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-emerald-600 file:text-white hover:file:bg-emerald-500 file:cursor-pointer file:transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded-lg"
+            className="block w-full text-sm text-neutral-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-violet-600 file:text-white hover:file:bg-violet-500 file:cursor-pointer file:transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500 rounded-lg"
           />
           <p className="text-neutral-500 text-xs mt-3">
             On an iPhone, this opens your camera or photo library. Works best with a clear, well-lit photo of the whole screen.
           </p>
 
           {analyzing && (
-            <p className="text-emerald-400 text-sm mt-4 animate-pulse">Analyzing photo, this can take a few seconds...</p>
+            <p className="text-violet-400 text-sm mt-4 animate-pulse">Analyzing photo, this can take a few seconds...</p>
           )}
 
           {error && (
@@ -221,7 +221,7 @@ export default function StatsPage() {
           )}
 
           {saveMessage && (
-            <p className="text-emerald-400 text-sm mt-4">{saveMessage}</p>
+            <p className="text-violet-400 text-sm mt-4">{saveMessage}</p>
           )}
         </div>
 
@@ -240,7 +240,7 @@ export default function StatsPage() {
                   type="number"
                   value={extracted.team_summary && extracted.team_summary.wins !== null && extracted.team_summary.wins !== undefined ? extracted.team_summary.wins : ''}
                   onChange={(e) => updateTeamField('wins', e.target.value)}
-                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm tabular-nums focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm tabular-nums focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                 />
               </div>
               <div>
@@ -249,7 +249,7 @@ export default function StatsPage() {
                   type="number"
                   value={extracted.team_summary && extracted.team_summary.losses !== null && extracted.team_summary.losses !== undefined ? extracted.team_summary.losses : ''}
                   onChange={(e) => updateTeamField('losses', e.target.value)}
-                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm tabular-nums focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm tabular-nums focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                 />
               </div>
               <div>
@@ -258,7 +258,7 @@ export default function StatsPage() {
                   type="number"
                   value={extracted.team_summary && extracted.team_summary.ties !== null && extracted.team_summary.ties !== undefined ? extracted.team_summary.ties : ''}
                   onChange={(e) => updateTeamField('ties', e.target.value)}
-                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm tabular-nums focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm tabular-nums focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                 />
               </div>
               <div>
@@ -267,7 +267,7 @@ export default function StatsPage() {
                   type="number"
                   value={extracted.team_summary && extracted.team_summary.points_for !== null && extracted.team_summary.points_for !== undefined ? extracted.team_summary.points_for : ''}
                   onChange={(e) => updateTeamField('points_for', e.target.value)}
-                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm tabular-nums focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm tabular-nums focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                 />
               </div>
               <div>
@@ -276,7 +276,7 @@ export default function StatsPage() {
                   type="number"
                   value={extracted.team_summary && extracted.team_summary.points_against !== null && extracted.team_summary.points_against !== undefined ? extracted.team_summary.points_against : ''}
                   onChange={(e) => updateTeamField('points_against', e.target.value)}
-                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm tabular-nums focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm tabular-nums focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                 />
               </div>
             </div>
@@ -293,7 +293,7 @@ export default function StatsPage() {
                             type="text"
                             value={p.name || ''}
                             onChange={(e) => updatePlayerName(idx, e.target.value)}
-                            className="bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-1.5 text-sm font-semibold w-48 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                            className="bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-1.5 text-sm font-semibold w-48 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                           />
                           <button
                             onClick={() => removePlayerRow(idx)}
@@ -311,7 +311,7 @@ export default function StatsPage() {
                                   type="number"
                                   value={p.stats[statKey] !== null && p.stats[statKey] !== undefined ? p.stats[statKey] : ''}
                                   onChange={(e) => updatePlayerStat(idx, statKey, e.target.value)}
-                                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-xs tabular-nums focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-xs tabular-nums focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                                 />
                               </div>
                             )
@@ -327,7 +327,7 @@ export default function StatsPage() {
             <button
               onClick={handleSave}
               disabled={saving}
-              className="w-full bg-emerald-600 hover:bg-emerald-500 text-white disabled:opacity-40 transition-colors rounded-lg px-4 py-2.5 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-neutral-950"
+              className="w-full bg-violet-600 hover:bg-violet-500 text-white disabled:opacity-40 transition-colors rounded-lg px-4 py-2.5 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-neutral-950"
             >
               {saving ? 'Saving...' : 'Save to Season ' + franchise.current_season}
             </button>
@@ -354,7 +354,7 @@ export default function StatsPage() {
                     return (
                       <tr key={row.id} className="border-b border-neutral-800/60 hover:bg-neutral-800/40 transition-colors">
                         <td className="py-2.5 px-3 font-semibold">Season {row.season}</td>
-                        <td className="py-2.5 px-3 text-emerald-400 tabular-nums">{row.wins !== null ? row.wins : '-'}</td>
+                        <td className="py-2.5 px-3 text-violet-400 tabular-nums">{row.wins !== null ? row.wins : '-'}</td>
                         <td className="py-2.5 px-3 text-red-400 tabular-nums">{row.losses !== null ? row.losses : '-'}</td>
                         <td className="py-2.5 px-3 text-neutral-400 tabular-nums">{row.ties !== null ? row.ties : '-'}</td>
                         <td className="py-2.5 px-3 text-neutral-300 tabular-nums">{row.points_for !== null ? row.points_for : '-'}</td>
@@ -376,7 +376,7 @@ export default function StatsPage() {
                 const seasonPlayers = playerHistory.filter(function(p) { return p.season === season })
                 return (
                   <div key={season}>
-                    <h3 className="text-emerald-400 text-[10px] font-semibold uppercase tracking-[0.14em] mb-3">Season {season}</h3>
+                    <h3 className="text-violet-400 text-[10px] font-semibold uppercase tracking-[0.14em] mb-3">Season {season}</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
                       {seasonPlayers.map(function(p) {
                         return (
