@@ -887,6 +887,17 @@ export default function FranchisePage() {
       payload.potential_rating = potential ? parseInt(potential) : null
       payload.wage = wage ? parseFloat(wage) : null
       payload.contract_years_remaining = contractYears ? parseInt(contractYears) : null
+      if (selectedPlayer) {
+        // Carry the full attribute profile from the reference database.
+        payload.pace = selectedPlayer.pace
+        payload.shooting = selectedPlayer.shooting
+        payload.passing = selectedPlayer.passing
+        payload.dribbling = selectedPlayer.dribbling
+        payload.defending = selectedPlayer.defending
+        payload.physical = selectedPlayer.physical
+        payload.nationality = selectedPlayer.nationality
+        payload.active_club = franchise.club_name
+      }
     }
 
     const { error } = await supabase.from('players').insert(payload)
@@ -1384,19 +1395,47 @@ export default function FranchisePage() {
     )
   }
 
+  // Broadcast-style ticker items computed from the real roster.
+  const rated = players.filter(function(p) { return p.overall_rating != null })
+  const squadOvr = rated.length ? rated.reduce(function(s, p) { return s + p.overall_rating }, 0) / rated.length : null
+  const topPlayer = rated.length ? rated.reduce(function(a, b) { return b.overall_rating > a.overall_rating ? b : a }) : null
+  const tickerItems = []
+  if (topPlayer) tickerItems.push(['TOP RATED', topPlayer.name + ' ' + topPlayer.overall_rating])
+  if (squadOvr !== null) tickerItems.push(['SQUAD OVR', squadOvr.toFixed(1)])
+  tickerItems.push(['SQUAD SIZE', players.length + ' players'])
+  if (isCfb) {
+    const elite = players.filter(function(p) { return p.dev_trait === 'Elite' }).length
+    if (elite) tickerItems.push(['ELITE DEV', elite + ' players'])
+    const nilLeader = players.filter(function(p) { return p.nil_value != null }).sort(function(a, b) { return b.nil_value - a.nil_value })[0]
+    if (nilLeader && nilLeader.nil_value > 0) tickerItems.push(['TOP NIL', nilLeader.name + ' ' + nilLeader.nil_value.toLocaleString()])
+    const fr = players.filter(function(p) { return p.cfb_class === 'FR' }).length
+    if (fr) tickerItems.push(['FRESHMEN', fr])
+  } else {
+    const withPot = players.filter(function(p) { return p.potential_rating != null && p.overall_rating != null })
+    const riser = withPot.sort(function(a, b) { return (b.potential_rating - b.overall_rating) - (a.potential_rating - a.overall_rating) })[0]
+    if (riser && riser.potential_rating > riser.overall_rating) tickerItems.push(['BIGGEST UPSIDE', riser.name + ' ' + riser.overall_rating + ' → ' + riser.potential_rating])
+    const aged = players.filter(function(p) { return p.age != null })
+    if (aged.length) tickerItems.push(['AVG AGE', (aged.reduce(function(s, p) { return s + p.age }, 0) / aged.length).toFixed(1)])
+    const speedster = players.filter(function(p) { return p.pace != null }).sort(function(a, b) { return b.pace - a.pace })[0]
+    if (speedster) tickerItems.push(['FASTEST', speedster.name + ' ' + speedster.pace + ' PAC'])
+  }
+  const eightyPlus = rated.filter(function(p) { return p.overall_rating >= 80 }).length
+  if (eightyPlus) tickerItems.push(['80+ CLUB', eightyPlus + ' players'])
+
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
-      <div className="max-w-7xl mx-auto px-6 py-10">
+      <style>{'@keyframes rhqTicker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}'}</style>
+      <div className="max-w-7xl mx-auto px-6 py-8">
 
         <a href="/" className="text-violet-400 hover:text-violet-300 text-sm font-medium">
           &larr; Back to Franchises
         </a>
 
-        <div className="mt-4 mb-6 flex justify-between items-start">
+        <div className="mt-4 mb-0 bg-gradient-to-br from-violet-600/40 via-violet-900/20 to-neutral-900 border border-violet-500/40 rounded-2xl p-6 flex justify-between items-start gap-6 flex-wrap">
           <div>
-            <p className="text-neutral-500 text-xs font-medium mb-1">{franchise.game || 'EA FC 26'}</p>
-            <h1 className="text-3xl font-bold tracking-tight">{franchise.club_name}</h1>
-            <div className="flex items-center gap-2 mt-1">
+            <p className="text-violet-300 text-[11px] font-semibold uppercase tracking-[0.16em] mb-1">{franchise.game || 'EA FC 26'}</p>
+            <h1 className="text-4xl font-black uppercase tracking-tight leading-none">{franchise.club_name}</h1>
+            <div className="flex items-center gap-2 mt-2">
               {editingLeague ? (
                 <>
                   <select
@@ -1439,33 +1478,62 @@ export default function FranchisePage() {
             </div>
           </div>
 
-          <div className="flex gap-2">
-            {players.length === 0 && (
-              <button
-                onClick={handleImportRoster}
-                disabled={importingRoster}
-                className="border border-violet-600 text-violet-400 hover:bg-violet-600 hover:text-white transition-colors rounded-lg px-4 py-2 text-sm font-semibold whitespace-nowrap disabled:opacity-40"
-              >
-                {importingRoster ? 'Importing...' : 'Import Roster from Database'}
-              </button>
+          <div className="flex items-center gap-6">
+            {squadOvr !== null && (
+              <div className="text-center">
+                <p className="text-neutral-400 text-[10px] uppercase tracking-wide mb-0.5">Overall</p>
+                <p className={'text-4xl font-bold tabular-nums leading-none ' + statTextColor(squadOvr)}>{squadOvr.toFixed(1)}</p>
+              </div>
             )}
-            <a
-              href={'/franchise/' + franchiseId + '/roster-photo'}
-              className="border border-violet-600 text-violet-400 hover:bg-violet-600 hover:text-white transition-colors rounded-lg px-4 py-2 text-sm font-semibold whitespace-nowrap"
-            >
-              Import from Photo
-            </a>
-            <button
-              onClick={() => setShowAddPanel(!showAddPanel)}
-              className="bg-violet-600 hover:bg-violet-500 transition-colors rounded-lg px-4 py-2 text-sm font-semibold whitespace-nowrap"
-            >
-              {showAddPanel ? 'Cancel' : '+ Add Player'}
-            </button>
+            <div className="flex gap-2 flex-wrap">
+              {players.length === 0 && (
+                <button
+                  onClick={handleImportRoster}
+                  disabled={importingRoster}
+                  className="border border-violet-500/60 text-violet-300 hover:bg-violet-600 hover:text-white transition-colors rounded-lg px-4 py-2 text-sm font-semibold whitespace-nowrap disabled:opacity-40"
+                >
+                  {importingRoster ? 'Importing...' : 'Import Roster from Database'}
+                </button>
+              )}
+              <a
+                href={'/franchise/' + franchiseId + '/roster-photo'}
+                className="border border-violet-500/60 text-violet-300 hover:bg-violet-600 hover:text-white transition-colors rounded-lg px-4 py-2 text-sm font-semibold whitespace-nowrap"
+              >
+                Import from Photo
+              </a>
+              <button
+                onClick={() => setShowAddPanel(!showAddPanel)}
+                className="bg-violet-600 hover:bg-violet-500 transition-colors rounded-lg px-4 py-2 text-sm font-semibold whitespace-nowrap"
+              >
+                {showAddPanel ? 'Cancel' : '+ Add Player'}
+              </button>
+            </div>
           </div>
         </div>
 
+        {tickerItems.length > 0 && (
+          <div className="mb-6 mt-2 overflow-hidden border border-neutral-800 rounded-lg bg-neutral-900/80">
+            <div className="flex whitespace-nowrap w-max" style={{ animation: 'rhqTicker 40s linear infinite' }}>
+              {[0, 1].map(function(dup) {
+                return (
+                  <div key={dup} className="flex">
+                    {tickerItems.map(function(item, i) {
+                      return (
+                        <span key={dup + '-' + i} className="inline-flex items-center gap-2 px-5 py-2 text-[13px] border-r border-neutral-800">
+                          <span className="text-violet-400 font-bold uppercase tracking-wide">{item[0]}</span>
+                          <span className="text-neutral-200 font-semibold">{item[1]}</span>
+                        </span>
+                      )
+                    })}
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )}
+
         {showAddPanel && (
-          <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-5 mb-6">
+          <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-5 mb-6">
             <div className="relative mb-4">
               <input
                 type="text"
@@ -1579,11 +1647,11 @@ export default function FranchisePage() {
             if (def.cfbOnly && !isCfb) return null
             const isDragOver = dragOverTabKey === key && dragTabKey !== key
             const sharedClassName =
-              'px-4 py-2 text-sm font-semibold border-b-2 -mb-px transition-colors cursor-move select-none ' +
+              'px-4 py-2.5 text-[13px] font-bold uppercase tracking-[0.08em] border-b-2 -mb-px transition-colors cursor-move select-none ' +
               (isDragOver ? 'border-violet-300 bg-violet-900/20 ' : '') +
               (def.type === 'tab' && activeTab === key
-                ? 'border-violet-500 text-violet-400'
-                : 'border-transparent text-neutral-500 hover:text-neutral-300')
+                ? 'border-violet-500 text-violet-300'
+                : 'border-transparent text-neutral-500 hover:text-neutral-200')
 
             if (def.type === 'tab') {
               return (
@@ -1636,33 +1704,33 @@ export default function FranchisePage() {
                 </select>
               </div>
               <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6 mb-3">
-                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-4">
                   <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Squad Size</p>
                   <p className="text-2xl font-semibold text-neutral-100">{teamStats.squadSize}</p>
                   <MiniBenchmarkBar ownValue={teamStats.squadSize} benchmark={getCfbBenchmark('squadSize')} isCurrency={false} decimals={0} />
                 </div>
-                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-4">
                   <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Avg Overall</p>
                   <p className="text-2xl font-semibold text-violet-400">
                     {teamStats.avgOverall !== null ? teamStats.avgOverall.toFixed(1) : '-'}
                   </p>
                   <MiniBenchmarkBar ownValue={teamStats.avgOverall} benchmark={getCfbBenchmark('avgOverall')} isCurrency={false} decimals={1} />
                 </div>
-                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-4">
                   <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Offense</p>
                   <p className="text-2xl font-semibold text-neutral-100">
                     {teamStats.offenseAvg !== null ? teamStats.offenseAvg.toFixed(0) : '-'}
                   </p>
                   <MiniBenchmarkBar ownValue={teamStats.offenseAvg} benchmark={getCfbBenchmark('offenseAvg')} isCurrency={false} decimals={0} />
                 </div>
-                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-4">
                   <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Defense</p>
                   <p className="text-2xl font-semibold text-neutral-100">
                     {teamStats.defenseAvg !== null ? teamStats.defenseAvg.toFixed(0) : '-'}
                   </p>
                   <MiniBenchmarkBar ownValue={teamStats.defenseAvg} benchmark={getCfbBenchmark('defenseAvg')} isCurrency={false} decimals={0} />
                 </div>
-                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-4">
                   <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">NIL Funds</p>
                   {editingNil ? (
                     <div className="flex items-center gap-1">
@@ -1696,7 +1764,7 @@ export default function FranchisePage() {
                 </a>
               </div>
 
-              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4 mb-3">
+              <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-4 mb-3">
                 <p className="text-neutral-500 text-xs uppercase tracking-wide mb-2">Class Breakdown &middot; {teamStats.squadSize} players</p>
                 {teamStats.classBreakdown && teamStats.classBreakdown.length > 0 ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -1731,7 +1799,7 @@ export default function FranchisePage() {
                 )}
               </div>
 
-              <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+              <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-4">
                 <p className="text-neutral-500 text-xs uppercase tracking-wide mb-3">Positional Breakdown</p>
                 {teamStats.sideBreakdown && teamStats.sideBreakdown.length > 0 ? (
                   <div className="space-y-4">
@@ -1816,38 +1884,38 @@ export default function FranchisePage() {
                 </select>
               </div>
               <div className="grid grid-cols-2 gap-3 mb-6 md:grid-cols-3 lg:grid-cols-6">
-                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-4">
                   <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Squad Size</p>
                   <p className="text-2xl font-semibold text-neutral-100">{teamStats.squadSize}</p>
                   <MiniBenchmarkBar ownValue={teamStats.squadSize} benchmark={getBenchmark('squadSize')} isCurrency={false} decimals={0} />
                 </div>
-                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-4">
                   <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Avg Age</p>
                   <p className="text-2xl font-semibold text-neutral-100">
                     {teamStats.avgAge !== null ? teamStats.avgAge.toFixed(1) : '-'}
                   </p>
                   <MiniBenchmarkBar ownValue={teamStats.avgAge} benchmark={getBenchmark('avgAge')} isCurrency={false} decimals={1} />
                 </div>
-                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-4">
                   <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Avg Overall</p>
                   <p className="text-2xl font-semibold text-violet-400">
                     {teamStats.avgOverall !== null ? teamStats.avgOverall.toFixed(1) : '-'}
                   </p>
                   <MiniBenchmarkBar ownValue={teamStats.avgOverall} benchmark={getBenchmark('avgOverall')} isCurrency={false} decimals={1} />
                 </div>
-                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-4">
                   <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Avg Potential</p>
                   <p className="text-2xl font-semibold text-neutral-100">
                     {teamStats.avgPotential !== null ? teamStats.avgPotential.toFixed(1) : '-'}
                   </p>
                   <MiniBenchmarkBar ownValue={teamStats.avgPotential} benchmark={getBenchmark('avgPotential')} isCurrency={false} decimals={1} />
                 </div>
-                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-4">
                   <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Team Value</p>
                   <p className="text-2xl font-semibold text-neutral-100">{formatEuro(teamStats.totalValue)}</p>
                   <MiniBenchmarkBar ownValue={teamStats.totalValue} benchmark={getBenchmark('totalValue')} isCurrency={true} decimals={0} />
                 </div>
-                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4">
+                <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-4">
                   <p className="text-neutral-500 text-xs uppercase tracking-wide mb-1">Weekly Wages</p>
                   <p className="text-2xl font-semibold text-neutral-100">{formatEuro(teamStats.totalWage)}</p>
                   <MiniBenchmarkBar ownValue={teamStats.totalWage} benchmark={getBenchmark('totalWage')} isCurrency={true} decimals={0} />
@@ -1859,7 +1927,7 @@ export default function FranchisePage() {
         )}
 
         {activeTab === 'progression' && (
-          <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 mb-6">
+          <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-6 mb-6">
             <div className="flex justify-between items-start mb-4">
               <div>
                 <h2 className="text-lg font-semibold">Season Progression</h2>
@@ -1952,7 +2020,7 @@ export default function FranchisePage() {
 
         {!isCfb && activeTab === 'dashboard' && players.length > 0 && (
           <>
-            <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-5 mb-6">
+            <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-5 mb-6">
               <h2 className="text-sm font-semibold mb-3 text-neutral-200">Top Players</h2>
               <div className="space-y-2">
                 {teamStats.topPlayers && teamStats.topPlayers.length > 0 ? (
@@ -1978,7 +2046,7 @@ export default function FranchisePage() {
               </div>
             </div>
 
-            <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-5 mb-6">
+            <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-5 mb-6">
               <h2 className="text-sm font-semibold text-neutral-200">Position Group Averages</h2>
               <p className="text-neutral-500 text-xs mb-3">Average overall and potential by position group.</p>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
@@ -2004,7 +2072,7 @@ export default function FranchisePage() {
         )}
 
         {isCfb && activeTab === 'depth' && (
-          <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 mb-6">
+          <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-6 mb-6">
             <h2 className="text-lg font-semibold mb-1">Depth Chart</h2>
             <p className="text-neutral-500 text-xs mb-5">Drag a player's bar up or down within their position to set your own depth order.</p>
 
@@ -2063,7 +2131,7 @@ export default function FranchisePage() {
         )}
 
         {activeTab === 'roster' && (
-          <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
+          <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-6">
             <div className="flex justify-end items-center mb-4">
               <div className="flex items-center gap-4">
                 {activeFilterCount > 0 && (

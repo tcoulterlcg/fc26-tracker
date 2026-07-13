@@ -810,8 +810,9 @@ export default function Home() {
       <main className="flex-1 min-w-0 px-6 py-8 lg:px-10">
         <div className="flex justify-between items-end gap-4 flex-wrap mb-6">
           <div>
-            <p className="text-neutral-500 text-[11px] font-semibold uppercase tracking-[0.2em]">{todayString}</p>
-            <h1 className="text-4xl font-black uppercase tracking-tight leading-none mt-1">Matchday Central</h1>
+            <p className="text-neutral-500 text-[11px] font-semibold uppercase tracking-[0.2em]">Roster HQ / Dashboard</p>
+            <h1 className="text-4xl font-black uppercase tracking-tight leading-none mt-1">Command Center</h1>
+            <p className="text-neutral-500 text-[11px] font-semibold uppercase tracking-[0.18em] mt-2">{franchises.length} active save{franchises.length === 1 ? '' : 's'}{todayString ? ' · ' + todayString : ''}</p>
           </div>
           <div className="flex items-center gap-2">
             <button onClick={handleLogout} className="lg:hidden border border-neutral-700 hover:bg-neutral-900 transition-colors rounded-lg px-3 py-2 text-sm font-medium text-neutral-300">Log Out</button>
