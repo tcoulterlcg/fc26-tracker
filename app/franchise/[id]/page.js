@@ -246,13 +246,24 @@ function formatStatSummary(statsObj) {
   }).join(' \u00b7 ')
 }
 
-function ovrBadgeColor(ovr) {
-  if (ovr === null || ovr === undefined) return 'bg-neutral-700'
-  if (ovr >= 85) return 'bg-green-600'
-  if (ovr >= 80) return 'bg-green-600'
-  if (ovr >= 72) return 'bg-amber-500'
-  if (ovr >= 64) return 'bg-orange-600'
-  return 'bg-red-600'
+// Badge tiers from the Claude Design "Roster HQ rating badge system" board
+// (project efc98ff8): Elite 90+ prismatic, Star 85-89 violet, Starter 80-84
+// blue, Rotation 72-79 teal, Depth 64-71 amber, Prospect <64 zinc.
+function badgeTierHex(v) {
+  if (v >= 85) return '#8b5cf6'
+  if (v >= 80) return '#3b82f6'
+  if (v >= 72) return '#14b8a6'
+  if (v >= 64) return '#b45309'
+  return '#3f3f46'
+}
+
+function ovrBadgeStyle(v) {
+  if (v === null || v === undefined) return { background: '#3f3f46' }
+  if (v >= 90) return {
+    background: 'linear-gradient(135deg, #8b5cf6, #d946ef 55%, #38bdf8)',
+    boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.3)'
+  }
+  return { background: badgeTierHex(v), boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.22)' }
 }
 
 const RATING_COLUMN_KEYS = {
@@ -271,10 +282,18 @@ function statTextColor(v) {
   return 'text-red-400'
 }
 
-function OvrBadge({ value, small }) {
+function OvrBadge({ value, small, ghost }) {
   if (value === null || value === undefined) return <span className="text-neutral-500">-</span>
+  // Ghost variant = Potential: outlined in the tier hue over a faint fill so
+  // it never outweighs the solid Overall badge beside it.
+  const style = ghost
+    ? { border: '1.5px solid ' + badgeTierHex(value), color: badgeTierHex(value) === '#3f3f46' ? '#a1a1aa' : badgeTierHex(value), background: badgeTierHex(value) + '14' }
+    : ovrBadgeStyle(value)
   return (
-    <span className={'inline-block text-white font-bold rounded-full text-center ' + ovrBadgeColor(value) + (small ? ' text-xs px-2 py-0.5 min-w-[28px]' : ' text-xs px-2.5 py-1 min-w-[32px]')}>
+    <span
+      style={style}
+      className={'inline-block font-bold rounded-[7px] text-center tabular-nums ' + (ghost ? '' : 'text-white ') + (small ? 'text-xs px-2 py-0.5 min-w-[28px]' : 'text-xs px-2.5 py-1 min-w-[32px]')}
+    >
       {value}
     </span>
   )
@@ -2804,7 +2823,7 @@ export default function FranchisePage() {
                           if (col.key === 'potential_rating') {
                             return (
                               <td key={col.key} className="py-2.5 px-3 whitespace-nowrap">
-                                <OvrBadge value={displayValue} small />
+                                <OvrBadge value={displayValue} small ghost />
                               </td>
                             )
                           }
