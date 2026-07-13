@@ -5,6 +5,7 @@ import { useEffect, useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
 import { CFB_CONFERENCES as CFB_CONFERENCE_SCHOOLS, CFB_CONFERENCE_NAMES } from '@/lib/cfbConferences'
+import { CFB_LOGOS } from '@/lib/cfbLogos'
 
 const GAMES = [
   { id: 'EA FC 26', label: 'EA FC 26', sub: 'Soccer', status: 'live' },
@@ -193,7 +194,7 @@ const CFB_DEFAULT_ORDER = [
 
 const FC_STAT_STORAGE_KEY = 'roster_hq_card_stats_fc'
 const CFB_STAT_STORAGE_KEY = 'roster_hq_card_stats_cfb'
-const LOGO_CACHE_KEY = 'roster_hq_logo_cache'
+const LOGO_CACHE_KEY = 'roster_hq_logo_cache_v2'
 
 function average(nums) {
   const valid = nums.filter(function(n) { return typeof n === 'number' && !isNaN(n) })
@@ -432,17 +433,16 @@ export default function Home() {
         if (next[f.id] !== undefined) continue
 
         const isCfb = f.game === 'EA CFB 27'
-        let candidates
-        if (isCfb) {
-          const mascot = CFB_MASCOTS[f.club_name]
-          candidates = mascot
-            ? [f.club_name + ' ' + mascot, f.club_name + ' ' + mascot + ' football']
-            : [f.club_name + ' football team']
+        let url = null
+        if (isCfb && CFB_LOGOS[f.club_name]) {
+          // Official ESPN mark — clean transparent PNG, no lookup needed.
+          url = CFB_LOGOS[f.club_name]
         } else {
-          candidates = [f.club_name + ' F.C.', f.club_name + ' FC']
+          const candidates = isCfb
+            ? [f.club_name + ' ' + (CFB_MASCOTS[f.club_name] || '') + ' football', f.club_name + ' football team']
+            : [f.club_name + ' F.C.', f.club_name + ' FC']
+          url = await fetchWikipediaThumbnail(candidates)
         }
-
-        const url = await fetchWikipediaThumbnail(candidates)
         if (cancelled) return
         next[f.id] = url
         setLogoCache(function(prev) { return Object.assign({}, prev, { [f.id]: url }) })
@@ -822,7 +822,7 @@ export default function Home() {
         </div>
 
         {featured && !showCreatePanel ? (
-          <div className="bg-gradient-to-br from-violet-600/15 via-neutral-900 to-neutral-900 border border-violet-600/30 rounded-2xl p-6 mb-6">
+          <div className="bg-gradient-to-br from-violet-600/40 via-violet-900/20 to-neutral-900 border border-violet-500/40 rounded-2xl p-6 mb-6">
             <div className="flex items-center justify-between gap-5 flex-wrap">
               <div className="flex items-center gap-5 min-w-0">
                 <TeamLogo url={logoCache[featured.id]} size={84} />
@@ -1058,7 +1058,7 @@ export default function Home() {
                 const logoUrl = logoCache[f.id]
 
                 return (
-                  <div key={f.id} className="relative bg-neutral-800/50 border border-neutral-800 hover:border-violet-600 rounded-xl p-5 transition-colors">
+                  <div key={f.id} className="relative bg-gradient-to-br from-violet-600/15 via-neutral-900 to-neutral-900 border border-neutral-800 hover:border-violet-600 rounded-xl p-5 transition-colors">
                     <a href={franchiseUrl} onClick={(e) => { e.preventDefault(); goToFranchise(f.id) }} className="absolute inset-0 z-0" aria-label={'Open ' + f.club_name}></a>
 
                     <div className="relative z-10 pointer-events-none">
