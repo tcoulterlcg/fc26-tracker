@@ -461,6 +461,17 @@ export default function Home() {
   const [dragInfo, setDragInfo] = useState({ game: null, key: null })
 
   const [logoCache, setLogoCache] = useState({})
+  const [newsItems, setNewsItems] = useState([])
+
+  // Real-life headlines for the header ticker + League Wire sidebar panel.
+  useEffect(() => {
+    let cancelled = false
+    fetch('/api/sports-news')
+      .then(function(r) { return r.json() })
+      .then(function(j) { if (!cancelled && j.items) setNewsItems(j.items) })
+      .catch(function() {})
+    return () => { cancelled = true }
+  }, [])
   const [todayString, setTodayString] = useState('')
 
   const router = useRouter()
@@ -898,13 +909,28 @@ export default function Home() {
             <p className="text-violet-500/90 text-[9px] font-semibold uppercase tracking-[0.2em] mt-1">Franchise Tracker</p>
           </div>
         </div>
-        <nav className="px-3 pb-3 lg:flex-1 space-y-1">
+        <nav className="px-3 pb-3 space-y-1">
           <span className="block rounded-lg px-3 py-2 text-sm font-semibold bg-violet-600/15 text-violet-300 border border-violet-600/30">Dashboard</span>
           <a href="/player-databases" className="block rounded-lg px-3 py-2 text-sm font-medium text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800/60 transition-colors">Player Databases</a>
           <a href="/leaderboards" className="block rounded-lg px-3 py-2 text-sm font-medium text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800/60 transition-colors">Leaderboards</a>
           <a href="/import" className="block rounded-lg px-3 py-2 text-sm font-medium text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800/60 transition-colors">Import Players</a>
           <a href="/profile" className="block rounded-lg px-3 py-2 text-sm font-medium text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800/60 transition-colors">Profile</a>
         </nav>
+        {newsItems.length > 0 && (
+          <div className="px-4 pt-4 pb-3 border-t border-neutral-800 hidden lg:block lg:flex-1 overflow-y-auto">
+            <p className="text-violet-400 text-[10px] font-bold uppercase tracking-[0.18em] mb-3">League Wire</p>
+            <div className="space-y-3">
+              {newsItems.slice(0, 8).map(function(n, i) {
+                return (
+                  <a key={i} href={n.url || '#'} target="_blank" rel="noreferrer" className="block group">
+                    <span className="text-violet-500 text-[9px] font-bold uppercase tracking-wide">{n.league}</span>
+                    <p className="text-neutral-400 group-hover:text-neutral-200 text-xs leading-snug transition-colors">{n.headline}</p>
+                  </a>
+                )
+              })}
+            </div>
+          </div>
+        )}
         <div className="p-4 border-t border-neutral-800 hidden lg:block">
           <p className="text-neutral-500 text-xs truncate mb-1">{user.email}</p>
           <button onClick={handleLogout} className="text-neutral-400 hover:text-violet-400 text-xs font-medium">Log Out</button>
@@ -918,6 +944,26 @@ export default function Home() {
             <h1 className="text-4xl font-black uppercase tracking-tight leading-none mt-1">Franchise HQ</h1>
             <p className="text-neutral-500 text-[11px] font-semibold uppercase tracking-[0.18em] mt-2">{franchises.length} active save{franchises.length === 1 ? '' : 's'}{todayString ? ' · ' + todayString : ''}</p>
           </div>
+          {newsItems.length > 0 && (
+            <div className="hidden md:block flex-1 min-w-0 max-w-2xl overflow-hidden border border-neutral-800 rounded-lg bg-neutral-900/60 self-center">
+              <div className="flex whitespace-nowrap w-max" style={{ animation: 'rhqTicker 60s linear infinite' }}>
+                {[0, 1].map(function(dup) {
+                  return (
+                    <div key={dup} className="flex">
+                      {newsItems.slice(0, 10).map(function(n, i) {
+                        return (
+                          <span key={dup + '-' + i} className="inline-flex items-center gap-1.5 px-4 py-2 text-[11px] border-r border-neutral-800/80">
+                            <span className="text-violet-400 font-bold uppercase tracking-wide">{n.league}</span>
+                            <span className="text-neutral-300 font-medium">{n.headline}</span>
+                          </span>
+                        )
+                      })}
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          )}
           <div className="flex items-center gap-2">
             <button onClick={handleLogout} className="lg:hidden border border-neutral-700 hover:bg-neutral-900 transition-colors rounded-lg px-3 py-2 text-sm font-medium text-neutral-300">Log Out</button>
             <button onClick={() => setShowCreatePanel(!showCreatePanel)} className="bg-violet-600 hover:bg-violet-500 transition-colors rounded-lg px-4 py-2 text-sm font-semibold whitespace-nowrap">

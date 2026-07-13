@@ -80,6 +80,19 @@ const MADDEN_COLUMNS = [
   { key: 'active_club', label: 'Team' }
 ]
 
+const MLB_COLUMNS = [
+  { key: 'name', label: 'Name' },
+  { key: 'position', label: 'Pos' },
+  { key: 'archetype', label: '2nd Pos' },
+  { key: 'notes', label: 'Level' },
+  { key: 'base_overall', label: 'Beg OVR' },
+  { key: 'overall_rating', label: 'Curr OVR' },
+  { key: 'ovr_diff', label: '± OVR' },
+  { key: 'dev_trait', label: 'Potential' },
+  { key: 'age', label: 'Age' },
+  { key: 'active_club', label: 'Team' }
+]
+
 const CFB_POSITION_GROUP = {
   'QB': 'Offense', 'HB': 'Offense', 'FB': 'Offense', 'WR': 'Offense', 'TE': 'Offense',
   'LT': 'Offense', 'LG': 'Offense', 'C': 'Offense', 'RG': 'Offense', 'RT': 'Offense',
@@ -350,6 +363,9 @@ export default function FranchisePage() {
   const [benchmarkLeague, setBenchmarkLeague] = useState(null)
 
   const [trajectory, setTrajectory] = useState(null)
+  const [editingOvrId, setEditingOvrId] = useState(null)
+  const [ovrDraft, setOvrDraft] = useState('')
+  const [mlbLevel, setMlbLevel] = useState('40-Man')
   const [transferModal, setTransferModal] = useState(null)
   const [tFee, setTFee] = useState('')
   const [tClub, setTClub] = useState('')
@@ -374,8 +390,9 @@ export default function FranchisePage() {
   // Madden (and NHL once live) carry the same speed/strength attribute family
   // as CFB, so they get a dedicated column set instead of the FC pace/shooting one.
   const isProEa = franchise && (franchise.game === 'EA Madden 26' || franchise.game === 'EA NHL 26')
-  const colVariant = isCfb ? 'cfb' : (isProEa ? 'proea' : 'fc')
-  const gameColumns = isCfb ? CFB_COLUMNS : (isProEa ? MADDEN_COLUMNS : FC_COLUMNS)
+  const isMlb = franchise && franchise.game === 'MLB The Show 26'
+  const colVariant = isCfb ? 'cfb' : (isProEa ? 'proea' : (isMlb ? 'mlb' : 'fc'))
+  const gameColumns = isCfb ? CFB_COLUMNS : (isProEa ? MADDEN_COLUMNS : (isMlb ? MLB_COLUMNS : FC_COLUMNS))
 
   useEffect(() => {
     loadData()
@@ -1032,6 +1049,18 @@ export default function FranchisePage() {
     return () => { cancelled = true }
   }, [players, franchise, isCfb])
 
+  // Inline edit of Current Overall — Beg OVR stays put, so ± OVR shows the
+  // player's in-game progression after the save.
+  const saveOvrEdit = async (playerId) => {
+    const id = playerId
+    setEditingOvrId(null)
+    const v = ovrDraft === '' ? null : parseInt(ovrDraft)
+    if (v !== null && (isNaN(v) || v < 1 || v > 99)) return
+    const { error } = await supabase.from('players').update({ overall_rating: v }).eq('id', id)
+    if (error) { alert(error.message); return }
+    await loadPlayers()
+  }
+
   // ---- Transfer tracking -------------------------------------------------
   // Every add/removal is auto-logged to transfer_history; the modal just lets
   // the user enrich the entry with deal details (fee, club, sell-on %, swap).
@@ -1047,7 +1076,14 @@ export default function FranchisePage() {
       fee_eur: d.fee ? parseFloat(d.fee) : null,
       sell_on_pct: d.sellOn ? parseFloat(d.sellOn) : null,
       swap_player: d.swap || null,
-      player_snapshot: direction === 'out' ? player : null
+      player_snapshot: direction === 'out' ? (function() {
+        // Strip load-time derived fields (base_overall, ovr_diff) — they are
+        // not real players columns, and Add Back re-inserts this snapshot.
+        const snap = Object.assign({}, player)
+        delete snap.base_overall
+        delete snap.ovr_diff
+        return snap
+      })() : null
     })
   }
 
@@ -1130,6 +1166,19 @@ export default function FranchisePage() {
   const displayedPlayers = useMemo(function() {
     let result = players.slice()
 
+    // MLB level views — level (MLB/AAA/AA/A) is stored in notes on import.
+    // 40-Man approximates the real 40-man roster as the top 40 by overall.
+    if (isMlb && mlbLevel !== 'All') {
+      if (mlbLevel === '40-Man') {
+        result = result
+          .slice()
+          .sort(function(a, b) { return (b.overall_rating || 0) - (a.overall_rating || 0) })
+          .slice(0, 40)
+      } else {
+        result = result.filter(function(p) { return (p.notes || '') === mlbLevel })
+      }
+    }
+
     const filterKeys = Object.keys(filters)
     for (let k = 0; k < filterKeys.length; k++) {
       const key = filterKeys[k]
@@ -1157,7 +1206,7 @@ export default function FranchisePage() {
     })
 
     return result
-  }, [players, filters, sortField, sortDirection])
+  }, [players, filters, sortField, sortDirection, isMlb, mlbLevel])
 
   const toggleSort = (field) => {
     if (sortField === field) {
@@ -1543,7 +1592,7 @@ export default function FranchisePage() {
     dashboard: { type: 'tab', label: 'Dashboard' },
     roster: { type: 'tab', label: 'Roster' },
     depth: { type: 'tab', label: 'Depth Chart', cfbOnly: true },
-    squad: { type: 'tab', label: 'Squad / Tactics', fcOnly: true },
+    squad: { type: 'tab', label: isMlb ? 'Lineup / Diamond' : 'Squad / Tactics', fcOnly: true },
     progression: { type: 'tab', label: 'Progression' },
     teamstats: { type: 'link', label: 'Team Stats', href: '/franchise/' + franchiseId + '/team-stats' },
     playerstats: { type: 'link', label: 'Player Stats', href: '/franchise/' + franchiseId + '/stats' },
@@ -2150,7 +2199,100 @@ export default function FranchisePage() {
           </>
         )}
 
-        {activeTab === 'squad' && !isCfb && (() => {
+        {activeTab === 'squad' && isMlb && (() => {
+          // Baseball diamond: best player per fielding position (MLB level
+          // first), plus the rotation and bullpen.
+          const pool = players.filter(function(p) { return (p.notes || '') === 'MLB' })
+          const source = pool.length > 0 ? pool : players
+          const byOvr = source.slice().sort(function(a, b) { return (b.overall_rating || 0) - (a.overall_rating || 0) })
+          const best = {}
+          for (const p of byOvr) {
+            const pos = (p.position || '').toUpperCase()
+            if (!best[pos]) best[pos] = p
+          }
+          const starters = byOvr.filter(function(p) { return ['SP'].indexOf((p.position || '').toUpperCase()) !== -1 }).slice(0, 5)
+          const bullpen = byOvr.filter(function(p) { return ['RP', 'CP', 'CL'].indexOf((p.position || '').toUpperCase()) !== -1 }).slice(0, 8)
+          const dh = byOvr.filter(function(p) { return (p.position || '').toUpperCase() === 'DH' })[0] || null
+
+          // Field coordinates as percentages of the diamond container.
+          const SPOTS = [
+            ['CF', 50, 12], ['LF', 18, 24], ['RF', 82, 24],
+            ['SS', 37, 42], ['2B', 63, 42],
+            ['3B', 24, 58], ['1B', 76, 58],
+            ['SP', 50, 56], ['C', 50, 84]
+          ]
+
+          const FieldChip = function(props) {
+            const pos = props.pos, p = props.p
+            return (
+              <div className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center" style={{ left: props.x + '%', top: props.y + '%' }}>
+                <span className="text-[9px] font-bold uppercase tracking-wide text-violet-300">{pos}</span>
+                {p ? (
+                  <>
+                    <span className={'text-base font-bold tabular-nums leading-tight ' + statTextColor(p.overall_rating)}>{p.overall_rating != null ? p.overall_rating : '-'}</span>
+                    <span className="text-[10px] font-semibold text-neutral-100 text-center leading-tight max-w-[90px]">{p.name}</span>
+                  </>
+                ) : (
+                  <span className="text-[10px] text-neutral-600">—</span>
+                )}
+              </div>
+            )
+          }
+
+          const PenRow = function(props) {
+            const p = props.p
+            return (
+              <div className="flex items-center justify-between gap-3 text-sm">
+                <span className="text-neutral-100 font-medium truncate">{p.name}</span>
+                <span className="flex items-center gap-2 shrink-0">
+                  <span className="text-neutral-500 text-[10px] font-bold uppercase">{p.position}</span>
+                  <span className={'font-bold tabular-nums ' + statTextColor(p.overall_rating)}>{p.overall_rating}</span>
+                </span>
+              </div>
+            )
+          }
+
+          return (
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="lg:col-span-2 bg-gradient-to-b from-violet-950/40 via-neutral-900 to-neutral-950 border border-violet-500/25 rounded-2xl p-6">
+                <p className="text-violet-300 text-[11px] font-semibold uppercase tracking-[0.16em] mb-4">Starting Nine &middot; best by rating{pool.length === 0 ? ' (all levels)' : ''}</p>
+                <div className="relative w-full" style={{ paddingBottom: '78%' }}>
+                  <svg viewBox="0 0 100 78" className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+                    <path d="M 50 74 L 22 50 Q 50 2 78 50 Z" fill="rgba(139,92,246,0.05)" stroke="rgba(139,92,246,0.25)" strokeWidth="0.4" />
+                    <path d="M 50 74 L 66 60 L 50 46 L 34 60 Z" fill="rgba(139,92,246,0.10)" stroke="rgba(139,92,246,0.35)" strokeWidth="0.4" />
+                    <circle cx="50" cy="59" r="2.6" fill="rgba(139,92,246,0.18)" stroke="rgba(139,92,246,0.35)" strokeWidth="0.3" />
+                  </svg>
+                  {SPOTS.map(function(s) { return <FieldChip key={s[0]} pos={s[0]} p={best[s[0]] || null} x={s[1]} y={s[2]} /> })}
+                </div>
+                {dh && (
+                  <div className="mt-3 pt-3 border-t border-neutral-800 flex items-center gap-2 text-sm">
+                    <span className="text-violet-300 text-[10px] font-bold uppercase tracking-wide">DH</span>
+                    <span className="text-neutral-100 font-semibold">{dh.name}</span>
+                    <span className={'font-bold tabular-nums ' + statTextColor(dh.overall_rating)}>{dh.overall_rating}</span>
+                  </div>
+                )}
+              </div>
+              <div className="space-y-6">
+                <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-2xl p-6">
+                  <p className="text-violet-300 text-[11px] font-semibold uppercase tracking-[0.16em] mb-4">Rotation</p>
+                  <div className="space-y-2.5">
+                    {starters.map(function(p) { return <PenRow key={p.id} p={p} /> })}
+                    {starters.length === 0 && <p className="text-neutral-500 text-sm">No starting pitchers.</p>}
+                  </div>
+                </div>
+                <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-2xl p-6">
+                  <p className="text-violet-300 text-[11px] font-semibold uppercase tracking-[0.16em] mb-4">Bullpen</p>
+                  <div className="space-y-2.5">
+                    {bullpen.map(function(p) { return <PenRow key={p.id} p={p} /> })}
+                    {bullpen.length === 0 && <p className="text-neutral-500 text-sm">No relievers.</p>}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )
+        })()}
+
+        {activeTab === 'squad' && !isCfb && !isMlb && (() => {
           const LINE_OF = { GK: 'GK', RB: 'DEF', RWB: 'DEF', CB: 'DEF', LB: 'DEF', LWB: 'DEF', CDM: 'MID', CM: 'MID', CAM: 'MID', LM: 'MID', RM: 'MID', LW: 'ATT', RW: 'ATT', ST: 'ATT', CF: 'ATT' }
           const byOvr = players.slice().sort(function(a, b) { return (b.overall_rating || 0) - (a.overall_rating || 0) })
           const lines = { GK: [], DEF: [], MID: [], ATT: [] }
@@ -2461,8 +2603,26 @@ export default function FranchisePage() {
         )}
 
         {activeTab === 'roster' && (
-          <div className="bg-gradient-to-br from-violet-600/40 via-violet-900/20 to-neutral-900 border border-violet-500/40 rounded-xl p-6">
-            <div className="flex justify-end items-center mb-4">
+          <div className="bg-neutral-950 border border-neutral-800 rounded-xl p-6">
+            <div className={'flex items-center mb-4 ' + (isMlb ? 'justify-between flex-wrap gap-3' : 'justify-end')}>
+              {isMlb && (
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  {['40-Man', 'MLB', 'AAA', 'AA', 'A', 'All'].map(function(lvl) {
+                    return (
+                      <button
+                        key={lvl}
+                        onClick={() => setMlbLevel(lvl)}
+                        className={'px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wide transition-colors ' +
+                          (mlbLevel === lvl
+                            ? 'bg-violet-600 text-white'
+                            : 'bg-neutral-900 border border-neutral-800 text-neutral-400 hover:text-neutral-200')}
+                      >
+                        {lvl}
+                      </button>
+                    )
+                  })}
+                </div>
+              )}
               <div className="flex items-center gap-4">
                 {activeFilterCount > 0 && (
                   <button
@@ -2509,7 +2669,7 @@ export default function FranchisePage() {
                             onDragEnd={handleDragEnd}
                             className={
                               'relative text-left py-2 px-3 whitespace-nowrap cursor-move select-none' +
-                              (col.key === 'name' ? ' sticky left-0 z-20 bg-neutral-900' : '') +
+                              (col.key === 'name' ? ' sticky left-0 z-20 bg-neutral-950' : '') +
                               (isDragOver ? ' bg-violet-900/30 border-l-2 border-violet-500' : '')
                             }
                           >
@@ -2600,14 +2760,48 @@ export default function FranchisePage() {
                       <tr
                         key={p.id}
                         className={
-                          (rowIdx % 2 === 0 ? 'bg-transparent' : 'bg-neutral-800/40') +
-                          ' border-b border-neutral-800/60 hover:bg-neutral-700/40'
+                          (rowIdx % 2 === 0 ? 'bg-neutral-950' : 'bg-neutral-900') +
+                          ' border-b border-neutral-800/60 hover:bg-neutral-800/60'
                         }
                       >
                         {orderedColumns.map(function(col) {
                           let displayValue = p[col.key]
 
+                          // Current Overall — click the badge to edit in place
+                          // (this is how in-game progression gets recorded).
                           if (col.key === 'overall_rating') {
+                            if (editingOvrId === p.id) {
+                              return (
+                                <td key={col.key} className="py-2.5 px-3 whitespace-nowrap">
+                                  <input
+                                    type="number"
+                                    autoFocus
+                                    value={ovrDraft}
+                                    onChange={(e) => setOvrDraft(e.target.value)}
+                                    onKeyDown={(e) => {
+                                      if (e.key === 'Enter') saveOvrEdit(p.id)
+                                      if (e.key === 'Escape') setEditingOvrId(null)
+                                    }}
+                                    onBlur={() => saveOvrEdit(p.id)}
+                                    className="w-14 bg-neutral-800 border border-violet-500 rounded px-1.5 py-0.5 text-sm text-neutral-100 focus:outline-none"
+                                  />
+                                </td>
+                              )
+                            }
+                            return (
+                              <td key={col.key} className="py-2.5 px-3 whitespace-nowrap">
+                                <button
+                                  onClick={() => { setEditingOvrId(p.id); setOvrDraft(displayValue != null ? String(displayValue) : '') }}
+                                  title="Click to edit current overall"
+                                  className="focus:outline-none focus:ring-2 focus:ring-violet-500 rounded-full"
+                                >
+                                  <OvrBadge value={displayValue} small />
+                                </button>
+                              </td>
+                            )
+                          }
+
+                          if (col.key === 'potential_rating') {
                             return (
                               <td key={col.key} className="py-2.5 px-3 whitespace-nowrap">
                                 <OvrBadge value={displayValue} small />
@@ -2670,7 +2864,7 @@ export default function FranchisePage() {
                           // Names link to the player's profile page.
                           if (col.key === 'name') {
                             return (
-                              <td key={col.key} className="py-2.5 px-3 whitespace-nowrap sticky left-0 z-10 bg-neutral-900">
+                              <td key={col.key} className={'py-2.5 px-3 whitespace-nowrap sticky left-0 z-10 ' + (rowIdx % 2 === 0 ? 'bg-neutral-950' : 'bg-neutral-900')}>
                                 <a href={'/franchise/' + franchiseId + '/player/' + p.id} className="font-semibold text-neutral-100 hover:text-violet-300 transition-colors">
                                   {displayValue}
                                 </a>

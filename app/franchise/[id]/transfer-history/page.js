@@ -102,6 +102,10 @@ export default function TransferHistoryPage() {
     const snap = Object.assign({}, t.player_snapshot)
     delete snap.id
     delete snap.created_at
+    // Derived display fields that may exist in older snapshots but are not
+    // real players columns — inserting them errors on the schema cache.
+    delete snap.base_overall
+    delete snap.ovr_diff
     snap.franchise_id = franchiseId
     const { error } = await supabase.from('players').insert(snap)
     if (error) { alert(error.message); return }
