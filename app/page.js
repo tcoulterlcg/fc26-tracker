@@ -849,6 +849,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100 lg:flex">
+      <style>{'@keyframes rhqTicker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}'}</style>
       <aside className="lg:w-60 lg:shrink-0 lg:sticky lg:top-0 lg:h-screen border-b lg:border-b-0 lg:border-r border-neutral-800 flex flex-col">
         <div className="p-5 flex items-center gap-3">
           <RosterHQLogo size={42} />
@@ -1126,6 +1127,30 @@ export default function Home() {
                 const enabledStats = statOrder.filter(function(s) { return s.enabled })
                 const logoUrl = logoCache[f.id]
 
+                // Broadcast-style mini ticker filling the card's open space,
+                // computed from the franchise's real roster.
+                const roster = playersByFranchise[f.id] || []
+                const ratedRoster = roster.filter(function(p) { return p.overall_rating != null })
+                const cardTicker = []
+                if (ratedRoster.length > 0) {
+                  const top = ratedRoster.reduce(function(a, b) { return b.overall_rating > a.overall_rating ? b : a })
+                  cardTicker.push(['TOP RATED', top.name + ' ' + top.overall_rating])
+                  if (isCfb) {
+                    const elite = roster.filter(function(p) { return p.dev_trait === 'Elite' }).length
+                    if (elite) cardTicker.push(['ELITE DEV', elite + ' players'])
+                    const nilLeader = roster.filter(function(p) { return p.nil_value != null }).sort(function(a, b) { return b.nil_value - a.nil_value })[0]
+                    if (nilLeader && nilLeader.nil_value > 0) cardTicker.push(['TOP NIL', nilLeader.name + ' ' + nilLeader.nil_value.toLocaleString()])
+                  } else {
+                    const withPot = roster.filter(function(p) { return p.potential_rating != null && p.overall_rating != null })
+                    const riser = withPot.sort(function(a, b) { return (b.potential_rating - b.overall_rating) - (a.potential_rating - a.overall_rating) })[0]
+                    if (riser && riser.potential_rating > riser.overall_rating) cardTicker.push(['BIGGEST UPSIDE', riser.name + ' ' + riser.overall_rating + ' → ' + riser.potential_rating])
+                    const aged = roster.filter(function(p) { return p.age != null })
+                    if (aged.length) cardTicker.push(['AVG AGE', (aged.reduce(function(s, p) { return s + p.age }, 0) / aged.length).toFixed(1)])
+                  }
+                  const eighty = ratedRoster.filter(function(p) { return p.overall_rating >= 80 }).length
+                  if (eighty) cardTicker.push(['80+ CLUB', eighty + ' players'])
+                }
+
                 return (
                   <div key={f.id} className="relative bg-gradient-to-br from-violet-600/15 via-neutral-900 to-neutral-900 border border-neutral-800 hover:border-violet-600 rounded-xl p-5 transition-colors">
                     <a href={franchiseUrl} onClick={(e) => { e.preventDefault(); goToFranchise(f.id) }} className="absolute inset-0 z-0" aria-label={'Open ' + f.club_name}></a>
@@ -1164,6 +1189,27 @@ export default function Home() {
                           })}
                         </div>
                       </div>
+
+                      {cardTicker.length > 0 && (
+                        <div className="overflow-hidden border border-neutral-800/80 rounded-lg bg-neutral-950/60 mt-2 mb-2">
+                          <div className="flex whitespace-nowrap w-max" style={{ animation: 'rhqTicker 26s linear infinite' }}>
+                            {[0, 1].map(function(dup) {
+                              return (
+                                <div key={dup} className="flex">
+                                  {cardTicker.map(function(item, i) {
+                                    return (
+                                      <span key={dup + '-' + i} className="inline-flex items-center gap-1.5 px-4 py-1.5 text-[11px] border-r border-neutral-800/80">
+                                        <span className="text-violet-400 font-bold uppercase tracking-wide">{item[0]}</span>
+                                        <span className="text-neutral-300 font-semibold">{item[1]}</span>
+                                      </span>
+                                    )
+                                  })}
+                                </div>
+                              )
+                            })}
+                          </div>
+                        </div>
+                      )}
 
                       {isCfb ? (
                         <div className="bg-neutral-900/60 rounded-lg p-2.5 mt-2">
