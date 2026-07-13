@@ -1,8 +1,10 @@
 // Load FC player_reference from a sofifa scrape (live roster update).
 // File lines: team|name|nat|pos|ovr|pot|age|pac|sho|pas|dri|def|phy|sofifaId|league
-// FULL REPLACE: wipes player_reference and reloads — the scrape covers every
-// league we carry, so this keeps the whole FC dataset on one live version.
-//   node scripts/load-fc-sofifa.mjs scripts/data/fc/fc_sofifa_<date>.txt
+// Default: FULL REPLACE (wipes player_reference and reloads — use when the
+// scrape covers every league we carry).
+// --append: only replaces the clubs present in the file (use when adding new
+// leagues without touching the rest).
+//   node scripts/load-fc-sofifa.mjs scripts/data/fc/fc_sofifa_<date>.txt [--append]
 import { readFileSync } from 'node:fs'
 import { createClient } from '@supabase/supabase-js'
 
@@ -33,9 +35,19 @@ for (const line of text.split(/\r?\n/)) {
 }
 console.log('parsed', rows.length, 'rows across', new Set(rows.map(r => r.active_club)).size, 'clubs,', new Set(rows.map(r => r.league)).size, 'leagues')
 
+const append = process.argv.includes('--append')
 const { count: before } = await sb.from('player_reference').select('id', { count: 'exact', head: true })
-const { error: delErr } = await sb.from('player_reference').delete().neq('name', '___never___')
-if (delErr) { console.error('wipe err:', delErr.message); process.exit(1) }
+if (append) {
+  const clubs = [...new Set(rows.map(r => r.active_club))]
+  for (const club of clubs) {
+    const { error } = await sb.from('player_reference').delete().eq('active_club', club)
+    if (error) { console.error('club delete err:', club, error.message); process.exit(1) }
+  }
+  console.log('append mode: replaced', clubs.length, 'clubs only')
+} else {
+  const { error: delErr } = await sb.from('player_reference').delete().neq('name', '___never___')
+  if (delErr) { console.error('wipe err:', delErr.message); process.exit(1) }
+}
 let inserted = 0
 for (let i = 0; i < rows.length; i += 500) {
   const chunk = rows.slice(i, i + 500)

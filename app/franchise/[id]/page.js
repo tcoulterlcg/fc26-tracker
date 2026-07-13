@@ -363,7 +363,7 @@ export default function FranchisePage() {
     const tabStorageKey = 'roster_hq_tab_order_' + (isCfb ? 'cfb' : 'fc')
     const defaultOrder = isCfb
       ? ['dashboard', 'roster', 'depth', 'progression', 'teamstats', 'playerstats', 'teamneeds', 'history']
-      : ['dashboard', 'roster', 'progression', 'teamstats', 'playerstats', 'teamneeds', 'history']
+      : ['dashboard', 'roster', 'squad', 'progression', 'teamstats', 'playerstats', 'teamneeds', 'history']
     try {
       const saved = window.localStorage.getItem(tabStorageKey)
       if (saved) {
@@ -1434,6 +1434,7 @@ export default function FranchisePage() {
     dashboard: { type: 'tab', label: 'Dashboard' },
     roster: { type: 'tab', label: 'Roster' },
     depth: { type: 'tab', label: 'Depth Chart', cfbOnly: true },
+    squad: { type: 'tab', label: 'Squad / Tactics', fcOnly: true },
     progression: { type: 'tab', label: 'Progression' },
     teamstats: { type: 'link', label: 'Team Stats', href: '/franchise/' + franchiseId + '/team-stats' },
     playerstats: { type: 'link', label: 'Player Stats', href: '/franchise/' + franchiseId + '/stats' },
@@ -1756,6 +1757,7 @@ export default function FranchisePage() {
             const def = TAB_DEFS[key]
             if (!def) return null
             if (def.cfbOnly && !isCfb) return null
+            if (def.fcOnly && isCfb) return null
             const isDragOver = dragOverTabKey === key && dragTabKey !== key
             const sharedClassName =
               'px-4 py-2.5 text-[13px] font-bold uppercase tracking-[0.08em] border-b-2 -mb-px transition-colors cursor-move select-none ' +
@@ -2037,6 +2039,75 @@ export default function FranchisePage() {
           </>
         )}
 
+        {activeTab === 'squad' && !isCfb && (() => {
+          const LINE_OF = { GK: 'GK', RB: 'DEF', RWB: 'DEF', CB: 'DEF', LB: 'DEF', LWB: 'DEF', CDM: 'MID', CM: 'MID', CAM: 'MID', LM: 'MID', RM: 'MID', LW: 'ATT', RW: 'ATT', ST: 'ATT', CF: 'ATT' }
+          const byOvr = players.slice().sort(function(a, b) { return (b.overall_rating || 0) - (a.overall_rating || 0) })
+          const lines = { GK: [], DEF: [], MID: [], ATT: [] }
+          for (const p of byOvr) {
+            const line = LINE_OF[(p.position || '').toUpperCase()] || 'MID'
+            lines[line].push(p)
+          }
+          const xi = [].concat(lines.ATT.slice(0, 3), lines.MID.slice(0, 3), lines.DEF.slice(0, 4), lines.GK.slice(0, 1))
+          const xiIds = new Set(xi.map(function(p) { return p.id }))
+          const bench = byOvr.filter(function(p) { return !xiIds.has(p.id) }).slice(0, 7)
+          const POS_ORDER = ['GK', 'RB', 'RWB', 'CB', 'LB', 'LWB', 'CDM', 'CM', 'CAM', 'LM', 'RM', 'LW', 'RW', 'CF', 'ST']
+          const depthGroups = POS_ORDER.map(function(pos) {
+            return { pos: pos, list: byOvr.filter(function(p) { return (p.position || '').toUpperCase() === pos }) }
+          }).filter(function(g) { return g.list.length > 0 })
+
+          const Chip = function(props) {
+            const p = props.p
+            return (
+              <div className="flex flex-col items-center gap-1 w-24">
+                <span className={'text-lg font-bold tabular-nums leading-none ' + statTextColor(p.overall_rating)}>{p.overall_rating != null ? p.overall_rating : '-'}</span>
+                <span className="text-[11px] font-semibold text-neutral-100 text-center leading-tight">{p.name}</span>
+                <span className="text-[9px] font-semibold uppercase tracking-wide text-violet-300">{p.position}</span>
+              </div>
+            )
+          }
+
+          return (
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="lg:col-span-2 bg-gradient-to-b from-violet-950/40 via-neutral-900 to-neutral-950 border border-violet-500/25 rounded-2xl p-6">
+                <p className="text-violet-300 text-[11px] font-semibold uppercase tracking-[0.16em] mb-5">Best XI &middot; 4-3-3 by rating</p>
+                <div className="space-y-7">
+                  <div className="flex justify-center gap-6 flex-wrap">{lines.ATT.slice(0, 3).map(function(p) { return <Chip key={p.id} p={p} /> })}</div>
+                  <div className="flex justify-center gap-6 flex-wrap">{lines.MID.slice(0, 3).map(function(p) { return <Chip key={p.id} p={p} /> })}</div>
+                  <div className="flex justify-center gap-4 flex-wrap">{lines.DEF.slice(0, 4).map(function(p) { return <Chip key={p.id} p={p} /> })}</div>
+                  <div className="flex justify-center">{lines.GK.slice(0, 1).map(function(p) { return <Chip key={p.id} p={p} /> })}</div>
+                </div>
+                <div className="mt-7 pt-5 border-t border-neutral-800">
+                  <p className="text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-3">Bench</p>
+                  <div className="flex gap-4 flex-wrap">{bench.map(function(p) { return <Chip key={p.id} p={p} /> })}</div>
+                </div>
+              </div>
+              <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-2xl p-6">
+                <p className="text-violet-300 text-[11px] font-semibold uppercase tracking-[0.16em] mb-4">Positional Depth</p>
+                <div className="space-y-3">
+                  {depthGroups.map(function(g) {
+                    return (
+                      <div key={g.pos} className="flex items-start gap-3">
+                        <span className="w-10 shrink-0 text-neutral-400 text-xs font-bold uppercase pt-0.5">{g.pos}</span>
+                        <div className="flex flex-wrap gap-x-3 gap-y-1">
+                          {g.list.map(function(p, i) {
+                            return (
+                              <span key={p.id} className="text-xs whitespace-nowrap">
+                                <span className={i === 0 ? 'text-neutral-100 font-semibold' : 'text-neutral-400'}>{p.name}</span>
+                                <span className={'ml-1 font-bold tabular-nums ' + statTextColor(p.overall_rating)}>{p.overall_rating != null ? p.overall_rating : '-'}</span>
+                              </span>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    )
+                  })}
+                  {depthGroups.length === 0 && <p className="text-neutral-500 text-sm">No players yet.</p>}
+                </div>
+              </div>
+            </div>
+          )
+        })()}
+
         {activeTab === 'progression' && (
           <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-6 mb-6">
             <div className="flex justify-between items-start mb-4">
@@ -2290,6 +2361,7 @@ export default function FranchisePage() {
                             onDragEnd={handleDragEnd}
                             className={
                               'relative text-left py-2 px-3 whitespace-nowrap cursor-move select-none' +
+                              (col.key === 'name' ? ' sticky left-0 z-20 bg-neutral-900' : '') +
                               (isDragOver ? ' bg-violet-900/30 border-l-2 border-violet-500' : '')
                             }
                           >
@@ -2413,6 +2485,16 @@ export default function FranchisePage() {
                                 {typeof displayValue === 'number'
                                   ? <span className={'font-bold ' + statTextColor(displayValue)}>{displayValue}</span>
                                   : <span className="text-neutral-600">-</span>}
+                              </td>
+                            )
+                          }
+
+                          // Frozen pane: the name column stays pinned while
+                          // the rest of the table scrolls horizontally.
+                          if (col.key === 'name') {
+                            return (
+                              <td key={col.key} className="py-2.5 px-3 font-semibold text-neutral-100 whitespace-nowrap sticky left-0 z-10 bg-neutral-900">
+                                {displayValue}
                               </td>
                             )
                           }
