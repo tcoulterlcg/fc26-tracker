@@ -9,16 +9,14 @@ function RosterHQLogo({ size }) {
     <svg width={size} height={size} viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="emeraldGradLogin" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#34d399" stopOpacity="1" />
-          <stop offset="100%" stopColor="#059669" stopOpacity="1" />
+          <stop offset="0%" stopColor="#34d399" />
+          <stop offset="100%" stopColor="#059669" />
         </linearGradient>
       </defs>
-      <rect width="512" height="512" rx="96" fill="#0a0a0a" />
-      <rect x="120" y="120" width="272" height="80" rx="16" fill="url(#emeraldGradLogin)" />
-      <rect x="120" y="216" width="180" height="80" rx="16" fill="#10b981" opacity="0.65" />
-      <rect x="120" y="312" width="272" height="80" rx="16" fill="url(#emeraldGradLogin)" opacity="0.9" />
-      <circle cx="356" cy="256" r="34" fill="#0a0a0a" stroke="#34d399" strokeWidth="8" />
-      <circle cx="356" cy="256" r="10" fill="#34d399" />
+      <rect width="512" height="512" rx="120" fill="#0a0a0a" stroke="#262626" strokeWidth="10" />
+      <text x="50%" y="53%" dominantBaseline="central" textAnchor="middle"
+        fontFamily="'Arial Black', Impact, sans-serif" fontWeight="900" fontSize="340"
+        fill="url(#emeraldGradLogin)">R</text>
     </svg>
   )
 }
@@ -64,6 +62,7 @@ export default function LoginPage() {
           <h1 className="inline-block text-3xl font-bold uppercase tracking-[0.18em] text-neutral-100">
             ROSTER<span className="text-emerald-400">HQ</span>
           </h1>
+          <p className="text-emerald-500/90 text-[10px] font-semibold uppercase tracking-[0.22em] mt-2">Franchise Tracker</p>
           <p className="text-neutral-400 mt-2 text-sm">
             {isSignUp ? 'Create an account to get started' : 'Log in to your franchises'}
           </p>

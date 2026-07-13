@@ -295,16 +295,14 @@ function RosterHQLogo({ size }) {
     <svg width={size} height={size} viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="emeraldGradHeader" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#34d399" stopOpacity="1" />
-          <stop offset="100%" stopColor="#059669" stopOpacity="1" />
+          <stop offset="0%" stopColor="#34d399" />
+          <stop offset="100%" stopColor="#059669" />
         </linearGradient>
       </defs>
-      <rect width="512" height="512" rx="96" fill="#0a0a0a" />
-      <rect x="120" y="120" width="272" height="80" rx="16" fill="url(#emeraldGradHeader)" />
-      <rect x="120" y="216" width="180" height="80" rx="16" fill="#10b981" opacity="0.65" />
-      <rect x="120" y="312" width="272" height="80" rx="16" fill="url(#emeraldGradHeader)" opacity="0.9" />
-      <circle cx="356" cy="256" r="34" fill="#0a0a0a" stroke="#34d399" strokeWidth="8" />
-      <circle cx="356" cy="256" r="10" fill="#34d399" />
+      <rect width="512" height="512" rx="120" fill="#0a0a0a" stroke="#262626" strokeWidth="10" />
+      <text x="50%" y="53%" dominantBaseline="central" textAnchor="middle"
+        fontFamily="'Arial Black', Impact, sans-serif" fontWeight="900" fontSize="340"
+        fill="url(#emeraldGradHeader)">R</text>
     </svg>
   )
 }
@@ -770,22 +768,20 @@ export default function Home() {
       <div className="max-w-6xl mx-auto px-6 py-10">
         <div className="flex justify-between items-start mb-8 flex-wrap gap-4">
           <div className="flex items-center gap-4">
-            <RosterHQLogo size={62} />
+            <RosterHQLogo size={56} />
             <div>
               <h1
-                className="text-3xl text-neutral-100"
+                className="text-3xl text-neutral-100 leading-none"
                 style={{
-                  fontFamily: "'Arial Black', 'Arial Bold', Impact, Haettenschweiler, sans-serif",
+                  fontFamily: "'Arial Black', 'Arial Bold', Impact, sans-serif",
                   fontWeight: 900,
-                  fontStyle: 'italic',
-                  letterSpacing: '-0.5px',
-                  transform: 'skewX(-6deg)',
-                  display: 'inline-block'
+                  letterSpacing: '-0.5px'
                 }}
               >
                 ROSTER<span style={{ color: '#34d399' }}>HQ</span>
               </h1>
-              <p className="text-neutral-400 mt-1 text-sm">Logged in as {user.email}</p>
+              <p className="text-emerald-500/90 text-[10px] font-semibold uppercase tracking-[0.22em] mt-1.5">Franchise Tracker</p>
+              <p className="text-neutral-500 mt-1 text-xs">Logged in as {user.email}</p>
             </div>
           </div>
           <div className="flex gap-2 flex-wrap">
