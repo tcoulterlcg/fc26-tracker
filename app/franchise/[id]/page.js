@@ -324,6 +324,7 @@ export default function FranchisePage() {
   const [fcReferenceRows, setFcReferenceRows] = useState(null)
   const [benchmarkLeague, setBenchmarkLeague] = useState(null)
 
+  const [trajectory, setTrajectory] = useState(null)
   const [transferModal, setTransferModal] = useState(null)
   const [tFee, setTFee] = useState('')
   const [tClub, setTClub] = useState('')
@@ -922,6 +923,63 @@ export default function FranchisePage() {
     }
   }
 
+  // ---- Squad trajectory analytics ---------------------------------------
+  // Splits squad-quality change into (a) roster moves, computed by rebuilding
+  // the pre-transfer squad from transfer_history (Outs restored via snapshot,
+  // Ins removed), and (b) in-game progression, measured as each retained
+  // player's current rating vs their base rating in the reference database.
+  useEffect(() => {
+    if (!franchise || isCfb || players.length === 0) { setTrajectory(null); return }
+    let cancelled = false
+    const run = async () => {
+      const avg = (list, key) => {
+        const vals = list.map((p) => p[key]).filter((v) => v != null)
+        return vals.length ? vals.reduce((s, v) => s + v, 0) / vals.length : null
+      }
+      const { data: th } = await supabase.from('transfer_history').select('*').eq('franchise_id', franchiseId)
+      const transfers = th || []
+      const inNames = new Set(transfers.filter((t) => t.transfer_type.includes('In')).map((t) => t.player_name.toLowerCase()))
+      const outSnaps = transfers.filter((t) => t.transfer_type.includes('Out') && t.player_snapshot).map((t) => t.player_snapshot)
+      const baseline = players.filter((p) => !inNames.has(p.name.toLowerCase())).concat(outSnaps)
+
+      const curOvr = avg(players, 'overall_rating'), curPot = avg(players, 'potential_rating')
+      const baseOvr = avg(baseline, 'overall_rating'), basePot = avg(baseline, 'potential_rating')
+
+      // Progression vs reference base ratings, name-matched.
+      const names = players.map((p) => p.name)
+      const { data: refs } = await supabase.from('player_reference').select('name, overall_rating, potential_rating').in('name', names)
+      const refByName = {}
+      for (const r of (refs || [])) refByName[r.name.toLowerCase()] = r
+      let dOvr = 0, dPot = 0, nOvr = 0, nPot = 0
+      for (const p of players) {
+        const r = refByName[p.name.toLowerCase()]
+        if (!r) continue
+        if (p.overall_rating != null && r.overall_rating != null) { dOvr += p.overall_rating - r.overall_rating; nOvr++ }
+        if (p.potential_rating != null && r.potential_rating != null) { dPot += p.potential_rating - r.potential_rating; nPot++ }
+      }
+      if (cancelled) return
+      setTrajectory({
+        baseOvr: baseOvr, basePot: basePot,
+        moves: {
+          ovr: curOvr != null && baseOvr != null ? curOvr - baseOvr : null,
+          pot: curPot != null && basePot != null ? curPot - basePot : null
+        },
+        progression: {
+          ovr: nOvr ? dOvr / nOvr : null,
+          pot: nPot ? dPot / nPot : null
+        },
+        combined: {
+          ovr: curOvr != null && baseOvr != null ? (curOvr - baseOvr) + (nOvr ? dOvr / nOvr : 0) : null,
+          pot: curPot != null && basePot != null ? (curPot - basePot) + (nPot ? dPot / nPot : 0) : null
+        },
+        movesCount: transfers.length,
+        progressionCount: nOvr
+      })
+    }
+    run()
+    return () => { cancelled = true }
+  }, [players, franchise, isCfb])
+
   // ---- Transfer tracking -------------------------------------------------
   // Every add/removal is auto-logged to transfer_history; the modal just lets
   // the user enrich the entry with deal details (fee, club, sell-on %, swap).
@@ -1492,7 +1550,9 @@ export default function FranchisePage() {
 
         <div className="mt-4 mb-0 bg-gradient-to-br from-violet-600/40 via-violet-900/20 to-neutral-900 border border-violet-500/40 rounded-2xl p-6 flex justify-between items-start gap-6 flex-wrap">
           <div>
-            <p className="text-violet-300 text-[11px] font-semibold uppercase tracking-[0.16em] mb-1">{franchise.game || 'EA FC 26'}</p>
+            <p className="text-violet-300 text-[11px] font-semibold uppercase tracking-[0.16em] mb-1">
+              {(franchise.game || 'EA FC 26') + ' · ' + (isCfb ? 'Dynasty Center' : (franchise.game === 'EA FC 26' || !franchise.game) ? 'Career Center' : 'Franchise Center')}
+            </p>
             <h1 className="text-4xl font-black uppercase tracking-tight leading-none">{franchise.club_name}</h1>
             <div className="flex items-center gap-2 mt-2">
               {editingLeague ? (
@@ -2200,6 +2260,43 @@ export default function FranchisePage() {
           </div>
         )}
 
+        {!isCfb && activeTab === 'dashboard' && players.length > 0 && trajectory && (
+          <div className="bg-gradient-to-br from-violet-600/25 via-violet-900/10 to-neutral-900 border border-violet-500/30 rounded-xl p-5 mb-6">
+            <h2 className="text-violet-300 text-[11px] font-semibold uppercase tracking-[0.16em] mb-1">Squad Trajectory</h2>
+            <p className="text-neutral-500 text-xs mb-4">How this season&rsquo;s roster moves and in-game progression have shifted squad quality.</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {[
+                ['Roster Moves', trajectory.moves, trajectory.movesCount + ' transfers logged'],
+                ['In-Game Progression', trajectory.progression, trajectory.progressionCount + ' players tracked vs base ratings'],
+                ['Combined', trajectory.combined, 'moves + progression']
+              ].map(function(row) {
+                const label = row[0], d = row[1], sub = row[2]
+                const fmt = function(v, base) {
+                  if (v === null) return <span className="text-neutral-600">-</span>
+                  const pct = base ? ' (' + (v >= 0 ? '+' : '') + (v / base * 100).toFixed(1) + '%)' : ''
+                  return <span className={v > 0 ? 'text-green-400' : v < 0 ? 'text-red-400' : 'text-neutral-400'}>{(v >= 0 ? '+' : '') + v.toFixed(1) + pct}</span>
+                }
+                return (
+                  <div key={label} className="bg-neutral-900/70 border border-neutral-800 rounded-lg p-4">
+                    <p className="text-neutral-400 text-[10px] font-semibold uppercase tracking-[0.14em] mb-2">{label}</p>
+                    <div className="flex gap-6">
+                      <div>
+                        <p className="text-neutral-500 text-[10px] uppercase">OVR</p>
+                        <p className="text-xl font-bold tabular-nums">{fmt(d.ovr, trajectory.baseOvr)}</p>
+                      </div>
+                      <div>
+                        <p className="text-neutral-500 text-[10px] uppercase">Potential</p>
+                        <p className="text-xl font-bold tabular-nums">{fmt(d.pot, trajectory.basePot)}</p>
+                      </div>
+                    </div>
+                    <p className="text-neutral-600 text-[11px] mt-2">{sub}</p>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )}
+
         {!isCfb && activeTab === 'dashboard' && players.length > 0 && (
           <>
             <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-5 mb-6">
@@ -2313,7 +2410,7 @@ export default function FranchisePage() {
         )}
 
         {activeTab === 'roster' && (
-          <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-6">
+          <div className="bg-gradient-to-br from-violet-600/40 via-violet-900/20 to-neutral-900 border border-violet-500/40 rounded-xl p-6">
             <div className="flex justify-end items-center mb-4">
               <div className="flex items-center gap-4">
                 {activeFilterCount > 0 && (

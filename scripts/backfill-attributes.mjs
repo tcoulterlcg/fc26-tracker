@@ -17,10 +17,10 @@ const sb = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
 const { data: franchises } = await sb.from('franchises').select('id, club_name, game')
 for (const f of (franchises || [])) {
   if (f.game !== 'EA FC 26') continue
-  const { data: missing } = await sb.from('players')
-    .select('id, name, overall_rating')
+  const { data: all } = await sb.from('players')
+    .select('id, name, overall_rating, pace, value_eur')
     .eq('franchise_id', f.id)
-    .is('pace', null)
+  const missing = (all || []).filter(p => p.pace == null || p.value_eur == null)
   if (!missing || !missing.length) { console.log(`OK        ${f.club_name}: no players missing attributes`); continue }
 
   let fixed = 0, unmatched = []
@@ -36,6 +36,7 @@ for (const f of (franchises || [])) {
       pace: ref.pace, shooting: ref.shooting, passing: ref.passing,
       dribbling: ref.dribbling, defending: ref.defending, physical: ref.physical,
       potential_rating: ref.potential_rating, age: ref.age, nationality: ref.nationality,
+      value_eur: ref.value_eur, wage_eur_wk: ref.wage_eur_wk, wage: ref.wage_eur_wk,
     }).eq('id', p.id)
     if (!error) fixed++
   }

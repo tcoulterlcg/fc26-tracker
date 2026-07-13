@@ -1,5 +1,5 @@
 // Load FC player_reference from a sofifa scrape (live roster update).
-// File lines: team|name|nat|pos|ovr|pot|age|pac|sho|pas|dri|def|phy|sofifaId|league
+// File lines: team|name|nat|pos|ovr|pot|age|pac|sho|pas|dri|def|phy|sofifaId|league[|valueEur|wageEurWk]
 // Default: FULL REPLACE (wipes player_reference and reloads — use when the
 // scrape covers every league we carry).
 // --append: only replaces the clubs present in the file (use when adding new
@@ -30,7 +30,9 @@ for (const line of text.split(/\r?\n/)) {
     overall_rating: num(p[4]), potential_rating: num(p[5]), age: num(p[6]),
     pace: num(p[7]), shooting: num(p[8]), passing: num(p[9]),
     dribbling: num(p[10]), defending: num(p[11]), physical: num(p[12]),
-    sofifa_id: num(p[13]), league: p[14].trim()
+    sofifa_id: num(p[13]), league: p[14].trim(),
+    value_eur: p.length > 15 ? num(p[15]) : null,
+    wage_eur_wk: p.length > 16 ? num(p[16]) : null
   })
 }
 console.log('parsed', rows.length, 'rows across', new Set(rows.map(r => r.active_club)).size, 'clubs,', new Set(rows.map(r => r.league)).size, 'leagues')

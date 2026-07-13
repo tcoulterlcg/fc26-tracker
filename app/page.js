@@ -829,7 +829,7 @@ export default function Home() {
         <div className="flex justify-between items-end gap-4 flex-wrap mb-6">
           <div>
             <p className="text-neutral-500 text-[11px] font-semibold uppercase tracking-[0.2em]">Roster HQ / Dashboard</p>
-            <h1 className="text-4xl font-black uppercase tracking-tight leading-none mt-1">Command Center</h1>
+            <h1 className="text-4xl font-black uppercase tracking-tight leading-none mt-1">Franchise HQ</h1>
             <p className="text-neutral-500 text-[11px] font-semibold uppercase tracking-[0.18em] mt-2">{franchises.length} active save{franchises.length === 1 ? '' : 's'}{todayString ? ' · ' + todayString : ''}</p>
           </div>
           <div className="flex items-center gap-2">
@@ -990,7 +990,7 @@ export default function Home() {
 
         <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-semibold">My Saves</h2>
+            <h2 className="text-lg font-semibold">Dashboard</h2>
             <button
               onClick={() => setShowCustomizePanel(!showCustomizePanel)}
               className="text-neutral-400 hover:text-neutral-200 text-xs font-medium border border-neutral-700 rounded-lg px-3 py-1.5"
