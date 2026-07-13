@@ -7,14 +7,22 @@ import { createClient } from '@/lib/supabase'
 import { CFB_CONFERENCES as CFB_CONFERENCE_SCHOOLS, CFB_CONFERENCE_NAMES } from '@/lib/cfbConferences'
 import { CFB_LOGOS } from '@/lib/cfbLogos'
 import { aliasCanonicalNames } from '@/lib/teamAliases'
+import { MLB_TEAMS, NHL_TEAMS, NFL_TEAMS, MLB_DIVISIONS, NHL_DIVISIONS, NFL_DIVISIONS } from '@/lib/proTeams'
 
 const GAMES = [
   { id: 'EA FC 26', label: 'EA FC 26', sub: 'Soccer', status: 'live' },
   { id: 'EA CFB 27', label: 'EA College Football 27', sub: 'College Football', status: 'live' },
-  { id: 'EA NHL 26', label: 'EA NHL 26', sub: 'Hockey', status: 'soon' },
-  { id: 'EA Madden 26', label: 'EA Madden 26', sub: 'Football', status: 'soon' },
-  { id: 'MLB The Show 26', label: 'MLB The Show 26', sub: 'Baseball', status: 'soon' }
+  { id: 'EA NHL 26', label: 'EA NHL 26', sub: 'Hockey', status: 'live' },
+  { id: 'EA Madden 26', label: 'EA Madden 26', sub: 'Football', status: 'live' },
+  { id: 'MLB The Show 26', label: 'MLB The Show 26', sub: 'Baseball', status: 'live' }
 ]
+
+// Pro-league games: team map (name -> division) + division list for the league select.
+const PRO_GAME_CONFIG = {
+  'MLB The Show 26': { teams: MLB_TEAMS, divisions: MLB_DIVISIONS },
+  'EA NHL 26': { teams: NHL_TEAMS, divisions: NHL_DIVISIONS },
+  'EA Madden 26': { teams: NFL_TEAMS, divisions: NFL_DIVISIONS }
+}
 
 const LEAGUES = [
   'Premier League', 'EFL Championship', 'EFL League One', 'EFL League Two',
@@ -351,6 +359,30 @@ async function importRosterForGame(supabase, game, franchiseId, teamName) {
     }
     return 0
   }
+  if (game === 'MLB The Show 26') {
+    // The reference table keeps multiple dated snapshots — import from the latest one.
+    const versionResult = await supabase.from('mlb_player_reference').select('version').order('version', { ascending: false }).limit(1)
+    if (versionResult.error || !versionResult.data || versionResult.data.length === 0) return 0
+    const latestVersion = versionResult.data[0].version
+    const referenceResult = await supabase.from('mlb_player_reference').select('*').eq('version', latestVersion).eq('team', teamName)
+    if (!referenceResult.error && referenceResult.data.length > 0) {
+      const playersToInsert = referenceResult.data.map(function(p) {
+        return {
+          franchise_id: franchiseId, name: p.player_name, position: p.position, age: p.age,
+          overall_rating: p.overall_rating, jersey_number: null,
+          archetype: p.secondary_position || null, // secondary position shown via archetype column
+          dev_trait: p.potential, // letter-grade potential (A/B/...) reuses the dev trait column
+          notes: p.level, // MLB / AAA / AA / A level stored in notes so it displays
+          active_club: p.team
+        }
+      })
+      await supabase.from('players').insert(playersToInsert)
+      return playersToInsert.length
+    }
+    return 0
+  }
+  // EA NHL 26 / EA Madden 26: no reference data yet — franchise starts with an
+  // empty roster (players get added via Add Player / photo import).
   return 0
 }
 
@@ -401,7 +433,10 @@ export default function Home() {
   const supabase = createClient()
 
   const isCfbSelected = selectedGame === 'EA CFB 27'
+  const proConfig = PRO_GAME_CONFIG[selectedGame] || null
   const entityLabel = isCfbSelected ? 'Dynasty' : 'Franchise'
+  // What the "league" field is called for the selected game.
+  const leagueNoun = isCfbSelected ? 'conference' : (proConfig ? 'division' : 'league')
 
   useEffect(() => {
     checkUser()
@@ -415,6 +450,8 @@ export default function Home() {
         searchClubs()
       } else if (selectedGame === 'EA CFB 27' && clubName.length >= 1) {
         searchCfbTeams()
+      } else if (PRO_GAME_CONFIG[selectedGame] && clubName.length >= 1) {
+        searchProTeams()
       } else {
         setClubResults([])
       }
@@ -613,11 +650,24 @@ export default function Home() {
     setShowClubResults(true)
   }
 
+  // MLB / NHL / NFL: match against the static team map, same pattern as CFB.
+  const searchProTeams = () => {
+    const lower = clubName.toLowerCase()
+    const teamMap = PRO_GAME_CONFIG[selectedGame].teams
+    const matches = Object.keys(teamMap).filter(function(team) {
+      return team.toLowerCase().indexOf(lower) !== -1
+    })
+    setClubResults(matches.slice(0, 6))
+    setShowClubResults(true)
+  }
+
   const applyLeagueForClub = (club) => {
     if (selectedGame === 'EA CFB 27' && CFB_TEAM_TO_CONFERENCE[club]) {
       setLeague(CFB_TEAM_TO_CONFERENCE[club])
     } else if (selectedGame === 'EA FC 26' && (clubLeagueLookup[club] || CLUB_LEAGUE_MAP[club])) {
       setLeague(clubLeagueLookup[club] || CLUB_LEAGUE_MAP[club])
+    } else if (PRO_GAME_CONFIG[selectedGame] && PRO_GAME_CONFIG[selectedGame].teams[club]) {
+      setLeague(PRO_GAME_CONFIG[selectedGame].teams[club])
     }
   }
 
@@ -903,11 +953,11 @@ export default function Home() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                   <div className="relative">
                     <label className="block text-xs font-medium text-neutral-400 mb-1">
-                      {selectedGame === 'EA CFB 27' ? 'Team Name' : 'Club Name'}
+                      {isCfbSelected || proConfig ? 'Team Name' : 'Club Name'}
                     </label>
                     <input
                       type="text"
-                      placeholder={selectedGame === 'EA CFB 27' ? 'Start typing, e.g. Ohio...' : 'Start typing, e.g. Qu...'}
+                      placeholder={isCfbSelected ? 'Start typing, e.g. Ohio...' : (proConfig ? 'Start typing, e.g. Tampa...' : 'Start typing, e.g. Qu...')}
                       value={clubName}
                       onChange={(e) => setClubName(e.target.value)}
                       onFocus={() => clubResults.length > 0 && setShowClubResults(true)}
@@ -932,7 +982,7 @@ export default function Home() {
                   </div>
                   <div>
                     <label className="block text-xs font-medium text-neutral-400 mb-1">
-                      {selectedGame === 'EA CFB 27' ? 'Conference' : 'League'}
+                      {isCfbSelected ? 'Conference' : (proConfig ? 'Division' : 'League')}
                     </label>
                     <select
                       value={league}
@@ -940,9 +990,9 @@ export default function Home() {
                       className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                     >
                       <option value="">
-                        {selectedGame === 'EA CFB 27' ? 'Select a conference...' : 'Select a league...'}
+                        {'Select a ' + leagueNoun + '...'}
                       </option>
-                      {(selectedGame === 'EA CFB 27' ? CFB_CONFERENCE_NAMES : LEAGUES).map((l) => (
+                      {(isCfbSelected ? CFB_CONFERENCE_NAMES : (proConfig ? proConfig.divisions : LEAGUES)).map((l) => (
                         <option key={l} value={l}>{l}</option>
                       ))}
                     </select>
@@ -966,7 +1016,7 @@ export default function Home() {
                   </div>
                 )}
                 <p className="text-neutral-500 text-xs mb-4">
-                  Picking a recognized team auto-fills its {selectedGame === 'EA CFB 27' ? 'conference' : 'league'} and automatically imports its roster from your player database, if available.
+                  Picking a recognized team auto-fills its {leagueNoun} and automatically imports its roster from your player database, if available.
                 </p>
                 <div className="flex gap-2 justify-between">
                   <button
