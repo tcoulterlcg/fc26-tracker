@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase'
 import { aliasCanonicalNames } from '@/lib/teamAliases'
+import { fuzzyPlayerSearch, similarity } from '@/lib/fuzzySearch'
 
 function mlbVersionLabel(v) {
   const d = new Date(v + 'T00:00:00')
@@ -61,7 +62,15 @@ export default function PlayerDatabasesPage() {
         .or('player_name.ilike.%' + searchTerm + '%,team.ilike.%' + searchTerm + '%')
         .order('overall_rating', { ascending: false })
         .limit(50)
-      if (!error) setResults(data)
+      let rows = error ? [] : (data || [])
+      if (rows.length < 3) {
+        const fuzzy = await fuzzyPlayerSearch(supabase, 'mlb_player_reference', 'player_name', searchTerm, 50, (q) => q.eq('version', mlbVersion))
+        const seen = new Set(rows.map((r) => r.id))
+        rows = rows.concat(fuzzy.filter((r) => !seen.has(r.id)))
+        // Relevance beats rating when we had to fuzzy-match.
+        rows.sort((a, b) => similarity(searchTerm, b.player_name) - similarity(searchTerm, a.player_name))
+      }
+      setResults(rows.slice(0, 50))
       setLoading(false)
       return
     }
@@ -95,7 +104,21 @@ export default function PlayerDatabasesPage() {
       }
     }
 
-    rows.sort((a, b) => (b.overall_rating || 0) - (a.overall_rating || 0))
+    // Typo tolerance: word-level fallback ranked by similarity.
+    let usedFuzzy = false
+    if (rows.length < 3) {
+      const fuzzy = await fuzzyPlayerSearch(supabase, table, nameCol, searchTerm, 50)
+      const seen = new Set(rows.map((r) => r.id))
+      rows = rows.concat(fuzzy.filter((r) => !seen.has(r.id)))
+      usedFuzzy = true
+    }
+
+    if (usedFuzzy) {
+      // Relevance beats rating when we had to fuzzy-match.
+      rows.sort((a, b) => similarity(searchTerm, b[nameCol]) - similarity(searchTerm, a[nameCol]))
+    } else {
+      rows.sort((a, b) => (b.overall_rating || 0) - (a.overall_rating || 0))
+    }
     setResults(rows.slice(0, 50))
     setLoading(false)
   }

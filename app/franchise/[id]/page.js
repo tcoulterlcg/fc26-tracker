@@ -4,6 +4,7 @@ import { useEffect, useState, useMemo } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
 import { aliasCanonicalNames } from '@/lib/teamAliases'
+import { fuzzyPlayerSearch } from '@/lib/fuzzySearch'
 
 const FC_COLUMNS = [
   { key: 'name', label: 'Name' },
@@ -817,30 +818,13 @@ export default function FranchisePage() {
 
   const searchPlayers = async () => {
     if (!franchise) return
-
-    if (isCfb) {
-      const { data, error } = await supabase
-        .from('cfb_player_reference')
-        .select('*')
-        .ilike('player_name', `%${searchTerm}%`)
-        .limit(6)
-
-      if (!error) {
-        setSearchResults(data)
-        setShowResults(true)
-      }
-    } else {
-      const { data, error } = await supabase
-        .from('player_reference')
-        .select('*')
-        .ilike('name', `%${searchTerm}%`)
-        .limit(6)
-
-      if (!error) {
-        setSearchResults(data)
-        setShowResults(true)
-      }
-    }
+    const table = isCfb ? 'cfb_player_reference' : 'player_reference'
+    const nameCol = isCfb ? 'player_name' : 'name'
+    // Typo-tolerant: word-level fallback + similarity ranking, so
+    // "Matias Albert" still surfaces "Mathis Albert".
+    const rows = await fuzzyPlayerSearch(supabase, table, nameCol, searchTerm, 6)
+    setSearchResults(rows)
+    setShowResults(true)
   }
 
   const handleSelectPlayer = (player) => {
