@@ -59,6 +59,27 @@ const CFB_COLUMNS = [
   { key: 'awareness', label: 'Awareness' }
 ]
 
+// Madden / NHL columns — same attribute family as CFB (speed, strength, …)
+// plus the Beg/Curr/± OVR progression trio.
+const MADDEN_COLUMNS = [
+  { key: 'name', label: 'Name' },
+  { key: 'position', label: 'Pos' },
+  { key: 'jersey_number', label: 'No.' },
+  { key: 'archetype', label: 'Archetype' },
+  { key: 'base_overall', label: 'Beg OVR' },
+  { key: 'overall_rating', label: 'Curr OVR' },
+  { key: 'ovr_diff', label: '± OVR' },
+  { key: 'speed', label: 'Speed' },
+  { key: 'strength', label: 'Strength' },
+  { key: 'agility', label: 'Agility' },
+  { key: 'acceleration', label: 'Accel' },
+  { key: 'change_of_direction', label: 'COD' },
+  { key: 'stamina', label: 'Stamina' },
+  { key: 'awareness', label: 'Awareness' },
+  { key: 'injury', label: 'Injury' },
+  { key: 'active_club', label: 'Team' }
+]
+
 const CFB_POSITION_GROUP = {
   'QB': 'Offense', 'HB': 'Offense', 'FB': 'Offense', 'WR': 'Offense', 'TE': 'Offense',
   'LT': 'Offense', 'LG': 'Offense', 'C': 'Offense', 'RG': 'Offense', 'RT': 'Offense',
@@ -350,7 +371,11 @@ export default function FranchisePage() {
   const franchiseId = params.id
 
   const isCfb = franchise && franchise.game === 'EA CFB 27'
-  const gameColumns = isCfb ? CFB_COLUMNS : FC_COLUMNS
+  // Madden (and NHL once live) carry the same speed/strength attribute family
+  // as CFB, so they get a dedicated column set instead of the FC pace/shooting one.
+  const isProEa = franchise && (franchise.game === 'EA Madden 26' || franchise.game === 'EA NHL 26')
+  const colVariant = isCfb ? 'cfb' : (isProEa ? 'proea' : 'fc')
+  const gameColumns = isCfb ? CFB_COLUMNS : (isProEa ? MADDEN_COLUMNS : FC_COLUMNS)
 
   useEffect(() => {
     loadData()
@@ -552,11 +577,11 @@ export default function FranchisePage() {
   }
 
   const storageKey = () => {
-    return COLUMN_ORDER_STORAGE_PREFIX + (isCfb ? 'cfb' : 'fc')
+    return COLUMN_ORDER_STORAGE_PREFIX + colVariant
   }
 
   const loadColumnOrder = () => {
-    const cols = isCfb ? CFB_COLUMNS : FC_COLUMNS
+    const cols = gameColumns
     try {
       const saved = window.localStorage.getItem(storageKey())
       if (saved) {
@@ -675,7 +700,8 @@ export default function FranchisePage() {
       // schema change is needed — matched by name against the game's ref table.
       const names = data.map(function(p) { return p.name }).filter(Boolean)
       const refBase = {}
-      if (names.length > 0) {
+      // Madden/NHL have no reference base table, so Beg OVR = current there.
+      if (names.length > 0 && !isProEa) {
         let refTable = 'player_reference', refNameCol = 'name'
         if (isCfb) { refTable = 'cfb_player_reference'; refNameCol = 'player_name' }
         else if (franchise && franchise.game === 'MLB The Show 26') { refTable = 'mlb_player_reference' }

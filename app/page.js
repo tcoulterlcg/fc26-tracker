@@ -400,8 +400,23 @@ async function importRosterForGame(supabase, game, franchiseId, teamName) {
     }
     return 0
   }
-  // EA NHL 26 / EA Madden 26: no reference data yet — franchise starts with an
-  // empty roster (players get added via Add Player / photo import).
+  if (game === 'EA Madden 26' || game === 'EA NHL 26') {
+    // Pulled live from EA's official ratings via our server-side proxy. NHL 26
+    // ratings aren't published yet, so that feed returns empty for now.
+    try {
+      const res = await fetch('/api/ea-ratings?game=' + encodeURIComponent(game) + '&team=' + encodeURIComponent(teamName))
+      if (!res.ok) return 0
+      const json = await res.json()
+      const rows = (json.players || []).map(function(p) {
+        return Object.assign({ franchise_id: franchiseId }, p)
+      })
+      if (rows.length === 0) return 0
+      await supabase.from('players').insert(rows)
+      return rows.length
+    } catch (e) {
+      return 0
+    }
+  }
   return 0
 }
 
