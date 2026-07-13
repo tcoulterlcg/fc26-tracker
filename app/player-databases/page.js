@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase'
+import { aliasCanonicalNames } from '@/lib/teamAliases'
 
 export default function PlayerDatabasesPage() {
   const [game, setGame] = useState('EA FC 26')
@@ -34,26 +35,37 @@ export default function PlayerDatabasesPage() {
     setLoading(true)
     setHasSearched(true)
 
-    if (game === 'EA CFB 27') {
-      const { data, error } = await supabase
-        .from('cfb_player_reference')
+    const isCfb = game === 'EA CFB 27'
+    const table = isCfb ? 'cfb_player_reference' : 'player_reference'
+    const nameCol = isCfb ? 'player_name' : 'name'
+    const clubCol = isCfb ? 'team' : 'active_club'
+
+    const primary = await supabase
+      .from(table)
+      .select('*')
+      .or(nameCol + '.ilike.%' + searchTerm + '%,' + clubCol + '.ilike.%' + searchTerm + '%')
+      .order('overall_rating', { ascending: false })
+      .limit(50)
+
+    let rows = primary.error ? [] : (primary.data || [])
+
+    // Nickname / acronym expansion: "PSG" -> Paris Saint-Germain, "OSU" -> Ohio State, etc.
+    const aliases = aliasCanonicalNames(searchTerm)
+    if (aliases.length > 0) {
+      const alias = await supabase
+        .from(table)
         .select('*')
-        .or('player_name.ilike.%' + searchTerm + '%,team.ilike.%' + searchTerm + '%')
+        .in(clubCol, aliases)
         .order('overall_rating', { ascending: false })
         .limit(50)
-
-      if (!error) setResults(data)
-    } else {
-      const { data, error } = await supabase
-        .from('player_reference')
-        .select('*')
-        .or('name.ilike.%' + searchTerm + '%,active_club.ilike.%' + searchTerm + '%')
-        .order('overall_rating', { ascending: false })
-        .limit(50)
-
-      if (!error) setResults(data)
+      if (!alias.error && alias.data) {
+        const seen = new Set(rows.map((r) => r.id))
+        rows = rows.concat(alias.data.filter((r) => !seen.has(r.id)))
+      }
     }
 
+    rows.sort((a, b) => (b.overall_rating || 0) - (a.overall_rating || 0))
+    setResults(rows.slice(0, 50))
     setLoading(false)
   }
 

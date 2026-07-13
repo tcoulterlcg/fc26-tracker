@@ -3,6 +3,7 @@
 import { useEffect, useState, useMemo } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
+import { aliasCanonicalNames } from '@/lib/teamAliases'
 
 const FC_COLUMNS = [
   { key: 'name', label: 'Name' },
@@ -714,9 +715,20 @@ export default function FranchisePage() {
   // resolves to a single team — so a name like "Miami" never silently pulls
   // both "Miami (FL)" and "Miami (OH)".
   const resolveRosterRows = async (table, col) => {
+    // 1. exact (case-insensitive) club match
     let res = await supabase.from(table).select('*').ilike(col, franchise.club_name)
     if (res.error) return { error: res.error.message }
     if (res.data.length > 0) return { rows: res.data }
+    // 2. nickname / acronym alias (e.g. "PSG" -> Paris Saint-Germain, "OSU" -> Ohio State)
+    const aliases = aliasCanonicalNames(franchise.club_name)
+    if (aliases.length === 1) {
+      res = await supabase.from(table).select('*').eq(col, aliases[0])
+      if (res.error) return { error: res.error.message }
+      if (res.data.length > 0) return { rows: res.data }
+    } else if (aliases.length > 1) {
+      return { ambiguous: aliases }
+    }
+    // 3. substring fallback, only if it resolves to a single team
     res = await supabase.from(table).select('*').ilike(col, '%' + franchise.club_name + '%')
     if (res.error) return { error: res.error.message }
     const teams = Array.from(new Set(res.data.map(function(r) { return r[col] })))
