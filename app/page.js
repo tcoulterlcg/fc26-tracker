@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
 import { CFB_CONFERENCES as CFB_CONFERENCE_SCHOOLS, CFB_CONFERENCE_NAMES } from '@/lib/cfbConferences'
 import { CFB_LOGOS } from '@/lib/cfbLogos'
+import { aliasCanonicalNames } from '@/lib/teamAliases'
 
 const GAMES = [
   { id: 'EA FC 26', label: 'EA FC 26', sub: 'Soccer', status: 'live' },
@@ -22,6 +23,12 @@ const LEAGUES = [
   'Scottish Premiership', 'MLS', 'Liga MX', 'Brasileirão', 'Saudi Pro League',
   'Süper Lig', 'A-League', 'Other / International'
 ]
+
+// Every CFB team -> its conference, derived from the full conferences map.
+const CFB_TEAM_TO_CONFERENCE = {}
+for (const _conf of Object.keys(CFB_CONFERENCE_SCHOOLS)) {
+  for (const _school of CFB_CONFERENCE_SCHOOLS[_conf]) CFB_TEAM_TO_CONFERENCE[_school] = _conf
+}
 
 const CLUB_LEAGUE_MAP = {
   'Arsenal': 'Premier League', 'Aston Villa': 'Premier League', 'Bournemouth': 'Premier League',
@@ -377,6 +384,7 @@ export default function Home() {
 
   const [clubResults, setClubResults] = useState([])
   const [showClubResults, setShowClubResults] = useState(false)
+  const [clubLeagueLookup, setClubLeagueLookup] = useState({})
 
   const [deletingId, setDeletingId] = useState(null)
   const [confirmDeleteId, setConfirmDeleteId] = useState(null)
@@ -577,29 +585,39 @@ export default function Home() {
     }
   }
 
-  const searchClubs = () => {
-    const lower = clubName.toLowerCase()
-    const matches = Object.keys(CLUB_LEAGUE_MAP).filter(function(club) {
-      return club.toLowerCase().indexOf(lower) !== -1
-    })
-    setClubResults(matches.slice(0, 6))
+  // Search the live reference database (every imported club) and expand
+  // nicknames — "QPR" surfaces Queens Park Rangers, "PSG" Paris Saint-Germain.
+  const searchClubs = async () => {
+    const term = clubName.trim()
+    const found = {}
+    const res = await supabase.from('player_reference').select('active_club, league').ilike('active_club', '%' + term + '%').limit(400)
+    for (const r of (res.data || [])) found[r.active_club] = r.league
+    const aliases = aliasCanonicalNames(term)
+    if (aliases.length > 0) {
+      const a = await supabase.from('player_reference').select('active_club, league').in('active_club', aliases)
+      for (const r of (a.data || [])) found[r.active_club] = r.league
+    }
+    setClubLeagueLookup(function(prev) { return Object.assign({}, prev, found) })
+    const names = Object.keys(found).sort()
+    setClubResults(names.slice(0, 6))
     setShowClubResults(true)
   }
 
   const searchCfbTeams = () => {
     const lower = clubName.toLowerCase()
-    const matches = Object.keys(CFB_TEAM_CONFERENCE_MAP).filter(function(team) {
-      return team.toLowerCase().indexOf(lower) !== -1
+    const aliases = aliasCanonicalNames(clubName)
+    const matches = Object.keys(CFB_TEAM_TO_CONFERENCE).filter(function(team) {
+      return team.toLowerCase().indexOf(lower) !== -1 || aliases.indexOf(team) !== -1
     })
     setClubResults(matches.slice(0, 6))
     setShowClubResults(true)
   }
 
   const applyLeagueForClub = (club) => {
-    if (selectedGame === 'EA CFB 27' && CFB_TEAM_CONFERENCE_MAP[club]) {
-      setLeague(CFB_TEAM_CONFERENCE_MAP[club])
-    } else if (selectedGame === 'EA FC 26' && CLUB_LEAGUE_MAP[club]) {
-      setLeague(CLUB_LEAGUE_MAP[club])
+    if (selectedGame === 'EA CFB 27' && CFB_TEAM_TO_CONFERENCE[club]) {
+      setLeague(CFB_TEAM_TO_CONFERENCE[club])
+    } else if (selectedGame === 'EA FC 26' && (clubLeagueLookup[club] || CLUB_LEAGUE_MAP[club])) {
+      setLeague(clubLeagueLookup[club] || CLUB_LEAGUE_MAP[club])
     }
   }
 

@@ -324,6 +324,11 @@ export default function FranchisePage() {
   const [fcReferenceRows, setFcReferenceRows] = useState(null)
   const [benchmarkLeague, setBenchmarkLeague] = useState(null)
 
+  const [transferModal, setTransferModal] = useState(null)
+  const [tFee, setTFee] = useState('')
+  const [tClub, setTClub] = useState('')
+  const [tSellOn, setTSellOn] = useState('')
+  const [tSwap, setTSwap] = useState('')
   const [editingNil, setEditingNil] = useState(false)
   const [nilDraft, setNilDraft] = useState('')
   const [savingNil, setSavingNil] = useState(false)
@@ -905,12 +910,65 @@ export default function FranchisePage() {
     if (!error) {
       resetAddPanel()
       await loadPlayers()
+      if (!isCfb) {
+        // Auto-log the incoming transfer; the modal collects deal details.
+        openTransferModal('in', {
+          name: payload.name,
+          active_club: selectedPlayer ? selectedPlayer.active_club : null
+        })
+      }
     } else {
       alert(error.message)
     }
   }
 
+  // ---- Transfer tracking -------------------------------------------------
+  // Every add/removal is auto-logged to transfer_history; the modal just lets
+  // the user enrich the entry with deal details (fee, club, sell-on %, swap).
+  const logTransfer = async (direction, player, details) => {
+    const d = details || {}
+    await supabase.from('transfer_history').insert({
+      franchise_id: franchiseId,
+      season: franchise.current_season,
+      player_name: player.name,
+      transfer_type: direction === 'out' ? 'Out' : 'In',
+      from_club: direction === 'out' ? franchise.club_name : (d.club || player.active_club || null),
+      to_club: direction === 'out' ? (d.club || null) : franchise.club_name,
+      fee_eur: d.fee ? parseFloat(d.fee) : null,
+      sell_on_pct: d.sellOn ? parseFloat(d.sellOn) : null,
+      swap_player: d.swap || null,
+      player_snapshot: direction === 'out' ? player : null
+    })
+  }
+
+  const openTransferModal = (direction, player) => {
+    setTransferModal({ direction, player })
+    setTFee('')
+    setTSellOn('')
+    setTSwap('')
+    setTClub(direction === 'in' ? (player.active_club && player.active_club !== franchise.club_name ? player.active_club : '') : '')
+  }
+
+  const completeTransferModal = async (withDetails) => {
+    const { direction, player } = transferModal
+    const details = withDetails ? { fee: tFee, club: tClub, sellOn: tSellOn, swap: tSwap } : {}
+    await logTransfer(direction, player, details)
+    if (direction === 'out') {
+      await supabase.from('players').delete().eq('id', player.id)
+      await loadPlayers()
+    }
+    setTransferModal(null)
+  }
+
   const handleDeletePlayer = async (playerId) => {
+    if (!isCfb) {
+      const player = players.find(function(p) { return p.id === playerId })
+      if (player) {
+        setConfirmDeleteId(null)
+        openTransferModal('out', player)
+        return
+      }
+    }
     const { error } = await supabase
       .from('players')
       .delete()
@@ -1528,6 +1586,59 @@ export default function FranchisePage() {
                   </div>
                 )
               })}
+            </div>
+          </div>
+        )}
+
+        {transferModal && (
+          <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center px-4">
+            <div className="w-full max-w-md bg-gradient-to-br from-violet-600/25 via-neutral-900 to-neutral-950 border border-violet-500/40 rounded-2xl p-6 shadow-2xl">
+              <p className="text-violet-300 text-[11px] font-semibold uppercase tracking-[0.16em]">
+                Transfer {transferModal.direction === 'out' ? 'Out' : 'In'}
+              </p>
+              <h3 className="text-2xl font-black uppercase tracking-tight mt-1">{transferModal.player.name}</h3>
+              <p className="text-neutral-400 text-xs mt-1 mb-5">
+                This move is logged to Transfer History automatically — add deal details for tracking, or skip.
+              </p>
+              <div className="grid grid-cols-2 gap-3 mb-5">
+                <div>
+                  <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">
+                    {transferModal.direction === 'out' ? 'Sale Price (€)' : 'Purchase Price (€)'}
+                  </label>
+                  <input type="number" value={tFee} onChange={(e) => setTFee(e.target.value)}
+                    className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500" />
+                </div>
+                <div>
+                  <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">
+                    {transferModal.direction === 'out' ? 'Sold To' : 'Signed From'}
+                  </label>
+                  <input type="text" value={tClub} onChange={(e) => setTClub(e.target.value)}
+                    className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500" />
+                </div>
+                <div>
+                  <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Sell-On Clause (%)</label>
+                  <input type="number" value={tSellOn} onChange={(e) => setTSellOn(e.target.value)}
+                    className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500" />
+                </div>
+                <div>
+                  <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Player Swap (name)</label>
+                  <input type="text" value={tSwap} onChange={(e) => setTSwap(e.target.value)}
+                    className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500" />
+                </div>
+              </div>
+              <div className="flex justify-between items-center gap-2 flex-wrap">
+                {transferModal.direction === 'out' ? (
+                  <button onClick={() => setTransferModal(null)} className="text-neutral-400 hover:text-neutral-200 text-sm px-2 py-2">Cancel</button>
+                ) : <span />}
+                <div className="flex gap-2">
+                  <button onClick={() => completeTransferModal(false)} className="border border-neutral-700 hover:bg-neutral-800 transition-colors rounded-lg px-4 py-2 text-sm font-medium text-neutral-300">
+                    Skip details{transferModal.direction === 'out' ? ' & remove' : ''}
+                  </button>
+                  <button onClick={() => completeTransferModal(true)} className="bg-violet-600 hover:bg-violet-500 transition-colors rounded-lg px-4 py-2 text-sm font-semibold">
+                    {transferModal.direction === 'out' ? 'Log & Remove' : 'Log Transfer'}
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         )}

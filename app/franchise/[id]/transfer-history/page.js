@@ -97,6 +97,19 @@ export default function TransferHistoryPage() {
     if (!error) await loadTransfers()
   }
 
+  // Restore an accidentally removed player from the snapshot taken at removal.
+  const handleAddBack = async (t) => {
+    const snap = Object.assign({}, t.player_snapshot)
+    delete snap.id
+    delete snap.created_at
+    snap.franchise_id = franchiseId
+    const { error } = await supabase.from('players').insert(snap)
+    if (error) { alert(error.message); return }
+    await supabase.from('transfer_history').delete().eq('id', t.id)
+    await loadTransfers()
+    alert(t.player_name + ' has been restored to your roster.')
+  }
+
   const formatEuro = (num) => {
     if (num === null || num === undefined) return '-'
     if (num >= 1000000) return '\u20ac' + (num / 1000000).toFixed(1) + 'M'
@@ -205,6 +218,8 @@ export default function TransferHistoryPage() {
                     <th className="text-left font-semibold py-2.5 px-3">From</th>
                     <th className="text-left font-semibold py-2.5 px-3">To</th>
                     <th className="text-right font-semibold py-2.5 px-3">Fee</th>
+                    <th className="text-right font-semibold py-2.5 px-3">Sell-On</th>
+                    <th className="text-left font-semibold py-2.5 px-3">Swap</th>
                     <th className="py-2.5 px-3"></th>
                   </tr>
                 </thead>
@@ -222,7 +237,12 @@ export default function TransferHistoryPage() {
                         <td className="py-2.5 px-3 text-neutral-300">{t.from_club || '-'}</td>
                         <td className="py-2.5 px-3 text-neutral-300">{t.to_club || '-'}</td>
                         <td className="py-2.5 px-3 text-right text-neutral-100 font-medium tabular-nums whitespace-nowrap">{formatEuro(t.fee_eur)}</td>
-                        <td className="py-2.5 px-3 text-right">
+                        <td className="py-2.5 px-3 text-right text-neutral-300 tabular-nums whitespace-nowrap">{t.sell_on_pct != null ? t.sell_on_pct + '%' : '-'}</td>
+                        <td className="py-2.5 px-3 text-neutral-300">{t.swap_player || '-'}</td>
+                        <td className="py-2.5 px-3 text-right whitespace-nowrap">
+                          {t.transfer_type === 'Out' && t.player_snapshot && (
+                            <button onClick={() => handleAddBack(t)} className="text-violet-400 hover:text-violet-300 text-xs font-semibold mr-3 transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500 rounded">Add Back</button>
+                          )}
                           <button onClick={() => handleRemove(t.id)} className="text-red-400 hover:text-red-300 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500 rounded">Remove</button>
                         </td>
                       </tr>
