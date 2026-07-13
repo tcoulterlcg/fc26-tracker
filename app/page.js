@@ -384,6 +384,7 @@ export default function Home() {
   const [dragInfo, setDragInfo] = useState({ game: null, key: null })
 
   const [logoCache, setLogoCache] = useState({})
+  const [todayString, setTodayString] = useState('')
 
   const router = useRouter()
   const supabase = createClient()
@@ -394,6 +395,7 @@ export default function Home() {
   useEffect(() => {
     checkUser()
     loadStatSettings()
+    setTodayString(new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }))
   }, [])
 
   useEffect(() => {
@@ -768,52 +770,78 @@ export default function Home() {
     return stats
   }, [franchises, playersByFranchise])
 
+  const featured = franchises[0]
+  const featuredStats = featured ? (franchiseStats[featured.id] || { squadSize: 0, avgOverall: null }) : null
+
   if (loading) {
     return React.createElement('div', { className: 'min-h-screen bg-neutral-950 flex items-center justify-center text-neutral-400' }, 'Loading...')
   }
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-100">
-      <div className="max-w-6xl mx-auto px-6 py-10">
-        <div className="flex justify-between items-start mb-8 flex-wrap gap-4">
-          <div className="flex items-center gap-4">
-            <RosterHQLogo size={56} />
-            <div>
-              <h1
-                className="text-3xl text-neutral-100 leading-none"
-                style={{
-                  fontFamily: "'Arial Black', 'Arial Bold', Impact, sans-serif",
-                  fontWeight: 900,
-                  letterSpacing: '-0.5px'
-                }}
-              >
-                ROSTER<span style={{ color: '#8b5cf6' }}>HQ</span>
-              </h1>
-              <p className="text-violet-500/90 text-[10px] font-semibold uppercase tracking-[0.22em] mt-1.5">Franchise Tracker</p>
-              <p className="text-neutral-500 mt-1 text-xs">Logged in as {user.email}</p>
+    <div className="min-h-screen bg-neutral-950 text-neutral-100 lg:flex">
+      <aside className="lg:w-60 lg:shrink-0 lg:sticky lg:top-0 lg:h-screen border-b lg:border-b-0 lg:border-r border-neutral-800 flex flex-col">
+        <div className="p-5 flex items-center gap-3">
+          <RosterHQLogo size={42} />
+          <div>
+            <div
+              className="text-xl text-neutral-100 leading-none"
+              style={{ fontFamily: "'Arial Black', 'Arial Bold', Impact, sans-serif", fontWeight: 900, letterSpacing: '-0.5px' }}
+            >
+              ROSTER<span style={{ color: '#8b5cf6' }}>HQ</span>
             </div>
+            <p className="text-violet-500/90 text-[9px] font-semibold uppercase tracking-[0.2em] mt-1">Franchise Tracker</p>
           </div>
-          <div className="flex gap-2 flex-wrap">
+        </div>
+        <nav className="px-3 pb-3 lg:flex-1 space-y-1">
+          <span className="block rounded-lg px-3 py-2 text-sm font-semibold bg-violet-600/15 text-violet-300 border border-violet-600/30">Dashboard</span>
+          <a href="/player-databases" className="block rounded-lg px-3 py-2 text-sm font-medium text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800/60 transition-colors">Player Databases</a>
+          <a href="/leaderboards" className="block rounded-lg px-3 py-2 text-sm font-medium text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800/60 transition-colors">Leaderboards</a>
+          <a href="/import" className="block rounded-lg px-3 py-2 text-sm font-medium text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800/60 transition-colors">Import Players</a>
+          <a href="/profile" className="block rounded-lg px-3 py-2 text-sm font-medium text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800/60 transition-colors">Profile</a>
+        </nav>
+        <div className="p-4 border-t border-neutral-800 hidden lg:block">
+          <p className="text-neutral-500 text-xs truncate mb-1">{user.email}</p>
+          <button onClick={handleLogout} className="text-neutral-400 hover:text-violet-400 text-xs font-medium">Log Out</button>
+        </div>
+      </aside>
+
+      <main className="flex-1 min-w-0 px-6 py-8 lg:px-10">
+        <div className="flex justify-between items-end gap-4 flex-wrap mb-6">
+          <div>
+            <p className="text-neutral-500 text-[11px] font-semibold uppercase tracking-[0.2em]">{todayString}</p>
+            <h1 className="text-4xl font-black uppercase tracking-tight leading-none mt-1">Matchday Central</h1>
+          </div>
+          <div className="flex items-center gap-2">
+            <button onClick={handleLogout} className="lg:hidden border border-neutral-700 hover:bg-neutral-900 transition-colors rounded-lg px-3 py-2 text-sm font-medium text-neutral-300">Log Out</button>
             <button onClick={() => setShowCreatePanel(!showCreatePanel)} className="bg-violet-600 hover:bg-violet-500 transition-colors rounded-lg px-4 py-2 text-sm font-semibold whitespace-nowrap">
-              {showCreatePanel ? 'Cancel' : '+ New Franchise'}
-            </button>
-            <a href="/leaderboards" className="border border-neutral-700 hover:border-neutral-600 hover:bg-neutral-900 transition-colors rounded-lg px-4 py-2 text-sm font-medium text-neutral-300 flex items-center">
-              Leaderboards
-            </a>
-            <a href="/player-databases" className="border border-neutral-700 hover:border-neutral-600 hover:bg-neutral-900 transition-colors rounded-lg px-4 py-2 text-sm font-medium text-neutral-300 flex items-center">
-              Player Databases
-            </a>
-            <a href="/import" className="border border-neutral-700 hover:border-neutral-600 hover:bg-neutral-900 transition-colors rounded-lg px-4 py-2 text-sm font-medium text-neutral-300 flex items-center">
-              Import Players
-            </a>
-            <a href="/profile" className="border border-neutral-700 hover:border-neutral-600 hover:bg-neutral-900 transition-colors rounded-lg px-4 py-2 text-sm font-medium text-neutral-300 flex items-center">
-              Profile
-            </a>
-            <button onClick={handleLogout} className="border border-neutral-700 hover:border-neutral-600 hover:bg-neutral-900 transition-colors rounded-lg px-4 py-2 text-sm font-medium text-neutral-300">
-              Log Out
+              {showCreatePanel ? 'Cancel' : '+ New Save'}
             </button>
           </div>
         </div>
+
+        {featured && !showCreatePanel ? (
+          <div className="bg-gradient-to-br from-violet-600/15 via-neutral-900 to-neutral-900 border border-violet-600/30 rounded-2xl p-6 mb-6">
+            <div className="flex items-center justify-between gap-5 flex-wrap">
+              <div className="flex items-center gap-5 min-w-0">
+                <TeamLogo url={logoCache[featured.id]} size={84} />
+                <div className="min-w-0">
+                  <p className="text-violet-300 text-[11px] font-semibold uppercase tracking-[0.16em]">Continue &middot; {featured.game}</p>
+                  <h2 className="text-3xl font-bold text-neutral-100 truncate">{displayName(featured)}</h2>
+                  <p className="text-neutral-400 text-sm mt-0.5">{featured.league || 'No league set'} &middot; Season {featured.current_season} &middot; {featuredStats.squadSize} players</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-6">
+                <div className="text-center">
+                  <p className="text-neutral-500 text-[10px] uppercase tracking-wide mb-0.5">Overall</p>
+                  <p className={'text-4xl font-bold tabular-nums leading-none ' + valueColorForTier(featuredStats.avgOverall)}>{featuredStats.avgOverall !== null && featuredStats.avgOverall !== undefined ? featuredStats.avgOverall.toFixed(1) : '-'}</p>
+                </div>
+                <button onClick={() => goToFranchise(featured.id)} className="bg-violet-600 hover:bg-violet-500 transition-colors rounded-xl px-6 py-3 text-sm font-semibold whitespace-nowrap">
+                  Resume {featured.game === 'EA CFB 27' ? 'Dynasty' : 'Season'} &rsaquo;
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : null}
 
         {showCreatePanel ? (
           <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-5 mb-8">
@@ -941,7 +969,7 @@ export default function Home() {
 
         <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-semibold">Your Franchises</h2>
+            <h2 className="text-lg font-semibold">My Saves</h2>
             <button
               onClick={() => setShowCustomizePanel(!showCustomizePanel)}
               className="text-neutral-400 hover:text-neutral-200 text-xs font-medium border border-neutral-700 rounded-lg px-3 py-1.5"
@@ -1015,7 +1043,7 @@ export default function Home() {
           )}
 
           {franchises.length === 0 ? (
-            <p className="text-neutral-500 text-sm">No franchises yet. Click "+ New Franchise" above to get started.</p>
+            <p className="text-neutral-500 text-sm">No saves yet. Click "+ New Save" above to get started.</p>
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
               {franchises.map(function(f) {
@@ -1124,7 +1152,15 @@ export default function Home() {
             </div>
           )}
         </div>
-      </div>
+
+        <div className="mt-6 bg-neutral-900/60 border border-dashed border-neutral-800 rounded-xl p-5">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-violet-400 text-[11px] font-semibold uppercase tracking-[0.16em]">Around the Leagues</span>
+            <span className="text-neutral-600 text-[10px] font-semibold uppercase tracking-wide">Bonus &middot; coming soon</span>
+          </div>
+          <p className="text-neutral-500 text-sm mt-2">Real-world scores, ratings updates, and transfer news for the clubs and schools you play as will land here.</p>
+        </div>
+      </main>
     </div>
   )
 }
