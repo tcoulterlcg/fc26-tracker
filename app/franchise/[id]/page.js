@@ -1022,7 +1022,6 @@ export default function FranchisePage() {
     if (!isCfb) {
       const player = players.find(function(p) { return p.id === playerId })
       if (player) {
-        setConfirmDeleteId(null)
         openTransferModal('out', player)
         return
       }
