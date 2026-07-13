@@ -107,7 +107,7 @@ export default function PlayerProfilePage() {
   if (isFc && player.wage_eur_wk != null) details.push(['Wage / wk', formatEuro(player.wage_eur_wk)])
   if (isCfb && player.cfb_class) details.push(['Class', player.cfb_class])
   if (isCfb && player.archetype) details.push(['Archetype', player.archetype])
-  if (isCfb && player.nil_value != null) details.push(['NIL', player.nil_value.toLocaleString()])
+  if (isCfb && player.nil_value != null) details.push(['NIL', '$' + player.nil_value.toLocaleString()])
   if (isMlb && reference) {
     if (reference.level) details.push(['Level', reference.level])
     if (reference.bats) details.push(['Bats', reference.bats])

@@ -208,6 +208,18 @@ const CFB_DEFAULT_ORDER = [
   { key: 'defense', enabled: true }
 ]
 
+// MLB / NHL / Madden have no market-value data, so their cards skip the euro
+// tiles entirely (any money in these games is USD, handled where it appears).
+const PRO_STAT_DEFS = {
+  overall: { label: 'Overall', isCurrency: false, decimals: 1, get: function(s) { return s.avgOverall } },
+  roster: { label: 'Roster', isCurrency: false, decimals: 0, get: function(s) { return s.squadSize } }
+}
+const PRO_DEFAULT_ORDER = [
+  { key: 'overall', enabled: true },
+  { key: 'roster', enabled: true }
+]
+const PRO_GAMES = { 'MLB The Show 26': true, 'EA NHL 26': true, 'EA Madden 26': true }
+
 const FC_STAT_STORAGE_KEY = 'roster_hq_card_stats_fc'
 const CFB_STAT_STORAGE_KEY = 'roster_hq_card_stats_cfb'
 const LOGO_CACHE_KEY = 'roster_hq_logo_cache_v3'
@@ -1129,9 +1141,10 @@ export default function Home() {
               {franchises.map(function(f) {
                 var franchiseUrl = "/franchise/" + f.id
                 const isCfb = f.game === 'EA CFB 27'
+                const isPro = !!PRO_GAMES[f.game]
                 const stats = franchiseStats[f.id] || { squadSize: 0, avgOverall: null }
-                const statOrder = isCfb ? cfbStatOrder : fcStatOrder
-                const statDefs = isCfb ? CFB_STAT_DEFS : FC_STAT_DEFS
+                const statOrder = isCfb ? cfbStatOrder : (isPro ? PRO_DEFAULT_ORDER : fcStatOrder)
+                const statDefs = isCfb ? CFB_STAT_DEFS : (isPro ? PRO_STAT_DEFS : FC_STAT_DEFS)
                 const enabledStats = statOrder.filter(function(s) { return s.enabled })
                 const logoUrl = logoCache[f.id]
 
@@ -1147,7 +1160,7 @@ export default function Home() {
                     const elite = roster.filter(function(p) { return p.dev_trait === 'Elite' }).length
                     if (elite) cardTicker.push(['ELITE DEV', elite + ' players'])
                     const nilLeader = roster.filter(function(p) { return p.nil_value != null }).sort(function(a, b) { return b.nil_value - a.nil_value })[0]
-                    if (nilLeader && nilLeader.nil_value > 0) cardTicker.push(['TOP NIL', nilLeader.name + ' ' + nilLeader.nil_value.toLocaleString()])
+                    if (nilLeader && nilLeader.nil_value > 0) cardTicker.push(['TOP NIL', nilLeader.name + ' $' + nilLeader.nil_value.toLocaleString()])
                   } else {
                     const withPot = roster.filter(function(p) { return p.potential_rating != null && p.overall_rating != null })
                     const riser = withPot.sort(function(a, b) { return (b.potential_rating - b.overall_rating) - (a.potential_rating - a.overall_rating) })[0]

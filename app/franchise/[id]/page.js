@@ -11,7 +11,9 @@ const FC_COLUMNS = [
   { key: 'position', label: 'Pos' },
   { key: 'age', label: 'Age' },
   { key: 'nationality', label: 'Nation' },
-  { key: 'overall_rating', label: 'OVR' },
+  { key: 'base_overall', label: 'Beg OVR' },
+  { key: 'overall_rating', label: 'Curr OVR' },
+  { key: 'ovr_diff', label: '± OVR' },
   { key: 'potential_rating', label: 'POT' },
   { key: 'pace', label: 'PAC' },
   { key: 'shooting', label: 'SHO' },
@@ -42,7 +44,9 @@ const CFB_COLUMNS = [
   { key: 'jersey_number', label: 'No.' },
   { key: 'cfb_class', label: 'Class' },
   { key: 'archetype', label: 'Archetype' },
-  { key: 'overall_rating', label: 'OVR' },
+  { key: 'base_overall', label: 'Beg OVR' },
+  { key: 'overall_rating', label: 'Curr OVR' },
+  { key: 'ovr_diff', label: '± OVR' },
   { key: 'dev_trait', label: 'Dev Trait' },
   { key: 'nil_value', label: 'NIL' },
   { key: 'speed', label: 'Speed' },
@@ -176,7 +180,7 @@ const CLUB_LEAGUE_MAP = {
   'Inter Miami': 'MLS', 'LA Galaxy': 'MLS', 'LAFC': 'MLS', 'Seattle Sounders': 'MLS', 'Atlanta United': 'MLS'
 }
 
-const COLUMN_ORDER_STORAGE_PREFIX = 'roster_column_order_'
+const COLUMN_ORDER_STORAGE_PREFIX = 'roster_column_order_v2_'
 
 function average(nums) {
   const valid = nums.filter(function(n) { return typeof n === 'number' && !isNaN(n) })
@@ -665,7 +669,29 @@ export default function FranchisePage() {
       .order('overall_rating', { ascending: false })
 
     if (!error) {
-      setPlayers(data)
+      // Beg OVR = the player's base rating in the reference ratings database
+      // (their starting point before in-franchise progression); Curr OVR is the
+      // live roster value; ± OVR is the delta. Derived at load time so no
+      // schema change is needed — matched by name against the game's ref table.
+      const names = data.map(function(p) { return p.name }).filter(Boolean)
+      const refBase = {}
+      if (names.length > 0) {
+        let refTable = 'player_reference', refNameCol = 'name'
+        if (isCfb) { refTable = 'cfb_player_reference'; refNameCol = 'player_name' }
+        else if (franchise && franchise.game === 'MLB The Show 26') { refTable = 'mlb_player_reference' }
+        const { data: refs } = await supabase.from(refTable).select(refNameCol + ', overall_rating').in(refNameCol, names)
+        for (const r of (refs || [])) {
+          const key = (r[refNameCol] || '').toLowerCase()
+          if (!(key in refBase)) refBase[key] = r.overall_rating
+        }
+      }
+      const enriched = data.map(function(p) {
+        const ref = p.name ? refBase[p.name.toLowerCase()] : undefined
+        const beg = ref != null ? ref : p.overall_rating
+        const diff = (p.overall_rating != null && beg != null) ? p.overall_rating - beg : null
+        return Object.assign({}, p, { base_overall: beg, ovr_diff: diff })
+      })
+      setPlayers(enriched)
     }
   }
 
@@ -2563,6 +2589,34 @@ export default function FranchisePage() {
                             )
                           }
 
+                          // Beginning overall — the rating when this player
+                          // joined the roster; muted so the current pill reads
+                          // as the live value.
+                          if (col.key === 'base_overall') {
+                            return (
+                              <td key={col.key} className="py-2.5 px-3 whitespace-nowrap tabular-nums">
+                                {typeof displayValue === 'number'
+                                  ? <span className={'font-semibold opacity-70 ' + statTextColor(displayValue)}>{displayValue}</span>
+                                  : <span className="text-neutral-600">-</span>}
+                              </td>
+                            )
+                          }
+
+                          // Progression since joining: +N green, -N red.
+                          if (col.key === 'ovr_diff') {
+                            return (
+                              <td key={col.key} className="py-2.5 px-3 whitespace-nowrap tabular-nums font-bold">
+                                {displayValue == null
+                                  ? <span className="text-neutral-600">-</span>
+                                  : displayValue > 0
+                                    ? <span className="text-green-400">+{displayValue}</span>
+                                    : displayValue < 0
+                                      ? <span className="text-red-400">{displayValue}</span>
+                                      : <span className="text-neutral-500">0</span>}
+                              </td>
+                            )
+                          }
+
                           if (col.key === 'value_eur' || col.key === 'wage_eur_wk') {
                             displayValue = displayValue ? '\u20ac' + displayValue.toLocaleString() : '-'
                           }
@@ -2570,7 +2624,7 @@ export default function FranchisePage() {
                           if (col.key === 'nil_value') {
                             return (
                               <td key={col.key} className="py-2.5 px-3 whitespace-nowrap tabular-nums text-neutral-300">
-                                {typeof displayValue === 'number' ? displayValue.toLocaleString() : '-'}
+                                {typeof displayValue === 'number' ? '$' + displayValue.toLocaleString() : '-'}
                               </td>
                             )
                           }
