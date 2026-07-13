@@ -22,11 +22,6 @@ const LEAGUES = [
   'Süper Lig', 'A-League', 'Other / International'
 ]
 
-const CFB_CONFERENCES = [
-  'SEC', 'Big Ten', 'Big 12', 'ACC', 'American Athletic', 'Mountain West',
-  'Conference USA', 'Sun Belt', 'MAC', 'Independent', 'Other'
-]
-
 const CLUB_LEAGUE_MAP = {
   'Arsenal': 'Premier League', 'Aston Villa': 'Premier League', 'Bournemouth': 'Premier League',
   'Brentford': 'Premier League', 'Brighton & Hove Albion': 'Premier League', 'Burnley': 'Premier League',
@@ -198,6 +193,7 @@ const CFB_DEFAULT_ORDER = [
 
 const FC_STAT_STORAGE_KEY = 'roster_hq_card_stats_fc'
 const CFB_STAT_STORAGE_KEY = 'roster_hq_card_stats_cfb'
+const LOGO_CACHE_KEY = 'roster_hq_logo_cache'
 
 function average(nums) {
   const valid = nums.filter(function(n) { return typeof n === 'number' && !isNaN(n) })
@@ -418,9 +414,18 @@ export default function Home() {
     let cancelled = false
 
     const loadLogos = async () => {
+      // Crests are cached in localStorage so we only hit Wikipedia once per
+      // franchise instead of on every homepage load.
+      let stored = {}
+      try { stored = JSON.parse(localStorage.getItem(LOGO_CACHE_KEY) || '{}') } catch (e) {}
+      if (Object.keys(stored).length) {
+        setLogoCache(function(prev) { return Object.assign({}, stored, prev) })
+      }
+      const next = Object.assign({}, stored)
+
       for (let i = 0; i < franchises.length; i++) {
         const f = franchises[i]
-        if (logoCache[f.id] !== undefined) continue
+        if (next[f.id] !== undefined) continue
 
         const isCfb = f.game === 'EA CFB 27'
         let candidates
@@ -434,9 +439,10 @@ export default function Home() {
         }
 
         const url = await fetchWikipediaThumbnail(candidates)
-        if (!cancelled) {
-          setLogoCache(function(prev) { return Object.assign({}, prev, { [f.id]: url }) })
-        }
+        if (cancelled) return
+        next[f.id] = url
+        setLogoCache(function(prev) { return Object.assign({}, prev, { [f.id]: url }) })
+        try { localStorage.setItem(LOGO_CACHE_KEY, JSON.stringify(next)) } catch (e) {}
       }
     }
 
