@@ -9,6 +9,7 @@ import { CFB_LOGOS } from '@/lib/cfbLogos'
 import { MLB_LOGOS, NHL_LOGOS, NFL_LOGOS } from '@/lib/proLogos'
 import { aliasCanonicalNames } from '@/lib/teamAliases'
 import { MLB_TEAMS, NHL_TEAMS, NFL_TEAMS, MLB_DIVISIONS, NHL_DIVISIONS, NFL_DIVISIONS } from '@/lib/proTeams'
+import { computeTeamOverall, positionBreakdown } from '@/lib/rosterMetrics'
 
 const GAMES = [
   { id: 'EA FC 26', label: 'EA FC 26', sub: 'Soccer', status: 'live' },
@@ -185,7 +186,7 @@ function fcPositionGroup(position) {
 const FC_POSITION_ORDER = ['GK', 'DEF', 'MID', 'FWD']
 
 const FC_STAT_DEFS = {
-  overall: { label: 'Overall', isCurrency: false, decimals: 1, get: function(s) { return s.avgOverall } },
+  overall: { label: 'Overall', isCurrency: false, decimals: 1, get: function(s) { return s.teamOverall !== null && s.teamOverall !== undefined ? s.teamOverall : s.avgOverall } },
   potential: { label: 'Potential', isCurrency: false, decimals: 0, get: function(s) { return s.avgPotential } },
   value: { label: 'Club Value', isCurrency: true, get: function(s) { return s.totalValue } },
   wages: { label: 'Weekly Wages', isCurrency: true, get: function(s) { return s.totalWage } }
@@ -198,7 +199,7 @@ const FC_DEFAULT_ORDER = [
 ]
 
 const CFB_STAT_DEFS = {
-  overall: { label: 'Overall', isCurrency: false, decimals: 1, get: function(s) { return s.avgOverall } },
+  overall: { label: 'Overall', isCurrency: false, decimals: 1, get: function(s) { return s.teamOverall !== null && s.teamOverall !== undefined ? s.teamOverall : s.avgOverall } },
   offense: { label: 'Offense', isCurrency: false, decimals: 0, get: function(s) { return s.offenseAvg } },
   defense: { label: 'Defense', isCurrency: false, decimals: 0, get: function(s) { return s.defenseAvg } }
 }
@@ -211,7 +212,7 @@ const CFB_DEFAULT_ORDER = [
 // MLB / NHL / Madden have no market-value data, so their cards skip the euro
 // tiles entirely (any money in these games is USD, handled where it appears).
 const PRO_STAT_DEFS = {
-  overall: { label: 'Overall', isCurrency: false, decimals: 1, get: function(s) { return s.avgOverall } },
+  overall: { label: 'Overall', isCurrency: false, decimals: 1, get: function(s) { return s.teamOverall !== null && s.teamOverall !== undefined ? s.teamOverall : s.avgOverall } },
   roster: { label: 'Roster', isCurrency: false, decimals: 0, get: function(s) { return s.squadSize } }
 }
 const PRO_DEFAULT_ORDER = [
@@ -260,12 +261,13 @@ function tierLabel(avg) {
   return 'Rebuilding'
 }
 
+// Canonical rating gradient, consistent with the roster attribute scale and
+// across all games: red (lowest) -> orange -> yellow -> green (highest).
 function valueColorForTier(avg) {
   if (avg === null || avg === undefined) return 'text-neutral-500'
-  if (avg >= 85) return 'text-green-400'
   if (avg >= 80) return 'text-green-400'
-  if (avg >= 72) return 'text-amber-400'
-  if (avg >= 64) return 'text-orange-400'
+  if (avg >= 70) return 'text-yellow-400'
+  if (avg >= 60) return 'text-orange-400'
   return 'text-red-400'
 }
 
@@ -819,6 +821,9 @@ export default function Home() {
       const isCfb = f.game === 'EA CFB 27'
       const overalls = roster.map(function(p) { return p.overall_rating })
       const avgOverall = average(overalls)
+      // Team overall = best active-lineup average, matching how each game rates a
+      // club (not a flat mean of the whole roster incl. bench / minors / prospects).
+      const teamOverall = computeTeamOverall(roster, f.game)
 
       if (isCfb) {
         const offenseRatings = []
@@ -843,6 +848,7 @@ export default function Home() {
         stats[f.id] = {
           squadSize: roster.length,
           avgOverall: avgOverall,
+          teamOverall: teamOverall,
           offenseAvg: average(offenseRatings),
           defenseAvg: average(defenseRatings),
           classBreakdown: classBreakdown
@@ -858,28 +864,18 @@ export default function Home() {
           return sum + (typeof w === 'number' && !isNaN(w) ? w : 0)
         }, 0)
 
-        const posBuckets = {}
-        for (let j = 0; j < roster.length; j++) {
-          const p = roster[j]
-          const group = fcPositionGroup(p.position)
-          if (!posBuckets[group]) posBuckets[group] = []
-          if (typeof p.overall_rating === 'number') posBuckets[group].push(p.overall_rating)
-        }
-
-        const positionBreakdown = FC_POSITION_ORDER
-          .filter(function(g) { return posBuckets[g] && posBuckets[g].length > 0 })
-          .map(function(g) {
-            const avg = average(posBuckets[g])
-            return { label: g, count: posBuckets[g].length, avg: avg, stars: starRating(avg) }
-          })
+        // Game-aware position groups (baseball C/INF/OF/DH/SP/RP, hockey F/D/G,
+        // football QB/SKILL/OL/DL/LB/DB/ST) — not soccer MID/FWD for every sport.
+        const posBreakdown = positionBreakdown(roster, f.game)
 
         stats[f.id] = {
           squadSize: roster.length,
           avgOverall: avgOverall,
+          teamOverall: teamOverall,
           avgPotential: average(potentials),
           totalValue: totalValue,
           totalWage: totalWage,
-          positionBreakdown: positionBreakdown
+          positionBreakdown: posBreakdown
         }
       }
     }
@@ -1246,8 +1242,8 @@ export default function Home() {
                             <p className="text-neutral-400 text-sm">
                               {f.league ? f.league : 'No league set'} &middot; Season {f.current_season}
                             </p>
-                            <span className={'text-xs font-semibold px-2 py-0.5 rounded-full whitespace-nowrap ' + tierChipColor(stats.avgOverall)}>
-                              {tierLabel(stats.avgOverall)}
+                            <span className={'text-xs font-semibold px-2 py-0.5 rounded-full whitespace-nowrap ' + tierChipColor(stats.teamOverall != null ? stats.teamOverall : stats.avgOverall)}>
+                              {tierLabel(stats.teamOverall != null ? stats.teamOverall : stats.avgOverall)}
                             </span>
                           </div>
                           <div className="mt-4">

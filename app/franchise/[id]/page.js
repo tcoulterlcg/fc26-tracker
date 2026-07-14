@@ -5,6 +5,7 @@ import { useRouter, useParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
 import { aliasCanonicalNames } from '@/lib/teamAliases'
 import { fuzzyPlayerSearch } from '@/lib/fuzzySearch'
+import { computeTeamOverall, positionBreakdown } from '@/lib/rosterMetrics'
 
 const FC_COLUMNS = [
   { key: 'name', label: 'Name' },
@@ -246,21 +247,21 @@ function formatStatSummary(statsObj) {
   }).join(' \u00b7 ')
 }
 
-// Badge tiers from the Claude Design "Roster HQ rating badge system" board
-// (project efc98ff8): Elite 90+ prismatic, Star 85-89 violet, Starter 80-84
-// blue, Rotation 72-79 teal, Depth 64-71 amber, Prospect <64 zinc.
+// Badge tiers follow the canonical rating gradient (red -> orange -> yellow ->
+// green), matching statTextColor and the homepage scale so every rating in the
+// app reads the same across all games. 90+ keeps an elite sheen within green.
 function badgeTierHex(v) {
-  if (v >= 85) return '#8b5cf6'
-  if (v >= 80) return '#3b82f6'
-  if (v >= 72) return '#14b8a6'
-  if (v >= 64) return '#b45309'
-  return '#3f3f46'
+  if (v >= 90) return '#22c55e'
+  if (v >= 80) return '#16a34a'
+  if (v >= 70) return '#ca8a04'
+  if (v >= 60) return '#ea580c'
+  return '#dc2626'
 }
 
 function ovrBadgeStyle(v) {
   if (v === null || v === undefined) return { background: '#3f3f46' }
   if (v >= 90) return {
-    background: 'linear-gradient(135deg, #8b5cf6, #d946ef 55%, #38bdf8)',
+    background: 'linear-gradient(135deg, #16a34a, #4ade80)',
     boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.3)'
   }
   return { background: badgeTierHex(v), boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.22)' }
@@ -273,12 +274,13 @@ const RATING_COLUMN_KEYS = {
   change_of_direction: true, injury: true, stamina: true, awareness: true
 }
 
+// Canonical attribute/rating gradient, used everywhere and across all games:
+// red (lowest) -> orange -> yellow -> green (highest).
 function statTextColor(v) {
   if (v === null || v === undefined) return 'text-neutral-500'
-  if (v >= 85) return 'text-green-400'
   if (v >= 80) return 'text-green-400'
-  if (v >= 72) return 'text-amber-400'
-  if (v >= 64) return 'text-orange-400'
+  if (v >= 70) return 'text-yellow-400'
+  if (v >= 60) return 'text-orange-400'
   return 'text-red-400'
 }
 
@@ -1401,6 +1403,7 @@ export default function FranchisePage() {
       return {
         squadSize: players.length,
         avgOverall: average(overalls),
+        teamOverall: computeTeamOverall(players, franchise && franchise.game),
         offenseAvg: average(offenseRatings),
         defenseAvg: average(defenseRatings),
         classBreakdown: classBreakdown,
@@ -1427,37 +1430,22 @@ export default function FranchisePage() {
       .sort(function(a, b) { return b.overall_rating - a.overall_rating })
       .slice(0, 5)
 
-    const fcPosBuckets = {}
-    for (let i = 0; i < players.length; i++) {
-      const p = players[i]
-      const group = fcPositionGroup(p.position)
-      if (!fcPosBuckets[group]) fcPosBuckets[group] = []
-      fcPosBuckets[group].push(p)
-    }
-    const fcGroupAverages = FC_POSITION_ORDER
-      .filter(function(g) { return fcPosBuckets[g] && fcPosBuckets[g].length > 0 })
-      .map(function(g) {
-        const rows = fcPosBuckets[g]
-        return {
-          key: g,
-          label: g,
-          count: rows.length,
-          avgOverall: average(rows.map(function(r) { return r.overall_rating })),
-          avgPotential: average(rows.map(function(r) { return r.potential_rating }))
-        }
-      })
+    // Game-aware position groups (soccer GK/DEF/MID/FWD, baseball C/INF/OF/DH/
+    // SP/RP, hockey F/D/G, football QB/SKILL/OL/DL/LB/DB/ST).
+    const fcGroupAverages = positionBreakdown(players, franchise && franchise.game)
 
     return {
       squadSize: players.length,
       avgAge: average(ages),
       avgOverall: average(overalls),
+      teamOverall: computeTeamOverall(players, franchise && franchise.game),
       avgPotential: average(potentials),
       totalValue: totalValue,
       totalWage: totalWage,
       topPlayers: topPlayers,
       fcGroupAverages: fcGroupAverages
     }
-  }, [players, isCfb])
+  }, [players, isCfb, franchise])
 
   const depthChartData = useMemo(function() {
     if (!isCfb) return []
@@ -1633,7 +1621,8 @@ export default function FranchisePage() {
 
   // Broadcast-style ticker items computed from the real roster.
   const rated = players.filter(function(p) { return p.overall_rating != null })
-  const squadOvr = rated.length ? rated.reduce(function(s, p) { return s + p.overall_rating }, 0) / rated.length : null
+  // Team overall = best active-lineup average, matching the in-game team rating.
+  const squadOvr = computeTeamOverall(players, franchise && franchise.game)
   const topPlayer = rated.length ? rated.reduce(function(a, b) { return b.overall_rating > a.overall_rating ? b : a }) : null
   const tickerItems = []
   if (topPlayer) tickerItems.push(['TOP RATED', topPlayer.name + ' ' + topPlayer.overall_rating])
@@ -2622,7 +2611,7 @@ export default function FranchisePage() {
         )}
 
         {activeTab === 'roster' && (
-          <div className="bg-neutral-950 border border-neutral-800 rounded-xl p-6">
+          <div className="bg-gradient-to-br from-violet-800/25 via-violet-950/30 to-neutral-950 border border-violet-500/30 rounded-xl p-6">
             <div className={'flex items-center mb-4 ' + (isMlb ? 'justify-between flex-wrap gap-3' : 'justify-end')}>
               {isMlb && (
                 <div className="flex items-center gap-1.5 flex-wrap">
@@ -2688,7 +2677,7 @@ export default function FranchisePage() {
                             onDragEnd={handleDragEnd}
                             className={
                               'relative text-left py-2 px-3 whitespace-nowrap cursor-move select-none' +
-                              (col.key === 'name' ? ' sticky left-0 z-20 bg-neutral-950' : '') +
+                              (col.key === 'name' ? ' sticky left-0 z-20 bg-[#140e26]' : '') +
                               (isDragOver ? ' bg-violet-900/30 border-l-2 border-violet-500' : '')
                             }
                           >
@@ -2779,8 +2768,8 @@ export default function FranchisePage() {
                       <tr
                         key={p.id}
                         className={
-                          (rowIdx % 2 === 0 ? 'bg-neutral-950' : 'bg-neutral-900') +
-                          ' border-b border-neutral-800/60 hover:bg-neutral-800/60'
+                          (rowIdx % 2 === 0 ? 'bg-[#1a1330]' : 'bg-[#241b40]') +
+                          ' border-b border-violet-500/10 hover:bg-violet-800/25'
                         }
                       >
                         {orderedColumns.map(function(col) {
@@ -2883,7 +2872,7 @@ export default function FranchisePage() {
                           // Names link to the player's profile page.
                           if (col.key === 'name') {
                             return (
-                              <td key={col.key} className={'py-2.5 px-3 whitespace-nowrap sticky left-0 z-10 ' + (rowIdx % 2 === 0 ? 'bg-neutral-950' : 'bg-neutral-900')}>
+                              <td key={col.key} className={'py-2.5 px-3 whitespace-nowrap sticky left-0 z-10 ' + (rowIdx % 2 === 0 ? 'bg-[#1a1330]' : 'bg-[#241b40]')}>
                                 <a href={'/franchise/' + franchiseId + '/player/' + p.id} className="font-semibold text-neutral-100 hover:text-violet-300 transition-colors">
                                   {displayValue}
                                 </a>
