@@ -9,7 +9,7 @@ import { CFB_LOGOS } from '@/lib/cfbLogos'
 import { MLB_LOGOS, NHL_LOGOS, NFL_LOGOS } from '@/lib/proLogos'
 import { aliasCanonicalNames } from '@/lib/teamAliases'
 import { MLB_TEAMS, NHL_TEAMS, NFL_TEAMS, MLB_DIVISIONS, NHL_DIVISIONS, NFL_DIVISIONS } from '@/lib/proTeams'
-import { computeTeamOverall, positionBreakdown } from '@/lib/rosterMetrics'
+import { computeTeamOverall, positionBreakdown, mlbGmSummary } from '@/lib/rosterMetrics'
 
 const GAMES = [
   { id: 'EA FC 26', label: 'EA FC 26', sub: 'Soccer', status: 'live' },
@@ -875,7 +875,10 @@ export default function Home() {
           avgPotential: average(potentials),
           totalValue: totalValue,
           totalWage: totalWage,
-          positionBreakdown: posBreakdown
+          positionBreakdown: posBreakdown,
+          // MLB gets a GM summary (lineup/rotation/bullpen/farm) instead of
+          // the generic position grid.
+          gm: f.game === 'MLB The Show 26' ? mlbGmSummary(roster) : null
         }
       }
     }
@@ -1309,6 +1312,32 @@ export default function Home() {
                           )}
                         </div>
                       ) : (
+                        stats.gm ? (
+                        <div className="bg-neutral-900/60 rounded-lg p-2.5 mt-2">
+                          <p className="text-neutral-500 text-[10px] uppercase tracking-wide mb-1.5">
+                            Front Office View &middot; {stats.squadSize} players
+                          </p>
+                          <div className="grid grid-cols-4 gap-2">
+                            {[['LINEUP', stats.gm.lineup], ['ROTATION', stats.gm.rotation], ['BULLPEN', stats.gm.bullpen], ['BENCH', stats.gm.bench]].map(function(u) {
+                              return (
+                                <div key={u[0]} className="bg-neutral-800/60 rounded-md px-2 py-1.5 text-center">
+                                  <p className="text-neutral-500 text-[9px] font-semibold uppercase tracking-wide">{u[0]}</p>
+                                  <p className={'text-base font-bold tabular-nums ' + valueColorForTier(u[1])}>{u[1] === null ? '-' : Math.round(u[1])}</p>
+                                </div>
+                              )
+                            })}
+                          </div>
+                          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-2 text-[10px] text-neutral-400">
+                            {stats.gm.farm.map(function(fm) {
+                              return <span key={fm.level} className="uppercase tracking-wide">{fm.level} <span className={'font-bold ' + valueColorForTier(fm.avg)}>{Math.round(fm.avg)}</span> <span className="text-neutral-600">({fm.count})</span></span>
+                            })}
+                            {stats.gm.avgAge !== null && <span className="uppercase tracking-wide">AVG AGE <span className="text-neutral-200 font-bold">{stats.gm.avgAge.toFixed(1)}</span></span>}
+                            {stats.gm.topProspect && (
+                              <span className="uppercase tracking-wide text-violet-300">TOP PROSPECT <span className="font-bold text-neutral-100">{stats.gm.topProspect.name}</span>{stats.gm.topProspect.grade ? <span className="text-violet-400 font-bold"> {stats.gm.topProspect.grade}</span> : null}</span>
+                            )}
+                          </div>
+                        </div>
+                        ) : (
                         <div className="bg-neutral-900/60 rounded-lg p-2.5 mt-2">
                           <p className="text-neutral-500 text-[10px] uppercase tracking-wide mb-1.5">
                             Position Breakdown &middot; {stats.squadSize} players
@@ -1328,6 +1357,7 @@ export default function Home() {
                             <p className="text-neutral-500 text-xs">-</p>
                           )}
                         </div>
+                        )
                       )}
                     </div>
 

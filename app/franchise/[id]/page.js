@@ -5,7 +5,7 @@ import { useRouter, useParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
 import { aliasCanonicalNames } from '@/lib/teamAliases'
 import { fuzzyPlayerSearch } from '@/lib/fuzzySearch'
-import { computeTeamOverall, positionBreakdown } from '@/lib/rosterMetrics'
+import { computeTeamOverall, positionBreakdown, mlbGmSummary } from '@/lib/rosterMetrics'
 
 const FC_COLUMNS = [
   { key: 'name', label: 'Name' },
@@ -1433,6 +1433,7 @@ export default function FranchisePage() {
     // Game-aware position groups (soccer GK/DEF/MID/FWD, baseball C/INF/OF/DH/
     // SP/RP, hockey F/D/G, football QB/SKILL/OL/DL/LB/DB/ST).
     const fcGroupAverages = positionBreakdown(players, franchise && franchise.game)
+    const gm = (franchise && franchise.game === 'MLB The Show 26') ? mlbGmSummary(players) : null
 
     return {
       squadSize: players.length,
@@ -1443,7 +1444,8 @@ export default function FranchisePage() {
       totalValue: totalValue,
       totalWage: totalWage,
       topPlayers: topPlayers,
-      fcGroupAverages: fcGroupAverages
+      fcGroupAverages: fcGroupAverages,
+      gm: gm
     }
   }, [players, isCfb, franchise])
 
@@ -2525,6 +2527,51 @@ export default function FranchisePage() {
                 )}
               </div>
             </div>
+
+            {teamStats.gm && (
+              <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-5 mb-6">
+                <h2 className="text-sm font-semibold text-neutral-200">Front Office View</h2>
+                <p className="text-neutral-500 text-xs mb-3">Unit strength on a best-lineup basis, farm system, and roster shape.</p>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-3">
+                  {[['Lineup', teamStats.gm.lineup, 'best 9'], ['Rotation', teamStats.gm.rotation, 'top ' + teamStats.gm.rotationCount + ' SP'], ['Bullpen', teamStats.gm.bullpen, 'top ' + teamStats.gm.bullpenCount + ' RP'], ['Bench', teamStats.gm.bench, 'next 4 bats']].map(function(u) {
+                    return (
+                      <div key={u[0]} className="bg-neutral-800/50 border border-neutral-800 rounded-lg px-3 py-2.5">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="text-sm text-neutral-200 font-medium">{u[0]}</span>
+                          <span className="text-neutral-500 text-[10px] uppercase">{u[2]}</span>
+                        </div>
+                        <OvrBadge value={u[1] !== null ? Math.round(u[1]) : null} />
+                      </div>
+                    )
+                  })}
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                  <div className="bg-neutral-800/50 border border-neutral-800 rounded-lg px-3 py-2.5">
+                    <p className="text-neutral-500 text-[10px] font-semibold uppercase tracking-wide mb-1">Farm System</p>
+                    <div className="flex gap-3">
+                      {teamStats.gm.farm.map(function(fm) {
+                        return <span key={fm.level} className="text-xs text-neutral-300 uppercase">{fm.level} <span className={statTextColor(Math.round(fm.avg)) + ' font-bold'}>{Math.round(fm.avg)}</span> <span className="text-neutral-600">({fm.count})</span></span>
+                      })}
+                      {teamStats.gm.farm.length === 0 && <span className="text-neutral-500 text-xs">No minor leaguers</span>}
+                    </div>
+                  </div>
+                  <div className="bg-neutral-800/50 border border-neutral-800 rounded-lg px-3 py-2.5">
+                    <p className="text-neutral-500 text-[10px] font-semibold uppercase tracking-wide mb-1">Age Curve</p>
+                    <p className="text-xs text-neutral-300">Avg <span className="text-neutral-100 font-bold">{teamStats.gm.avgAge !== null ? teamStats.gm.avgAge.toFixed(1) : '-'}</span> · <span className="text-neutral-100 font-bold">{teamStats.gm.under25}</span> under 25</p>
+                  </div>
+                  <div className="bg-neutral-800/50 border border-neutral-800 rounded-lg px-3 py-2.5">
+                    <p className="text-neutral-500 text-[10px] font-semibold uppercase tracking-wide mb-1">Top Prospect</p>
+                    {teamStats.gm.topProspect ? (
+                      <p className="text-xs text-neutral-100 font-semibold">{teamStats.gm.topProspect.name} {teamStats.gm.topProspect.grade && <span className="text-violet-400">POT {teamStats.gm.topProspect.grade}</span>} <span className="text-neutral-500">{teamStats.gm.topProspect.level}</span></p>
+                    ) : <p className="text-neutral-500 text-xs">-</p>}
+                  </div>
+                  <div className="bg-neutral-800/50 border border-neutral-800 rounded-lg px-3 py-2.5">
+                    <p className="text-neutral-500 text-[10px] font-semibold uppercase tracking-wide mb-1">40-Man</p>
+                    <p className={'text-xs font-bold ' + (teamStats.gm.fortyMan >= 40 ? 'text-orange-400' : 'text-neutral-100')}>{teamStats.gm.fortyMan}/40 {teamStats.gm.fortyMan >= 40 ? '· FULL' : ''}</p>
+                  </div>
+                </div>
+              </div>
+            )}
 
             <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-5 mb-6">
               <h2 className="text-sm font-semibold text-neutral-200">Position Group Averages</h2>
