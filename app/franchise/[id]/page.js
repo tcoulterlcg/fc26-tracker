@@ -117,6 +117,16 @@ function fcPositionGroup(position) {
 
 const FC_POSITION_ORDER = ['GK', 'DEF', 'MID', 'FWD']
 
+// EA FC 26 formations — outfield rows from defence to attack (GK is implied).
+// Used by the squad hub to shape the Best XI. Ordered by back-line size.
+const FC_FORMATIONS = {
+  '4-4-2': [4, 4, 2], '4-4-1-1': [4, 4, 1, 1], '4-3-3': [4, 3, 3], '4-2-3-1': [4, 2, 3, 1],
+  '4-1-2-1-2': [4, 1, 2, 1, 2], '4-2-2-2': [4, 2, 2, 2], '4-3-2-1': [4, 3, 2, 1],
+  '4-1-4-1': [4, 1, 4, 1], '4-5-1': [4, 5, 1], '4-1-3-2': [4, 1, 3, 2],
+  '3-5-2': [3, 5, 2], '3-4-3': [3, 4, 3], '3-4-2-1': [3, 4, 2, 1], '3-1-4-2': [3, 1, 4, 2],
+  '5-3-2': [5, 3, 2], '5-2-1-2': [5, 2, 1, 2], '5-4-1': [5, 4, 1],
+}
+
 const DEPTH_GROUPS = [
   { label: 'Backfield', side: 'Offense', positions: ['QB', 'HB', 'FB'] },
   { label: 'Receivers', side: 'Offense', positions: ['WR', 'TE'] },
@@ -342,6 +352,7 @@ export default function FranchisePage() {
   const [importingRoster, setImportingRoster] = useState(false)
 
   const [activeTab, setActiveTab] = useState('roster')
+  const [formation, setFormation] = useState('4-3-3') // FC squad-hub Best XI shape
 
   const [tabOrder, setTabOrder] = useState(null)
   const [dragTabKey, setDragTabKey] = useState(null)
@@ -2310,7 +2321,19 @@ export default function FranchisePage() {
             const line = LINE_OF[(p.position || '').toUpperCase()] || 'MID'
             lines[line].push(p)
           }
-          const xi = [].concat(lines.ATT.slice(0, 3), lines.MID.slice(0, 3), lines.DEF.slice(0, 4), lines.GK.slice(0, 1))
+          // Shape the Best XI to the selected formation (rows are defence->attack).
+          const rows = FC_FORMATIONS[formation] || FC_FORMATIONS['4-3-3']
+          const defN = rows[0], attN = rows[rows.length - 1]
+          const midRows = rows.slice(1, rows.length - 1), midN = midRows.reduce(function(a, b) { return a + b }, 0)
+          const used = new Set()
+          const take = function(bucket, n) { const out = []; for (const p of bucket) { if (out.length >= n) break; if (!used.has(p.id)) { used.add(p.id); out.push(p) } } return out }
+          const backfill = function(arr, n) { for (const p of byOvr) { if (arr.length >= n) break; if (!used.has(p.id)) { used.add(p.id); arr.push(p) } } }
+          const gkP = take(lines.GK, 1); backfill(gkP, 1)
+          const defP = take(lines.DEF, defN); backfill(defP, defN)
+          const midP = take(lines.MID, midN); backfill(midP, midN)
+          const attP = take(lines.ATT, attN); backfill(attP, attN)
+          const midSplit = []; let mi = 0; for (const c of midRows) { midSplit.push(midP.slice(mi, mi + c)); mi += c }
+          const xi = [].concat(gkP, defP, midP, attP)
           const xiIds = new Set(xi.map(function(p) { return p.id }))
           const bench = byOvr.filter(function(p) { return !xiIds.has(p.id) }).slice(0, 7)
           const POS_ORDER = ['GK', 'RB', 'RWB', 'CB', 'LB', 'LWB', 'CDM', 'CM', 'CAM', 'LM', 'RM', 'LW', 'RW', 'CF', 'ST']
@@ -2332,12 +2355,21 @@ export default function FranchisePage() {
           return (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <div className="lg:col-span-2 bg-gradient-to-b from-violet-950/40 via-neutral-900 to-neutral-950 border border-violet-500/25 rounded-2xl p-6">
-                <p className="text-violet-300 text-[11px] font-semibold uppercase tracking-[0.16em] mb-5">Best XI &middot; 4-3-3 by rating</p>
+                <div className="flex items-center justify-between gap-3 mb-5 flex-wrap">
+                  <p className="text-violet-300 text-[11px] font-semibold uppercase tracking-[0.16em]">Best XI &middot; {formation}</p>
+                  <label className="flex items-center gap-2">
+                    <span className="text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em]">Formation</span>
+                    <select value={formation} onChange={function(e) { setFormation(e.target.value) }}
+                      className="bg-neutral-800 border border-neutral-700 rounded-lg px-2.5 py-1.5 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-violet-500">
+                      {Object.keys(FC_FORMATIONS).map(function(f) { return <option key={f} value={f}>{f}</option> })}
+                    </select>
+                  </label>
+                </div>
                 <div className="space-y-7">
-                  <div className="flex justify-center gap-6 flex-wrap">{lines.ATT.slice(0, 3).map(function(p) { return <Chip key={p.id} p={p} /> })}</div>
-                  <div className="flex justify-center gap-6 flex-wrap">{lines.MID.slice(0, 3).map(function(p) { return <Chip key={p.id} p={p} /> })}</div>
-                  <div className="flex justify-center gap-4 flex-wrap">{lines.DEF.slice(0, 4).map(function(p) { return <Chip key={p.id} p={p} /> })}</div>
-                  <div className="flex justify-center">{lines.GK.slice(0, 1).map(function(p) { return <Chip key={p.id} p={p} /> })}</div>
+                  <div className="flex justify-center gap-6 flex-wrap">{attP.map(function(p) { return <Chip key={p.id} p={p} /> })}</div>
+                  {midSplit.slice().reverse().map(function(row, ri) { return <div key={ri} className="flex justify-center gap-6 flex-wrap">{row.map(function(p) { return <Chip key={p.id} p={p} /> })}</div> })}
+                  <div className="flex justify-center gap-4 flex-wrap">{defP.map(function(p) { return <Chip key={p.id} p={p} /> })}</div>
+                  <div className="flex justify-center">{gkP.map(function(p) { return <Chip key={p.id} p={p} /> })}</div>
                 </div>
                 <div className="mt-7 pt-5 border-t border-neutral-800">
                   <p className="text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-3">Bench</p>

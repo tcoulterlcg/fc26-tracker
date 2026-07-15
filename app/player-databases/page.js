@@ -11,6 +11,16 @@ function mlbVersionLabel(v) {
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
 }
 
+// Position options per game (for the position filter dropdown).
+const POSITIONS = {
+  'EA FC 26': ['GK', 'RB', 'RWB', 'CB', 'LB', 'LWB', 'CDM', 'CM', 'CAM', 'RM', 'LM', 'RW', 'LW', 'CF', 'ST'],
+  'EA CFB 27': ['QB', 'HB', 'FB', 'WR', 'TE', 'LT', 'LG', 'C', 'RG', 'RT', 'LE', 'RE', 'DT', 'LOLB', 'MLB', 'ROLB', 'CB', 'FS', 'SS', 'K', 'P'],
+  'MLB The Show 26': ['C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF', 'DH', 'SP', 'RP', 'CP'],
+}
+// Which games expose age / numeric potential (drives the max-age + potential sort).
+const HAS_AGE = { 'EA FC 26': true, 'MLB The Show 26': true, 'EA CFB 27': false }
+const HAS_POTENTIAL = { 'EA FC 26': true, 'MLB The Show 26': false, 'EA CFB 27': false }
+
 export default function PlayerDatabasesPage() {
   const [game, setGame] = useState('EA FC 26')
   const [searchTerm, setSearchTerm] = useState('')
@@ -19,6 +29,10 @@ export default function PlayerDatabasesPage() {
   const [hasSearched, setHasSearched] = useState(false)
   const [mlbVersion, setMlbVersion] = useState('')
   const [mlbVersions, setMlbVersions] = useState([])
+  // Filters / sort — let you browse (e.g. highest-potential GKs under 22).
+  const [position, setPosition] = useState('All')
+  const [maxAge, setMaxAge] = useState('')
+  const [sortBy, setSortBy] = useState('overall')
 
   const supabase = createClient()
 
@@ -26,6 +40,9 @@ export default function PlayerDatabasesPage() {
     setResults([])
     setHasSearched(false)
     setSearchTerm('')
+    setPosition('All')
+    setMaxAge('')
+    setSortBy('overall')
   }, [game])
 
   useEffect(() => {
@@ -38,87 +55,66 @@ export default function PlayerDatabasesPage() {
   }, [game])
 
   useEffect(() => {
+    const active = searchTerm.length >= 2 || position !== 'All' || maxAge !== ''
     const delayDebounce = setTimeout(() => {
-      if (searchTerm.length >= 2) {
-        search()
-      } else {
-        setResults([])
-        setHasSearched(false)
-      }
+      if (active) search()
+      else { setResults([]); setHasSearched(false) }
     }, 300)
     return () => clearTimeout(delayDebounce)
-  }, [searchTerm, game, mlbVersion])
+  }, [searchTerm, game, mlbVersion, position, maxAge, sortBy])
 
   const search = async () => {
     setLoading(true)
     setHasSearched(true)
 
-    if (game === 'MLB The Show 26') {
-      if (!mlbVersion) { setResults([]); setLoading(false); return }
-      const { data, error } = await supabase
-        .from('mlb_player_reference')
-        .select('*')
-        .eq('version', mlbVersion)
-        .or('player_name.ilike.%' + searchTerm + '%,team.ilike.%' + searchTerm + '%')
-        .order('overall_rating', { ascending: false })
-        .limit(50)
-      let rows = error ? [] : (data || [])
+    const isCfb = game === 'EA CFB 27'
+    const isMlb = game === 'MLB The Show 26'
+    const table = isCfb ? 'cfb_player_reference' : isMlb ? 'mlb_player_reference' : 'player_reference'
+    const nameCol = (isCfb || isMlb) ? 'player_name' : 'name'
+    const clubCol = (isCfb || isMlb) ? 'team' : 'active_club'
+    const term = searchTerm.trim()
+    const filtering = position !== 'All' || maxAge !== ''
+
+    if (isMlb && !mlbVersion) { setResults([]); setLoading(false); return }
+
+    // Structured query: name/club text + position + max age + sort. Also powers
+    // pure browse (e.g. GK, age <= 21, sort by potential — no name needed).
+    let q = supabase.from(table).select('*')
+    if (isMlb) q = q.eq('version', mlbVersion)
+    if (term.length >= 2) q = q.or(nameCol + '.ilike.%' + term + '%,' + clubCol + '.ilike.%' + term + '%')
+    if (position !== 'All') q = q.eq('position', position)
+    if (maxAge !== '' && HAS_AGE[game]) { const a = parseInt(maxAge, 10); if (!isNaN(a)) q = q.lte('age', a) }
+
+    const upside = sortBy === 'upside' && HAS_POTENTIAL[game]
+    if (sortBy === 'potential' && HAS_POTENTIAL[game]) {
+      q = q.order('potential_rating', { ascending: false, nullsFirst: false }).order('overall_rating', { ascending: false, nullsFirst: false })
+    } else if (sortBy === 'age' && HAS_AGE[game]) {
+      q = q.order('age', { ascending: true, nullsFirst: false }).order('overall_rating', { ascending: false, nullsFirst: false })
+    } else {
+      q = q.order('overall_rating', { ascending: false, nullsFirst: false })
+    }
+    q = q.limit(upside ? 300 : 50)
+
+    const { data, error } = await q
+    let rows = error ? [] : (data || [])
+
+    // Pure name search (no structural filters): keep nickname + typo tolerance.
+    if (term.length >= 2 && !filtering) {
+      const aliases = aliasCanonicalNames(term)
+      if (aliases.length > 0) {
+        const alias = await supabase.from(table).select('*').in(clubCol, aliases).order('overall_rating', { ascending: false }).limit(50)
+        if (!alias.error && alias.data) { const seen = new Set(rows.map((r) => r.id)); rows = rows.concat(alias.data.filter((r) => !seen.has(r.id))) }
+      }
       if (rows.length < 3) {
-        const fuzzy = await fuzzyPlayerSearch(supabase, 'mlb_player_reference', 'player_name', searchTerm, 50, (q) => q.eq('version', mlbVersion))
+        const fuzzy = await fuzzyPlayerSearch(supabase, table, nameCol, term, 50, isMlb ? (qq) => qq.eq('version', mlbVersion) : undefined)
         const seen = new Set(rows.map((r) => r.id))
         rows = rows.concat(fuzzy.filter((r) => !seen.has(r.id)))
-        // Relevance beats rating when we had to fuzzy-match.
-        rows.sort((a, b) => similarity(searchTerm, b.player_name) - similarity(searchTerm, a.player_name))
+        rows.sort((a, b) => similarity(term, b[nameCol]) - similarity(term, a[nameCol]))
       }
-      setResults(rows.slice(0, 50))
-      setLoading(false)
-      return
+    } else if (upside) {
+      rows.sort((a, b) => ((b.potential_rating || 0) - (b.overall_rating || 0)) - ((a.potential_rating || 0) - (a.overall_rating || 0)) || (b.potential_rating || 0) - (a.potential_rating || 0))
     }
 
-    const isCfb = game === 'EA CFB 27'
-    const table = isCfb ? 'cfb_player_reference' : 'player_reference'
-    const nameCol = isCfb ? 'player_name' : 'name'
-    const clubCol = isCfb ? 'team' : 'active_club'
-
-    const primary = await supabase
-      .from(table)
-      .select('*')
-      .or(nameCol + '.ilike.%' + searchTerm + '%,' + clubCol + '.ilike.%' + searchTerm + '%')
-      .order('overall_rating', { ascending: false })
-      .limit(50)
-
-    let rows = primary.error ? [] : (primary.data || [])
-
-    // Nickname / acronym expansion: "PSG" -> Paris Saint-Germain, "OSU" -> Ohio State, etc.
-    const aliases = aliasCanonicalNames(searchTerm)
-    if (aliases.length > 0) {
-      const alias = await supabase
-        .from(table)
-        .select('*')
-        .in(clubCol, aliases)
-        .order('overall_rating', { ascending: false })
-        .limit(50)
-      if (!alias.error && alias.data) {
-        const seen = new Set(rows.map((r) => r.id))
-        rows = rows.concat(alias.data.filter((r) => !seen.has(r.id)))
-      }
-    }
-
-    // Typo tolerance: word-level fallback ranked by similarity.
-    let usedFuzzy = false
-    if (rows.length < 3) {
-      const fuzzy = await fuzzyPlayerSearch(supabase, table, nameCol, searchTerm, 50)
-      const seen = new Set(rows.map((r) => r.id))
-      rows = rows.concat(fuzzy.filter((r) => !seen.has(r.id)))
-      usedFuzzy = true
-    }
-
-    if (usedFuzzy) {
-      // Relevance beats rating when we had to fuzzy-match.
-      rows.sort((a, b) => similarity(searchTerm, b[nameCol]) - similarity(searchTerm, a[nameCol]))
-    } else {
-      rows.sort((a, b) => (b.overall_rating || 0) - (a.overall_rating || 0))
-    }
     setResults(rows.slice(0, 50))
     setLoading(false)
   }
@@ -193,11 +189,43 @@ export default function PlayerDatabasesPage() {
         )}
 
         <div className="bg-neutral-900/60 border border-neutral-800 rounded-xl p-6">
+          {/* Filters + sort — browse without a name (e.g. GK · age <= 21 · sort by potential) */}
+          <div className="flex flex-wrap items-end gap-3 mb-4">
+            <div>
+              <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Position</label>
+              <select value={position} onChange={(e) => setPosition(e.target.value)}
+                className="bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500">
+                <option value="All">All positions</option>
+                {(POSITIONS[game] || []).map((p) => (<option key={p} value={p}>{p}</option>))}
+              </select>
+            </div>
+            {HAS_AGE[game] && (
+              <div>
+                <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Max age</label>
+                <input type="number" min="15" max="50" value={maxAge} onChange={(e) => setMaxAge(e.target.value)} placeholder="Any"
+                  className="w-24 bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-violet-500" />
+              </div>
+            )}
+            <div>
+              <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Sort by</label>
+              <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}
+                className="bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500">
+                <option value="overall">Overall (high → low)</option>
+                {HAS_POTENTIAL[game] && <option value="potential">Potential (high → low)</option>}
+                {HAS_POTENTIAL[game] && <option value="upside">Upside (POT − OVR)</option>}
+                {HAS_AGE[game] && <option value="age">Age (young → old)</option>}
+              </select>
+            </div>
+            {(position !== 'All' || maxAge !== '') && (
+              <button type="button" onClick={() => { setPosition('All'); setMaxAge('') }}
+                className="text-violet-400 hover:text-violet-300 text-xs font-semibold pb-2.5">Clear filters</button>
+            )}
+          </div>
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder={game === 'EA FC 26' ? 'Search by player name or club...' : 'Search by player name or team...'}
+            placeholder={game === 'EA CFB 27' ? 'Search by player name or team… (optional)' : 'Search by player name or club… (optional)'}
             className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-sm placeholder:text-neutral-500 mb-5 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
           />
 
@@ -215,7 +243,7 @@ export default function PlayerDatabasesPage() {
 
           {!loading && !hasSearched && (
             <div className="py-10 text-center border border-dashed border-neutral-800 rounded-lg">
-              <p className="text-neutral-500 text-sm">Type at least 2 characters to search.</p>
+              <p className="text-neutral-500 text-sm">Pick a position / max age above, or type a name (2+ characters), to browse.</p>
             </div>
           )}
 

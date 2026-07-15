@@ -1,0 +1,357 @@
+FC Basel 1893|Xherdan Shaqiri|Switzerland|CAM|77|77|33|67|80|79|79|40|71|193348|Swiss Super League
+Servette FC|Miroslav Stevanović|Bosnia and Herzegovina|RM|74|74|34|73|70|75|72|39|69|206254|Swiss Super League
+Servette FC|Timothé Cognat|France|CM|74|74|27|77|65|74|75|65|70|244399|Swiss Super League
+FC Basel 1893|Dominik Schmid|Switzerland|LB|74|74|27|77|58|75|73|67|73|239016|Swiss Super League
+FC Basel 1893|Bećir Omeragić|Switzerland|CB|74|80|23|75|40|63|67|74|73|244603|Swiss Super League
+FC Basel 1893|Bénie Traoré|Côte d'Ivoire|LM|74|82|22|86|74|64|79|32|67|260651|Swiss Super League
+BSC Young Boys|Edimilson Fernandes|Switzerland|CDM|74|74|29|67|64|69|71|75|67|215556|Swiss Super League
+FC Lugano|Renato Steffen|Switzerland|RM|74|74|33|80|70|72|75|49|64|210537|Swiss Super League
+FC St. Gallen 1879|Lawrence Ati Zigi|Ghana|GK|73|75|28|72|70|66|74|40|73|229956|Swiss Super League
+BSC Young Boys|Christian Fassnacht|Switzerland|RM|73|73|31|76|70|68|73|36|69|234913|Swiss Super League
+BSC Young Boys|Alvyn Antonio Sanches|Switzerland|CAM|73|82|22|84|64|69|77|63|66|260272|Swiss Super League
+FC Lugano|Mattia Zanotti|Italy|RB|73|82|22|78|59|70|74|68|72|271573|Swiss Super League
+Grasshopper Club Zürich|Justin Hammel|Switzerland|GK|72|78|24|75|70|70|77|23|70|270038|Swiss Super League
+FC Basel 1893|Flavius Daniliuc|Austria|CB|72|78|24|52|42|61|60|71|74|252017|Swiss Super League
+FC Basel 1893|Julien Duranville|Belgium|RM|72|85|19|88|61|63|82|26|49|262105|Swiss Super League
+FC Luzern|Matteo Di Giusto|Switzerland|CAM|72|76|24|78|71|68|75|31|54|256980|Swiss Super League
+FC Luzern|Pascal Loretz|Switzerland|GK|72|82|22|72|70|68|73|44|72|262862|Swiss Super League
+FC St. Gallen 1879|Lukas Görtler|Germany|CM|72|72|31|69|69|75|68|59|77|228645|Swiss Super League
+BSC Young Boys|Gregory Wüthrich|Switzerland|CB|72|72|30|45|35|51|54|72|83|220665|Swiss Super League
+BSC Young Boys|Samuel Essende|Congo DR|ST|72|72|27|73|69|50|67|26|81|245716|Swiss Super League
+BSC Young Boys|Marvin Keller|Switzerland|GK|72|81|22|73|70|70|73|38|73|256726|Swiss Super League
+BSC Young Boys|Joël Almada Monteiro|Switzerland|LM|72|73|25|81|69|64|73|47|78|258924|Swiss Super League
+FC Thun|Leonardo Bertone|Switzerland|CDM|72|72|31|66|70|71|69|66|74|211437|Swiss Super League
+FC Lugano|Uran Bislimi|Switzerland|CM|72|75|25|69|66|71|74|64|72|270913|Swiss Super League
+FC Basel 1893|Léo Leroy|France|CDM|71|76|25|52|60|71|71|65|68|247599|Swiss Super League
+FC Basel 1893|Keigo Tsunemoto|Japan|RB|71|72|26|78|52|62|64|68|61|258880|Swiss Super League
+FC St. Gallen 1879|Carlo Boukhalfa|Germany|CAM|71|72|26|68|67|66|74|61|77|258784|Swiss Super League
+BSC Young Boys|Chris Bedia|Côte d'Ivoire|ST|71|71|29|70|71|54|66|36|80|225533|Swiss Super League
+BSC Young Boys|Rayan Raveloson|Madagascar|CM|71|71|28|73|68|65|72|69|76|225853|Swiss Super League
+BSC Young Boys|Yan Valery|Tunisia|RB|71|72|26|62|52|63|69|70|74|236316|Swiss Super League
+BSC Young Boys|Armin Gigović|Bosnia and Herzegovina|CDM|71|78|23|65|60|70|74|63|75|251617|Swiss Super League
+BSC Young Boys|Darian Males|Switzerland|RM|71|74|24|78|65|67|71|36|66|252526|Swiss Super League
+FC Thun|Fabio Fehr|Switzerland|RB|71|74|25|72|57|69|64|64|62|256735|Swiss Super League
+FC Lausanne-Sport|Karlo Letica|Croatia|GK|71|73|28|71|66|65|71|32|73|243538|Swiss Super League
+FC Lugano|Anto Grgić|Switzerland|CDM|71|71|28|61|68|76|66|65|74|229336|Swiss Super League
+FC Lugano|Antonios Papadopoulos|Germany|CB|71|75|25|66|33|56|59|68|83|240008|Swiss Super League
+FC Lugano|Kevin Behrens|Germany|ST|71|71|34|69|69|51|65|41|82|244706|Swiss Super League
+FC Lugano|Amir Saipi|Kosovo|GK|71|77|24|71|69|68|72|30|72|247077|Swiss Super League
+FC Sion|Anthony Racioppi|Switzerland|GK|71|75|26|74|70|68|72|30|68|243573|Swiss Super League
+FC Sion|Ilyas Chouaref|Malta|LM|71|74|24|76|69|64|75|38|72|246729|Swiss Super League
+Grasshopper Club Zürich|Michael Frey|Switzerland|ST|70|70|30|60|71|61|59|41|86|208159|Swiss Super League
+Servette FC|Florian Ayé|France|ST|70|70|28|83|69|57|68|31|74|229448|Swiss Super League
+Servette FC|Junior Kadile|France|LM|70|79|22|89|65|65|70|31|58|257083|Swiss Super League
+FC Zürich|Alexander Hack|Germany|CB|70|70|31|54|38|59|50|71|74|231111|Swiss Super League
+FC Zürich|Nelson Palacio|Colombia|CDM|70|77|24|71|63|63|67|65|70|264433|Swiss Super League
+FC Basel 1893|Koba Leïn Koindredi|France|CM|70|77|23|65|70|72|74|58|69|252025|Swiss Super League
+FC Basel 1893|Ibrahim Salah|Morocco|RM|70|76|23|71|69|60|72|30|67|270828|Swiss Super League
+FC St. Gallen 1879|Jordi Quintillà Guasch|Spain|CDM|70|70|31|51|66|71|73|64|68|210619|Swiss Super League
+FC St. Gallen 1879|Lukas Daschner|Germany|CDM|70|71|26|72|69|67|73|63|69|238980|Swiss Super League
+FC St. Gallen 1879|Christian Witzig|Switzerland|CM|70|75|24|68|65|70|72|61|68|263745|Swiss Super League
+BSC Young Boys|Loris Benito|Switzerland|CB|70|70|33|66|50|63|63|70|77|193468|Swiss Super League
+BSC Young Boys|Sandro Lauper|Switzerland|CB|70|70|28|73|65|65|69|69|72|229900|Swiss Super League
+FC Lausanne-Sport|Jamie Roche|Sweden|CM|70|75|24|70|65|65|68|69|77|256874|Swiss Super League
+FC Lugano|Ahmed Kendouci|Algeria|CM|70|73|26|73|71|67|72|63|62|79217|Swiss Super League
+FC Lugano|David von Ballmoos|Switzerland|GK|70|70|30|71|71|72|69|50|70|219244|Swiss Super League
+FC Lugano|Hannes Delcroix|Haiti|CB|70|73|26|66|35|60|61|70|69|237440|Swiss Super League
+FC Sion|Numa Lavanchy|Switzerland|RB|70|70|31|79|61|64|69|63|71|199890|Swiss Super League
+FC Sion|Donat Rrudhani|Kosovo|CAM|70|71|26|75|71|68|71|39|70|270328|Swiss Super League
+Servette FC|Joël Mall|Cyprus|GK|69|69|34|71|66|63|70|44|69|189021|Swiss Super League
+Servette FC|Steve Rouiller|Switzerland|CB|69|69|34|41|27|48|52|70|77|224821|Swiss Super League
+Servette FC|Houboulang Mendes|Guinea-Bissau|RB|69|69|27|76|42|59|63|68|71|234856|Swiss Super League
+Servette FC|Lamine Fomba|France|CDM|69|70|27|67|52|64|71|68|77|236721|Swiss Super League
+Servette FC|Ablie Jallow|Gambia|RM|69|69|26|77|65|65|73|34|48|239740|Swiss Super League
+Servette FC|Samuel Mráz|Slovakia|ST|69|69|28|72|68|54|64|32|72|244185|Swiss Super League
+FC Basel 1893|Moritz Broschinski|Germany|ST|69|73|24|78|68|60|66|33|70|243960|Swiss Super League
+FC Basel 1893|Abelmy Meto Silu|Congo DR|CDM|69|80|22|70|54|63|72|67|69|262062|Swiss Super League
+FC Basel 1893|Finn van Breemen|Netherlands|CB|69|80|22|64|31|51|58|69|73|276173|Swiss Super League
+FC St. Gallen 1879|Hugo Vandermersch|France|RB|69|70|26|67|45|61|63|67|71|252183|Swiss Super League
+BSC Young Boys|Jaouen Hadjam|Algeria|LB|69|77|22|79|54|59|69|65|72|258230|Swiss Super League
+FC Winterthur|Stefanos Kapino|Greece|GK|69|69|31|71|64|64|70|46|67|205878|Swiss Super League
+FC Thun|Genís Montolio Lafuente|Spain|CB|69|70|28|60|37|63|59|71|64|241855|Swiss Super League
+FC Thun|Niklas Steffen|Switzerland|GK|69|75|24|73|66|69|72|30|65|275733|Swiss Super League
+FC Lausanne-Sport|Theo Bair|Canada|ST|69|72|25|75|66|51|64|29|80|245563|Swiss Super League
+FC Lausanne-Sport|Kevin Mouanga|Congo|CB|69|73|24|69|31|46|51|70|74|247407|Swiss Super League
+FC Sion|Ali Kabacalman|Switzerland|CDM|69|69|29|57|55|60|66|65|72|234687|Swiss Super League
+FC Sion|Baltazar Oliveira|Brazil|CDM|69|73|25|67|56|66|72|63|72|243898|Swiss Super League
+Grasshopper Club Zürich|Maximilian Ullmann|Austria|LB|68|68|29|81|60|62|65|61|71|238988|Swiss Super League
+Grasshopper Club Zürich|Sven Köhler|Germany|CB|68|68|28|59|58|63|60|66|80|251281|Swiss Super League
+Servette FC|David Douline|France|CDM|68|68|32|43|58|62|65|67|71|212939|Swiss Super League
+Servette FC|Bradley Mazikou|Congo|LB|68|68|29|78|32|61|63|63|63|234138|Swiss Super League
+Servette FC|Dylan Bronn|Tunisia|CB|68|68|30|60|61|64|61|68|76|235565|Swiss Super League
+Servette FC|Giotto Morandi|Switzerland|CAM|68|69|26|76|66|68|69|52|63|240544|Swiss Super League
+Servette FC|Jérémy Guillemenot|Switzerland|ST|68|68|27|77|67|63|66|38|67|245218|Swiss Super League
+FC Zürich|Valon Berisha|Kosovo|LM|68|68|32|57|64|70|70|59|74|191783|Swiss Super League
+FC Zürich|Lindrit Kamberi|Switzerland|RB|68|71|25|70|37|58|65|68|73|243025|Swiss Super League
+FC Zürich|Matthias Phaëton|Guadeloupe|LM|68|69|25|84|64|60|67|29|77|246230|Swiss Super League
+FC Basel 1893|Albian Ajeti|Switzerland|ST|68|68|28|70|67|55|65|28|72|222352|Swiss Super League
+FC Basel 1893|Nicolas Vouilloz|Switzerland|CB|68|75|24|71|28|49|53|66|78|257005|Swiss Super League
+FC Luzern|Pius Dorn|Germany|RB|68|68|28|80|66|66|68|59|69|231039|Swiss Super League
+FC Luzern|Stefan Knežević|Switzerland|CB|68|69|28|37|37|50|61|68|76|234817|Swiss Super League
+FC St. Gallen 1879|Jozo Stanić|Croatia|CB|68|71|26|61|28|59|59|68|76|244490|Swiss Super League
+FC St. Gallen 1879|Chima Okoroji|Germany|LB|68|68|28|86|34|64|67|60|69|245428|Swiss Super League
+BSC Young Boys|Dominik Pech|Czechia|CM|68|77|18|67|62|68|71|56|65|75499|Swiss Super League
+BSC Young Boys|Alan Virginius|France|LM|68|77|22|90|59|59|70|27|42|257319|Swiss Super League
+BSC Young Boys|Ryan Andrews|England|RB|68|75|20|85|56|58|69|62|62|270371|Swiss Super League
+FC Thun|Kastriot Imeri|Switzerland|CM|68|73|25|71|72|69|71|59|63|250766|Swiss Super League
+FC Lausanne-Sport|Olivier Custodio|Switzerland|CM|68|68|30|55|50|72|66|65|71|218887|Swiss Super League
+FC Lausanne-Sport|Morgan Poaty|Congo|LB|68|68|27|83|50|55|68|64|73|231307|Swiss Super League
+FC Lausanne-Sport|Brandon Soppy|France|RB|68|75|23|79|50|63|67|63|73|258407|Swiss Super League
+FC Lausanne-Sport|Karim Sow|Switzerland|CB|68|78|22|59|33|44|39|68|74|263968|Swiss Super League
+FC Lugano|Daniel dos Santos|Switzerland|CAM|68|76|22|69|60|66|69|39|50|73151|Swiss Super League
+FC Lugano|Mattia Bottani|Switzerland|LM|68|68|34|79|64|63|69|41|50|176246|Swiss Super League
+FC Lugano|Ezgjan Alioski|North Macedonia|LB|68|68|33|71|70|70|72|64|68|206006|Swiss Super League
+FC Lugano|Lars Lukas Mai|Germany|CB|68|72|25|49|35|55|53|65|75|243275|Swiss Super League
+FC Lugano|Yanis Cimignani|France|RM|68|74|23|73|64|64|70|52|62|258393|Swiss Super League
+FC Lugano|Claudio Cassano|Italy|CAM|68|79|21|82|63|64|73|36|45|277376|Swiss Super League
+FC Sion|Franck Surdez|Switzerland|LM|68|74|23|78|66|62|69|31|59|70427|Swiss Super League
+FC Sion|Benjamin Kololli|Kosovo|LM|68|68|33|66|70|64|71|54|73|211903|Swiss Super League
+FC Sion|Nias Hefti|Switzerland|LB|68|71|25|76|43|63|69|61|64|244131|Swiss Super League
+FC Sion|Kreshnik Hajrizi|Kosovo|CB|68|71|26|68|33|51|61|67|76|263740|Swiss Super League
+Servette FC|Lilian Njoh|France|LB|67|74|23|65|45|61|64|63|61|73846|Swiss Super League
+Servette FC|Jérémy Frick|Switzerland|GK|67|67|32|68|67|66|64|42|67|206307|Swiss Super League
+Servette FC|Yoan Severin|France|CB|67|68|28|65|27|50|51|66|77|237181|Swiss Super League
+Servette FC|Marco Burch|Switzerland|CB|67|72|24|67|45|53|51|66|74|252527|Swiss Super League
+FC Zürich|Ivan Ricardo Cavaleiro|Angola|LM|67|67|31|73|64|64|70|33|65|212267|Swiss Super League
+FC Zürich|Bledian Krasniqi|Kosovo|CM|67|74|24|71|66|67|71|62|61|246168|Swiss Super League
+FC Zürich|Philippe Paulin Keny|Senegal|ST|67|68|26|80|65|55|65|29|71|251381|Swiss Super League
+FC Luzern|Adrian Grbić|Austria|ST|67|67|28|65|69|53|65|31|70|239432|Swiss Super League
+FC Luzern|Kevin Spadanuda|Switzerland|LM|67|67|28|70|66|64|68|39|55|269947|Swiss Super League
+FC Luzern|Lars Villiger|Switzerland|ST|67|76|22|72|68|54|63|38|72|275090|Swiss Super League
+FC Luzern|Adrian Bajrami|Switzerland|CB|67|75|23|63|27|44|43|68|67|279896|Swiss Super League
+FC St. Gallen 1879|Aliou Baldé|Guinea|ST|67|75|22|90|68|57|72|33|63|261444|Swiss Super League
+FC St. Gallen 1879|Tom Gaal|Germany|CB|67|73|24|54|36|50|58|67|72|266000|Swiss Super League
+FC St. Gallen 1879|Colin Kleine-Bekel|Germany|CB|67|74|22|54|28|42|41|69|71|276130|Swiss Super League
+BSC Young Boys|Heinz Lindner|Austria|GK|67|67|34|66|66|63|66|42|70|193247|Swiss Super League
+BSC Young Boys|Saidy Janko|Gambia|RB|67|67|29|83|52|59|66|63|70|220172|Swiss Super League
+FC Winterthur|Mirlind Kryeziu|Kosovo|CB|67|68|28|33|36|50|50|65|77|239853|Swiss Super League
+FC Thun|Marco Bürki|Switzerland|CB|67|67|31|60|26|56|55|67|76|211438|Swiss Super League
+FC Thun|Jan Bamert|Switzerland|CB|67|69|27|54|32|52|58|68|69|231650|Swiss Super League
+FC Lausanne-Sport|Gaoussou Diakité|Mali|ST|67|81|19|82|66|57|72|44|67|70511|Swiss Super League
+FC Lausanne-Sport|Florent Mollet|France|CAM|67|67|33|55|66|75|64|51|52|209288|Swiss Super League
+FC Lausanne-Sport|Nicky Beloko|Switzerland|CM|67|69|25|73|62|62|68|66|76|252967|Swiss Super League
+FC Lugano|Mohamed Belhadj Mahmoud|Tunisia|CDM|67|72|25|67|58|63|66|64|70|264705|Swiss Super League
+FC Sion|Rilind Nivokazi|Kosovo|ST|67|70|25|64|67|49|63|25|72|79212|Swiss Super League
+FC Sion|Josias Lukembila|Switzerland|LM|67|68|25|80|61|59|67|23|62|256698|Swiss Super League
+Grasshopper Club Zürich|Amir Abrashi|Albania|CDM|66|66|35|35|54|59|66|60|69|199282|Swiss Super League
+Grasshopper Club Zürich|Lovro Zvonarek|Croatia|CAM|66|78|20|69|60|63|67|39|54|269497|Swiss Super League
+Grasshopper Club Zürich|Abdoulaye Diaby|Mali|CB|66|72|24|64|27|41|41|62|84|276170|Swiss Super League
+FC Basel 1893|Marin Soticek|Croatia|RW|66|81|20|76|64|54|72|24|59|73582|Swiss Super League
+FC Luzern|Bung Meng Freimann|Switzerland|CB|66|80|19|79|27|55|61|66|66|73657|Swiss Super League
+FC Luzern|Severin Ottiger|Switzerland|RB|66|75|22|71|48|59|65|62|69|270928|Swiss Super League
+FC Luzern|Andrejs Cigaņiks|Latvia|LB|66|66|28|69|52|61|63|60|63|273127|Swiss Super League
+BSC Young Boys|Ebrima Colley|Gambia|RW|66|67|25|83|64|58|69|27|54|254692|Swiss Super League
+FC Winterthur|Théo Golliard|Switzerland|CAM|66|72|22|68|61|65|65|41|49|73146|Swiss Super League
+FC Winterthur|Remo Arnold|Switzerland|CB|66|67|28|34|35|56|56|66|74|228874|Swiss Super League
+FC Winterthur|Andrin Hunziker|Switzerland|ST|66|72|22|63|66|49|60|25|75|267486|Swiss Super League
+FC Winterthur|Randy Schneider|Philippines|CM|66|71|23|75|56|64|71|53|62|270037|Swiss Super League
+FC Thun|Christopher Ibayi|Congo|ST|66|66|29|60|68|48|61|26|67|70187|Swiss Super League
+FC Thun|Mattias Käit|Estonia|CM|66|67|27|69|61|63|64|64|70|229377|Swiss Super League
+FC Thun|Brighton Labeau|Martinique|ST|66|66|29|72|66|54|67|24|77|239329|Swiss Super League
+FC Thun|Nils Reichmuth|Switzerland|CAM|66|73|23|66|59|63|66|47|58|263062|Swiss Super League
+FC Lugano|Hicham Mahou|France|LM|66|67|25|84|62|60|63|39|55|239003|Swiss Super League
+FC Lugano|Georgios Koutsias|Greece|ST|66|76|21|86|66|56|69|23|61|258834|Swiss Super League
+FC Sion|Jan Kronig|Switzerland|CB|66|71|25|69|30|44|53|67|70|243860|Swiss Super League
+Grasshopper Club Zürich|Jonathan Asp-Jensen|Denmark|LW|65|81|19|65|60|67|64|54|58|72246|Swiss Super League
+Grasshopper Club Zürich|Óscar Clemente Mues|Spain|LM|65|65|26|63|55|65|62|49|46|255258|Swiss Super League
+Grasshopper Club Zürich|Young Jun Lee|Korea Republic|ST|65|74|22|63|67|47|57|24|75|261490|Swiss Super League
+Grasshopper Club Zürich|Ismajl Beka|Kosovo|CB|65|70|25|48|39|45|42|63|72|271638|Swiss Super League
+Servette FC|Gaël Ondoua|Cameroon|CDM|65|65|29|63|51|60|60|63|72|245017|Swiss Super League
+FC Zürich|Jorge Segura|Colombia|CB|65|66|28|58|29|38|39|67|75|228770|Swiss Super League
+FC Zürich|Juan José Perea|Colombia|ST|65|68|25|77|66|56|67|26|65|253173|Swiss Super League
+FC Luzern|Julian von Moos|Switzerland|ST|65|68|24|80|62|60|68|28|58|244592|Swiss Super League
+FC Luzern|Tyron Owusu|Switzerland|CM|65|76|22|69|48|62|68|61|71|257344|Swiss Super League
+FC St. Gallen 1879|Kevin Csoboth|Hungary|LM|65|68|25|85|60|60|64|27|46|236449|Swiss Super League
+FC St. Gallen 1879|Mihailo Stevanović|Serbia|CM|65|71|23|71|60|62|65|61|72|258043|Swiss Super League
+BSC Young Boys|Tanguy Zoukrou|France|CB|65|75|22|55|32|43|42|65|71|264785|Swiss Super League
+FC Winterthur|Nishan Burkart|Switzerland|LM|65|66|25|82|60|57|65|27|66|243838|Swiss Super League
+FC Winterthur|Basil Stillhart|Switzerland|CDM|65|65|31|59|62|62|60|62|77|243894|Swiss Super League
+FC Winterthur|Alexandre Jankewitz|Switzerland|CDM|65|70|23|67|57|61|66|59|71|257244|Swiss Super League
+FC Thun|Lucien Dähler|Switzerland|RB|65|70|24|68|39|56|61|62|52|78288|Swiss Super League
+FC Thun|Dominik Franke|Germany|LB|65|66|26|74|34|54|62|60|68|236787|Swiss Super League
+FC Thun|Justin Roth|Switzerland|CDM|65|72|24|63|46|58|57|62|61|252029|Swiss Super League
+FC Thun|Michael Heule|Switzerland|LB|65|70|24|70|53|59|67|58|57|276773|Swiss Super League
+FC Lausanne-Sport|Omar Janneh Susso|Spain|ST|65|80|18|76|63|46|63|17|65|74109|Swiss Super League
+FC Lausanne-Sport|Alban Ajdini|Kosovo|ST|65|68|25|74|65|63|67|33|65|257692|Swiss Super League
+FC Lausanne-Sport|Theo Bergvall|Sweden|RB|65|76|20|85|42|57|63|58|66|272927|Swiss Super League
+FC Lugano|Martim Costa Marques|Portugal|LB|65|76|21|69|36|59|69|61|46|276658|Swiss Super League
+FC Sion|Théo Berdayes|Switzerland|RM|65|71|23|73|59|54|66|21|60|264423|Swiss Super League
+FC Sion|Lamine Diack|Senegal|CDM|65|70|24|73|59|60|62|63|70|270894|Swiss Super League
+Grasshopper Club Zürich|Dirk Abels|Netherlands|CB|64|64|28|61|43|55|61|62|71|250805|Swiss Super League
+FC Zürich|Cheveyo Tsawa|Switzerland|CM|64|77|18|63|49|64|63|61|60|71151|Swiss Super League
+FC Basel 1893|Kevin Rüegg|Switzerland|RB|64|64|26|68|55|62|64|60|68|240099|Swiss Super League
+FC Basel 1893|Moussa Cissé|France|LB|64|73|22|74|36|53|65|60|57|263881|Swiss Super League
+FC Luzern|Jesper Löfgren|Sweden|CB|64|65|28|39|30|43|56|62|73|247042|Swiss Super League
+FC St. Gallen 1879|Alessandro Vogt|Switzerland|ST|64|77|20|67|66|45|60|22|71|75654|Swiss Super League
+FC Winterthur|Pajtim Kasami|Switzerland|CM|64|64|33|45|70|64|63|60|70|197900|Swiss Super League
+FC Winterthur|Roman Buess|Switzerland|ST|64|64|32|71|64|59|61|39|67|206431|Swiss Super League
+FC Winterthur|Luca Zuffi|Switzerland|CDM|64|64|35|46|62|69|63|61|59|210538|Swiss Super League
+FC Winterthur|Lukas Mühl|Germany|CB|64|65|28|59|37|50|55|62|68|233960|Swiss Super League
+FC Winterthur|Silvan Sidler|Switzerland|RB|64|65|26|62|61|61|60|61|65|235815|Swiss Super League
+FC Winterthur|Fabian Rohner|Switzerland|RM|64|64|26|87|58|56|67|51|43|240532|Swiss Super League
+FC Winterthur|Loïc Lüthi|Switzerland|CB|64|72|21|59|32|47|50|63|71|276172|Swiss Super League
+FC Thun|Valmir Matoshi|Switzerland|CM|64|72|21|66|66|60|63|58|65|78314|Swiss Super League
+FC Thun|Ethan Meichtry|Switzerland|CAM|64|78|19|68|61|56|68|48|54|78316|Swiss Super League
+FC Lausanne-Sport|Beyatt Lekoueiry|Mauritania|CAM|64|75|20|75|56|61|69|38|64|77114|Swiss Super League
+FC Lausanne-Sport|Sékou Fofana|Côte d'Ivoire|LB|64|71|22|73|33|49|60|60|66|263031|Swiss Super League
+FC Lugano|Zachary Brault-Guillard|Canada|RB|64|65|26|88|57|55|61|59|67|243574|Swiss Super League
+FC Sion|Francesco Ruberto|Switzerland|GK|64|64|32|67|65|63|63|43|60|216779|Swiss Super League
+Grasshopper Club Zürich|Imourane Hassane|Benin|CDM|63|71|22|65|36|54|57|60|68|74643|Swiss Super League
+Grasshopper Club Zürich|Saulo Decarli|Switzerland|CB|63|63|33|45|34|49|53|62|66|213323|Swiss Super League
+Grasshopper Club Zürich|Allan Arigoni|Switzerland|RB|63|64|26|88|38|49|59|60|71|242759|Swiss Super League
+Grasshopper Club Zürich|Luke Plange|England|ST|63|71|22|69|64|49|64|33|55|265793|Swiss Super League
+Grasshopper Club Zürich|Tim Meyer|Switzerland|CM|63|77|20|71|51|60|65|65|65|277540|Swiss Super League
+FC Zürich|Umeh Emmanuel|Nigeria|LW|63|77|20|80|62|52|67|29|54|73218|Swiss Super League
+FC Zürich|Chris Kablan|Switzerland|RB|63|63|30|75|53|59|60|60|63|239425|Swiss Super League
+FC Luzern|Taisei Abe|Japan|CDM|63|73|21|68|50|56|63|59|65|80094|Swiss Super League
+FC Luzern|Sinan Karweina|Germany|ST|63|64|26|74|61|62|65|41|65|244082|Swiss Super League
+FC Luzern|Levin Winkler|Switzerland|CM|63|72|21|64|56|62|63|62|62|279599|Swiss Super League
+FC St. Gallen 1879|Corsin Konietzke|Switzerland|CDM|63|82|19|64|44|60|61|58|71|70500|Swiss Super League
+FC St. Gallen 1879|Malamine Efekele|France|RM|63|75|20|85|62|54|67|19|52|278260|Swiss Super League
+BSC Young Boys|Facinet Conte|Guinea|ST|63|76|20|81|63|44|65|19|46|276947|Swiss Super League
+FC Winterthur|Francis Momoh|Nigeria|ST|63|68|24|75|59|50|62|25|72|263969|Swiss Super League
+FC Thun|Vasilije Janjičić|Switzerland|CDM|63|66|26|48|50|58|60|60|73|237420|Swiss Super League
+FC Lugano|Damian Kelvin|Switzerland|CB|63|70|23|62|28|41|43|59|76|79160|Swiss Super League
+FC Sion|Marcos Robson Cipriano|Brazil|LB|63|64|26|74|53|61|63|56|59|244497|Swiss Super League
+FC Sion|Noé Sow|France|CDM|63|66|26|54|34|51|57|63|67|264033|Swiss Super League
+FC Sion|Liam Chipperfield|Switzerland|CM|63|72|21|70|57|60|66|47|63|266623|Swiss Super League
+FC Zürich|Livano Comenencia|Curacao|RB|62|73|21|74|43|55|61|57|61|275206|Swiss Super League
+FC Luzern|Vaso Vasić|Serbia|GK|62|62|35|62|62|63|62|46|63|223968|Swiss Super League
+FC St. Gallen 1879|Behar Neziri|Germany|CDM|62|69|22|68|51|55|58|57|59|73908|Swiss Super League
+FC St. Gallen 1879|Betim Fazliji|Kosovo|CDM|62|65|26|56|41|56|57|62|66|252030|Swiss Super League
+FC St. Gallen 1879|Tiemoko Ouattara|Switzerland|LM|62|73|20|74|57|52|66|27|55|276670|Swiss Super League
+FC Winterthur|Dario Ulrich|Switzerland|RM|62|62|27|66|59|61|63|60|60|239974|Swiss Super League
+FC Winterthur|Souleymane Diaby|Côte d'Ivoire|LB|62|65|25|70|50|55|62|57|63|269565|Swiss Super League
+FC Thun|Furkan Dursun|Austria|ST|62|72|20|67|60|49|61|24|67|70947|Swiss Super League
+FC Thun|Elmin Rastoder|North Macedonia|ST|62|69|23|61|63|44|58|20|61|276645|Swiss Super League
+FC Lausanne-Sport|Nathan Butler-Oyedeji|England|ST|62|68|22|77|62|54|66|19|60|273926|Swiss Super League
+FC Lugano|Elias Pihlström|Sweden|LW|62|76|18|67|58|58|63|26|54|76660|Swiss Super League
+FC Sion|Altin Shala|Kosovo|RW|62|69|22|71|64|58|61|21|47|79161|Swiss Super League
+FC Basel 1893|Mirko Salvi|Switzerland|GK|61|61|31|61|59|60|59|40|61|209332|Swiss Super League
+FC Basel 1893|Dion Kacuri|Switzerland|CM|61|70|21|69|53|59|65|47|63|270847|Swiss Super League
+FC Luzern|Rúben Dantas Fernandes|Switzerland|LB|61|69|22|66|52|54|58|57|54|76263|Swiss Super League
+FC Luzern|Lucas Manuel Silva Ferreira|Portugal|CAM|61|80|18|67|57|59|62|41|54|80138|Swiss Super League
+FC St. Gallen 1879|Cyrill May|Switzerland|CB|61|79|18|64|24|40|43|62|68|78569|Swiss Super League
+FC St. Gallen 1879|Lukas Watkowiak|Germany|GK|61|62|29|61|59|60|62|21|63|239746|Swiss Super League
+BSC Young Boys|Stefan Bukinac|Serbia|LB|61|70|19|61|41|50|57|59|66|83606|Swiss Super League
+FC Winterthur|Adrian Durrer|Switzerland|CB|61|66|23|42|34|47|52|60|69|261164|Swiss Super League
+FC Thun|Marc Gutbub|Switzerland|ST|61|69|22|66|64|52|59|26|50|78318|Swiss Super League
+FC Lausanne-Sport|Sékou Koné|Mali|CDM|61|76|19|58|49|53|62|58|57|77403|Swiss Super League
+FC Lausanne-Sport|Thomas Castella|Switzerland|GK|61|61|32|61|61|60|62|45|62|210509|Swiss Super League
+FC Sion|Winsley Boteli|Switzerland|ST|61|76|18|78|61|46|59|19|60|79663|Swiss Super League
+Grasshopper Club Zürich|El Bachir Ngom|Senegal|CB|60|63|25|63|32|38|43|61|65|83804|Swiss Super League
+FC Zürich|Damienus Reverson|Netherlands|ST|60|68|21|74|58|47|63|27|58|76579|Swiss Super League
+FC Zürich|Miguel Reichmuth|Switzerland|CM|60|71|21|56|48|58|65|55|44|271879|Swiss Super League
+FC Zürich|Daniel Ihendu|Germany|CB|60|73|19|70|30|36|33|58|70|275960|Swiss Super League
+FC Winterthur|Elias Maluvunu|Switzerland|RM|60|69|20|68|58|55|62|41|57|73175|Swiss Super League
+FC Winterthur|Rhodri Smith|Switzerland|LB|60|77|18|69|38|51|58|57|51|75656|Swiss Super League
+FC Winterthur|Bafodé Dansoko|Guinea|LM|60|60|29|68|60|52|62|27|66|81579|Swiss Super League
+FC Winterthur|Stéphane Edi Cueni|Cabo Verde|CDM|60|65|24|70|47|59|60|57|62|258739|Swiss Super League
+FC Lausanne-Sport|Enzo Kana-Biyik|France|ST|60|78|18|71|60|45|61|19|62|77147|Swiss Super League
+FC Lausanne-Sport|Seydou Traoré|Côte d'Ivoire|ST|60|70|20|71|58|42|60|21|59|276679|Swiss Super League
+FC Lausanne-Sport|Gabriel Sigua|Georgia|CM|60|77|20|65|57|53|63|53|67|277060|Swiss Super League
+Grasshopper Club Zürich|Yannick Bettkober|Germany|CB|59|73|20|67|23|34|35|61|62|75524|Swiss Super League
+Grasshopper Club Zürich|Felix Emmanuel Tsimba|Switzerland|ST|59|72|19|66|59|47|56|18|56|75526|Swiss Super League
+Grasshopper Club Zürich|Samuel Krasniqi|Switzerland|RM|59|71|20|65|53|56|59|27|46|81865|Swiss Super League
+Grasshopper Club Zürich|Simone Stroscio|Switzerland|CB|59|69|21|64|45|56|57|59|60|276644|Swiss Super League
+Servette FC|Malek Ishuayed|Switzerland|LM|59|76|18|65|49|54|64|24|50|82355|Swiss Super League
+FC Zürich|David Vujević|Switzerland|CB|59|76|18|65|21|35|36|60|61|75943|Swiss Super League
+FC St. Gallen 1879|Diego Besio|Switzerland|ST|59|74|19|69|60|45|58|26|55|81858|Swiss Super League
+FC Winterthur|Antonio Spagnoli|Switzerland|GK|59|70|20|62|58|59|58|20|54|73174|Swiss Super League
+FC Winterthur|Tibault Citherlet|Switzerland|CB|59|69|20|66|30|39|54|58|68|80142|Swiss Super League
+FC Thun|Noah Rupp|Switzerland|CM|59|70|21|59|50|60|60|52|51|263985|Swiss Super League
+FC Lausanne-Sport|Hamza Abdallah|Comoros|RB|59|66|22|77|35|44|52|55|51|279052|Swiss Super League
+FC Lugano|Yassin Sbai|Switzerland|LB|59|67|21|66|54|51|59|57|53|77836|Swiss Super League
+FC Sion|Ruben Londja|Switzerland|RM|59|69|19|74|57|57|59|27|59|73609|Swiss Super League
+FC Sion|Maxime Dubosson|Switzerland|CB|59|68|20|60|22|39|40|60|62|75777|Swiss Super League
+Grasshopper Club Zürich|Salifou Diarrassouba|Côte d'Ivoire|CAM|58|65|23|72|45|55|63|37|38|259083|Swiss Super League
+FC Zürich|Nevio Di Giusto|Switzerland|RW|58|73|20|71|53|55|60|52|42|71263|Swiss Super League
+FC Zürich|Selmin Hodza|Switzerland|RB|58|67|22|64|47|55|57|54|49|271878|Swiss Super League
+FC Basel 1893|Tim Pfeiffer|Germany|GK|58|70|20|59|59|59|55|20|57|71838|Swiss Super League
+FC Basel 1893|Kaio Eduardo Pereira Santos|Brazil|ST|58|70|20|68|59|46|60|19|51|76618|Swiss Super League
+FC Basel 1893|Marvin Akahomen|Switzerland|LB|58|75|17|79|23|39|48|54|54|275600|Swiss Super League
+FC Luzern|Andrej Vasović|Switzerland|ST|58|75|17|56|63|42|55|20|49|75573|Swiss Super League
+FC Luzern|Oscar Kabwit|Congo DR|ST|58|72|20|77|58|44|65|26|58|81544|Swiss Super League
+FC Winterthur|Emmanuel Essiam|Ghana|CM|58|69|21|71|48|53|63|55|68|266153|Swiss Super League
+FC Thun|Ashvin Balaruban|Switzerland|LB|58|64|23|68|30|44|54|54|45|255378|Swiss Super League
+FC Lausanne-Sport|Dircssi Ngonzo|Switzerland|CB|58|72|19|65|26|37|42|58|66|70503|Swiss Super League
+FC Lugano|Ilija Maslarov|North Macedonia|CDM|58|73|18|53|33|52|53|59|53|73154|Swiss Super League
+Grasshopper Club Zürich|Samuel Marques|Switzerland|RM|57|71|20|64|45|56|58|45|46|279669|Swiss Super League
+Servette FC|Loun Srdanović|Switzerland|RB|57|70|18|68|35|41|54|55|50|73377|Swiss Super League
+FC Zürich|Silas Huber|Switzerland|GK|57|74|19|57|55|54|58|24|56|73240|Swiss Super League
+FC Zürich|Neil Volken|Switzerland|LB|57|75|18|68|33|47|58|53|45|77117|Swiss Super League
+FC Zürich|Jill Stiel|Switzerland|CM|57|76|17|66|49|56|54|55|54|81300|Swiss Super League
+FC Zürich|Pirosch Fischer|Switzerland|RW|57|65|20|73|54|53|59|26|43|83946|Swiss Super League
+FC Zürich|Ilan Sauter|Switzerland|CB|57|64|24|74|38|46|49|55|67|245361|Swiss Super League
+FC St. Gallen 1879|Enoch Owusu|Italy|RW|57|69|20|79|57|47|57|26|52|80141|Swiss Super League
+FC St. Gallen 1879|Nino Weibel|Switzerland|CAM|57|74|18|69|47|53|61|33|55|81860|Swiss Super League
+FC St. Gallen 1879|Antonio Verinac|Croatia|ST|57|65|20|53|57|35|52|23|64|83531|Swiss Super League
+BSC Young Boys|Keeto Thermoncy|Haiti|CB|57|70|19|58|28|37|42|57|59|82203|Swiss Super League
+BSC Young Boys|Dario Marzino|Switzerland|GK|57|59|28|63|52|53|60|47|53|228998|Swiss Super League
+FC Winterthur|Ledjan Sahitaj|Kosovo|RB|57|65|21|69|30|38|46|57|64|73972|Swiss Super League
+FC Thun|Jan Eicher|Switzerland|GK|57|65|21|54|55|55|61|29|59|78285|Swiss Super League
+FC Lausanne-Sport|Ethan Bruchez|Switzerland|CAM|57|74|17|68|41|55|63|43|45|78059|Swiss Super League
+FC Lugano|João Victor Schlickmann Carbone|Brazil|CB|57|66|20|61|39|47|52|56|60|83910|Swiss Super League
+FC Sion|Adrien Llukes|Switzerland|ST|57|77|16|70|55|44|62|18|43|78852|Swiss Super League
+Grasshopper Club Zürich|Nicolas Glaus|Switzerland|GK|56|64|23|58|55|56|59|21|51|272383|Swiss Super League
+Servette FC|Thomas Lopes|France|RM|56|76|18|66|55|52|56|42|51|82208|Swiss Super League
+FC Zürich|Yevhen Morozov|Ukraine|GK|56|72|18|58|62|57|53|26|50|79210|Swiss Super League
+FC Zürich|Aaron Tchamda|Switzerland|CDM|56|72|18|50|37|46|52|53|68|82353|Swiss Super League
+FC Basel 1893|Andrej Bacanin|Serbia|CDM|56|71|18|50|37|53|52|52|55|80343|Swiss Super League
+FC Basel 1893|Adriano Onyegbule|Germany|CAM|56|73|19|72|46|51|63|34|57|276638|Swiss Super League
+FC St. Gallen 1879|Joel Ruiz|Switzerland|CB|56|68|18|62|26|40|41|57|56|81862|Swiss Super League
+FC St. Gallen 1879|Bela Dumrath|Germany|GK|56|68|21|58|59|56|55|27|53|270035|Swiss Super League
+FC Winterthur|Julius Holder|Switzerland|ST|56|67|20|68|56|49|55|25|60|80143|Swiss Super League
+FC Winterthur|Sambou Camara|Switzerland|CB|56|72|18|62|28|43|42|53|70|80177|Swiss Super League
+FC Lausanne-Sport|Souleymane N'Diaye|Switzerland|CM|56|72|19|69|47|51|58|52|64|73656|Swiss Super League
+FC Lausanne-Sport|Andrew Lachhab|Switzerland|RW|56|77|16|71|50|48|59|23|50|83197|Swiss Super League
+FC Lugano|Diego Mina|Switzerland|GK|56|68|19|53|56|54|57|29|54|70281|Swiss Super League
+FC Sion|Nevio Biner|Switzerland|CB|56|70|18|68|38|43|44|57|55|79214|Swiss Super League
+FC Sion|Simon Caillet|Switzerland|GK|56|74|18|55|56|52|60|24|55|83193|Swiss Super League
+Grasshopper Club Zürich|Laurent Seji|Kosovo|GK|55|67|21|56|55|53|53|26|56|73193|Swiss Super League
+Grasshopper Club Zürich|Dorian Paloschi|Italy|CB|55|67|19|50|26|33|34|55|63|80111|Swiss Super League
+Grasshopper Club Zürich|Luka Mikulić|Bosnia and Herzegovina|CB|55|63|20|55|28|33|40|55|57|83043|Swiss Super League
+Servette FC|Miguel Mardochée|Switzerland|LW|55|71|18|65|58|45|58|26|51|82454|Swiss Super League
+FC Zürich|Mohamed Bangoura|Guinea|CDM|55|68|19|63|37|54|55|54|49|74009|Swiss Super League
+FC Zürich|Cosimo Fiorini|Italy|CDM|55|71|19|64|48|54|54|53|52|74038|Swiss Super League
+FC Zürich|Isaiah Okafor|Switzerland|CDM|55|66|20|56|40|47|55|52|57|75944|Swiss Super League
+FC Zürich|Damien Odera|Kenya|LW|55|72|17|67|53|44|58|23|44|82354|Swiss Super League
+FC Zürich|Sebastian Walker|Switzerland|LM|55|68|19|67|49|51|55|46|46|83431|Swiss Super League
+FC Basel 1893|Giacomo Koloto|Switzerland|ST|55|73|17|59|56|38|57|21|49|83612|Swiss Super League
+FC Luzern|Julian Bock|Germany|GK|55|65|21|55|54|51|56|21|55|73176|Swiss Super League
+FC Luzern|Sascha Meyer|Switzerland|ST|55|70|19|61|52|52|55|35|61|279241|Swiss Super League
+FC St. Gallen 1879|Nevio Scherrer|Switzerland|ST|55|75|17|58|56|40|55|20|48|83947|Swiss Super League
+BSC Young Boys|Olivier Mambwa|Switzerland|LB|55|73|16|59|32|42|52|51|61|81297|Swiss Super League
+FC Winterthur|Thierry Diethelm|Switzerland|CB|55|70|18|59|25|36|33|54|62|80274|Swiss Super League
+FC Winterthur|Tobias Okafor|Switzerland|LB|55|72|18|74|34|38|50|51|56|83199|Swiss Super League
+FC Winterthur|Carmine Chiappetta|Switzerland|LM|55|64|22|71|52|47|59|17|44|259719|Swiss Super League
+FC Thun|Jan-Peter Zaugg|Switzerland|GK|55|65|19|55|58|56|54|21|55|82703|Swiss Super League
+FC Thun|Tim Spycher|Switzerland|GK|55|67|21|55|54|56|55|30|54|275721|Swiss Super League
+FC Lugano|Šerif Berbić|Switzerland|GK|55|63|23|55|54|52|55|33|53|271502|Swiss Super League
+FC Sion|Ryan Kessler|Switzerland|CB|55|70|19|58|30|38|36|56|61|83934|Swiss Super League
+Grasshopper Club Zürich|Matteo Mantini|Italy|CDM|54|71|17|55|36|49|53|51|55|79651|Swiss Super League
+Servette FC|Sacha Denarie|Switzerland|ST|54|70|18|66|53|38|53|18|50|83944|Swiss Super League
+Servette FC|Louis Rieder|Switzerland|GK|54|60|22|58|54|53|54|17|49|85258|Swiss Super League
+Servette FC|Téo Allix|France|CB|54|69|20|58|31|44|44|54|55|279079|Swiss Super League
+FC Zürich|Gian Stork|Switzerland|CB|54|73|18|61|36|50|49|53|51|80144|Swiss Super League
+FC St. Gallen 1879|Pascal Büttiker|Switzerland|CB|54|69|19|57|28|37|36|56|57|76577|Swiss Super League
+FC St. Gallen 1879|Yannick Bujard|Switzerland|GK|54|61|21|53|56|56|53|23|51|84035|Swiss Super League
+FC Winterthur|Leandro Maksutaj|Kosovo|CM|54|72|18|72|55|55|57|41|64|80275|Swiss Super League
+FC Lugano|Nicolò Puddu|Switzerland|CAM|54|72|17|59|50|51|56|19|44|83613|Swiss Super League
+Servette FC|Jamie Atangana|Switzerland|ST|53|71|17|69|53|40|51|21|48|80265|Swiss Super League
+FC Luzern|Mio Zimmermann|Switzerland|CM|53|74|17|66|39|51|55|44|63|80139|Swiss Super League
+BSC Young Boys|Mats Seiler|Switzerland|CB|53|70|19|64|26|29|33|53|62|70279|Swiss Super League
+FC Winterthur|Noah Brogli|Switzerland|GK|53|73|17|56|48|48|58|26|52|79316|Swiss Super League
+FC Winterthur|Ezequiel Meili|Switzerland|CB|53|70|19|62|24|30|35|54|63|83198|Swiss Super League
+FC Thun|Adam Ilic|Switzerland|CM|53|73|17|59|38|50|56|44|52|82704|Swiss Super League
+FC Lugano|Aleksandar Radic|Switzerland|CB|53|65|18|49|26|34|36|53|56|83616|Swiss Super League
+FC Lugano|Yuri Peverelli|Switzerland|LM|53|72|18|58|41|51|53|40|46|83948|Swiss Super League
+Grasshopper Club Zürich|Pantaleo Creti|Italy|RB|52|72|16|61|28|32|48|51|53|79654|Swiss Super League
+Servette FC|Alonzo Vincent|Peru|CM|52|72|16|64|44|52|50|42|52|81688|Swiss Super League
+FC Luzern|Sandro Wyss|Switzerland|ST|52|69|17|76|52|38|52|21|47|80350|Swiss Super League
+FC Luzern|Joel Matuanana|Angola|LB|52|68|17|61|28|36|49|49|53|82352|Swiss Super League
+FC Luzern|Erblin Sadikaj|Switzerland|CB|51|70|17|53|28|38|41|51|55|82702|Swiss Super League
+FC Basel 1893|Bennett Hoch|Switzerland|GK|50|67|17|45|49|52|55|29|49|84085|Swiss Super League
+FC Luzern|Demir Xhemalija|Switzerland|CDM|50|70|19|61|32|44|52|46|55|71839|Swiss Super League
+FC St. Gallen 1879|Janis Widmer|Switzerland|GK|50|65|17|46|58|53|48|31|46|80140|Swiss Super League
+FC Sion|Nelson Savonnier|Switzerland|CB|50|73|17|57|25|29|30|52|55|80592|Swiss Super League
