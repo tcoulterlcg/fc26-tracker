@@ -16,6 +16,10 @@ export default function TransferHistoryPage() {
   const [fee, setFee] = useState('')
   const [saving, setSaving] = useState(false)
 
+  // Inline edit of an existing transfer row.
+  const [editingId, setEditingId] = useState(null)
+  const [editDraft, setEditDraft] = useState({})
+
   const router = useRouter()
   const params = useParams()
   const supabase = createClient()
@@ -95,6 +99,41 @@ export default function TransferHistoryPage() {
   const handleRemove = async (id) => {
     const { error } = await supabase.from('transfer_history').delete().eq('id', id)
     if (!error) await loadTransfers()
+  }
+
+  // --- edit an existing transfer (fix a sold price, club, type, etc.) ---
+  const startEdit = (t) => {
+    setEditingId(t.id)
+    setEditDraft({
+      season: t.season ?? '',
+      player_name: t.player_name || '',
+      transfer_type: t.transfer_type || 'In',
+      from_club: t.from_club || '',
+      to_club: t.to_club || '',
+      fee_eur: t.fee_eur ?? '',
+      sell_on_pct: t.sell_on_pct ?? '',
+      swap_player: t.swap_player || ''
+    })
+  }
+  const cancelEdit = () => { setEditingId(null); setEditDraft({}) }
+  const editField = (k, v) => setEditDraft(function(d) { return Object.assign({}, d, { [k]: v }) })
+  const saveEdit = async () => {
+    const d = editDraft
+    if (!d.player_name.trim()) { alert('Player name is required.'); return }
+    const payload = {
+      season: d.season === '' || d.season === null ? franchise.current_season : parseInt(d.season),
+      player_name: d.player_name.trim(),
+      transfer_type: d.transfer_type,
+      from_club: d.from_club.trim() || null,
+      to_club: d.to_club.trim() || null,
+      fee_eur: d.fee_eur === '' || d.fee_eur === null ? null : parseFloat(d.fee_eur),
+      sell_on_pct: d.sell_on_pct === '' || d.sell_on_pct === null ? null : parseFloat(d.sell_on_pct),
+      swap_player: d.swap_player.trim() || null
+    }
+    const { error } = await supabase.from('transfer_history').update(payload).eq('id', editingId)
+    if (error) { alert(error.message); return }
+    cancelEdit()
+    await loadTransfers()
   }
 
   // Restore an accidentally removed player from the snapshot taken at removal.
@@ -229,6 +268,29 @@ export default function TransferHistoryPage() {
                 </thead>
                 <tbody>
                   {transfers.map(function(t) {
+                    const inputCls = 'w-full bg-neutral-800 border border-neutral-700 rounded px-2 py-1 text-xs text-neutral-100 focus:outline-none focus:ring-1 focus:ring-violet-500'
+                    if (editingId === t.id) {
+                      return (
+                        <tr key={t.id} className="border-b border-neutral-800/60 bg-violet-900/10">
+                          <td className="py-2 px-2"><input type="number" value={editDraft.season} onChange={(e) => editField('season', e.target.value)} className={inputCls + ' w-16'} /></td>
+                          <td className="py-2 px-2"><input value={editDraft.player_name} onChange={(e) => editField('player_name', e.target.value)} className={inputCls + ' min-w-[120px]'} /></td>
+                          <td className="py-2 px-2">
+                            <select value={editDraft.transfer_type} onChange={(e) => editField('transfer_type', e.target.value)} className={inputCls}>
+                              <option value="In">In</option><option value="Out">Out</option><option value="Loan In">Loan In</option><option value="Loan Out">Loan Out</option>
+                            </select>
+                          </td>
+                          <td className="py-2 px-2"><input value={editDraft.from_club} onChange={(e) => editField('from_club', e.target.value)} className={inputCls} /></td>
+                          <td className="py-2 px-2"><input value={editDraft.to_club} onChange={(e) => editField('to_club', e.target.value)} className={inputCls} /></td>
+                          <td className="py-2 px-2"><input type="number" value={editDraft.fee_eur} onChange={(e) => editField('fee_eur', e.target.value)} placeholder="euros" className={inputCls + ' w-28 text-right'} /></td>
+                          <td className="py-2 px-2"><input type="number" value={editDraft.sell_on_pct} onChange={(e) => editField('sell_on_pct', e.target.value)} className={inputCls + ' w-16 text-right'} /></td>
+                          <td className="py-2 px-2"><input value={editDraft.swap_player} onChange={(e) => editField('swap_player', e.target.value)} className={inputCls} /></td>
+                          <td className="py-2 px-3 text-right whitespace-nowrap">
+                            <button onClick={saveEdit} className="text-violet-400 hover:text-violet-300 text-xs font-semibold mr-3 transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500 rounded">Save</button>
+                            <button onClick={cancelEdit} className="text-neutral-400 hover:text-neutral-200 text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500 rounded">Cancel</button>
+                          </td>
+                        </tr>
+                      )
+                    }
                     return (
                       <tr key={t.id} className="border-b border-neutral-800/60 hover:bg-neutral-800/40 transition-colors">
                         <td className="py-2.5 px-3 text-neutral-400 whitespace-nowrap">Season {t.season}</td>
@@ -244,6 +306,7 @@ export default function TransferHistoryPage() {
                         <td className="py-2.5 px-3 text-right text-neutral-300 tabular-nums whitespace-nowrap">{t.sell_on_pct != null ? t.sell_on_pct + '%' : '-'}</td>
                         <td className="py-2.5 px-3 text-neutral-300">{t.swap_player || '-'}</td>
                         <td className="py-2.5 px-3 text-right whitespace-nowrap">
+                          <button onClick={() => startEdit(t)} className="text-neutral-300 hover:text-violet-300 text-xs font-semibold mr-3 transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500 rounded">Edit</button>
                           {t.transfer_type === 'Out' && t.player_snapshot && (
                             <button onClick={() => handleAddBack(t)} className="text-violet-400 hover:text-violet-300 text-xs font-semibold mr-3 transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500 rounded">Add Back</button>
                           )}
