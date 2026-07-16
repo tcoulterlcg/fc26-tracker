@@ -1441,6 +1441,22 @@ export default function FranchisePage() {
       .sort(function(a, b) { return b.overall_rating - a.overall_rating })
       .slice(0, 5)
 
+    // Prospects rank on potential, capped at 22 and under — the age cut is what
+    // makes it a prospect list rather than a rerun of Top Players. A young star
+    // can legitimately appear on both cards.
+    const topProspects = players
+      .filter(function(p) {
+        return typeof p.potential_rating === 'number' &&
+          typeof p.overall_rating === 'number' &&
+          typeof p.age === 'number' && p.age <= 22
+      })
+      .slice()
+      .sort(function(a, b) {
+        if (b.potential_rating !== a.potential_rating) return b.potential_rating - a.potential_rating
+        return (b.potential_rating - b.overall_rating) - (a.potential_rating - a.overall_rating)
+      })
+      .slice(0, 5)
+
     // Game-aware position groups (soccer GK/DEF/MID/FWD, baseball C/INF/OF/DH/
     // SP/RP, hockey F/D/G, football QB/SKILL/OL/DL/LB/DB/ST).
     const fcGroupAverages = positionBreakdown(players, franchise && franchise.game)
@@ -1455,6 +1471,7 @@ export default function FranchisePage() {
       totalValue: totalValue,
       totalWage: totalWage,
       topPlayers: topPlayers,
+      topProspects: topProspects,
       fcGroupAverages: fcGroupAverages,
       gm: gm
     }
@@ -2534,30 +2551,63 @@ export default function FranchisePage() {
 
         {!isCfb && activeTab === 'dashboard' && players.length > 0 && (
           <>
-            <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-5 mb-6">
-              <h2 className="text-sm font-semibold mb-3 text-neutral-200">Top Players</h2>
-              <div className="space-y-2">
-                {teamStats.topPlayers && teamStats.topPlayers.length > 0 ? (
-                  teamStats.topPlayers.map(function(p) {
-                    return (
-                      <div key={p.id} className="flex items-center justify-between bg-neutral-800/50 border border-neutral-800 rounded-lg px-3 py-2">
-                        <div>
-                          <span className="font-medium text-neutral-100">{p.name}</span>
-                          <span className="text-neutral-500 text-xs ml-2">
-                            {p.position}{p.active_club ? ' \u00b7 ' + p.active_club : ''}
-                          </span>
+            <div className={'grid gap-4 mb-6 ' + (teamStats.topProspects && teamStats.topProspects.length > 0 ? 'md:grid-cols-2' : 'grid-cols-1')}>
+              <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-5">
+                <h2 className="text-sm font-semibold text-neutral-200">Top Players</h2>
+                <p className="text-neutral-500 text-xs mb-3">Highest overall rating right now.</p>
+                <div className="space-y-2">
+                  {teamStats.topPlayers && teamStats.topPlayers.length > 0 ? (
+                    teamStats.topPlayers.map(function(p) {
+                      return (
+                        <div key={p.id} className="flex items-center justify-between bg-neutral-800/50 border border-neutral-800 rounded-lg px-3 py-2">
+                          <div>
+                            <span className="font-medium text-neutral-100">{p.name}</span>
+                            <span className="text-neutral-500 text-xs ml-2">
+                              {p.position}{p.active_club ? ' \u00b7 ' + p.active_club : ''}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <span className="text-neutral-400 text-xs">POT {p.potential_rating !== null && p.potential_rating !== undefined ? p.potential_rating : '-'}</span>
+                            <OvrBadge value={p.overall_rating} small />
+                          </div>
                         </div>
-                        <div className="flex items-center gap-3">
-                          <span className="text-neutral-400 text-xs">POT {p.potential_rating !== null && p.potential_rating !== undefined ? p.potential_rating : '-'}</span>
-                          <OvrBadge value={p.overall_rating} small />
-                        </div>
-                      </div>
-                    )
-                  })
-                ) : (
-                  <p className="text-neutral-500 text-sm">No players yet.</p>
-                )}
+                      )
+                    })
+                  ) : (
+                    <p className="text-neutral-500 text-sm">No players yet.</p>
+                  )}
+                </div>
               </div>
+
+              {teamStats.topProspects && teamStats.topProspects.length > 0 && (
+                <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-xl p-5">
+                  <h2 className="text-sm font-semibold text-neutral-200">Top Prospects</h2>
+                  <p className="text-neutral-500 text-xs mb-3">Highest potential, age 22 and under.</p>
+                  <div className="space-y-2">
+                    {teamStats.topProspects.map(function(p) {
+                      return (
+                        <div key={p.id} className="flex items-center justify-between bg-neutral-800/50 border border-neutral-800 rounded-lg px-3 py-2">
+                          <div>
+                            <span className="font-medium text-neutral-100">{p.name}</span>
+                            <span className="text-neutral-500 text-xs ml-2">
+                              {p.position}{typeof p.age === 'number' ? ' \u00b7 ' + p.age + 'y' : ''}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <span className="text-neutral-400 text-xs">
+                              OVR {p.overall_rating}
+                              {p.potential_rating > p.overall_rating && (
+                                <span className="text-violet-400 font-semibold"> +{p.potential_rating - p.overall_rating}</span>
+                              )}
+                            </span>
+                            <OvrBadge value={p.potential_rating} small />
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
 
             {teamStats.gm && (
