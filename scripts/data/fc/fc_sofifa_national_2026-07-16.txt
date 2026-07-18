@@ -1,0 +1,1559 @@
+France|Mike Maignan|France|GK|87|88|29|84|84|85|88|64|84|215698|International
+France|Jules Koundé|France|RB|86|87|26|84|53|74|78|83|83|241486|International
+France|Dayot Upamecano|France|CB|86|88|26|77|45|64|75|85|84|229558|International
+France|William Saliba|France|CB|88|90|24|77|39|68|73|88|83|243715|International
+France|Lucas Digne|France|LB|80|80|31|69|68|79|76|77|74|200458|International
+France|Aurélien Tchouaméni|France|CDM|84|87|25|74|70|79|78|83|82|241637|International
+France|Adrien Rabiot|France|CM|85|85|30|81|79|81|82|78|85|210008|International
+France|Michael Olise|France|RM|89|91|23|78|82|86|90|50|69|247827|International
+France|Ousmane Dembélé|France|ST|90|90|28|91|88|83|93|50|69|231443|International
+France|Kylian Mbappé|France|ST|91|92|26|96|91|81|92|37|76|231747|International
+France|Bradley Barcola|France|LW|84|88|22|92|77|78|84|39|66|264652|International
+France|Désiré Doué|France|RW|86|91|20|83|81|79|90|55|78|271421|International
+France|Marcus Thuram|France|ST|85|85|27|87|83|75|81|50|81|228093|International
+France|Rayan Cherki|France|RW|84|88|21|75|79|83|89|40|65|251570|International
+France|Kouadio Manu Koné|France|CM|80|84|24|74|74|75|82|76|82|250723|International
+France|Theo Hernández|France|LB|84|84|27|90|77|78|83|79|83|232656|International
+France|Ibrahima Konaté|France|CB|84|85|26|77|34|63|69|84|85|237678|International
+France|Brice Samba|France|GK|80|80|31|78|80|80|80|53|80|204883|International
+France|Maghnes Akliouche|France|CAM|80|86|23|74|72|78|83|48|62|264862|International
+France|Malo Gusto|France|RB|79|84|22|84|46|75|78|73|74|259307|International
+France|Robin Risser|France|GK|78|85|20|79|74|82|80|39|75|271918|International
+France|Maxence Lacroix|France|CB|81|83|25|88|41|57|67|81|82|244067|International
+France|Jean-Philippe Mateta|France|ST|82|82|28|75|83|70|77|41|82|236461|International
+France|Lucas Hernández|France|LB|81|81|29|71|54|72|71|82|78|220814|International
+France|N'Golo Kanté|France|CDM|84|84|34|74|65|73|80|83|79|215914|International
+France|Warren Zaïre-Emery|France|CM|83|89|19|80|69|78|81|79|87|270673|International
+Spain|Unai Simón Mendibil|Spain|GK|84|85|28|83|80|76|84|49|82|230869|International
+Spain|Pedro Antonio Porro Sauceda|Spain|RB|82|85|25|78|73|81|80|77|76|243576|International
+Spain|Pau Cubarsí Paredes|Spain|CB|83|89|18|75|44|67|78|84|77|278046|International
+Spain|Aymeric Laporte|Spain|CB|82|82|31|55|52|75|70|84|79|212218|International
+Spain|Marc Cucurella Saseta|Spain|LB|85|85|26|77|64|79|80|83|79|239231|International
+Spain|Rodrigo Hernández Cascante|Spain|CDM|89|89|29|65|79|85|82|86|84|231866|International
+Spain|Pedro González López|Spain|CM|90|93|22|77|75|86|90|78|77|251854|International
+Spain|Lamine Yamal Nasraoui Ebana|Spain|RW|89|95|17|86|84|87|91|25|61|277643|International
+Spain|Alejandro Baena Rodríguez|Spain|LM|82|87|23|79|76|83|81|66|68|257279|International
+Spain|Daniel Olmo Carvajal|Spain|CAM|84|84|27|74|79|81|85|51|60|244260|International
+Spain|Mikel Oyarzabal Ugarte|Spain|ST|83|83|28|73|85|81|83|45|73|230142|International
+Spain|Nicholas Williams Arthuer|Spain|LW|85|88|22|93|77|79|86|37|67|256516|International
+Spain|Ferran Torres García|Spain|ST|84|86|25|84|84|78|83|40|74|241461|International
+Spain|Fabián Ruiz Peña|Spain|CM|85|85|29|61|77|80|81|75|72|226271|International
+Spain|Martín Zubimendi Ibáñez|Spain|CDM|85|87|26|66|71|81|81|81|75|248148|International
+Spain|Marcos Llorente Moreno|Spain|RB|85|85|30|91|79|80|82|79|83|226161|International
+Spain|Eric García Martret|Spain|CB|83|86|24|79|58|75|76|85|81|245037|International
+Spain|David Raya Martín|Spain|GK|87|87|29|86|84|87|87|62|85|220901|International
+Spain|Víctor Muñoz Villanueva|Spain|LW|78|86|21|93|72|70|79|47|62|76042|International
+Spain|Mikel Merino Zazón|Spain|CM|83|83|29|53|79|80|80|81|80|225193|International
+Spain|Pablo Martín Páez Gavira|Spain|CM|83|87|20|76|66|78|85|68|70|264240|International
+Spain|Alejandro Grimaldo García|Spain|LM|85|85|29|72|77|87|85|74|66|210035|International
+Spain|Marc Pubill Pagès|Spain|CB|80|87|22|80|56|71|74|80|82|266039|International
+Spain|Joan García Pons|Spain|GK|86|89|24|85|85|80|88|46|84|259532|International
+Spain|Yeremy Jesús Pino Santos|Spain|LW|79|86|22|76|73|79|81|38|53|259377|International
+Spain|Borja Iglesias Quintás|Spain|ST|80|80|32|62|83|71|74|40|77|224179|International
+England|Jordan Pickford|England|GK|85|85|31|84|80|88|87|53|82|204935|International
+England|Reece James|England|RB|84|86|25|76|71|83|78|83|82|238074|International
+England|Ezri Konsa|England|CB|84|85|27|75|53|72|75|85|80|227678|International
+England|Marc Guéhi|England|CB|84|86|24|71|42|69|73|85|81|241159|International
+England|Nico O'Reilly|England|LB|81|86|20|83|70|78|80|79|79|277427|International
+England|Elliot Anderson|England|CDM|82|86|22|71|68|81|81|80|79|254243|International
+England|Jude Bellingham|England|CAM|89|93|22|80|85|83|89|79|85|252371|International
+England|Declan Rice|England|CDM|88|89|26|72|73|86|81|84|84|234378|International
+England|Bukayo Saka|England|RW|87|89|23|83|82|85|87|60|76|246669|International
+England|Harry Kane|England|ST|90|90|31|64|93|83|82|49|83|202126|International
+England|Anthony Gordon|England|LW|82|85|24|91|78|76|82|50|72|242964|International
+England|Ollie Watkins|England|ST|82|82|29|77|82|72|78|50|80|221697|International
+England|Noni Madueke|England|RW|80|84|23|88|75|74|83|45|69|254796|International
+England|Morgan Rogers|England|CAM|84|86|22|77|81|81|85|67|78|260247|International
+England|Kobbie Mainoo|England|CDM|79|85|20|68|69|76|82|75|74|269136|International
+England|John Stones|England|CB|82|82|31|64|58|74|75|84|72|203574|International
+England|Djed Spence|England|LB|79|83|24|88|52|72|79|76|75|243702|International
+England|Dean Henderson|England|GK|82|83|28|83|79|79|82|55|81|233306|International
+England|Marcus Rashford|England|LW|82|82|27|91|83|78|81|33|68|231677|International
+England|Eberechi Eze|England|CAM|84|85|27|74|80|82|87|57|68|235794|International
+England|Dan Burn|England|CB|80|80|33|42|36|67|64|80|85|198032|International
+England|Jarell Quansah|England|CB|76|84|22|74|35|61|70|75|76|273651|International
+England|Ivan Toney|England|ST|82|82|29|73|83|71|76|52|83|212228|International
+England|Jordan Henderson|England|CDM|79|79|35|65|71|80|74|75|76|183711|International
+England|Trevoh Chalobah|England|CB|80|82|25|66|53|69|70|81|78|230918|International
+England|James Trafford|England|GK|77|84|22|77|75|76|78|53|75|263063|International
+Germany|Manuel Neuer|Germany|GK|82|82|39|80|80|88|79|31|84|167495|International
+Germany|Joshua Kimmich|Germany|CDM|89|89|30|72|73|89|84|83|79|212622|International
+Germany|Jonathan Tah|Germany|CB|87|87|29|63|38|60|63|87|86|213331|International
+Germany|Antonio Rüdiger|Germany|CB|84|84|32|77|54|71|68|83|84|205452|International
+Germany|Nathaniel Brown|Germany|LB|80|86|22|83|60|76|82|74|59|269701|International
+Germany|Felix Nmecha|Germany|CM|84|86|24|82|77|77|83|82|86|246863|International
+Germany|Aleksandar Pavlović|Germany|CDM|82|87|21|62|67|82|80|78|75|275298|International
+Germany|Leroy Sané|Germany|RM|81|81|29|85|81|79|83|30|63|222492|International
+Germany|Florian Wirtz|Germany|CAM|87|91|22|80|80|87|88|54|67|256630|International
+Germany|Deniz Undav|Germany|ST|82|82|28|67|83|76|81|33|80|244176|International
+Germany|Kai Havertz|Germany|ST|82|84|26|72|79|78|81|48|74|235790|International
+Germany|Jamal Musiala|Germany|CAM|87|91|22|80|81|80|90|65|65|256790|International
+Germany|Angelo Stiller|Germany|CDM|83|87|24|56|59|84|84|76|71|250959|International
+Germany|Leon Goretzka|Germany|CDM|81|81|30|76|78|79|79|80|80|209658|International
+Germany|Waldemar Anton|Germany|CB|83|83|28|69|47|67|67|84|84|229476|International
+Germany|David Raum|Germany|LB|83|83|27|86|61|81|80|76|80|236703|International
+Germany|Malick Thiaw|Germany|CB|81|85|23|75|47|70|73|82|80|256261|International
+Germany|Oliver Baumann|Germany|GK|84|84|35|85|81|80|84|39|81|193698|International
+Germany|Nick Woltemade|Germany|ST|80|85|23|67|78|68|82|41|77|254022|International
+Germany|Nadiem Amiri|Germany|CM|80|80|28|65|80|82|82|62|72|225309|International
+Germany|Assan Ouédraogo|Germany|CM|74|87|19|76|68|73|81|56|70|276602|International
+Germany|Maximilian Beier|Germany|ST|80|84|22|86|80|70|81|48|62|254117|International
+Germany|Jamie Leweling|Germany|RM|78|81|24|83|72|68|81|46|74|252448|International
+Germany|Pascal Groß|Germany|CDM|78|78|34|39|74|83|78|71|71|190765|International
+Germany|Alexander Nübel|Germany|GK|80|81|28|81|75|84|82|48|77|223885|International
+Germany|Nico Schlotterbeck|Germany|CB|86|88|25|74|60|76|73|87|84|247819|International
+Portugal|Diogo Meireles Costa|Portugal|GK|84|89|25|83|78|82|86|35|83|234577|International
+Portugal|João Pedro Cavaco Cancelo|Portugal|RB|84|84|31|83|73|84|84|78|71|210514|International
+Portugal|Rúben Santos Gato Alves Dias|Portugal|CB|87|87|28|59|39|69|69|87|84|239818|International
+Portugal|Renato Palma Veiga|Portugal|CB|78|83|21|80|60|73|72|77|82|273906|International
+Portugal|Nuno Alexandre Tavares Mendes|Portugal|LB|88|91|23|95|76|79|86|82|77|252145|International
+Portugal|João Pedro Gonçalves Neves|Portugal|CM|88|93|20|74|74|82|86|84|83|272834|International
+Portugal|Vítor Machado Ferreira|Portugal|CM|90|92|25|72|81|87|91|75|70|255253|International
+Portugal|Pedro Lomba Neto|Portugal|RM|82|83|25|91|77|77|83|40|70|238616|International
+Portugal|Rafael da Conceição Leão|Portugal|LW|84|85|26|93|78|80|86|28|75|241721|International
+Portugal|Bruno Miguel Borges Fernandes|Portugal|CAM|88|88|30|67|84|90|84|67|75|212198|International
+Portugal|C. Ronaldo dos Santos Aveiro|Portugal|ST|85|85|40|76|88|76|80|34|76|20801|International
+Portugal|Gonçalo Matias Ramos|Portugal|ST|80|84|24|73|79|64|77|48|79|256903|International
+Portugal|Gonçalo Manuel Ganchinho Guedes|Portugal|LW|78|78|28|81|80|74|78|37|68|224411|International
+Portugal|Rúben Diogo da Silva Neves|Portugal|CDM|85|85|28|57|75|87|78|78|77|224293|International
+Portugal|Bernardo Mota Carvalho e Silva|Portugal|CM|83|83|30|56|77|83|88|70|64|218667|International
+Portugal|Gonçalo Bernardo Inácio|Portugal|CB|81|86|23|77|37|71|73|82|81|257179|International
+Portugal|José Diogo Dalot Teixeira|Portugal|RB|78|79|26|82|62|73|75|74|78|234574|International
+Portugal|Rui Tiago Dantas da Silva|Portugal|GK|81|81|31|82|78|77|84|31|81|210385|International
+Portugal|João Félix Sequeira|Portugal|CAM|81|84|25|77|81|78|83|45|66|242444|International
+Portugal|Samuel Almeida Costa|Portugal|CDM|78|82|24|61|66|69|71|77|79|255566|International
+Portugal|Francisco Trincão|Portugal|CAM|83|85|25|80|81|80|84|40|71|244778|International
+Portugal|Tomás Lemos Araújo|Portugal|CB|78|86|23|82|30|69|72|77|79|266096|International
+Portugal|Matheus Luiz Nunes|Portugal|RB|82|83|26|87|70|79|79|78|77|253124|International
+Portugal|Francisco F. da Conceição|Portugal|CAM|79|86|22|88|73|74|85|37|50|261050|International
+Portugal|Nélson Cabral Semedo|Portugal|RB|78|78|31|80|63|71|79|74|73|227928|International
+Portugal|José Pedro Malheiro de Sá|Portugal|GK|76|76|32|76|75|70|76|52|73|212442|International
+Brazil|Alisson Ramses Becker|Brazil|GK|88|88|32|86|87|83|87|56|88|212831|International
+Brazil|Danilo Luiz da Silva|Brazil|CB|75|75|33|62|66|72|69|77|70|199304|International
+Brazil|Marcos Aoás Corrêa|Brazil|CB|87|87|31|78|56|75|74|89|80|207865|International
+Brazil|Gabriel dos S. Magalhães|Brazil|CB|89|90|27|64|44|64|65|89|84|232580|International
+Brazil|Douglas dos Santos J. Melo|Brazil|LB|77|77|31|78|60|73|78|73|66|210822|International
+Brazil|Carlos Henrique Venancio Casimiro|Brazil|CDM|82|82|33|36|74|78|69|81|79|200145|International
+Brazil|Bruno Guimarães Moura|Brazil|CM|86|86|27|66|75|84|84|79|81|247851|International
+Brazil|Gabriel Teodoro Martinelli Silva|Brazil|LW|81|84|24|90|77|75|83|46|72|251566|International
+Brazil|Rayan Vitor Simplício Rocha|Brazil|RM|78|88|18|83|78|74|79|35|75|83494|International
+Brazil|Matheus Santos Carneiro da Cunha|Brazil|CAM|83|84|26|78|85|79|84|44|75|240243|International
+Brazil|Vinícius José de Oliveira Júnior|Brazil|LW|89|92|24|93|84|81|91|29|71|238794|International
+Brazil|Endrick Felipe Moreira de Sousa|Brazil|ST|78|89|18|87|78|66|80|30|72|272505|International
+Brazil|Neymar da Silva Santos Jr.|Brazil|CAM|83|83|33|76|79|85|88|37|53|190871|International
+Brazil|Fábio Henrique Tavares|Brazil|CDM|82|82|31|53|69|77|75|81|83|209499|International
+Brazil|Danilo Santos de Oliveira|Brazil|CDM|76|80|24|67|63|70|73|74|68|273106|International
+Brazil|Gleison Bremer Silva Nascimento|Brazil|CB|86|86|28|82|51|62|67|86|81|239580|International
+Brazil|Roger Ibañez da Silva|Brazil|CB|82|84|26|87|34|55|65|82|85|247257|International
+Brazil|Ederson Santana de Moraes|Brazil|GK|83|83|31|80|81|91|81|64|83|210257|International
+Brazil|Igor Thiago Rodrigues|Brazil|ST|81|85|24|74|81|64|75|44|83|275771|International
+Brazil|Éderson José dos Santos|Brazil|CM|82|85|25|78|72|77|80|79|81|266866|International
+Brazil|Alex Sandro Lobo Silva|Brazil|LB|77|77|34|70|65|74|77|76|75|191043|International
+Brazil|Luiz Henrique Rosa da Silva|Brazil|RM|78|81|24|88|70|69|82|53|66|264698|International
+Brazil|Leonardo Pereira|Brazil|CB|76|76|29|72|40|53|50|77|75|222895|International
+Brazil|Weverton Pereira da Silva|Brazil|GK|77|77|37|79|77|71|75|35|80|186555|International
+Brazil|Lucas Tolentino Coelho de Lima|Brazil|CM|79|79|27|68|78|78|84|69|75|233927|International
+Brazil|Raphael Dias Belloli|Brazil|LW|89|89|28|91|85|85|88|53|76|233419|International
+Italy|Gianluigi Donnarumma|Italy|GK|89|91|26|90|83|72|90|52|87|230621|International
+Italy|Matteo Politano|Italy|RW|81|81|31|80|78|80|83|60|55|216409|International
+Italy|Gianluca Mancini|Italy|CB|84|84|29|71|50|59|65|85|82|229582|International
+Italy|Alessandro Bastoni|Italy|CB|87|89|26|74|47|77|78|87|82|237383|International
+Italy|Riccardo Calafiori|Italy|LB|82|86|23|73|68|75|76|80|80|257711|International
+Italy|Federico Dimarco|Italy|LB|86|86|27|82|79|85|82|80|78|226268|International
+Italy|Manuel Locatelli|Italy|CDM|84|85|27|64|70|80|76|81|79|222077|International
+Italy|Nicolò Barella|Italy|CM|88|88|28|81|78|85|87|81|78|224232|International
+Italy|Sandro Tonali|Italy|CDM|85|87|25|79|74|82|80|81|84|241096|International
+Italy|Moise Kean|Italy|ST|83|86|25|86|82|58|81|40|74|236610|International
+Italy|Mateo Retegui|Italy|ST|82|83|26|72|83|67|78|37|76|241850|International
+Italy|Giacomo Raspadori|Italy|ST|78|81|25|80|78|72|83|28|60|253002|International
+Italy|Bryan Cristante|Italy|CM|81|81|30|54|74|79|75|78|82|208268|International
+Italy|Davide Frattesi|Italy|CM|81|83|25|82|77|77|80|73|76|239807|International
+Italy|Leonardo Spinazzola|Italy|LB|80|80|32|85|68|76|79|76|68|202884|International
+Italy|Federico Gatti|Italy|CB|80|83|27|76|42|53|65|81|80|266872|International
+Italy|Marco Palestra|Italy|RB|75|84|20|86|62|69|78|67|72|278339|International
+Italy|Marco Carnesecchi|Italy|GK|85|88|25|86|84|74|86|30|85|252154|International
+Italy|Alessandro Buongiorno|Italy|CB|82|86|26|69|47|67|65|84|79|243241|International
+Italy|Francesco Pio Esposito|Italy|ST|76|84|20|64|76|69|71|37|77|277327|International
+Italy|Alex Meret|Italy|GK|82|84|28|81|79|74|85|44|84|225116|International
+Italy|Andrea Cambiaso|Italy|LB|80|82|25|80|70|78|80|75|72|258966|International
+Italy|Niccolò Pisilli|Italy|CM|72|84|20|69|66|68|73|70|67|275291|International
+Italy|Elia Caprile|Italy|GK|78|84|23|77|75|71|83|51|78|255303|International
+Italy|Giorgio Scalvini|Italy|CB|78|86|21|65|36|58|61|80|71|265188|International
+Italy|Gianluca Scamacca|Italy|ST|78|79|26|65|80|67|74|36|70|226710|International
+Argentina|Emiliano Martínez|Argentina|GK|85|85|32|83|81|82|85|56|85|202811|International
+Argentina|Nahuel Molina|Argentina|RB|77|77|27|83|72|73|74|73|70|233084|International
+Argentina|Cristian Romero|Argentina|CB|82|84|27|66|48|62|65|83|81|232488|International
+Argentina|Lisandro Martínez|Argentina|CB|81|82|27|67|59|75|75|81|80|239301|International
+Argentina|Facundo Medina|Argentina|CB|79|83|26|74|44|70|72|79|81|236804|International
+Argentina|Rodrigo De Paul|Argentina|CM|83|83|31|75|77|83|83|75|83|212616|International
+Argentina|Alexis Mac Allister|Argentina|CM|85|86|26|66|82|84|83|77|76|239837|International
+Argentina|Enzo Fernández|Argentina|CM|85|88|24|68|77|85|82|73|75|247090|International
+Argentina|Thiago Almada|Argentina|CAM|78|83|24|79|75|78|81|53|59|245371|International
+Argentina|Lionel Messi|Argentina|CAM|86|86|38|76|84|84|89|33|64|158023|International
+Argentina|Lautaro Martínez|Argentina|ST|88|88|27|82|88|75|84|51|83|231478|International
+Argentina|Julián Alvarez|Argentina|ST|86|89|25|86|86|82|87|58|78|246191|International
+Argentina|Nicolás Paz Martínez|Argentina|CAM|82|89|20|79|75|79|84|55|65|277846|International
+Argentina|Leandro Paredes|Argentina|CM|81|81|31|66|70|84|79|74|77|207439|International
+Argentina|Nico Gonzalez|Argentina|LM|79|79|27|86|75|74|79|54|67|240690|International
+Argentina|Nicolás Otamendi|Argentina|CB|80|80|37|58|57|65|62|81|85|192366|International
+Argentina|Nicolás Tagliafico|Argentina|LB|78|78|32|70|56|70|76|77|76|211256|International
+Argentina|Gerónimo Rulli|Argentina|GK|81|81|33|82|77|80|86|54|77|215316|International
+Argentina|Giuliano Simeone|Argentina|RM|82|86|22|92|75|74|82|56|83|253396|International
+Argentina|Giovani Lo Celso|Argentina|CAM|81|81|29|75|80|82|81|68|69|226226|International
+Argentina|Gonzalo Montiel|Argentina|RB|76|76|28|76|72|71|74|73|78|231340|International
+Argentina|Marcos Senesi|Argentina|CB|81|81|28|54|44|73|73|81|77|236506|International
+Argentina|Juan Musso|Argentina|GK|80|80|31|79|78|73|82|46|81|214979|International
+Argentina|Exequiel Palacios|Argentina|CM|83|83|26|62|76|79|82|81|71|231521|International
+Argentina|José Manuel López|Argentina|ST|79|82|24|76|80|68|76|37|73|261176|International
+Argentina|Valentín Barco|Argentina|CM|78|84|20|77|50|80|79|69|63|263370|International
+Netherlands|Bart Verbruggen|Netherlands|GK|80|86|22|80|77|81|83|56|79|258498|International
+Netherlands|Denzel Dumfries|Netherlands|RB|84|84|29|84|70|75|79|79|84|233096|International
+Netherlands|Jan Paul van Hecke|Netherlands|CB|80|83|25|67|46|72|70|80|78|258908|International
+Netherlands|Virgil van Dijk|Netherlands|CB|88|88|33|73|60|72|71|89|85|203376|International
+Netherlands|Micky van de Ven|Netherlands|CB|82|85|24|90|60|66|73|81|81|264453|International
+Netherlands|Ryan Gravenberch|Netherlands|CDM|86|89|23|76|77|81|86|81|81|246104|International
+Netherlands|Frenkie de Jong|Netherlands|CM|87|87|28|82|71|85|87|78|77|228702|International
+Netherlands|Tijjani Reijnders|Netherlands|CM|85|86|26|78|79|82|84|72|77|240638|International
+Netherlands|Donyell Malen|Netherlands|ST|80|80|26|86|79|72|83|35|67|231447|International
+Netherlands|Brian Brobbey|Netherlands|ST|77|83|23|84|73|57|72|30|83|251810|International
+Netherlands|Cody Gakpo|Netherlands|LM|83|83|26|83|82|80|83|47|75|242516|International
+Netherlands|Marten de Roon|Netherlands|CM|81|81|34|61|74|77|76|83|80|208461|International
+Netherlands|Teun Koopmeiners|Netherlands|CAM|80|80|27|70|79|83|77|75|75|240679|International
+Netherlands|Crysencio Summerville|Netherlands|LM|78|83|23|89|74|70|82|36|55|251954|International
+Netherlands|Guus Til|Netherlands|CAM|77|77|27|79|76|72|74|65|77|235663|International
+Netherlands|Nathan Aké|Netherlands|CB|82|82|30|73|53|71|74|83|74|208920|International
+Netherlands|Lutsharel Geertruida|Netherlands|CB|78|82|24|72|59|70|75|78|78|241187|International
+Netherlands|Robin Roefs|Netherlands|GK|80|86|22|80|78|76|82|31|81|263798|International
+Netherlands|Justin Kluivert|Netherlands|CAM|79|80|26|87|78|76|81|42|62|236920|International
+Netherlands|Memphis Depay|Netherlands|ST|80|80|31|78|82|78|83|30|75|202556|International
+Netherlands|Quinten Timber|Netherlands|CM|80|85|24|77|78|76|80|74|83|251806|International
+Netherlands|Noa Lang|Netherlands|LW|79|80|26|80|77|73|84|50|68|239380|International
+Netherlands|Mark Flekken|Netherlands|GK|78|78|32|79|76|80|80|32|76|211738|International
+Netherlands|Jorrel Hato|Netherlands|LB|78|87|19|85|41|70|74|75|73|272978|International
+Netherlands|Mats Wieffer|Netherlands|CDM|78|81|25|67|66|75|74|76|78|248793|International
+Netherlands|Wout Weghorst|Netherlands|ST|77|77|32|52|78|60|66|57|86|223689|International
+Belgium|Thibaut Courtois|Belgium|GK|90|90|33|86|89|78|90|46|88|192119|International
+Belgium|Thomas Meunier|Belgium|RB|77|77|33|65|74|72|71|75|82|202371|International
+Belgium|Arthur Theate|Belgium|CB|78|83|25|67|40|70|71|78|82|257278|International
+Belgium|Brandon Mechele|Belgium|CB|78|78|32|49|40|57|59|81|78|212204|International
+Belgium|Maxim De Cuyper|Belgium|LB|79|83|24|76|73|80|78|75|75|251479|International
+Belgium|Hans Vanaken|Belgium|CAM|81|81|32|45|80|85|79|60|78|200155|International
+Belgium|Youri Tielemans|Belgium|CM|85|85|28|53|79|85|80|75|72|216393|International
+Belgium|Alexis Saelemaekers|Belgium|RM|80|80|26|80|67|76|83|69|65|242664|International
+Belgium|Leandro Trossard|Belgium|LW|83|83|30|80|81|80|85|30|60|207421|International
+Belgium|Kevin De Bruyne|Belgium|CM|87|87|34|66|83|92|84|65|72|192985|International
+Belgium|Romelu Lukaku|Belgium|ST|83|83|32|78|82|75|74|41|83|192505|International
+Belgium|Jérémy Doku|Belgium|LW|83|86|23|92|73|77|88|32|71|246420|International
+Belgium|Dodi Lukébakio|Belgium|RW|81|81|27|87|80|75|83|31|64|231416|International
+Belgium|Nicolas Raskin|Belgium|CDM|78|83|24|73|68|74|78|74|74|239810|International
+Belgium|Matias Fernandez-Pardo|Spain|LM|76|84|20|92|74|68|78|39|70|276048|International
+Belgium|Nathan Ngoy|Belgium|CB|75|83|22|79|49|60|69|74|77|262071|International
+Belgium|Koni De Winter|Belgium|CB|75|84|23|70|40|60|67|76|72|265774|International
+Belgium|Senne Lammens|Belgium|GK|81|87|22|80|83|77|81|45|81|254803|International
+Belgium|Timothy Castagne|Belgium|RB|75|75|29|68|57|70|72|73|71|222501|International
+Belgium|Zeno Debast|Belgium|CB|78|86|21|70|56|76|74|78|76|254262|International
+Belgium|Axel Witsel|Belgium|CDM|76|76|36|36|63|75|73|76|72|177413|International
+Belgium|Joaquin Seys|Belgium|LB|74|87|20|81|54|70|72|68|68|71305|International
+Belgium|Mike Penders|Belgium|GK|77|86|19|79|76|79|77|22|74|270821|International
+Belgium|Diego Manuel J. da Silva Moreira|Belgium|RM|78|84|20|90|67|69|82|64|69|270039|International
+Belgium|Charles De Ketelaere|Belgium|CAM|82|86|24|71|79|80|83|55|69|251470|International
+Belgium|Amadou Onana|Belgium|CDM|81|84|23|74|64|72|74|81|82|257057|International
+Morocco|Yassine Bounou|Morocco|GK|82|82|34|81|82|76|85|38|82|209981|International
+Morocco|Achraf Hakimi|Morocco|RB|89|90|26|92|79|82|83|82|79|235212|International
+Morocco|Issa Diop|Morocco|CB|76|77|28|57|37|53|55|77|78|231633|International
+Morocco|Redouane Halhal|Morocco|CB|66|76|22|61|30|44|51|66|68|264657|International
+Morocco|Noussair Mazraoui|Morocco|RB|80|80|27|75|66|76|80|77|72|236401|International
+Morocco|Ayyoub Bouaddi|France|CDM|78|86|17|75|55|73|76|73|75|278901|International
+Morocco|Neil El Aynaoui|Morocco|CM|76|81|23|62|63|76|74|73|75|262745|International
+Morocco|Brahim Díaz|Morocco|RM|81|82|25|81|73|78|84|33|63|231410|International
+Morocco|Bilal El Khannouss|Morocco|CAM|78|84|21|78|66|76|83|38|56|257504|International
+Morocco|Azzedine Ounahi|Morocco|CM|79|82|25|78|72|78|81|68|73|255125|International
+Morocco|Ismael Saibari|Morocco|CAM|80|85|24|78|77|75|82|54|80|259480|International
+Morocco|Soufiane Rahimi|Morocco|ST|77|77|29|87|77|72|78|38|68|264348|International
+Morocco|Chemsdine Talbi|Morocco|RW|76|86|20|90|68|68|79|47|57|275048|International
+Morocco|Sofyan Amrabat|Morocco|CDM|79|79|28|74|70|74|76|76|84|224158|International
+Morocco|Samir El Mourabet|Morocco|CM|73|82|19|60|63|66|73|69|65|279702|International
+Morocco|Zakaria El Ouahdi|Morocco|RB|78|85|23|80|66|71|78|69|71|275353|International
+Morocco|Marwane Saadane|Morocco|CB|72|72|33|54|52|63|62|70|85|235890|International
+Morocco|Munir El Kajoui|Morocco|GK|72|72|36|70|70|68|73|48|74|223573|International
+Morocco|Ayoub El Kaabi|Morocco|ST|80|80|32|81|82|62|75|46|77|243586|International
+Morocco|Ayoube Amaimouni|Morocco|RM|70|83|20|78|70|62|75|25|56|78474|International
+Morocco|Gessime Yassine|Morocco|RM|70|83|19|66|62|67|79|40|46|70017|International
+Morocco|Amine Sbaï|Morocco|LM|72|74|24|76|66|65|76|29|55|273666|International
+Morocco|Anass Salah-Eddine|Morocco|LB|75|81|23|82|45|71|77|70|68|268728|International
+Morocco|Chadi Riad|Morocco|CB|72|81|22|60|32|61|61|71|72|258490|International
+Morocco|Youssef Belammari|Morocco|LB|66|67|26|73|43|47|59|64|66|82240|International
+Morocco|Ahmed Reda Tagnaouti|Morocco|GK|70|70|29|70|68|67|70|38|68|241777|International
+Croatia|Dominik Livaković|Croatia|GK|78|78|30|78|75|70|80|56|78|241671|International
+Croatia|Josip Stanišić|Croatia|RB|79|82|25|73|44|67|70|79|75|250955|International
+Croatia|Josip Šutalo|Croatia|CB|77|81|25|77|32|62|72|77|80|256325|International
+Croatia|Marin Pongračić|Croatia|CB|73|75|27|61|26|52|62|73|76|238370|International
+Croatia|Joško Gvardiol|Croatia|CB|85|88|23|79|71|75|79|85|83|251517|International
+Croatia|Luka Modrić|Croatia|CM|85|85|39|68|74|87|86|73|63|177003|International
+Croatia|Mateo Kovačić|Croatia|CM|82|82|31|66|74|80|81|73|71|207410|International
+Croatia|Marco Pašalić|Croatia|RM|72|75|24|76|75|67|76|35|56|262740|International
+Croatia|Ivan Perišić|Croatia|LW|81|81|36|75|80|81|79|68|74|181458|International
+Croatia|Petar Sučić|Croatia|CM|77|83|21|71|69|76|81|64|74|276278|International
+Croatia|Petar Musa|Croatia|ST|77|77|27|82|75|62|71|41|81|244797|International
+Croatia|Toni Fruk|Croatia|ST|77|82|24|74|79|79|80|52|62|77673|International
+Croatia|Andrej Kramarić|Croatia|CAM|81|81|34|67|82|78|84|33|73|216354|International
+Croatia|Mario Pašalić|Croatia|CM|79|79|30|69|77|76|79|67|76|223273|International
+Croatia|Kristijan Jakić|Croatia|CDM|75|75|28|69|62|64|68|75|80|257889|International
+Croatia|Luka Vušković|Croatia|CB|78|88|18|59|62|62|63|78|80|275192|International
+Croatia|Martin Erlić|Croatia|CB|73|74|27|57|39|50|55|73|75|244456|International
+Croatia|Dominik Kotarski|Croatia|GK|75|78|25|77|72|76|77|46|72|246267|International
+Croatia|Igor Matanović|Croatia|ST|74|78|22|65|72|55|66|34|74|259750|International
+Croatia|Ante Budimir|Croatia|ST|82|82|33|65|83|63|74|36|81|188335|International
+Croatia|Nikola Moro|Croatia|CDM|75|75|27|66|72|74|73|70|72|244270|International
+Croatia|Luka Sučić|Croatia|CM|76|81|22|78|74|75|77|68|73|258775|International
+Croatia|Duje Ćaleta-Car|Croatia|CB|74|74|28|58|40|55|57|73|77|225263|International
+Croatia|Ivor Pandur|Croatia|GK|72|77|25|73|69|66|76|39|70|258585|International
+Croatia|Nikola Vlašić|Croatia|CAM|80|80|27|74|78|78|82|57|70|241095|International
+Croatia|Martin Baturina|Croatia|CAM|79|84|22|78|72|79|83|63|67|262842|International
+Norway|Ørjan Nyland|Norway|GK|74|74|34|73|73|75|74|45|73|185427|International
+Norway|Julian Ryerson|Norway|RB|80|80|27|74|63|72|76|77|82|229891|International
+Norway|Kristoffer Ajer|Norway|CB|76|77|27|68|56|65|68|74|81|224258|International
+Norway|Torbjørn Heggem|Norway|CB|74|76|26|73|46|62|66|73|79|248342|International
+Norway|David Møller Wolfe|Norway|LB|73|78|23|78|53|66|69|67|76|262135|International
+Norway|Martin Ødegaard|Norway|CM|86|87|26|68|78|88|87|67|64|222665|International
+Norway|Sander Berge|Norway|CDM|79|80|27|60|64|75|71|75|84|228092|International
+Norway|Patrick Berg|Norway|CDM|79|80|27|73|69|77|72|74|80|222227|International
+Norway|Alexander Sørloth|Norway|ST|83|83|29|77|82|71|74|37|84|216549|International
+Norway|Erling Haaland|Norway|ST|91|93|24|88|92|71|80|47|88|239085|International
+Norway|Antonio Nusa|Norway|LW|78|88|20|89|73|70|84|42|63|262863|International
+Norway|Fredrik Aursnes|Norway|CM|80|80|29|74|71|78|80|77|82|231913|International
+Norway|Oscar Bobb|Norway|RM|76|84|21|81|66|73|80|35|43|277295|International
+Norway|Thelo Aasgaard|Norway|CAM|71|78|23|67|70|71|72|46|63|259185|International
+Norway|Fredrik Bjørkan|Norway|LB|75|76|26|81|53|66|73|69|75|233800|International
+Norway|Leo Østigård|Norway|CB|75|80|25|60|37|51|62|74|80|238516|International
+Norway|Marcus Pedersen|Norway|RB|73|75|24|89|49|69|73|65|66|243481|International
+Norway|Egil Selvik|Norway|GK|70|73|27|70|69|66|70|19|69|247611|International
+Norway|Andreas Schjelderup|Norway|LW|77|86|21|80|70|72|81|42|57|260952|International
+Norway|Jørgen Strand Larsen|Norway|ST|77|80|25|75|78|62|70|32|81|238756|International
+Norway|Sander Tangvik|Norway|GK|70|79|22|71|66|68|70|57|68|257568|International
+Norway|Kristian Thorstvedt|Norway|CM|76|76|26|62|72|74|73|68|83|242725|International
+Norway|Jens Petter Hauge|Norway|LW|76|77|25|82|72|71|77|45|64|233848|International
+Norway|Henrik Falchener|Norway|CB|69|80|22|66|49|55|59|66|79|256435|International
+Norway|Sondre Langås|Norway|CB|71|77|24|86|38|57|64|68|85|277305|International
+Norway|Morten Thorsby|Norway|CM|72|72|29|57|62|69|71|71|75|222475|International
+Türkiye|Uğurcan Çakır|Türkiye|GK|80|81|29|80|76|81|82|54|80|226300|International
+Türkiye|Zeki Çelik|Türkiye|RB|78|78|28|72|59|71|75|75|76|224490|International
+Türkiye|Ozan Kabak|Türkiye|CB|76|78|25|60|37|59|66|74|79|239890|International
+Türkiye|Abdülkerim Bardakcı|Türkiye|CB|80|80|30|58|50|70|69|81|85|229905|International
+Türkiye|Oğuz Aydın|Türkiye|LW|74|77|24|84|70|69|76|56|67|264001|International
+Türkiye|Salih Özcan|Türkiye|CDM|74|75|27|70|59|67|73|75|78|235407|International
+Türkiye|Orkun Kökçü|Türkiye|CM|82|86|24|72|80|84|80|70|79|243245|International
+Türkiye|Eren Elmalı|Türkiye|LB|75|80|24|83|58|72|72|69|78|259754|International
+Türkiye|Arda Güler|Türkiye|RM|83|89|20|77|79|85|84|55|57|264309|International
+Türkiye|Kenan Yıldız|Türkiye|CAM|82|89|20|84|79|77|85|51|66|277954|International
+Türkiye|Barış Alper Yılmaz|Türkiye|LM|80|81|25|93|75|72|80|69|90|263205|International
+Türkiye|Kerem Aktürkoğlu|Türkiye|LW|79|79|26|85|76|76|80|42|58|258580|International
+Türkiye|Hakan Çalhanoğlu|Türkiye|CDM|86|86|31|71|81|87|82|80|73|208128|International
+Türkiye|Can Uzun|Türkiye|CAM|78|85|19|69|80|72|81|38|64|275328|International
+Türkiye|Ferdi Kadıoğlu|Türkiye|LB|79|81|25|84|68|74|80|76|65|235152|International
+Türkiye|Merih Demiral|Türkiye|CB|79|81|27|70|41|52|60|80|81|238160|International
+Türkiye|Çağlar Söyüncü|Türkiye|CB|75|75|29|69|47|58|64|75|79|232119|International
+Türkiye|Altay Bayındır|Türkiye|GK|75|77|27|77|72|70|77|30|75|243647|International
+Türkiye|İsmail Yüksek|Türkiye|CDM|77|79|26|74|59|70|74|76|79|260466|International
+Türkiye|Yunus Akgün|Türkiye|RM|79|82|24|85|76|76|82|37|57|239892|International
+Türkiye|Mert Günok|Türkiye|GK|75|75|36|75|75|75|74|56|75|190113|International
+Türkiye|Mert Müldür|Türkiye|RB|74|75|26|76|54|65|73|71|75|243526|International
+Türkiye|Deniz Gül|Türkiye|ST|70|82|20|70|68|59|71|31|75|278587|International
+Türkiye|İrfan Can Kahveci|Türkiye|RM|74|74|29|71|74|75|75|58|67|225403|International
+Türkiye|Samet Akaydin|Türkiye|CB|72|72|31|55|37|43|48|73|76|263021|International
+Türkiye|Kaan Ayhan|Türkiye|CB|73|73|30|51|63|72|64|73|72|207790|International
+Uruguay|Fernando Muslera|Uruguay|GK|78|78|39|79|74|69|79|43|80|182494|International
+Uruguay|Guillermo Varela|Uruguay|RB|76|76|32|78|42|65|70|73|70|219914|International
+Uruguay|Sebastián Cáceres|Uruguay|CB|75|80|25|60|41|54|61|78|76|253257|International
+Uruguay|Mathías Olivera|Uruguay|LB|77|77|27|70|51|69|71|77|73|240716|International
+Uruguay|Juan Manuel Sanabria|Uruguay|LB|74|77|25|76|62|68|73|70|69|252326|International
+Uruguay|Manuel Ugarte|Uruguay|CDM|78|82|24|62|65|71|73|76|75|253306|International
+Uruguay|Agustín Canobbio|Uruguay|RM|74|74|26|83|69|69|73|50|65|253281|International
+Uruguay|Rodrigo Bentancur|Uruguay|CDM|80|81|28|64|68|78|77|78|72|227535|International
+Uruguay|Federico Valverde|Uruguay|CM|89|90|26|90|85|84|84|82|85|239053|International
+Uruguay|Maximiliano Araújo|Uruguay|LM|78|79|25|85|65|72|79|71|73|254817|International
+Uruguay|Darwin Núñez|Uruguay|ST|78|81|26|88|77|72|74|49|82|253072|International
+Uruguay|Brian Rodríguez|Uruguay|LW|77|78|25|80|71|71|79|33|52|253061|International
+Uruguay|Federico Viñas|Uruguay|ST|75|76|27|77|72|64|75|47|83|253385|International
+Uruguay|Rodrigo Zalazar|Uruguay|CAM|80|83|25|80|83|79|80|66|75|251377|International
+Uruguay|Nicolás De la Cruz|Uruguay|CM|76|76|28|81|75|75|77|70|68|240699|International
+Uruguay|José María Giménez|Uruguay|CB|83|83|30|71|46|60|62|84|81|216460|International
+Uruguay|Matías Viña|Uruguay|LB|74|74|27|80|65|72|76|69|69|253290|International
+Uruguay|Sergio Rochet|Uruguay|GK|77|77|32|78|77|67|80|49|76|223690|International
+Uruguay|Joaquín Piquerez|Uruguay|LB|76|77|26|78|68|73|74|70|76|254623|International
+Uruguay|Rodrigo Aguirre|Uruguay|ST|72|72|30|78|74|58|68|23|66|224201|International
+Uruguay|Santiago Bueno|Uruguay|CB|76|78|26|50|31|56|56|77|77|237658|International
+Uruguay|Emiliano Martínez|Uruguay|CDM|74|79|25|73|58|64|71|71|70|255340|International
+Uruguay|Facundo Pellistri|Uruguay|RM|73|76|23|82|64|66|75|38|63|253283|International
+Uruguay|Santiago Mele|Uruguay|GK|74|77|27|75|70|68|76|50|72|259259|International
+Uruguay|Ronald Araujo|Uruguay|CB|81|84|26|79|54|64|59|79|82|253163|International
+Uruguay|Giorgian De Arrascaeta|Uruguay|CAM|83|83|31|82|81|82|83|43|55|225645|International
+Senegal|Édouard Mendy|Senegal|GK|81|81|33|83|77|77|81|34|80|234642|International
+Senegal|Krépin Diatta|Senegal|RM|74|74|26|88|69|67|76|61|67|238227|International
+Senegal|Kalidou Koulibaly|Senegal|CB|82|82|34|74|48|62|65|82|84|201024|International
+Senegal|Moussa Niakhaté|Senegal|CB|80|80|29|69|49|65|64|81|81|225859|International
+Senegal|Ismail Jakobs|Senegal|LB|75|78|25|90|60|65|74|70|67|252293|International
+Senegal|Idrissa Gueye|Senegal|CDM|79|79|35|60|59|72|73|80|70|193474|International
+Senegal|Pape Gueye|Senegal|CM|80|81|26|72|73|75|78|78|82|241707|International
+Senegal|Ismaïla Sarr|Senegal|RW|81|81|27|91|79|77|79|38|69|235353|International
+Senegal|Sadio Mané|Senegal|LM|83|83|33|82|81|78|85|44|75|208722|International
+Senegal|Habib Diarra|Senegal|CM|77|83|21|70|69|71|77|71|71|264293|International
+Senegal|Nicolas Jackson|Senegal|ST|79|82|24|82|77|69|79|40|78|259197|International
+Senegal|Bamba Dieng|Senegal|ST|74|77|25|80|74|61|70|33|62|261084|International
+Senegal|Iliman Ndiaye|Senegal|RM|82|83|25|86|77|73|86|44|65|261188|International
+Senegal|Pape Matar Sarr|Senegal|CM|80|85|22|68|66|77|80|78|76|259868|International
+Senegal|Lamine Camara|Senegal|CM|79|85|21|79|69|80|79|71|72|275138|International
+Senegal|El Hadji Malick Diouf|Senegal|LB|78|84|20|82|67|73|75|74|77|274915|International
+Senegal|Mamadou Sarr|Senegal|CB|77|84|19|68|30|57|57|78|75|275507|International
+Senegal|Mory Diaw|Senegal|GK|72|72|32|72|70|71|73|43|71|220820|International
+Senegal|Antoine Mendy|Senegal|CB|72|81|21|67|41|56|64|72|73|272515|International
+Senegal|Assane Diao|Senegal|RM|76|87|19|90|74|67|77|36|62|275324|International
+Senegal|Yehvann Diouf|Senegal|GK|77|82|25|77|76|76|78|50|75|235633|International
+Senegal|Abdoulaye Seck|Senegal|CB|72|72|33|74|48|55|57|68|87|217620|International
+Senegal|Bara Sapoko Ndiaye|Senegal|CM|61|81|17|82|52|59|67|56|53|85225|International
+Senegal|Pathé Ciss|Senegal|CDM|77|77|31|63|57|64|65|76|83|250858|International
+Senegal|Ibrahim Mbaye|Senegal|RW|74|85|17|89|63|63|78|28|51|74449|International
+Senegal|Cherif Ndiaye|Senegal|ST|69|69|29|80|66|55|67|38|80|237179|International
+Colombia|Camilo Vargas|Colombia|GK|77|77|36|73|74|76|72|46|78|212067|International
+Colombia|Daniel Muñoz|Colombia|RB|82|82|29|78|69|73|77|80|81|237646|International
+Colombia|Davinson Sánchez|Colombia|CB|81|81|29|82|58|62|72|81|87|220793|International
+Colombia|Jhon Lucumí|Colombia|CB|76|78|27|65|38|62|61|77|78|231207|International
+Colombia|Johan Mojica|Colombia|LB|77|77|32|87|65|72|74|72|72|214026|International
+Colombia|Gustavo Puerta|Colombia|CDM|71|82|21|65|61|68|72|65|74|273827|International
+Colombia|Jefferson Lerma|Colombia|CDM|77|77|30|67|71|70|74|76|78|213991|International
+Colombia|Jhon Arias|Colombia|RM|77|77|27|85|73|73|78|49|67|241602|International
+Colombia|Luis Díaz|Colombia|LM|87|87|28|83|80|81|87|45|75|241084|International
+Colombia|James Rodríguez|Colombia|CAM|80|80|33|50|81|85|82|49|61|198710|International
+Colombia|Luis Javier Suárez|Colombia|ST|80|80|27|83|81|68|77|41|77|245158|International
+Colombia|Jhon Córdoba|Colombia|ST|79|79|32|78|79|61|74|45|87|210287|International
+Colombia|Jorge Carrascal|Colombia|CAM|78|78|27|78|74|74|84|45|60|225964|International
+Colombia|Richard Ríos|Colombia|CM|78|82|25|81|69|76|81|72|85|262881|International
+Colombia|Kevin Castaño|Colombia|CM|74|75|24|69|64|74|76|71|72|272951|International
+Colombia|Yerry Mina|Colombia|CB|76|76|30|34|50|51|55|77|82|220523|International
+Colombia|Santiago Arias|Colombia|RB|74|74|33|74|53|68|74|72|71|204259|International
+Colombia|Álvaro Montero|Colombia|GK|76|76|30|76|74|72|76|43|75|229541|International
+Colombia|Jaminton Campaz|Colombia|LM|76|77|25|82|73|73|76|30|59|238230|International
+Colombia|Deiver Machado|Colombia|LB|74|74|31|77|69|70|73|70|72|220837|International
+Colombia|Juan Fernando Quintero|Colombia|CAM|76|76|32|60|75|80|82|41|55|210513|International
+Colombia|Andrés Gómez|Colombia|RM|73|82|22|77|69|67|75|32|58|266674|International
+Colombia|David Ospina|Colombia|GK|75|75|36|75|74|75|74|53|76|176550|International
+Colombia|Willer Ditta|Colombia|CB|77|78|28|66|32|51|61|76|83|245810|International
+Colombia|Juan Camilo Portilla|Colombia|CDM|73|76|26|69|66|67|67|68|75|248191|International
+Colombia|Juan Camilo Hernández Suárez|Colombia|ST|79|80|26|81|78|75|81|45|78|237034|International
+Côte d'Ivoire|Yahia Fofana|Côte d'Ivoire|GK|73|78|24|73|71|70|74|41|71|242179|International
+Côte d'Ivoire|Wilfried Singo|Côte d'Ivoire|CB|78|84|24|82|61|68|74|77|84|252802|International
+Côte d'Ivoire|Odilon Kossounou|Côte d'Ivoire|CB|80|85|24|80|32|64|67|81|78|246875|International
+Côte d'Ivoire|Emmanuel Agbadou|Côte d'Ivoire|CB|77|78|28|80|50|63|66|76|82|258575|International
+Côte d'Ivoire|Ghislain Konan|Côte d'Ivoire|LB|73|73|29|79|51|66|69|69|74|235634|International
+Côte d'Ivoire|Ibrahim Sangaré|Côte d'Ivoire|CDM|78|79|27|58|66|73|72|77|80|235173|International
+Côte d'Ivoire|Nicolas Pépé|Côte d'Ivoire|RW|81|81|30|87|80|75|84|37|69|226110|International
+Côte d'Ivoire|Franck Yannick Kessié|Côte d'Ivoire|CDM|79|79|28|73|77|72|76|77|86|230938|International
+Côte d'Ivoire|Christ Ravynel Inao Oulaï|Côte d'Ivoire|CM|70|84|19|75|56|70|76|64|64|74735|International
+Côte d'Ivoire|Yan Diomande|Côte d'Ivoire|RW|81|89|18|92|75|73|85|43|62|78012|International
+Côte d'Ivoire|Yoan Bonny|France|ST|78|86|21|87|76|73|78|33|76|259565|International
+Côte d'Ivoire|Evann Guessand|Côte d'Ivoire|RW|78|83|24|83|76|72|78|36|78|258444|International
+Côte d'Ivoire|Amad Diallo|Côte d'Ivoire|RM|80|85|22|85|75|75|84|54|53|254088|International
+Côte d'Ivoire|Bazoumana Touré|Côte d'Ivoire|LM|77|86|19|91|64|69|80|29|52|71418|International
+Côte d'Ivoire|Jean Michaël Seri|Côte d'Ivoire|CDM|69|69|33|54|65|74|72|64|58|216451|International
+Côte d'Ivoire|Ousmane Diomande|Côte d'Ivoire|CB|80|87|21|80|26|51|70|79|86|270531|International
+Côte d'Ivoire|Guéla Doué|Côte d'Ivoire|RB|77|82|22|72|52|71|72|75|78|275208|International
+Côte d'Ivoire|Alban Lafont|Côte d'Ivoire|GK|74|76|26|71|70|69|79|47|75|231691|International
+Côte d'Ivoire|Evan Ndicka|Côte d'Ivoire|CB|81|83|25|74|53|69|69|82|82|236403|International
+Côte d'Ivoire|Oumar Diakité|Côte d'Ivoire|ST|72|82|21|82|71|57|70|21|71|277178|International
+Côte d'Ivoire|Mohamed Koné|Côte d'Ivoire|GK|68|75|23|68|68|64|70|31|64|263922|International
+Côte d'Ivoire|Christopher Operi|Côte d'Ivoire|LB|73|73|28|78|61|70|72|68|71|236629|International
+Côte d'Ivoire|Seko Fofana|Côte d'Ivoire|CM|77|77|30|65|77|73|76|71|79|216320|International
+Côte d'Ivoire|Parfait Guiagon|Côte d'Ivoire|LM|74|77|24|72|67|69|78|26|59|277975|International
+Côte d'Ivoire|Simon Adingra|Côte d'Ivoire|LW|76|82|23|87|70|70|80|30|54|260779|International
+Côte d'Ivoire|Elye Wahi|France|ST|74|81|22|84|74|67|76|31|65|260407|International
+Austria|Alexander Schlager|Austria|GK|72|73|29|71|70|69|75|46|72|215522|International
+Austria|Stefan Posch|Austria|CB|78|78|28|75|55|68|67|79|74|223671|International
+Austria|Kevin Danso|Austria|CB|79|82|26|73|32|57|62|78|83|237985|International
+Austria|David Alaba|Austria|CB|80|80|33|68|71|81|78|81|75|197445|International
+Austria|Konrad Laimer|Austria|RB|84|84|28|82|69|78|76|80|77|225375|International
+Austria|Nicolas Seiwald|Austria|CDM|80|85|24|72|62|75|74|79|77|257876|International
+Austria|Xaver Schlager|Austria|CDM|78|79|27|69|70|73|76|73|77|233195|International
+Austria|Romano Schmid|Austria|CAM|78|81|25|77|67|78|83|56|58|239701|International
+Austria|Paul Wanner|Germany|CAM|75|86|19|75|64|73|76|54|50|266237|International
+Austria|Marcel Sabitzer|Austria|CDM|81|81|31|74|80|80|80|77|76|204923|International
+Austria|Michael Gregoritsch|Austria|ST|75|75|31|37|77|68|68|42|76|199439|International
+Austria|Marko Arnautović|Austria|ST|77|77|36|56|79|78|78|43|74|184200|International
+Austria|Carney Chukwuemeka|Austria|CAM|78|84|21|75|68|75|83|61|69|259356|International
+Austria|Patrick Wimmer|Austria|LM|77|83|24|83|69|71|81|49|72|254566|International
+Austria|Florian Grillitsch|Austria|CM|76|76|29|63|61|75|74|73|69|228336|International
+Austria|Philipp Lienhart|Austria|CB|78|78|28|67|28|59|64|80|78|231366|International
+Austria|Phillipp Mwene|Austria|LB|75|75|31|78|55|69|75|69|70|216275|International
+Austria|Patrick Pentz|Austria|GK|72|74|28|69|69|68|74|53|71|228505|International
+Austria|Marco Friedl|Austria|CB|77|79|27|75|44|64|69|79|77|237595|International
+Austria|Alexander Prass|Austria|LB|75|77|24|74|65|74|76|70|74|263041|International
+Austria|Florian Wiegele|Austria|GK|69|74|24|71|67|65|68|28|67|72937|International
+Austria|David Affengruber|Austria|CB|75|82|24|73|43|57|69|75|83|261264|International
+Austria|Michael Svoboda|Austria|CB|72|72|26|58|47|52|56|71|80|250779|International
+Austria|Alessandro Schöpf|Austria|CM|68|68|31|67|62|67|69|60|70|220925|International
+Austria|Saša Kalajdžić|Austria|ST|73|73|27|50|72|67|68|45|64|239901|International
+Austria|Dejan Ljubičić|Austria|CM|73|73|27|68|68|70|73|69|76|240916|International
+Denmark|Mads Hermansen|Denmark|GK|75|80|24|75|74|75|76|50|75|246158|International
+Denmark|Alexander Bah|Denmark|RB|77|77|27|88|65|72|75|73|80|245235|International
+Denmark|Joachim Andersen|Denmark|CB|79|79|29|44|57|72|65|80|83|224221|International
+Denmark|Andreas Christensen|Denmark|CB|80|80|29|71|32|67|69|82|73|213661|International
+Denmark|Joakim Mæhle|Denmark|LB|77|77|28|75|57|70|75|73|76|234678|International
+Denmark|Victor Froholdt|Denmark|CM|79|88|19|77|73|74|78|77|79|279015|International
+Denmark|Morten Hjulmand|Denmark|CDM|83|86|26|70|76|78|77|80|84|244669|International
+Denmark|Pierre-Emile Højbjerg|Denmark|CDM|81|81|29|49|73|77|74|78|82|213648|International
+Denmark|Gustav Isaksen|Denmark|RM|76|79|24|88|72|67|78|40|48|248729|International
+Denmark|Rasmus Højlund|Denmark|ST|78|83|22|85|77|61|73|37|79|259399|International
+Denmark|Mikkel Damsgaard|Denmark|CAM|80|83|24|68|73|82|81|66|67|241508|International
+Denmark|Kasper Høgh|Denmark|ST|74|79|24|81|72|58|68|33|79|243203|International
+Denmark|Jens Stage|Denmark|CM|79|79|28|64|74|74|77|77|81|232711|International
+Denmark|Patrick Dorgu|Denmark|LM|77|84|20|86|69|71|77|72|73|277432|International
+Denmark|Albert Grønbæk|Denmark|CAM|73|78|24|75|67|72|76|62|69|256949|International
+Denmark|Rasmus Kristensen|Denmark|RB|79|79|27|69|67|70|72|79|81|233301|International
+Denmark|Lucas Høgsberg|Denmark|CB|73|82|19|67|31|61|64|73|71|276377|International
+Denmark|Filip Jörgensen|Denmark|GK|77|83|23|77|76|72|78|45|77|258485|International
+Denmark|Christian Eriksen|Denmark|CAM|76|76|33|48|75|82|76|53|47|190460|International
+Denmark|William Osula|Denmark|ST|73|81|21|88|71|55|73|24|68|270519|International
+Denmark|Andreas Jungdal|Denmark|GK|64|69|23|67|61|57|67|23|63|273047|International
+Denmark|Jacob Trenskow|Denmark|RM|71|74|24|71|67|66|74|47|52|259131|International
+Denmark|Mathias Jensen|Denmark|CM|79|79|29|63|68|81|78|70|72|229723|International
+Denmark|Oliver Provstgaard|Denmark|CB|69|76|22|66|39|53|62|68|76|266123|International
+Denmark|Christian Nørgaard|Denmark|CDM|80|80|31|49|65|74|71|79|79|210697|International
+Denmark|Anders Dreyer|Denmark|RW|78|78|27|78|80|76|78|41|65|236918|International
+Switzerland|Gregor Kobel|Switzerland|GK|86|89|27|87|83|64|87|44|86|235073|International
+Switzerland|Silvan Widmer|Switzerland|RB|73|73|32|73|62|69|71|72|72|216158|International
+Switzerland|Nico Elvedi|Switzerland|CB|76|76|28|70|39|62|63|77|76|221491|International
+Switzerland|Manuel Akanji|Switzerland|CB|83|83|29|78|48|70|74|83|82|229237|International
+Switzerland|Ricardo Rodríguez|Switzerland|LB|73|73|32|56|69|77|73|70|72|193352|International
+Switzerland|Remo Freuler|Switzerland|CDM|82|82|33|58|72|76|77|78|74|202024|International
+Switzerland|Granit Xhaka|Switzerland|CDM|85|85|32|47|75|85|74|78|82|199503|International
+Switzerland|Dan Ndoye|Switzerland|LM|77|80|24|89|72|70|79|62|66|257980|International
+Switzerland|Ruben Vargas|Switzerland|LW|78|78|26|88|72|73|80|56|67|238581|International
+Switzerland|Johan Manzambi|Switzerland|CM|77|86|19|78|71|70|82|69|71|276694|International
+Switzerland|Breel Embolo|Switzerland|ST|77|77|28|78|75|70|74|52|80|222357|International
+Switzerland|Noah Okafor|Switzerland|ST|76|79|25|88|76|71|80|31|69|242530|International
+Switzerland|Denis Zakaria|Switzerland|CDM|81|81|28|80|67|74|77|80|85|229261|International
+Switzerland|Ardon Jashari|Switzerland|CDM|77|86|22|75|67|75|73|72|81|257186|International
+Switzerland|Fabian Rieder|Switzerland|CAM|74|81|23|74|70|71|75|51|62|259306|International
+Switzerland|Miro Muheim|Switzerland|LB|75|75|27|73|66|73|73|71|73|232839|International
+Switzerland|Aurèle Amenda|Switzerland|CB|74|80|21|68|28|53|54|73|76|270846|International
+Switzerland|Yvon Mvogo|Switzerland|GK|76|76|31|77|75|73|79|42|73|206003|International
+Switzerland|Michel Aebischer|Switzerland|CM|74|74|28|66|67|72|75|74|70|236898|International
+Switzerland|Zeki Amdouni|Switzerland|ST|74|78|24|71|76|69|76|46|67|262642|International
+Switzerland|Christian Fassnacht|Switzerland|RM|73|73|31|76|70|68|73|36|69|234913|International
+Switzerland|Djibril Sow|Switzerland|CM|75|75|28|78|70|73|75|74|78|229752|International
+Switzerland|Eray Cömert|Switzerland|CB|73|74|27|66|49|62|55|72|76|233885|International
+Switzerland|Marvin Keller|Switzerland|GK|72|81|22|73|70|70|73|38|73|256726|International
+Switzerland|Luca Jaquez|Switzerland|CB|71|79|22|64|42|53|63|71|71|266685|International
+Switzerland|Cedric Itten|Switzerland|ST|70|70|28|68|71|61|65|36|79|233139|International
+Czechia|Matěj Kovář|Czechia|GK|77|81|25|76|76|78|77|30|77|242948|International
+Czechia|Vladimír Coufal|Czechia|RB|78|78|32|71|57|73|72|75|74|244470|International
+Czechia|Tomáš Holeš|Czechia|CB|76|76|32|74|58|69|69|75|80|251116|International
+Czechia|Robin Hranáč|Czechia|CB|76|77|25|73|38|52|53|76|77|276646|International
+Czechia|Ladislav Krejčí|Czechia|CB|78|81|26|72|68|68|69|76|84|252064|International
+Czechia|Alexandr Sojka|Czechia|CM|65|73|22|67|55|64|65|58|67|74419|International
+Czechia|Michal Sadílek|Czechia|CDM|77|79|26|58|61|75|72|73|79|245209|International
+Czechia|Vladimír Darida|Czechia|CM|71|71|34|61|70|72|75|67|56|201262|International
+Czechia|Lukáš Červ|Czechia|CDM|74|78|24|69|68|67|68|71|78|71259|International
+Czechia|Adam Hložek|Czechia|ST|77|83|22|78|78|72|77|31|79|246618|International
+Czechia|Patrik Schick|Czechia|ST|85|85|29|72|83|71|81|38|77|234236|International
+Czechia|Mojmír Chytil|Czechia|ST|74|75|26|73|73|55|68|29|81|274906|International
+Czechia|Tomáš Souček|Czechia|CDM|76|76|30|45|72|71|67|77|79|236792|International
+Czechia|David Zima|Czechia|CB|75|77|24|76|39|56|66|77|75|255687|International
+Czechia|Štěpán Chaloupek|Czechia|CB|74|80|22|74|45|58|66|73|78|73456|International
+Czechia|Jaroslav Zelený|Czechia|CB|73|73|32|73|62|71|71|72|75|199323|International
+Czechia|David Jurásek|Czechia|LB|73|75|24|83|61|69|70|67|74|267594|International
+Czechia|Lukas Hornicek|Czechia|GK|75|83|22|74|74|73|77|28|75|258936|International
+Czechia|Lukáš Provod|Czechia|CAM|79|79|28|77|75|79|78|65|83|253727|International
+Czechia|Tomáš Chorý|Czechia|ST|75|75|30|57|75|60|64|32|88|244793|International
+Czechia|Denis Višinský|Czechia|LW|69|75|22|76|66|66|69|47|59|80073|International
+Czechia|Jan Kuchta|Czechia|ST|73|73|28|77|71|65|71|34|80|257536|International
+Czechia|Pavel Šulc|Czechia|CAM|78|81|24|74|77|75|78|47|73|247050|International
+Czechia|Hugo Sochůrek|Czechia|CM|63|78|17|72|52|61|66|53|57|86210|International
+Czechia|Jindřich Staněk|Czechia|GK|76|76|29|75|72|78|79|36|77|221909|International
+Czechia|David Douděra|Czechia|RM|73|73|27|89|69|65|71|65|67|269509|International
+Poland|Kamil Grabara|Poland|GK|81|84|26|82|79|76|85|42|83|228383|International
+Poland|Tomasz Kędziora|Poland|CB|74|74|31|76|45|65|66|74|75|210136|International
+Poland|Jan Bednarek|Poland|CB|80|80|29|43|22|61|69|81|80|220570|International
+Poland|Jakub Kiwior|Poland|CB|80|85|25|69|37|72|73|81|78|265693|International
+Poland|Matty Cash|Poland|RB|81|81|27|75|67|74|76|78|76|227174|International
+Poland|Piotr Zieliński|Poland|CM|81|81|31|77|77|81|82|70|61|210406|International
+Poland|Sebastian Szymański|Poland|CAM|77|78|26|77|74|78|76|60|67|235973|International
+Poland|Michał Skóraś|Poland|LM|71|72|25|81|63|64|73|44|69|251633|International
+Poland|Filip Rózga|Poland|CAM|65|79|18|84|63|62|69|38|59|276395|International
+Poland|Jakub Kamiński|Poland|LM|77|82|23|84|69|69|79|57|60|252495|International
+Poland|Robert Lewandowski|Poland|ST|86|86|36|71|87|79|82|44|82|188545|International
+Poland|Krzysztof Piątek|Poland|ST|78|78|30|71|79|58|73|37|72|223113|International
+Poland|Jakub Moder|Poland|CM|74|75|26|64|70|74|72|70|77|239778|International
+Poland|Bartosz Slisz|Poland|CDM|73|76|26|74|56|67|70|68|74|243222|International
+Poland|Oskar Pietuszewski|Poland|LM|70|85|17|79|64|66|72|22|53|75754|International
+Poland|Arkadiusz Pyrka|Poland|RB|70|76|22|84|56|60|68|65|63|257886|International
+Poland|Jan Ziółkowski|Poland|CB|69|79|20|64|28|45|47|69|69|276680|International
+Poland|Bartłomiej Drągowski|Poland|GK|72|72|27|73|69|70|76|42|72|215502|International
+Poland|Karol Świderski|Poland|ST|72|72|28|66|73|63|71|32|70|224301|International
+Poland|Nicola Zalewski|Poland|LM|77|79|23|83|66|75|79|63|59|262113|International
+Poland|Łukasz Skorupski|Poland|GK|78|78|34|78|77|68|81|51|77|189908|International
+Poland|Bartosz Bereszyński|Poland|CB|68|68|32|76|56|65|69|67|70|199763|International
+Poland|Przemysław Wiśniewski|Poland|CB|71|73|26|86|25|45|52|69|82|243185|International
+Poland|Mateusz Kochalski|Poland|GK|72|76|24|72|67|63|77|39|73|258239|International
+Poland|Bartosz Mrozek|Poland|GK|71|76|25|71|70|70|71|38|70|235304|International
+Poland|Adam Buksa|Poland|ST|72|72|28|59|73|56|67|32|75|224438|International
+Sweden|Kristoffer Nordfeldt|Sweden|GK|70|70|36|68|68|70|68|50|70|192129|International
+Sweden|Gustaf Lagerbielke|Sweden|CB|73|77|25|50|37|59|60|72|75|264191|International
+Sweden|Victor Lindelöf|Sweden|CB|76|76|30|50|51|71|67|77|69|221660|International
+Sweden|Gabriel Gudmundsson|Sweden|LB|77|78|26|87|64|70|76|70|76|236822|International
+Sweden|Jesper Karlström|Sweden|CDM|75|75|30|64|60|72|71|71|76|214658|International
+Sweden|Alexander Bernhardsson|Sweden|RM|73|73|26|83|72|65|73|49|71|255459|International
+Sweden|Benjamin Nygren|Sweden|CM|74|80|23|73|75|75|73|62|73|243646|International
+Sweden|Yasin Ayari|Sweden|CDM|79|85|21|69|73|76|80|74|64|257400|International
+Sweden|Elliot Stroud|Sweden|LB|73|79|23|82|67|69|71|68|73|272712|International
+Sweden|Viktor Gyökeres|Sweden|ST|86|86|27|86|86|72|78|44|90|241651|International
+Sweden|Alexander Isak|Sweden|ST|87|88|25|83|88|73|84|39|75|233731|International
+Sweden|Lucas Bergvall|Sweden|CM|78|87|19|75|66|76|78|72|74|272926|International
+Sweden|Mattias Svanberg|Sweden|CM|76|77|26|73|70|74|76|66|73|228946|International
+Sweden|Besfort Zeneli|Sweden|CM|72|79|22|71|65|70|70|56|67|270919|International
+Sweden|Taha Ali|Sweden|LM|69|69|27|86|60|58|76|35|50|260972|International
+Sweden|Daniel Svensson|Sweden|LB|79|83|23|77|60|76|77|75|75|259716|International
+Sweden|Hjalmar Ekdal|Sweden|CB|71|73|26|53|33|53|63|72|75|252316|International
+Sweden|Viktor Johansson|Sweden|GK|74|76|26|75|71|70|77|40|73|241643|International
+Sweden|Anthony Elanga|Sweden|RW|79|82|23|92|70|74|80|39|67|257470|International
+Sweden|Gustaf Nilsson|Sweden|ST|73|73|28|70|75|58|63|32|80|223933|International
+Sweden|Jacob Widell Zetterström|Sweden|GK|73|76|26|75|72|65|75|38|68|247022|International
+Sweden|Eric Smith|Sweden|CB|74|74|28|67|59|67|67|73|79|222369|International
+Sweden|Isak Hien|Sweden|CB|78|81|26|69|37|49|58|79|82|260697|International
+Sweden|Herman Johansson|Sweden|RM|73|73|27|93|59|64|68|65|77|261028|International
+Sweden|Carl Starfelt|Sweden|CB|78|78|30|74|31|58|69|79|79|220821|International
+Sweden|Ken Sema|Sweden|LM|70|70|31|74|67|68|70|60|68|213750|International
+Ukraine|Anatoliy Trubin|Ukraine|GK|80|87|23|77|76|77|84|45|83|250753|International
+Ukraine|Yukhym Konoplia|Ukraine|RB|72|74|25|81|47|68|69|67|66|263804|International
+Ukraine|Illia Zabarnyi|Ukraine|CB|80|85|22|80|37|65|64|81|81|258781|International
+Ukraine|Mykola Matviienko|Ukraine|CB|77|77|29|77|58|71|69|78|76|229528|International
+Ukraine|Vitaliy Mykolenko|Ukraine|LB|77|78|26|74|55|70|71|76|71|244380|International
+Ukraine|Artem Bondarenko|Ukraine|CAM|77|79|24|75|71|76|76|63|64|255074|International
+Ukraine|Volodymyr Brazhko|Ukraine|CDM|75|83|23|70|68|71|70|72|75|277439|International
+Ukraine|Viktor Tsygankov|Ukraine|RW|78|78|27|81|76|77|77|43|62|244369|International
+Ukraine|Georgiy Sudakov|Ukraine|CAM|79|86|22|81|76|78|81|60|72|259913|International
+Ukraine|Mykola Shaparenko|Ukraine|CM|78|79|26|79|71|79|79|68|71|244374|International
+Ukraine|Artem Dovbyk|Ukraine|ST|81|81|28|83|83|67|75|34|78|242458|International
+Ukraine|Roman Yaremchuk|Ukraine|ST|75|75|29|73|75|69|70|45|75|240702|International
+Ukraine|Ruslan Malinovskyi|Ukraine|CM|75|75|32|65|78|77|76|63|73|231969|International
+Ukraine|Oleksiy Hutsuliak|Ukraine|RM|74|74|27|79|73|68|73|40|72|235414|International
+Ukraine|Oleksandr Nazarenko|Ukraine|LM|72|72|25|85|66|64|75|34|53|75355|International
+Ukraine|Ivan Kaliuzhnyi|Ukraine|CDM|71|72|27|66|62|63|66|67|78|270731|International
+Ukraine|Valeriy Bondar|Ukraine|CB|75|78|26|72|35|64|65|76|74|248698|International
+Ukraine|Georgiy Bushchan|Ukraine|GK|74|74|31|75|68|80|76|30|72|244385|International
+Ukraine|Vladyslav Vanat|Ukraine|ST|77|82|23|80|78|64|75|34|71|271541|International
+Ukraine|Bogdan Mykhailichenko|Ukraine|LB|72|72|28|75|57|68|74|66|72|244428|International
+Ukraine|Yehor Yarmoliuk|Ukraine|CDM|77|83|21|66|65|74|76|73|71|270608|International
+Ukraine|Dmytro Riznyk|Ukraine|GK|74|78|26|75|67|78|76|48|77|265628|International
+Ukraine|Oleksandr Karavaiev|Ukraine|RB|73|73|33|76|52|70|72|68|64|237109|International
+Ukraine|Nazar Voloshyn|Ukraine|LM|70|80|22|82|65|66|71|29|55|274726|International
+Ukraine|Vladyslav Veleten|Ukraine|RW|70|78|22|84|63|65|71|31|65|81839|International
+Ukraine|Oleksandr Svatok|Ukraine|CB|70|70|30|63|36|54|53|71|71|278884|International
+United States|Matt Freese|United States|GK|71|74|26|73|69|69|72|29|72|247506|International
+United States|Sergiño Dest|United States|RB|79|83|24|87|60|75|83|72|72|251804|International
+United States|Chris Richards|United States|CB|79|81|25|66|27|60|65|80|77|250954|International
+United States|Tim Ream|United States|CB|72|72|37|45|44|69|60|74|75|198261|International
+United States|Antonee Robinson|United States|LB|81|81|27|88|48|75|77|77|78|229348|International
+United States|Christian Pulisic|United States|RW|85|85|26|88|82|80|86|46|65|227796|International
+United States|Weston McKennie|United States|CM|79|79|26|77|71|78|77|79|80|238744|International
+United States|Tyler Adams|United States|CDM|79|81|26|79|59|72|76|79|75|232999|International
+United States|Timothy Weah|United States|RM|77|78|25|87|75|72|77|68|65|241496|International
+United States|Malik Tillman|United States|CAM|79|84|23|76|75|75|80|65|75|256853|International
+United States|Folarin Balogun|United States|ST|79|83|23|84|79|63|78|23|71|247463|International
+United States|Brenden Aaronson|United States|RW|76|79|24|80|71|74|77|60|62|247361|International
+United States|Ricardo Pepi|United States|ST|76|84|22|73|78|60|72|46|73|251223|International
+United States|Cristian Roldan|United States|CDM|75|75|30|76|64|67|71|77|77|226807|International
+United States|Giovanni Reyna|United States|CAM|73|78|22|67|71|72|77|38|66|245541|International
+United States|Joe Scally|United States|RB|75|78|22|83|53|60|69|73|77|243133|International
+United States|Mark McKenzie|United States|CB|74|77|26|80|36|50|64|73|78|242195|International
+United States|Matt Turner|United States|GK|74|74|31|74|72|67|74|40|73|233267|International
+United States|Haji Wright|United States|ST|74|74|27|82|72|61|71|33|77|238743|International
+United States|Auston Trusty|United States|CB|74|77|26|78|47|56|60|72|83|235755|International
+United States|Chris Brady|United States|GK|69|80|21|74|64|62|72|29|67|260982|International
+United States|Miles Robinson|United States|CB|73|74|28|82|35|55|67|72|79|237255|International
+United States|Alex Freeman|United States|RB|73|81|20|82|66|69|71|69|74|267920|International
+United States|Sebastian Berhalter|United States|CM|70|75|24|71|62|71|68|65|71|255205|International
+United States|Max Arfsten|United States|LM|72|75|24|77|65|66|73|63|69|274535|International
+United States|Alejandro Zendejas|United States|RW|77|77|27|81|73|75|81|52|67|226579|International
+Japan|Zion Suzuki|Japan|GK|74|80|22|73|72|71|76|56|74|255981|International
+Japan|Tsuyoshi Watanabe|Japan|CB|77|77|28|76|39|53|61|77|78|246826|International
+Japan|Hiroki Ito|Japan|CB|78|81|26|74|57|71|72|80|72|234205|International
+Japan|Ko Itakura|Japan|CB|76|77|28|75|59|61|74|76|76|233152|International
+Japan|Ritsu Doan|Japan|RM|81|81|27|81|71|77|84|44|65|232639|International
+Japan|Daichi Kamada|Japan|CM|78|78|28|71|72|78|79|65|66|232730|International
+Japan|Kaishū Sano|Japan|CDM|80|83|24|79|53|67|80|81|75|73078|International
+Japan|Keito Nakamura|Japan|LM|76|79|24|79|74|71|77|41|74|242914|International
+Japan|Takefusa Kubo|Japan|RM|81|84|24|85|76|76|84|43|65|237681|International
+Japan|Ayase Ueda|Japan|ST|78|79|26|74|78|62|74|30|77|252162|International
+Japan|Junya Ito|Japan|RM|76|76|32|86|69|72|76|58|70|232905|International
+Japan|Daizen Maeda|Japan|LW|78|78|27|92|77|70|76|64|79|246321|International
+Japan|Shuto Machino|Japan|ST|73|76|25|81|73|68|73|40|73|245622|International
+Japan|Ao Tanaka|Japan|CDM|76|78|26|70|68|72|77|72|70|236764|International
+Japan|Takehiro Tomiyasu|Japan|RB|77|78|26|68|33|68|71|78|75|232938|International
+Japan|Yukinari Sugawara|Japan|RB|75|79|25|75|54|73|72|71|70|242916|International
+Japan|Shogo Taniguchi|Japan|CB|72|72|33|58|45|60|60|73|73|233225|International
+Japan|Tomoki Hayakawa|Japan|GK|71|75|26|73|68|64|75|31|69|260847|International
+Japan|Yuito Suzuki|Japan|CAM|75|78|23|83|69|70|78|48|57|255185|International
+Japan|Ayumu Seko|Japan|CDM|72|77|25|66|36|59|61|70|74|247264|International
+Japan|Keisuke Goto|Japan|ST|64|80|20|60|64|48|59|30|67|76570|International
+Japan|Junnosuke Suzuki|Japan|RB|70|80|21|75|52|62|66|68|73|266260|International
+Japan|Koki Ogawa|Japan|ST|69|69|27|51|69|57|66|29|67|232829|International
+Japan|Yuto Nagatomo|Japan|LB|68|68|38|67|48|64|67|67|61|194359|International
+Japan|Kento Shiogai|Japan|ST|68|82|20|84|68|55|68|21|57|74879|International
+Japan|Keisuke Osako|Japan|GK|69|73|25|68|68|65|72|30|66|244654|International
+Scotland|Angus Gunn|Scotland|GK|72|73|29|73|71|70|74|48|70|216325|International
+Scotland|Nathan Patterson|Scotland|RB|71|76|23|71|46|63|70|70|68|257896|International
+Scotland|Grant Hanley|Scotland|CB|70|70|33|52|30|49|49|69|79|198904|International
+Scotland|Jack Hendry|Scotland|CB|72|72|30|75|56|65|65|67|82|225316|International
+Scotland|Andrew Robertson|Scotland|LB|81|81|31|74|61|79|77|78|74|216267|International
+Scotland|Lewis Ferguson|Scotland|CDM|78|81|25|72|78|75|77|73|76|242280|International
+Scotland|Ryan Christie|Scotland|CDM|78|78|30|69|70|76|77|73|76|213884|International
+Scotland|Ben Gannon-Doak|Scotland|RM|71|84|19|89|61|63|75|28|60|266815|International
+Scotland|John McGinn|Scotland|RM|81|81|30|69|77|78|80|77|83|210881|International
+Scotland|Scott McTominay|Scotland|CM|86|86|28|76|83|78|83|80|85|237238|International
+Scotland|Ché Adams|Scotland|ST|78|78|28|82|80|64|78|43|72|226093|International
+Scotland|Lawrence Shankland|Scotland|ST|76|76|29|63|77|68|75|28|80|216218|International
+Scotland|Kenny McLean|Scotland|CDM|73|73|33|61|67|69|71|67|75|201368|International
+Scotland|Kieran Tierney|Scotland|LB|77|77|28|76|60|75|76|75|73|226491|International
+Scotland|Scott McKenna|Scotland|CB|75|75|28|60|32|51|56|76|80|225974|International
+Scotland|Aaron Hickey|Scotland|RB|75|79|23|71|56|70|74|74|64|248808|International
+Scotland|Anthony Ralston|Scotland|RB|70|71|26|76|59|68|68|64|78|234072|International
+Scotland|Craig Gordon|Scotland|GK|67|67|42|67|66|63|68|26|66|53110|International
+Scotland|Lyndon Dykes|Scotland|ST|69|69|29|66|68|52|64|29|83|247279|International
+Scotland|George Hirst|Scotland|ST|72|73|26|73|71|55|66|43|74|233602|International
+Scotland|John Souttar|Scotland|CB|74|75|28|73|48|64|72|73|77|212516|International
+Scotland|Tyler Fletcher|Scotland|CM|62|80|18|68|53|63|62|59|63|82899|International
+Scotland|Liam Kelly|Scotland|GK|67|67|29|68|66|67|69|33|66|225203|International
+Scotland|Dominic Hyam|Scotland|CB|71|71|29|51|32|54|58|71|76|221281|International
+Scotland|Ross Stewart|Scotland|ST|71|71|28|68|71|57|64|30|70|244319|International
+Scotland|Findlay Curtis|Scotland|LW|66|85|18|63|60|64|68|34|44|76784|International
+Algeria|Lyes Amzouri|Algeria|GK|80|80|33|82|78|74|77|31|80|85348|International
+Algeria|Samir Bouzeyane|Algeria|RB|78|81|25|82|54|70|69|72|71|85362|International
+Algeria|Zakaria Benhouariq|Algeria|CB|78|80|25|68|32|51|55|80|76|85351|International
+Algeria|Amnay Aït Zekran|Algeria|CB|78|80|25|66|28|45|51|80|74|85345|International
+Algeria|Samy Belouhane|Algeria|LB|76|76|29|74|50|74|66|72|72|85350|International
+Algeria|Nadil Boudrissane|Algeria|CDM|79|79|29|68|57|66|70|77|79|85355|International
+Algeria|Aferdis Imzuran|Algeria|CM|72|80|21|66|62|66|73|60|65|85364|International
+Algeria|Walem Mefrane|Algeria|CM|76|84|21|72|70|74|76|66|66|85367|International
+Algeria|Yacel Amrizi|Algeria|ST|72|80|21|64|74|54|67|27|63|85346|International
+Algeria|Bilal Boumezdar|Algeria|ST|77|77|29|68|81|56|68|27|60|85376|International
+Algeria|Younes Kherzani|Algeria|LM|75|75|25|80|59|72|76|30|45|85366|International
+Algeria|Hocem Boulazem|Algeria|ST|74|74|21|66|79|61|68|25|62|85361|International
+Algeria|Massiren Aït Zefrane|Algeria|LM|76|76|29|79|60|74|77|29|54|85344|International
+Algeria|Faris Zerouaniq|Algeria|RM|76|76|25|81|61|73|76|28|57|85374|International
+Algeria|Fayezel Oumazrane|Algeria|RB|77|77|25|77|49|70|68|73|72|85370|International
+Algeria|Nadir Ouzrani|Algeria|CB|75|75|33|59|25|40|44|77|73|85372|International
+Algeria|Ziyad Oumrani|Algeria|LB|74|82|21|80|47|63|66|68|67|85371|International
+Algeria|Rayan Khelzani|Algeria|GK|72|74|25|71|75|69|72|26|74|85365|International
+Algeria|Younel Amzighar|Algeria|RM|73|73|25|76|68|73|75|35|47|85347|International
+Algeria|Sofiane Belkourim|Algeria|ST|71|71|29|76|75|57|72|23|51|85349|International
+Algeria|Taha Bensouhane|Algeria|CB|68|71|25|70|24|42|44|69|65|85353|International
+Algeria|Imranech Belhamzine|Algeria|CB|69|77|21|63|23|44|45|71|64|85375|International
+Algeria|Imrane Mezouqri|Algeria|CDM|68|68|29|57|36|54|61|67|71|85368|International
+Algeria|Melyaz Mourkane|Algeria|LW|70|70|25|75|57|67|72|31|49|85369|International
+Algeria|Redouane Bensahriq|Algeria|ST|70|73|25|77|73|58|70|23|53|85352|International
+Algeria|Naïl Zerhouni|Algeria|GK|67|70|25|67|66|62|71|22|65|85373|International
+Ecuador|Hernán Galíndez|Ecuador|GK|74|74|38|74|73|70|74|32|76|253354|International
+Ecuador|Alan Franco|Ecuador|CDM|70|73|26|79|61|65|71|64|72|246058|International
+Ecuador|Joel Ordoñez|Ecuador|CB|76|86|21|74|26|55|57|75|80|268611|International
+Ecuador|Willian Pacho|Ecuador|CB|88|90|23|80|34|63|63|88|86|256196|International
+Ecuador|Piero Hincapié|Ecuador|LB|83|87|23|84|41|68|72|84|82|256197|International
+Ecuador|John Yeboah|Ecuador|ST|72|76|25|92|68|66|79|26|57|242755|International
+Ecuador|Moisés Caicedo|Ecuador|CDM|88|90|23|71|67|78|81|85|82|256079|International
+Ecuador|Pedro Vite|Ecuador|CM|75|80|23|75|61|73|75|71|72|261222|International
+Ecuador|Nilson Angulo|Ecuador|LM|71|81|22|80|62|64|73|38|59|264205|International
+Ecuador|Gonzalo Plata|Ecuador|RM|78|81|24|88|69|70|83|43|74|247181|International
+Ecuador|Enner Valencia|Ecuador|ST|75|75|35|82|75|66|74|48|78|220295|International
+Ecuador|Ángelo Preciado|Ecuador|RM|75|75|27|87|62|70|76|66|71|246055|International
+Ecuador|Kendry Páez|Ecuador|CAM|73|84|18|78|69|71|77|47|54|274559|International
+Ecuador|Jordy Alcívar|Ecuador|CDM|70|74|25|68|65|67|68|64|71|254039|International
+Ecuador|Pervis Estupiñán|Ecuador|LB|79|79|27|76|57|77|78|75|72|237942|International
+Ecuador|Felix Torres|Ecuador|CB|72|73|28|67|37|50|60|72|76|252053|International
+Ecuador|Yaimar Medina|Ecuador|LB|70|84|20|91|58|64|67|61|64|271417|International
+Ecuador|Gonzalo Valle|Ecuador|GK|73|74|29|73|71|70|74|26|73|259904|International
+Ecuador|Jackson Porozo|Ecuador|CB|72|79|24|70|32|43|46|72|74|260740|International
+Ecuador|Kevin Rodríguez|Ecuador|ST|71|74|25|84|68|58|70|32|71|272569|International
+Ecuador|Alan Minda|Ecuador|ST|70|79|22|84|68|63|72|53|59|263397|International
+Ecuador|Denil Castillo|Ecuador|CM|69|77|21|77|61|68|66|67|76|277197|International
+Ecuador|Moisés Ramírez|Ecuador|GK|70|75|24|69|69|66|70|33|69|256161|International
+Ecuador|Anthony Valencia|Ecuador|RM|66|76|21|82|59|60|73|52|53|256199|International
+Ecuador|Jeremy Arévalo Mera|Ecuador|ST|66|80|20|74|67|52|65|24|60|277742|International
+Ecuador|Jordy Caicedo|Ecuador|ST|64|64|27|64|64|44|56|34|77|268508|International
+Mexico|Raúl Rangel|Mexico|GK|76|80|25|72|74|75|79|32|78|73325|International
+Mexico|Jorge Sánchez|Mexico|RB|73|73|27|84|50|63|71|69|78|233493|International
+Mexico|César Montes|Mexico|CB|76|77|28|57|46|65|64|76|80|229980|International
+Mexico|Johan Vásquez|Mexico|CB|75|78|26|61|33|58|60|76|74|244349|International
+Mexico|Jesús Gallardo|Mexico|LB|77|77|30|83|68|71|76|71|75|226045|International
+Mexico|Erik Lira|Mexico|CDM|75|80|25|74|58|67|69|72|74|257784|International
+Mexico|Luis Romo|Mexico|CDM|75|75|30|68|66|71|67|71|82|243015|International
+Mexico|Gilberto Mora|Mexico|CAM|73|87|16|67|65|73|74|50|48|79399|International
+Mexico|Roberto Alvarado|Mexico|RM|76|76|26|79|70|77|75|62|68|237043|International
+Mexico|Raúl Jiménez|Mexico|ST|78|78|34|57|79|73|74|46|79|204838|International
+Mexico|Julian Quiñones|Mexico|ST|81|81|28|88|79|70|79|36|83|234579|International
+Mexico|Santiago Giménez|Mexico|ST|79|84|24|78|80|70|77|46|69|245152|International
+Mexico|Edson Álvarez|Mexico|CDM|78|79|27|66|59|68|72|79|82|235844|International
+Mexico|Orbelín Pineda|Mexico|CAM|77|77|29|81|73|72|82|73|70|224574|International
+Mexico|Álvaro Fidalgo Fernández|Spain|CM|77|77|28|79|67|77|80|60|66|246608|International
+Mexico|Brian Gutiérrez|Mexico|CAM|72|82|22|68|65|70|72|42|59|260984|International
+Mexico|Israel Reyes|Mexico|RB|75|78|25|79|65|66|70|76|75|252008|International
+Mexico|Guillermo Ochoa|Mexico|GK|74|74|39|73|68|67|74|50|80|140233|International
+Mexico|Luis Chávez|Mexico|CM|76|76|29|83|72|77|75|70|68|222382|International
+Mexico|Obed Vargas|Mexico|CDM|72|83|19|74|54|66|72|67|64|263701|International
+Mexico|Alexis Vega|Mexico|LW|78|78|27|76|78|76|80|32|71|233260|International
+Mexico|Armando González|Mexico|ST|74|83|22|72|72|52|70|33|56|84061|International
+Mexico|Carlos Acevedo|Mexico|GK|74|75|29|77|71|67|75|63|73|235183|International
+Mexico|Guillermo Martínez|Mexico|ST|73|73|30|65|77|55|62|35|73|221293|International
+Mexico|César Huerta|Mexico|LW|73|75|24|84|68|68|75|48|72|246289|International
+Mexico|Mateo Chávez|Mexico|LB|71|78|21|82|45|63|70|64|67|78784|International
+Wales|Karl Darlow|Wales|GK|74|74|34|75|71|68|77|58|72|193331|International
+Wales|Neco Williams|Wales|LB|80|82|24|72|49|72|75|79|71|243057|International
+Wales|Dylan Lawlor|Wales|CB|66|82|19|72|45|52|63|65|71|72046|International
+Wales|Joe Rodon|Wales|CB|77|78|27|76|33|55|60|77|80|229266|International
+Wales|Jay Dasilva|Wales|LB|72|72|27|79|42|68|75|66|61|232755|International
+Wales|Ethan Ampadu|Wales|CDM|78|81|24|67|51|70|71|77|79|235735|International
+Wales|Jordan James|Wales|CM|73|80|20|62|69|70|72|66|70|265514|International
+Wales|Brennan Johnson|Wales|RW|79|82|24|86|76|72|77|43|58|251421|International
+Wales|Sorba Thomas|Wales|LM|74|74|26|87|68|71|73|48|70|260478|International
+Wales|Harry Wilson|Wales|RM|80|80|28|77|82|80|82|46|58|220710|International
+Wales|Kieffer Moore|Wales|ST|72|72|32|64|70|56|66|45|80|216627|International
+Wales|Daniel James|Wales|RW|76|76|27|94|71|68|76|50|67|232104|International
+Wales|Isaak Davies|Wales|ST|67|74|23|82|66|56|68|25|57|257438|International
+Wales|David Brooks|Wales|RM|76|76|27|72|71|77|78|49|60|220196|International
+Wales|Nathan Broadhead|Wales|LM|72|72|27|76|72|68|74|37|67|232545|International
+Wales|Josh Sheehan|Wales|CDM|68|68|30|78|57|68|70|62|63|212366|International
+Wales|Chris Mepham|Wales|CB|72|74|27|47|37|55|60|72|72|233201|International
+Wales|Danny Ward|Wales|GK|70|70|32|71|69|68|69|46|68|207998|International
+Wales|Ben Cabango|Wales|CB|72|77|25|61|28|47|52|72|76|248687|International
+Wales|Liam Cullen|Wales|CAM|69|70|26|76|69|64|69|31|66|233941|International
+Wales|Ben Davies|Wales|CB|75|75|32|53|58|71|71|77|68|205923|International
+Wales|Connor Roberts|Wales|RB|74|74|29|76|61|71|71|70|72|225147|International
+Wales|Lewis Koumas|Wales|LM|69|83|19|80|67|62|71|33|65|70994|International
+Wales|Rubin Colwill|Wales|CAM|68|75|23|66|68|69|68|54|70|257437|International
+Wales|Ronan Kpakio|Wales|RB|64|82|18|79|44|56|63|56|60|75296|International
+Wales|Tom King|Wales|GK|64|64|30|64|63|61|64|42|63|225650|International
+Paraguay|Orlando Gill|Paraguay|GK|67|73|25|65|67|70|68|26|68|75260|International
+Paraguay|Juan José Cáceres|Paraguay|RB|73|78|25|83|45|62|66|71|71|251613|International
+Paraguay|Gustavo Velázquez|Paraguay|CB|73|73|34|74|31|47|55|72|78|246696|International
+Paraguay|Gustavo Gómez|Paraguay|CB|78|78|32|58|48|44|53|82|76|218191|International
+Paraguay|Omar Alderete|Paraguay|CB|80|81|28|60|61|62|69|81|80|240359|International
+Paraguay|Junior Alonso|Paraguay|CB|74|74|32|70|55|62|63|73|82|220337|International
+Paraguay|Miguel Almirón|Paraguay|RW|76|76|31|85|72|69|79|57|63|230977|International
+Paraguay|Diego Gómez|Paraguay|CDM|77|84|22|72|76|75|77|72|76|269278|International
+Paraguay|Andrés Cubas|Paraguay|CDM|74|74|29|69|47|66|71|73|56|222429|International
+Paraguay|Matías Galarza|Paraguay|CM|70|74|23|79|69|63|74|67|78|278020|International
+Paraguay|Julio César Enciso|Paraguay|CAM|75|84|21|74|74|70|79|33|51|255434|International
+Paraguay|Gabriel Ávalos|Paraguay|ST|74|74|34|67|71|63|73|45|82|226286|International
+Paraguay|Mauricio Magalhães Prado|Paraguay|CAM|76|80|24|77|74|77|76|45|65|83924|International
+Paraguay|Ramón Sosa|Paraguay|LM|74|75|25|78|65|68|76|49|63|255718|International
+Paraguay|Damián Bobadilla|Paraguay|CM|73|78|23|75|68|67|70|68|72|268482|International
+Paraguay|Gustavo Caballero|Paraguay|RM|67|73|23|88|61|60|68|33|64|270844|International
+Paraguay|José Canale|Paraguay|CB|70|70|28|64|32|49|49|70|74|253238|International
+Paraguay|Gastón Olveira|Paraguay|GK|73|73|32|71|76|64|74|19|69|254601|International
+Paraguay|Antonio Sanabria|Paraguay|ST|75|75|29|75|75|68|78|32|57|219932|International
+Paraguay|Isidro Pitta|Paraguay|ST|70|73|25|68|73|46|65|24|70|254952|International
+Paraguay|Braian Ojeda|Paraguay|CDM|69|74|25|67|54|63|71|64|73|248870|International
+Paraguay|Alex Arce|Paraguay|ST|75|75|30|61|78|51|71|23|74|273843|International
+Paraguay|Alejandro Romero Gamarra|Paraguay|CAM|79|79|30|81|74|81|80|52|65|226376|International
+Paraguay|Fabián Balbuena|Paraguay|CB|74|74|33|50|40|50|50|75|77|228229|International
+Paraguay|Alexandro Maidana|Paraguay|LB|62|76|19|73|59|62|59|55|55|77972|International
+Paraguay|Roberto Fernández|Paraguay|GK|68|68|37|68|66|64|68|44|65|193241|International
+Canada|Maxime Crépeau|Canada|GK|69|69|31|70|69|64|70|45|66|213536|International
+Canada|Alistair Johnston|Canada|RB|78|79|26|82|59|73|72|73|80|256107|International
+Canada|Moïse Bombito|Canada|CB|75|80|25|93|49|58|64|74|76|274536|International
+Canada|Luc De Fougerolles|Canada|CB|66|81|19|64|32|45|52|67|67|279008|International
+Canada|Richie Laryea|Canada|RM|73|73|30|90|61|65|73|64|71|232081|International
+Canada|Tajon Buchanan|Canada|RM|76|76|26|90|70|68|77|67|73|246800|International
+Canada|Niko Sigur|Canada|RB|72|81|21|71|61|69|73|65|68|275238|International
+Canada|Stephen Antunes Eustáquio|Canada|CDM|75|75|28|66|67|74|73|72|73|242380|International
+Canada|Ali Ahmed|Canada|LM|72|75|24|84|61|67|73|61|64|272604|International
+Canada|Jonathan David|Canada|ST|81|84|25|81|81|71|80|34|77|243630|International
+Canada|Tani Oluwaseyi|Canada|ST|71|74|25|85|72|56|66|31|69|271108|International
+Canada|Liam Millar|Canada|LM|72|73|25|85|66|66|75|52|59|240925|International
+Canada|Jonathan Osorio|Canada|CM|71|71|33|50|67|70|72|61|65|213439|International
+Canada|Nathan-Dylan Saliba|Canada|CM|70|79|21|67|64|68|75|58|64|260398|International
+Canada|Alphonso Davies|Canada|LB|83|86|24|93|66|78|84|74|76|234396|International
+Canada|Derek Cornelius|Canada|CB|74|76|27|67|45|55|57|71|85|243009|International
+Canada|Alfie Jones|Canada|CB|72|73|27|64|40|59|59|71|78|236315|International
+Canada|Dayne St. Clair|Canada|GK|72|74|28|72|68|60|75|27|71|247228|International
+Canada|Promise David|Canada|ST|76|81|23|72|79|60|67|29|85|73070|International
+Canada|Cyle Larin|Canada|ST|74|74|30|70|75|66|70|28|77|226777|International
+Canada|Owen Goodman|Canada|GK|66|78|21|66|65|66|67|38|64|276806|International
+Canada|Joel Waterman|Canada|CB|68|68|29|43|42|58|50|68|74|255956|International
+Canada|Ismaël Koné|Canada|CM|75|79|23|78|66|70|75|67|71|264207|International
+Canada|Jayden Nelson|Canada|LW|68|75|22|92|59|58|74|48|59|255339|International
+Canada|Mathieu Choinière|Canada|CM|67|68|26|60|58|66|66|62|59|244680|International
+Canada|Jacob Shaffelburg|Canada|LM|67|68|25|90|63|60|65|52|63|251352|International
+Ghana|Lawrence Ati Zigi|Ghana|GK|73|75|28|72|70|66|74|40|73|229956|International
+Ghana|Marvin Senaya|Ghana|RB|70|75|24|70|46|57|66|68|67|263112|International
+Ghana|Derrick Luckassen|Netherlands|CB|70|70|29|72|58|64|67|68|76|224242|International
+Ghana|Jerome Opoku|Ghana|CB|72|75|26|59|43|54|59|73|80|241710|International
+Ghana|Gideon Mensah|Ghana|LB|74|75|26|76|57|65|72|68|67|247124|International
+Ghana|Thomas Partey|Ghana|CDM|79|79|32|59|71|76|74|78|80|209989|International
+Ghana|Caleb Yirenkyi|Ghana|CM|71|83|19|74|63|66|72|69|80|73638|International
+Ghana|Kwasi Sibo|Ghana|CDM|70|72|27|63|54|61|64|68|76|253114|International
+Ghana|Iñaki Williams Arthuer|Ghana|RW|81|81|31|92|80|74|78|49|82|216201|International
+Ghana|Jordan Ayew|Ghana|ST|69|69|33|52|70|69|72|56|69|197756|International
+Ghana|Antoine Semenyo|Ghana|RW|84|85|25|82|84|78|83|40|79|241236|International
+Ghana|Prince Kwabena Adu|Ghana|ST|72|77|21|73|71|58|68|26|68|74753|International
+Ghana|Abdul Fatawu|Ghana|RM|76|83|21|84|74|73|78|47|67|267680|International
+Ghana|Elisha Owusu|Ghana|CDM|73|74|27|55|54|68|70|70|70|238392|International
+Ghana|Christopher Bonsu Baah|Ghana|LM|73|83|20|87|65|64|79|34|66|274913|International
+Ghana|Abdul Mumin|Ghana|CB|77|79|27|76|56|61|69|77|76|235662|International
+Ghana|Rahman Baba|Ghana|LB|75|75|30|76|66|69|74|72|77|209620|International
+Ghana|Benjamin Asare|Ghana|GK|75|75|32|73|62|67|81|34|78|83520|International
+Ghana|Ernest Nuamah|Ghana|RM|75|82|21|82|70|69|78|24|58|268763|International
+Ghana|Alidu Seidu|Ghana|CB|74|79|25|64|43|61|70|75|67|257946|International
+Ghana|Kamaldeen Sulemana|Ghana|CAM|73|76|23|88|66|68|78|28|59|256035|International
+Ghana|Kojo Peprah Oppong|Ghana|CB|72|79|21|74|25|47|59|72|74|273948|International
+Ghana|Brandon Thomas-Asante|Ghana|ST|72|73|26|83|70|61|71|44|79|235744|International
+Ghana|Augustine Boakye|Ghana|RW|71|74|24|86|64|62|73|30|57|264441|International
+Ghana|Jonas Adjetey|Ghana|CB|70|82|21|70|23|47|50|71|71|276634|International
+Ghana|Joseph Anang|Ghana|GK|68|73|25|68|68|68|69|33|66|244191|International
+Korea Republic|Seung Gyu Kim|Korea Republic|GK|73|73|34|73|67|68|75|36|73|191655|International
+Korea Republic|Han Beom Lee|Korea Republic|CB|71|80|23|72|29|53|60|71|72|261062|International
+Korea Republic|Min Jae Kim|Korea Republic|CB|82|82|28|73|32|58|63|83|84|237086|International
+Korea Republic|Gi Hyuk Lee|Korea Republic|CB|70|77|24|82|56|61|68|67|77|261128|International
+Korea Republic|Young Woo Seol|Korea Republic|RB|73|74|26|81|55|65|69|66|74|254980|International
+Korea Republic|Seung Ho Paik|Korea Republic|CDM|72|72|28|67|67|70|74|66|75|237424|International
+Korea Republic|In Beom Hwang|Korea Republic|CM|76|76|28|62|70|76|77|63|64|228010|International
+Korea Republic|Jens Castrop|Korea Republic|CAM|74|81|21|80|66|71|77|66|71|264194|International
+Korea Republic|Kang In Lee|Korea Republic|RW|80|83|24|72|76|81|83|52|64|243780|International
+Korea Republic|Jae Sung Lee|Korea Republic|CAM|76|76|32|71|71|73|78|66|66|221671|International
+Korea Republic|Heung Min Son|Korea Republic|ST|84|84|32|83|84|81|83|42|73|200104|International
+Korea Republic|Hee Chan Hwang|Korea Republic|ST|74|74|29|80|75|69|74|39|68|226380|International
+Korea Republic|Hyeon Gyu Oh|Korea Republic|ST|73|78|24|78|75|54|69|43|81|248712|International
+Korea Republic|Hyun Jun Yang|Korea Republic|RW|72|78|23|82|68|69|74|39|69|260397|International
+Korea Republic|Jin Seob Park|Korea Republic|CDM|74|74|29|70|54|62|63|73|84|243673|International
+Korea Republic|Moon Hwan Kim|Korea Republic|RB|69|69|29|83|53|60|69|62|68|244800|International
+Korea Republic|Tae Seok Lee|Korea Republic|LB|69|75|22|79|40|63|68|62|71|261063|International
+Korea Republic|Hyeon Woo Jo|Korea Republic|GK|74|74|33|77|71|62|77|51|73|212432|International
+Korea Republic|Jin Gyu Kim|Korea Republic|CM|73|73|28|70|68|72|72|52|70|227659|International
+Korea Republic|Ji Sung Eom|Korea Republic|LM|71|77|23|85|64|63|73|36|65|260492|International
+Korea Republic|Dong Gyeong Lee|Korea Republic|CAM|75|75|27|77|74|73|75|59|73|245054|International
+Korea Republic|Jun Ho Bae|Korea Republic|CAM|71|80|21|74|62|69|73|36|55|266774|International
+Korea Republic|Wi Je Cho|Korea Republic|CB|69|77|23|77|31|50|51|67|86|267401|International
+Korea Republic|Bum Keun Song|Korea Republic|GK|74|77|27|76|69|67|76|25|72|238570|International
+Korea Republic|Tae Hyeon Kim|Korea Republic|CB|66|73|24|70|27|48|47|66|71|252198|International
+Korea Republic|Gue Sung Cho|Korea Republic|ST|68|68|27|72|67|52|65|30|73|247686|International
+Egypt|Mostafa Shobeir|Egypt|GK|71|76|25|69|70|64|71|19|72|269161|International
+Egypt|Mohamed Hany|Egypt|RB|71|71|29|72|51|66|63|69|67|254252|International
+Egypt|Yasser Ibrahim|Egypt|CB|72|72|32|65|49|53|57|73|73|261624|International
+Egypt|Ramy Rabia|Egypt|CB|70|70|32|60|49|55|55|70|72|220380|International
+Egypt|Ahmed Fatouh|Egypt|LB|68|68|27|65|41|59|61|67|64|82400|International
+Egypt|Marwan Attia|Egypt|CDM|74|76|26|60|48|69|69|71|72|81918|International
+Egypt|Mohanad Lashin|Egypt|CDM|70|70|29|60|41|62|61|70|63|82329|International
+Egypt|Mostafa Mohamed|Egypt|LW|62|62|28|67|62|59|65|29|61|86105|International
+Egypt|Emam Ashour|Egypt|CAM|75|75|27|76|71|72|77|63|71|261742|International
+Egypt|Mohamed Salah|Egypt|RM|89|89|33|86|85|85|87|45|75|209331|International
+Egypt|Omar Marmoush|Egypt|LW|83|83|26|89|83|75|85|34|71|256675|International
+Egypt|Ahmed Sayed|Egypt|RW|74|74|29|83|70|71|74|52|68|222537|International
+Egypt|Haissem Hassan|France|RW|73|79|23|91|61|64|80|26|57|245870|International
+Egypt|Hamza Abdelkarim|Egypt|ST|60|83|17|68|58|49|59|23|60|86106|International
+Egypt|Mahmoud Hassan|Egypt|LM|75|75|30|77|72|71|78|36|71|226078|International
+Egypt|Hamdy Fathy|Egypt|CDM|74|74|30|73|61|69|71|71|72|254254|International
+Egypt|Mohamed Abdelmonem|Egypt|CB|73|76|26|60|40|61|59|73|72|269164|International
+Egypt|Mohamed El Shenawy|Egypt|GK|74|74|36|75|72|70|73|48|74|228182|International
+Egypt|Mahmoud Saber|Egypt|CM|70|74|23|64|59|65|67|58|59|82318|International
+Egypt|Karim Hafez|Egypt|LB|70|70|29|76|48|66|69|64|72|224198|International
+Egypt|Hossam Abdelmaguid|Egypt|CB|69|75|24|56|29|47|56|70|65|81960|International
+Egypt|Ibrahim Adel|Egypt|LW|70|73|24|70|70|63|71|29|51|81958|International
+Egypt|Tarek Alaa|Egypt|RB|66|68|23|64|46|55|60|66|64|85641|International
+Egypt|Nabil Emad|Egypt|CDM|64|64|29|59|51|58|60|61|64|83651|International
+Egypt|Mahdy Soliman|Egypt|GK|68|68|38|69|68|65|66|37|65|85642|International
+Egypt|Mohamed Alaa|Egypt|GK|60|60|25|59|58|55|61|23|60|85643|International
+Republic of Ireland|Caoimhin Kelleher|Republic of Ireland|GK|79|82|26|77|76|79|80|43|78|240913|International
+Republic of Ireland|Séamus Coleman|Republic of Ireland|RB|70|70|36|51|65|70|70|74|61|180216|International
+Republic of Ireland|Jake O'Brien|Republic of Ireland|RB|76|81|24|77|49|67|62|76|80|253510|International
+Republic of Ireland|Nathan Collins|Republic of Ireland|CB|79|82|24|62|31|58|63|80|81|248484|International
+Republic of Ireland|Dara O'Shea|Republic of Ireland|CB|75|78|26|69|33|56|58|75|77|235405|International
+Republic of Ireland|Ryan Manning|Republic of Ireland|LB|73|73|29|69|61|72|71|68|67|226012|International
+Republic of Ireland|Chiedozie Ogbene|Republic of Ireland|RM|71|71|28|89|64|65|71|63|71|231005|International
+Republic of Ireland|Jayson Molumby|Republic of Ireland|CDM|70|72|25|60|54|65|68|64|66|236344|International
+Republic of Ireland|Jack Taylor|Republic of Ireland|CDM|71|72|27|69|67|67|70|69|73|233851|International
+Republic of Ireland|Finn Azaz|Republic of Ireland|CAM|74|79|24|74|71|73|74|57|68|252066|International
+Republic of Ireland|Troy Parrott|Republic of Ireland|ST|77|82|23|76|78|67|75|44|74|245902|International
+Republic of Ireland|Adam Idah|Republic of Ireland|ST|70|74|24|80|69|57|66|23|78|244288|International
+Republic of Ireland|Sammie Szmodics|Republic of Ireland|CAM|72|72|29|77|72|68|74|51|62|220139|International
+Republic of Ireland|Harvey Vale|England|LM|68|76|21|75|62|65|68|57|58|265412|International
+Republic of Ireland|Jimmy Dunne|Republic of Ireland|CB|73|73|27|63|46|64|67|73|80|235156|International
+Republic of Ireland|John Egan|Republic of Ireland|CB|71|71|32|50|46|52|60|71|75|204936|International
+Republic of Ireland|Robbie Brady|Republic of Ireland|LB|69|69|33|63|64|73|69|65|65|201884|International
+Republic of Ireland|Mark Travers|Republic of Ireland|GK|72|75|26|73|69|69|74|40|72|232284|International
+Republic of Ireland|Alan Browne|Republic of Ireland|CM|72|72|30|70|69|70|72|69|78|216464|International
+Republic of Ireland|Jason Knight|Republic of Ireland|CM|72|77|24|72|64|70|72|67|72|252376|International
+Republic of Ireland|Liam Scales|Republic of Ireland|CB|75|77|26|68|57|66|64|74|83|246991|International
+Republic of Ireland|Evan Ferguson|Republic of Ireland|ST|74|82|20|68|75|60|71|21|73|259608|International
+Republic of Ireland|Johnny Kenny|Republic of Ireland|ST|70|77|22|82|70|52|66|33|71|260951|International
+Republic of Ireland|Josh Cullen|Republic of Ireland|CDM|77|77|29|61|63|75|74|73|71|228151|International
+Republic of Ireland|Mikey Johnston|Republic of Ireland|LM|72|72|26|85|69|64|76|29|48|238505|International
+Republic of Ireland|Gavin Bazunu|Republic of Ireland|GK|70|77|23|70|69|70|71|47|68|243585|International
+Hungary|Dénes Dibusz|Hungary|GK|77|77|34|78|75|74|80|27|74|221610|International
+Hungary|Bendegúz Bolla|Hungary|RB|69|72|25|78|67|65|69|61|70|263233|International
+Hungary|Willi Orban|Hungary|CB|83|83|32|57|40|56|56|86|83|204638|International
+Hungary|Márton Dárdai|Hungary|CB|70|76|23|68|36|68|62|70|73|256780|International
+Hungary|Milos Kerkez|Hungary|LB|81|85|21|87|59|75|78|76|80|260908|International
+Hungary|Bence Ötvös|Hungary|CDM|68|69|27|63|67|68|68|63|69|79091|International
+Hungary|Alex Tóth|Hungary|CM|72|85|19|69|68|74|71|66|63|70903|International
+Hungary|Roland Sallai|Hungary|RB|78|78|28|80|70|72|76|75|77|234171|International
+Hungary|Callum Styles|Hungary|LB|70|73|25|68|62|66|69|65|66|234087|International
+Hungary|Dominik Szoboszlai|Hungary|CAM|86|88|24|81|83|86|84|73|77|236772|International
+Hungary|Barnabás Varga|Hungary|ST|77|77|30|71|75|59|72|32|74|236510|International
+Hungary|Dániel Lukács|Hungary|ST|69|69|29|73|68|59|71|31|62|276232|International
+Hungary|András Schäfer|Hungary|CM|74|75|26|71|62|69|76|65|70|247026|International
+Hungary|Zsolt Nagy|Hungary|LM|72|72|32|78|69|66|69|68|74|254159|International
+Hungary|Loïc Négo|Hungary|RB|71|71|34|74|64|68|69|66|66|188537|International
+Hungary|Attila Szalai|Hungary|CB|70|71|27|70|45|60|62|68|77|253170|International
+Hungary|Attila Mocsi|Hungary|CB|67|72|25|63|34|42|49|66|74|245710|International
+Hungary|Péter Szappanos|Hungary|GK|67|67|34|65|64|61|73|24|65|268099|International
+Hungary|Damir Redzic|Hungary|RW|69|78|22|83|70|58|72|28|51|261210|International
+Hungary|Áron Csongvai|Hungary|CM|69|74|24|62|63|68|64|67|73|272566|International
+Hungary|Zsombor Gruber|Hungary|ST|69|81|20|72|70|58|70|30|58|73598|International
+Hungary|Milán Vitális|Hungary|CM|69|76|23|74|62|69|67|59|71|78801|International
+Hungary|Attila Osváth|Hungary|RB|69|69|29|73|57|62|65|67|71|231254|International
+Hungary|Patrik Demjén|Hungary|GK|68|70|27|69|65|68|70|27|71|274968|International
+Hungary|Donát Bárány|Hungary|ST|67|71|24|67|68|54|62|28|71|276214|International
+Hungary|Botond Balogh|Hungary|CB|70|79|23|52|33|50|49|72|70|258708|International
+Congo DR|Lionel Mpasi|Congo DR|GK|70|70|30|70|66|66|74|45|68|223150|International
+Congo DR|Aaron Wan-Bissaka|Congo DR|RB|79|79|27|79|51|69|76|77|73|229880|International
+Congo DR|Chancel Mbemba|Congo DR|CB|75|75|30|67|56|64|67|75|73|210897|International
+Congo DR|Steve Kapuadi|Congo DR|CB|70|70|27|65|33|45|49|69|83|269507|International
+Congo DR|Axel Tuanzebe|Congo DR|CB|73|73|27|76|36|64|67|72|74|231485|International
+Congo DR|Arthur Masuaku|Congo DR|LB|75|75|31|79|62|74|78|68|79|212491|International
+Congo DR|Ngal'ayel Mukau|Congo DR|CDM|74|82|20|70|61|67|72|70|75|274447|International
+Congo DR|Noah Sadiki|Congo DR|CM|78|85|20|79|66|73|80|75|77|269230|International
+Congo DR|Samuel Moutoussamy|Congo DR|CM|70|70|28|68|55|67|71|69|73|240351|International
+Congo DR|Cédric Bakambu|Congo DR|ST|75|75|34|79|75|68|70|37|68|198951|International
+Congo DR|Yoane Wissa|Congo DR|ST|81|81|28|85|82|70|80|31|71|234824|International
+Congo DR|Simon Banza|Congo DR|ST|80|80|28|79|80|62|77|36|79|231652|International
+Congo DR|Brian Cipenga|Congo DR|LM|73|73|27|87|67|65|76|33|63|73317|International
+Congo DR|Théo Bongonda|Congo DR|RM|73|73|29|78|71|69|77|33|58|217877|International
+Congo DR|Edo Kayembe|Congo DR|CM|71|72|27|72|67|69|70|67|78|242217|International
+Congo DR|Aaron Tshibola|Congo DR|CM|64|64|30|66|57|62|66|62|74|216485|International
+Congo DR|Gédéon Kalulu|Congo DR|RB|71|71|27|80|40|58|70|70|76|238391|International
+Congo DR|Matthieu Epolo|Congo DR|GK|75|85|20|77|71|68|76|32|74|262265|International
+Congo DR|Nathanaël Mbuku|Congo DR|RM|70|76|23|73|63|68|74|33|53|253036|International
+Congo DR|Fiston Mayele|Congo DR|ST|70|70|31|73|71|57|68|38|70|82523|International
+Congo DR|Timothy Fayulu|Congo DR|GK|69|74|25|71|66|65|70|25|66|248858|International
+Congo DR|Meschack Elia|Congo DR|ST|67|67|27|79|66|65|71|26|69|251532|International
+Congo DR|Joris Kayembe|Congo DR|LB|74|74|30|80|60|71|73|68|74|222875|International
+Congo DR|Gaël Kakuta|Congo DR|CAM|72|72|34|71|71|72|75|39|60|186197|International
+Congo DR|Charles Pickel|Congo DR|CM|70|70|28|63|63|67|68|68|79|233884|International
+Congo DR|Dylan Batubinsika|Congo DR|CB|69|70|29|68|28|51|55|67|77|239814|International
+Bosnia and Herzegovina|Nikola Vasilj|Bosnia and Herzegovina|GK|78|78|29|79|75|65|81|34|78|262956|International
+Bosnia and Herzegovina|Amar Dedić|Bosnia and Herzegovina|RB|76|82|22|83|62|72|80|68|77|257345|International
+Bosnia and Herzegovina|Nikola Katić|Bosnia and Herzegovina|CB|72|73|28|58|35|46|53|70|86|244204|International
+Bosnia and Herzegovina|Tarik Muharemović|Bosnia and Herzegovina|CB|74|80|22|62|23|53|60|76|74|262027|International
+Bosnia and Herzegovina|Sead Kolašinac|Bosnia and Herzegovina|CB|78|78|32|61|62|68|67|79|81|207993|International
+Bosnia and Herzegovina|Esmir Bajraktarević|Bosnia and Herzegovina|RW|72|84|20|77|61|67|79|44|61|269823|International
+Bosnia and Herzegovina|Ivan Bašić|Bosnia and Herzegovina|CM|67|72|23|67|61|68|65|55|59|84041|International
+Bosnia and Herzegovina|Ivan Šunjić|Bosnia and Herzegovina|CDM|68|68|28|62|57|56|63|69|76|244271|International
+Bosnia and Herzegovina|Amar Memić|Bosnia and Herzegovina|RM|75|77|24|89|69|71|73|62|68|76602|International
+Bosnia and Herzegovina|Ermedin Demirović|Bosnia and Herzegovina|ST|80|80|27|72|81|73|78|42|78|238900|International
+Bosnia and Herzegovina|Edin Džeko|Bosnia and Herzegovina|ST|79|79|39|47|81|74|76|40|72|180930|International
+Bosnia and Herzegovina|Haris Tabaković|Bosnia and Herzegovina|ST|75|75|31|60|74|52|67|33|80|212002|International
+Bosnia and Herzegovina|Amir Hadžiahmetović|Bosnia and Herzegovina|CDM|71|71|28|52|60|72|68|68|70|233053|International
+Bosnia and Herzegovina|Armin Gigović|Bosnia and Herzegovina|CDM|71|78|23|65|60|70|74|63|75|251617|International
+Bosnia and Herzegovina|Dženis Burnić|Bosnia and Herzegovina|CM|69|69|27|76|59|66|71|64|68|228082|International
+Bosnia and Herzegovina|Ermin Mahmić|Bosnia and Herzegovina|CAM|67|72|20|67|65|65|69|46|62|85688|International
+Bosnia and Herzegovina|Nihad Mujakić|Bosnia and Herzegovina|CB|67|69|27|71|28|50|55|66|77|251168|International
+Bosnia and Herzegovina|Martin Zlomislić|Bosnia and Herzegovina|GK|68|68|26|66|70|65|68|37|66|84039|International
+Bosnia and Herzegovina|Kerim Alajbegović|Bosnia and Herzegovina|CAM|68|83|17|70|70|66|71|39|58|75533|International
+Bosnia and Herzegovina|Benjamin Tahirović|Bosnia and Herzegovina|CDM|66|74|22|51|50|62|65|61|70|272596|International
+Bosnia and Herzegovina|Mladen Jurkas|Bosnia and Herzegovina|GK|67|82|17|61|63|67|73|31|68|86243|International
+Bosnia and Herzegovina|Jovo Lukić|Bosnia and Herzegovina|ST|70|71|26|67|69|59|64|29|76|75209|International
+Bosnia and Herzegovina|Samed Baždar|Bosnia and Herzegovina|ST|67|78|21|61|65|69|73|40|59|72360|International
+Bosnia and Herzegovina|Stjepan Radeljić|Bosnia and Herzegovina|CB|67|67|27|61|36|47|45|67|73|84037|International
+Bosnia and Herzegovina|Dennis Hadžikadunić|Bosnia and Herzegovina|CB|69|71|26|61|30|49|54|68|75|236541|International
+Bosnia and Herzegovina|Arjan Malić|Bosnia and Herzegovina|RB|65|78|19|62|36|54|55|63|67|73113|International
+Romania|Ionuț Andrei Radu|Romania|GK|78|78|28|80|76|75|80|53|76|234102|International
+Romania|Andrei Rațiu|Romania|RB|80|81|27|94|67|74|79|74|71|248165|International
+Romania|Radu Drăgușin|Romania|CB|75|81|23|67|37|53|65|75|74|260105|International
+Romania|Andrei Burcă|Romania|CB|68|68|32|68|41|45|52|66|78|248003|International
+Romania|Nicușor Bancu|Romania|LB|69|69|32|79|65|67|70|62|72|243000|International
+Romania|Răzvan Marin|Romania|CM|75|75|29|65|74|78|74|64|71|235813|International
+Romania|Vlad Dragomir|Romania|CM|68|69|26|71|64|70|69|54|59|237324|International
+Romania|Ianis Hagi|Romania|CAM|72|73|26|63|72|73|74|36|62|226568|International
+Romania|Dennis Man|Romania|RW|77|77|26|92|74|70|78|45|71|239978|International
+Romania|Daniel Bîrligea|Romania|ST|72|75|25|82|70|61|71|36|80|266728|International
+Romania|Valentin Mihăilă|Romania|LM|68|69|25|83|64|63|69|33|53|248060|International
+Romania|Alex Dobre|Romania|RW|71|71|26|81|72|68|71|44|71|237378|International
+Romania|David Miculescu|Romania|RW|68|71|24|71|65|65|67|49|76|257803|International
+Romania|Nicolae Stanciu|Romania|CM|75|75|32|74|74|78|77|62|71|212207|International
+Romania|Florin Tănase|Romania|CAM|72|72|30|75|70|72|72|45|62|223231|International
+Romania|Ștefan Baiaram|Romania|RM|70|77|22|85|62|62|71|31|60|251880|International
+Romania|Vladimir Screciu|Romania|CB|71|75|25|73|39|58|62|69|75|243023|International
+Romania|Ștefan Târnovanu|Romania|GK|69|73|25|70|65|63|72|56|70|248073|International
+Romania|Deian Sorescu|Romania|RM|69|69|27|86|70|64|68|61|69|246562|International
+Romania|Virgil Ghiță|Romania|CB|70|72|27|70|44|53|52|68|81|248105|International
+Romania|Claudiu Petrila|Romania|LW|71|74|24|91|63|68|72|33|60|248049|International
+Romania|Adrian Rus|Romania|CB|69|69|29|72|47|55|60|68|74|248040|International
+Romania|Kevin Ciubotaru|Romania|LB|63|72|21|77|42|58|63|57|62|272675|International
+Romania|Andrei Coubiș|Romania|CB|67|77|21|61|35|46|51|66|76|81262|International
+Romania|Marius Coman|Romania|ST|65|65|28|66|63|51|62|31|70|72404|International
+Romania|Horațiu Moldovan|Romania|GK|70|72|27|70|69|66|71|43|71|251136|International
+Saudi Arabia|Nawaf Al Aqidi|Saudi Arabia|GK|72|77|25|75|69|67|74|47|66|255368|International
+Saudi Arabia|Saud Abdulhamid|Saudi Arabia|RB|76|78|25|86|50|66|73|70|71|246688|International
+Saudi Arabia|Hassan Tombakti|Saudi Arabia|CB|74|77|26|83|36|59|64|76|74|245751|International
+Saudi Arabia|Abdulelah Al Amri|Saudi Arabia|CB|71|72|28|69|29|51|47|69|81|241197|International
+Saudi Arabia|Nawaf Boushal|Saudi Arabia|LB|69|72|25|82|40|52|65|64|73|254685|International
+Saudi Arabia|Mohammed Abu Al Shamat|Saudi Arabia|RB|71|80|22|76|47|67|73|63|61|74436|International
+Saudi Arabia|Mohammed Kanno|Saudi Arabia|CM|74|74|30|73|71|72|73|70|76|220075|International
+Saudi Arabia|Abdullah Al Khaibari|Saudi Arabia|CDM|70|70|28|73|43|63|67|66|73|237721|International
+Saudi Arabia|Salem Al Dawsari|Saudi Arabia|LM|82|82|33|87|74|76|84|57|81|210602|International
+Saudi Arabia|Firas Al Birekan|Saudi Arabia|ST|74|77|25|80|71|63|71|48|74|238545|International
+Saudi Arabia|Musab Al Juwair|Saudi Arabia|CM|76|83|22|68|67|80|75|56|69|263824|International
+Saudi Arabia|Saleh Al Shehri|Saudi Arabia|ST|68|68|31|66|66|52|63|28|73|211173|International
+Saudi Arabia|Nasser Al Dawsari|Saudi Arabia|CM|68|69|26|68|60|71|69|62|71|241938|International
+Saudi Arabia|Ziyad Al Johani|Saudi Arabia|CDM|67|74|23|67|53|64|66|63|63|263182|International
+Saudi Arabia|Ali Majrashi|Saudi Arabia|RB|72|75|25|87|44|52|65|67|77|242506|International
+Saudi Arabia|Hassan Kadish|Saudi Arabia|LB|71|71|32|71|49|63|63|67|76|210843|International
+Saudi Arabia|Muteb Al Harbi|Saudi Arabia|LB|67|70|25|93|54|62|67|56|60|256331|International
+Saudi Arabia|Mohammed Al Owais|Saudi Arabia|GK|68|68|33|73|63|56|70|51|62|210923|International
+Saudi Arabia|Ali Lajami|Saudi Arabia|CB|69|69|29|76|49|60|60|67|76|228783|International
+Saudi Arabia|Sultan Mandash|Saudi Arabia|RM|69|69|30|82|60|62|72|37|61|225976|International
+Saudi Arabia|Alaa Al Hajji|Saudi Arabia|CM|63|63|29|66|56|63|65|58|65|231801|International
+Saudi Arabia|Jehad Thekri|Saudi Arabia|CB|67|76|23|71|31|48|55|66|77|74699|International
+Saudi Arabia|Abdullah Al Hamdan|Saudi Arabia|ST|64|67|25|73|62|65|62|41|69|242223|International
+Saudi Arabia|Ahmed Al Kassar|Saudi Arabia|GK|63|63|34|62|63|55|65|40|62|209027|International
+Saudi Arabia|Khaled Al Ghannam|Saudi Arabia|LM|65|68|24|85|57|55|72|29|42|248498|International
+Saudi Arabia|Ayman Yahya|Saudi Arabia|LB|69|74|24|84|61|61|68|64|67|253440|International
+Iran|Peyman Sorrengar|Iran|GK|73|77|25|68|72|70|76|34|73|84173|International
+Iran|Bozorgmehr Haijan|Iran|RB|72|75|25|77|58|68|66|68|68|84170|International
+Iran|Navmehran Aref|Iran|CB|72|72|33|54|30|49|51|73|73|84177|International
+Iran|Samsam Mantra|Iran|CB|70|75|25|62|51|54|52|71|70|84181|International
+Iran|Pourang Shakaramy|Iran|LB|74|74|29|80|59|68|69|70|60|84168|International
+Iran|Puya Ganjineh|Iran|CDM|74|74|29|59|60|69|68|72|71|84175|International
+Iran|Arash Rostamfar|Iran|CM|69|69|33|60|66|69|68|64|60|84171|International
+Iran|Mousa Rayanejad|Iran|RM|74|74|25|78|68|71|73|49|56|84178|International
+Iran|Ashkan Nasserpoor|Iran|LM|73|73|29|82|66|69|72|48|68|84179|International
+Iran|Tiam Farzanian|Iran|CAM|72|72|29|64|71|70|73|42|56|84186|International
+Iran|Jahangir Peerfalak|Iran|ST|77|77|29|83|76|67|75|38|68|84172|International
+Iran|Aryan Toranj|Iran|LM|71|71|29|76|67|66|72|32|53|84182|International
+Iran|Kianoush Shadi|Iran|CDM|68|68|33|64|57|59|56|67|71|84190|International
+Iran|Omid Rastafan|Iran|CDM|66|73|21|60|54|61|61|64|68|84169|International
+Iran|Nader Affkari|Iran|CB|68|73|25|70|46|53|54|69|67|84197|International
+Iran|Samsam Bahador|Iran|RB|67|70|25|64|36|52|53|68|61|84185|International
+Iran|Gurgen Shahab|Iran|CB|66|74|21|71|50|52|56|64|69|84189|International
+Iran|Arsalan Anushfar|Iran|GK|68|74|21|69|66|67|70|32|65|84174|International
+Iran|Amin Farangis|Iran|RM|71|72|25|75|66|70|68|43|64|84165|International
+Iran|Nikan Bamdadnejad|Iran|ST|74|74|25|76|72|64|72|39|72|84164|International
+Iran|Farhad Schayan|Iran|ST|68|68|21|80|67|59|70|32|54|84180|International
+Iran|Sepehr Delavar|Iran|CB|65|73|21|60|38|51|48|65|67|84187|International
+Iran|Alireza Sinapour|Iran|LB|65|71|21|68|43|54|59|62|53|84183|International
+Iran|Shahryar Nikdel|Iran|CM|68|68|25|65|67|68|69|60|65|84167|International
+Iran|Dariush Mehrdad|Iran|CAM|66|73|21|73|65|62|65|29|52|84184|International
+Iran|Iliyan Babar|Iran|GK|65|70|21|61|66|68|67|36|64|84176|International
+Northern Ireland|Pierce Charles|Northern Ireland|GK|67|81|19|66|66|70|65|31|65|273839|International
+Northern Ireland|Conor Bradley|Northern Ireland|RB|79|84|21|82|61|70|75|76|74|264298|International
+Northern Ireland|Ciaron Brown|Northern Ireland|CB|70|72|27|65|46|56|61|70|75|242541|International
+Northern Ireland|Paddy McNair|Northern Ireland|CB|72|72|30|63|62|67|67|73|75|213697|International
+Northern Ireland|Ruairi McConville|Northern Ireland|CB|68|77|20|64|32|50|51|68|71|75768|International
+Northern Ireland|Brodie Spencer|Northern Ireland|RB|68|77|21|81|46|56|63|65|74|270637|International
+Northern Ireland|Isaac Price|Northern Ireland|CAM|71|80|21|66|67|69|71|64|70|268630|International
+Northern Ireland|Shea Charles|Northern Ireland|CM|72|82|21|64|63|72|70|69|75|276695|International
+Northern Ireland|Ethan Galbraith|Northern Ireland|RB|72|77|24|73|64|70|74|66|66|243640|International
+Northern Ireland|Justin Devenny|Northern Ireland|CM|71|78|21|63|68|72|71|63|66|73895|International
+Northern Ireland|Callum Marshall|Northern Ireland|ST|66|75|20|70|66|55|64|42|77|278101|International
+Northern Ireland|Jamie Reid|Northern Ireland|ST|66|66|30|73|66|55|65|25|73|205255|International
+Northern Ireland|George Saville|Northern Ireland|CDM|70|70|32|58|65|69|68|67|72|204412|International
+Northern Ireland|Paul Smyth|Northern Ireland|RM|68|68|27|91|60|60|71|40|54|241075|International
+Northern Ireland|Brad Lyons|Northern Ireland|CM|65|65|28|70|60|60|62|66|72|246846|International
+Northern Ireland|Trai Hume|Northern Ireland|RB|78|81|23|80|43|66|70|76|80|266400|International
+Northern Ireland|Eoin Toal|Northern Ireland|CB|67|70|26|49|31|46|52|66|77|239540|International
+Northern Ireland|Conor Hazard|Northern Ireland|GK|67|70|27|67|66|64|67|34|67|242289|International
+Northern Ireland|Patrick Kelly|Northern Ireland|CM|63|72|20|69|55|61|66|57|66|272542|International
+Northern Ireland|Jamie Donley|Northern Ireland|CAM|67|80|20|66|63|66|67|37|60|278557|International
+Northern Ireland|Josh Magennis|Northern Ireland|ST|65|65|34|48|64|55|60|42|82|186562|International
+Northern Ireland|Bailey Peacock-Farrell|Northern Ireland|GK|66|66|28|65|66|66|68|60|63|229091|International
+Northern Ireland|Dion Charles|Northern Ireland|ST|66|66|29|81|65|58|64|42|72|220039|International
+Northern Ireland|Ali McCann|Northern Ireland|CM|71|74|25|67|60|67|70|72|77|243520|International
+Northern Ireland|Terry Devlin|Northern Ireland|RB|70|78|21|73|58|62|65|67|75|276070|International
+Northern Ireland|Daniel Ballard|Northern Ireland|CB|78|80|25|60|37|54|60|78|82|243908|International
+Iceland|Elías Rafn Ólafsson|Iceland|GK|73|76|25|75|73|62|75|33|72|246704|International
+Iceland|Victor Pálsson|Iceland|CB|67|67|34|50|52|56|56|66|75|190640|International
+Iceland|Sverrir Ingi Ingason|Iceland|CB|72|72|31|52|53|57|57|73|77|221422|International
+Iceland|Daníel Leó Grétarsson|Iceland|CB|68|68|29|65|52|60|61|69|71|226510|International
+Iceland|Mikael Egill Ellertsson|Iceland|CM|71|76|23|71|69|68|73|65|69|264436|International
+Iceland|Jóhann Berg Guðmundsson|Iceland|RM|71|71|34|65|71|73|69|61|66|191076|International
+Iceland|Hákon Arnar Haraldsson|Iceland|CAM|78|83|22|77|67|75|81|57|69|262088|International
+Iceland|Ísak Bergmann Jóhannesson|Iceland|CM|74|81|22|72|64|74|74|63|72|246814|International
+Iceland|Albert Guðmundsson|Iceland|ST|78|78|28|87|77|70|82|36|68|238004|International
+Iceland|Brynjólfur Willumsson|Iceland|ST|68|72|24|58|69|56|67|38|70|261457|International
+Iceland|Andri Lucas Guðjohnsen|Iceland|ST|69|75|23|77|65|52|68|29|71|270787|International
+Iceland|Daníel Guðjohnsen|Iceland|ST|65|79|19|69|64|52|63|19|67|275062|International
+Iceland|Stefán Teitur Þórðarson|Iceland|CM|69|70|26|63|65|68|69|63|66|262551|International
+Iceland|Kristian Hlynsson|Iceland|CAM|68|78|21|58|63|64|71|41|50|274927|International
+Iceland|Aron Gunnarsson|Iceland|CDM|67|67|36|47|59|62|62|66|67|189167|International
+Iceland|Hörður Magnússon|Iceland|CB|71|71|32|64|50|67|59|73|69|208522|International
+Iceland|Logi Tómasson|Iceland|LB|70|73|24|80|58|65|67|64|74|277902|International
+Iceland|Hákon Valdimarsson|Iceland|GK|69|77|23|68|66|70|70|20|68|264133|International
+Iceland|Bjarki Steinn Bjarkason|Iceland|RM|68|69|25|71|60|65|69|58|57|258533|International
+Iceland|Gylfi Sigurðsson|Iceland|CAM|70|70|35|50|71|73|71|58|61|184484|International
+Iceland|Anton Ari Einarsson|Iceland|GK|63|63|30|64|63|61|66|23|61|84609|International
+Iceland|Þórir Jóhann Helgason|Iceland|CM|68|73|24|67|64|68|68|53|60|263657|International
+Iceland|Andri Fannar Baldursson|Iceland|CDM|64|70|23|50|49|60|63|62|63|256036|International
+Iceland|Orri Óskarsson|Iceland|ST|74|80|20|74|73|63|70|31|74|269186|International
+Iceland|Jón Dagur Þorsteinsson|Iceland|LW|69|69|26|79|64|64|72|39|70|241474|International
+Iceland|Mikael Anderson|Iceland|CM|72|73|27|76|67|69|75|68|75|236883|International
+Tunisia|Aymen Dahmen|Tunisia|GK|72|73|28|70|73|68|73|27|69|268825|International
+Tunisia|Yan Valery|Tunisia|RB|71|72|26|62|52|63|69|70|74|236316|International
+Tunisia|Dylan Bronn|Tunisia|CB|68|68|30|60|61|64|61|68|76|235565|International
+Tunisia|Montassar Talbi|Tunisia|CB|75|77|27|56|30|44|58|75|78|245410|International
+Tunisia|Omar Rekik|Tunisia|CB|64|73|23|68|38|54|59|62|69|258033|International
+Tunisia|Ali Abdi|Tunisia|LB|75|75|31|86|62|69|73|68|75|252711|International
+Tunisia|Elias Saad|Tunisia|LW|71|72|25|73|66|67|76|31|57|274000|International
+Tunisia|Anis Ben Slimane|Tunisia|CAM|69|73|24|65|66|66|71|58|73|255210|International
+Tunisia|Ellyes Skhiri|Tunisia|CDM|77|77|30|64|72|72|74|76|74|225126|International
+Tunisia|Hannibal Mejbri|Tunisia|CM|75|82|22|76|63|74|76|69|82|258171|International
+Tunisia|Sebastian Tounekti|Tunisia|LW|73|80|22|84|66|66|77|24|63|256383|International
+Tunisia|Firas Chaouat|Tunisia|ST|64|64|29|67|65|46|60|22|71|255569|International
+Tunisia|Rani Khedira|Germany|CDM|76|76|31|57|44|58|62|79|83|211999|International
+Tunisia|Ismaël Gharbi|Tunisia|LM|72|80|21|78|67|68|77|41|56|263194|International
+Tunisia|Elias Achouri|Tunisia|LM|70|70|26|81|63|64|73|31|61|263672|International
+Tunisia|Adem Arous|Tunisia|CB|62|71|20|61|32|42|43|65|62|81410|International
+Tunisia|Mohamed Amine Ben Hamida|Tunisia|LB|61|61|29|65|43|53|55|57|58|84599|International
+Tunisia|Sabri Ben Hessen|Tunisia|GK|63|63|29|61|62|62|64|26|63|82781|International
+Tunisia|Mortadha Ben Ouanes|Tunisia|LM|68|68|30|72|60|68|67|66|65|263432|International
+Tunisia|Mohamed Belhadj Mahmoud|Tunisia|CDM|67|72|25|67|58|63|66|64|70|264705|International
+Tunisia|Raed Chikhaoui|Tunisia|CB|61|71|21|53|27|40|42|61|66|84597|International
+Tunisia|Moutaz Neffati|Tunisia|RB|64|75|20|70|54|59|61|60|58|279056|International
+Tunisia|Hazem Mastouri|Tunisia|ST|68|68|28|72|66|58|67|30|65|82220|International
+Tunisia|Khalil Ayari|Tunisia|RW|65|74|20|74|59|62|69|29|49|84604|International
+Tunisia|Rayan Elloumi|Tunisia|ST|58|78|17|67|57|45|58|20|53|79903|International
+Tunisia|Abdelmouhib Chamakh|Tunisia|GK|62|67|23|63|59|58|65|27|64|84595|International
+Australia|Patrick Beach|Australia|GK|66|78|21|70|64|65|71|31|63|267599|International
+Australia|Alessandro Circati|Australia|CB|72|80|21|59|35|53|49|72|77|268913|International
+Australia|Harry Souttar|Australia|CB|72|74|26|46|28|51|54|72|75|229901|International
+Australia|Lucas Herrington|Australia|CB|60|82|17|65|32|42|45|59|66|75145|International
+Australia|Jordan Bos|Australia|LB|74|82|22|87|65|68|73|67|79|260521|International
+Australia|Jackson Irvine|Australia|CM|74|74|32|66|68|71|70|72|80|211378|International
+Australia|Aiden O'Neill|Australia|CDM|70|70|26|76|61|65|68|66|77|230888|International
+Australia|Aziz Behich|Australia|LB|67|67|34|74|62|66|69|60|70|202157|International
+Australia|Connor Metcalfe|Australia|CM|69|71|25|72|60|66|70|62|75|240648|International
+Australia|Cristian Volpato|Italy|RW|70|78|21|73|68|67|73|37|61|265761|International
+Australia|Nestory Irankunda|Australia|RM|69|84|19|92|72|63|72|43|74|266245|International
+Australia|Ajdin Hrustić|Australia|CM|68|68|28|50|67|70|71|54|67|237647|International
+Australia|Nishan Velupillay|Australia|RM|65|68|24|94|57|55|70|35|57|262039|International
+Australia|Paul Okon-Engstler|Australia|CDM|60|75|20|64|39|55|56|54|62|80236|International
+Australia|Cameron Burgess|Australia|CB|73|73|29|48|37|57|54|73|80|216744|International
+Australia|Kai Trewin|Australia|CB|69|76|24|66|43|58|59|69|79|252700|International
+Australia|Miloš Degenek|Australia|CB|68|68|31|66|58|61|57|66|77|229585|International
+Australia|Mathew Ryan|Australia|GK|79|79|33|78|78|79|80|52|78|199005|International
+Australia|Awer Mabil|Australia|RM|68|68|29|85|64|60|69|34|61|212830|International
+Australia|Mohamed Touré|Australia|ST|69|76|21|88|67|57|66|33|73|255767|International
+Australia|Paul Izzo|Australia|GK|72|72|30|73|70|69|73|55|71|204424|International
+Australia|Mathew Leckie|Australia|CM|70|70|34|77|68|68|73|63|76|195033|International
+Australia|Jacob Italiano|Australia|RB|66|70|23|76|63|63|69|62|57|241552|International
+Australia|Jason Geria|Australia|RB|66|66|32|72|37|54|59|62|80|212511|International
+Australia|Cameron Devlin|Australia|CDM|74|77|27|68|53|65|73|70|72|246006|International
+Australia|Tete Yengi|Australia|ST|62|67|24|69|61|48|56|38|79|260386|International
+Finland|Lukáš Hrádecký|Finland|GK|80|80|35|82|78|64|82|40|80|190941|International
+Finland|Ville Koski|Finland|CB|66|72|23|64|28|48|48|68|69|81776|International
+Finland|Miro Tenho|Finland|CB|66|66|30|47|23|48|50|66|74|254994|International
+Finland|Samuli Miettinen|Finland|CB|60|69|21|46|30|44|42|59|67|84614|International
+Finland|Nikolai Alho|Finland|RB|67|67|32|80|58|62|66|58|67|234298|International
+Finland|Adam Markhiev|Finland|CDM|69|75|23|62|58|68|70|63|69|81326|International
+Finland|Kaan Kairinen|Finland|CM|75|75|26|64|63|76|74|68|73|232446|International
+Finland|Oliver Antman|Finland|RM|73|79|23|83|65|70|72|37|64|247447|International
+Finland|Anssi Suhonen|Finland|CAM|66|71|24|66|58|65|70|44|59|263310|International
+Finland|Leo Walta|Finland|CAM|71|80|22|69|71|71|72|60|65|263364|International
+Finland|Joel Pohjanpalo|Finland|ST|75|75|30|72|76|65|72|40|79|220165|International
+Finland|Oiva Jukkola|Finland|LW|62|68|23|70|63|57|64|31|53|81784|International
+Finland|Topi Keskinen|Finland|RM|68|74|22|85|64|61|68|45|58|272648|International
+Finland|Matti Peltola|Finland|CDM|66|73|22|64|34|56|59|68|67|256215|International
+Finland|Doni Arifi|Finland|CDM|65|73|23|59|55|63|65|61|69|83016|International
+Finland|Kasper Paananen|Finland|CAM|64|71|22|69|61|60|66|41|62|84616|International
+Finland|Ryan Mahuta|Finland|LB|64|70|22|68|36|54|60|61|60|84615|International
+Finland|Viljami Sinisalo|Finland|GK|69|77|23|71|67|69|73|27|67|258928|International
+Finland|Tony Miettinen|Finland|CB|62|73|22|56|34|44|50|63|63|70918|International
+Finland|Onni Valakari|Finland|CM|68|70|25|71|64|65|67|56|71|245685|International
+Finland|Jesse Joronen|Finland|GK|73|73|32|73|71|69|73|47|73|199904|International
+Finland|Juho Lähteenmäki|Finland|LB|66|76|19|79|56|60|66|60|58|77520|International
+Finland|Jaakko Oksanen|Finland|CDM|64|68|24|65|54|61|59|61|65|241614|International
+Finland|Benjamin Källman|Finland|ST|73|73|27|81|70|59|71|23|81|245582|International
+Finland|Naatan Skyttä|Finland|CAM|73|80|23|69|65|72|75|57|53|263343|International
+Finland|Daniel Håkans|Finland|LM|66|69|24|91|57|56|68|30|62|271326|International
+Cabo Verde|Josimar José Évora Dias|Cabo Verde|GK|66|66|39|65|65|64|65|45|66|217141|International
+Cabo Verde|Steven Moreira|Cabo Verde|CB|71|71|30|73|33|67|71|71|74|212401|International
+Cabo Verde|Roberto Lopes|Cabo Verde|CB|68|68|33|48|30|48|54|68|77|202014|International
+Cabo Verde|Edilson Alberto Sanches Borges|Cabo Verde|CB|63|63|30|37|33|37|55|62|72|221706|International
+Cabo Verde|Sidny Lopes Cabral|Cabo Verde|RB|68|75|22|82|61|68|69|60|64|70289|International
+Cabo Verde|Kevin Lenini Pina|Cabo Verde|CDM|67|67|28|53|56|64|63|63|79|269419|International
+Cabo Verde|Ryan Isaac Mendes da Graça|Cabo Verde|LM|71|71|35|74|67|69|74|28|54|194847|International
+Cabo Verde|Telmo Arcanjo|Cabo Verde|RM|71|76|24|74|61|68|71|38|60|257194|International
+Cabo Verde|Deroy D'Encarnação Duarte|Cabo Verde|CDM|69|74|25|64|63|67|70|64|73|235355|International
+Cabo Verde|Garry Mendes Rodrigues|Cabo Verde|LM|70|70|34|77|67|67|72|43|62|210212|International
+Cabo Verde|Gilson Benchimol Tavares|Cabo Verde|ST|64|71|23|80|65|56|70|20|51|263669|International
+Cabo Verde|Nuno Miguel da Costa Jóia|Cabo Verde|ST|70|70|34|78|69|61|69|30|68|230857|International
+Cabo Verde|Willy Johnson Semedo Afonso|Cabo Verde|LM|70|70|31|80|66|62|72|37|68|242395|International
+Cabo Verde|Jamiro Gregory Monteiro Alvarenga|Cabo Verde|CAM|69|69|31|72|59|70|72|54|68|231150|International
+Cabo Verde|Laros Michael D'Encarnação Duarte|Cabo Verde|CM|68|68|28|70|62|69|69|62|69|250893|International
+Cabo Verde|Wagner Fabrício Cardoso de Pina|Cabo Verde|RB|72|81|22|81|59|66|72|66|66|276909|International
+Cabo Verde|Ianique Santos Tavares|Cabo Verde|LB|67|67|37|79|45|52|56|62|73|196902|International
+Cabo Verde|Márcio Salomão Brazão da Rosa|Cabo Verde|GK|64|66|28|62|63|63|64|28|64|83505|International
+Cabo Verde|João Paulo Moreira Fernandes|Cabo Verde|CM|66|67|27|71|60|64|65|62|64|79254|International
+Cabo Verde|Hélio Sandro Varela|Cabo Verde|LM|67|73|23|84|67|61|69|27|65|276923|International
+Cabo Verde|Logan Costa|Cabo Verde|CB|77|83|24|60|40|59|67|77|78|243923|International
+Cabo Verde|Jovane Eduardo Borges Cabral|Cabo Verde|LW|70|70|27|77|71|68|72|38|68|244193|International
+Cabo Verde|Dailon Rocha Livramento|Cabo Verde|ST|69|74|24|82|70|56|68|34|64|73853|International
+Cabo Verde|Carlos Joaquim Antunes dos Santos|Cabo Verde|GK|63|67|24|62|64|62|66|27|63|267636|International
+Cabo Verde|Jair Semedo Monteiro|Cabo Verde|CM|63|63|29|70|59|59|63|61|63|85971|International
+Cabo Verde|Kelvin Spencer Pires|Cabo Verde|CB|64|69|25|57|37|52|55|63|70|85973|International
+New Zealand|Max Crocombe|New Zealand|GK|69|69|31|69|70|65|68|47|70|206566|International
+New Zealand|Tim Payne|New Zealand|RB|63|63|31|64|56|58|58|59|75|209361|International
+New Zealand|Finn Surman|New Zealand|CB|68|75|21|65|33|49|55|66|78|266150|International
+New Zealand|Tyler Bindon|New Zealand|CB|70|80|20|58|46|59|64|69|73|277552|International
+New Zealand|Liberato Cacace|New Zealand|LB|72|76|24|72|60|67|71|69|73|242429|International
+New Zealand|Joe Bell|New Zealand|CDM|75|78|26|70|65|73|72|71|82|254142|International
+New Zealand|Marko Stamenić|New Zealand|CDM|71|76|23|65|59|66|70|67|75|259680|International
+New Zealand|Sarpreet Singh|New Zealand|CAM|68|69|26|66|65|70|69|49|60|232669|International
+New Zealand|Elijah Just|New Zealand|CAM|69|72|25|81|68|65|70|47|54|254136|International
+New Zealand|Ryan Thomas|New Zealand|CM|66|66|30|57|57|68|69|57|66|220763|International
+New Zealand|Chris Wood|New Zealand|ST|81|81|33|53|82|67|72|40|81|192123|International
+New Zealand|Ben Old|New Zealand|LW|68|77|22|82|58|63|71|58|70|262289|International
+New Zealand|Callum McCowatt|New Zealand|CAM|69|70|26|76|70|68|69|55|71|243666|International
+New Zealand|Jesse Randall|New Zealand|LM|67|76|22|84|67|58|68|37|63|73092|International
+New Zealand|Alex Rufer|New Zealand|CDM|66|66|29|64|59|64|64|62|77|219392|International
+New Zealand|Michael Boxall|New Zealand|CB|71|71|36|52|43|60|57|71|80|202170|International
+New Zealand|Francis de Vries|New Zealand|LB|70|70|30|66|54|68|63|66|78|237268|International
+New Zealand|Alex Paulsen|New Zealand|GK|68|77|22|69|65|69|71|55|65|263851|International
+New Zealand|Nando Pijnaker|New Zealand|CB|67|69|26|60|48|56|53|65|80|254143|International
+New Zealand|Kosta Barbarouses|New Zealand|ST|67|67|35|76|69|58|69|40|76|182091|International
+New Zealand|Michael Woud|New Zealand|GK|61|65|26|67|49|65|64|39|59|235860|International
+New Zealand|Tommy Smith|New Zealand|CB|64|64|35|39|37|48|47|62|79|186352|International
+New Zealand|Ben Waine|New Zealand|ST|62|67|24|77|61|54|61|44|68|245539|International
+New Zealand|Callan Elliot|New Zealand|RB|63|66|25|78|48|55|61|55|69|246195|International
+New Zealand|Logan Rogerson|New Zealand|RM|62|62|27|76|61|55|62|48|71|231065|International
+New Zealand|Lachlan Bayliss|New Zealand|CM|63|72|22|74|56|60|65|58|57|276249|International
+Panama|Orlando Mosquera|Panama|GK|70|70|30|73|68|69|71|32|67|263976|International
+Panama|Amir Murillo|Panama|RB|75|75|29|80|58|71|72|70|76|237841|International
+Panama|Jiovany Ramos|Panama|CB|67|68|28|57|33|56|54|67|72|266387|International
+Panama|José Córdoba|Panama|CB|70|75|24|76|31|54|63|69|76|72708|International
+Panama|Andrés Andrade|Panama|CB|69|72|26|74|51|60|64|68|79|252873|International
+Panama|César Blackman|Panama|RB|67|67|27|76|57|57|66|62|62|82405|International
+Panama|Cristian Martínez|Panama|RM|63|63|28|77|57|58|65|46|62|234154|International
+Panama|Carlos Harvey|Panama|CB|66|70|25|53|42|54|58|65|73|259568|International
+Panama|Yoel Bárcenas|Panama|LM|71|71|31|77|67|67|72|36|62|241731|International
+Panama|José Luis Rodríguez|Panama|LW|72|72|27|85|68|66|75|28|64|234726|International
+Panama|Tomás Rodríguez|Panama|ST|67|68|26|77|69|50|63|23|62|69979|International
+Panama|Ismael Díaz|Panama|LW|73|73|28|87|71|63|73|35|76|231867|International
+Panama|Azarias Londoño|Panama|RW|71|74|24|77|70|67|69|33|67|77423|International
+Panama|Cecilio Waterman|Panama|ST|70|70|34|68|72|53|62|44|73|220409|International
+Panama|Aníbal Godoy|Panama|CM|70|70|35|43|56|65|67|64|75|217047|International
+Panama|Jorge Gutiérrez|Panama|LB|70|71|26|76|46|68|68|65|62|274198|International
+Panama|Fidel Escobar|Panama|CB|65|65|30|77|42|40|46|63|79|240196|International
+Panama|Luis Mejía|Panama|GK|72|72|34|69|67|68|75|52|71|202089|International
+Panama|Éric Davis|Panama|LB|67|67|34|60|45|63|60|69|69|217045|International
+Panama|José Fajardo|Panama|ST|68|68|31|69|67|59|68|33|69|243545|International
+Panama|César Yanis|Panama|RM|68|68|29|78|58|61|68|24|47|264457|International
+Panama|César Samudio|Panama|GK|63|63|31|63|61|62|65|22|63|82404|International
+Panama|Alberto Quintero|Panama|LW|67|67|37|83|63|62|68|28|60|194415|International
+Panama|Roderick Miller|Panama|CB|64|64|33|50|38|43|43|65|74|217050|International
+Panama|Adalberto Carrasquilla|Panama|CM|74|74|26|73|62|71|75|59|69|243544|International
+Panama|Edgardo Fariña|Panama|CB|60|64|23|59|21|39|49|60|66|82406|International
+South Africa|Ronwen Williams|South Africa|GK|76|76|33|78|74|72|78|52|73|213615|International
+South Africa|Khuliso Mudau|South Africa|RB|71|71|30|81|46|61|71|65|71|270951|International
+South Africa|Nkosinathi Sibisi|South Africa|CB|69|69|29|73|41|53|49|73|71|269625|International
+South Africa|Mbekezeli Mbokazi|South Africa|CB|72|82|19|64|63|51|53|72|78|82308|International
+South Africa|Aubrey Modiba|South Africa|LB|71|71|29|82|61|71|73|64|72|242935|International
+South Africa|Sphephelo Sithole|South Africa|CDM|66|69|26|64|55|59|61|64|75|257293|International
+South Africa|Teboho Mokoena|South Africa|CDM|72|72|28|76|62|73|71|66|76|242936|International
+South Africa|Oswin Appollis|South Africa|LM|75|80|23|75|66|72|74|28|56|82294|International
+South Africa|Tshepang Moremi|South Africa|CAM|64|69|24|66|54|66|64|40|52|82507|International
+South Africa|Themba Zwane|South Africa|CAM|73|73|35|78|66|70|72|48|63|222560|International
+South Africa|Lyle Foster|South Africa|ST|73|75|24|81|72|61|70|36|74|241173|International
+South Africa|Evidence Makgopa|South Africa|ST|68|73|25|74|68|50|65|31|64|262638|International
+South Africa|Iqraam Rayners|South Africa|ST|60|60|29|69|62|47|63|22|57|82883|International
+South Africa|Thalente Mbatha|South Africa|CDM|60|63|25|59|37|54|56|58|57|82497|International
+South Africa|Ime Okon|South Africa|CB|68|75|21|77|30|46|59|68|71|79280|International
+South Africa|Samukele Kabini|South Africa|LB|65|76|21|71|34|54|60|62|63|77951|International
+South Africa|Thabang Matuludi|South Africa|RB|63|64|26|65|29|46|59|58|66|82487|International
+South Africa|Sipho Chaine|South Africa|GK|71|73|28|70|72|73|70|34|71|271875|International
+South Africa|Khulumani Ndamane|South Africa|CB|60|70|21|60|29|43|47|60|62|82493|International
+South Africa|Relebohile Mofokeng|South Africa|CAM|65|72|20|67|58|60|67|37|53|82509|International
+South Africa|Ricardo Goss|South Africa|GK|67|67|31|66|68|67|63|26|69|253949|International
+South Africa|Thapelo Maseko|South Africa|LM|66|76|21|69|58|63|61|30|57|84685|International
+South Africa|Bradley Cross|South Africa|CB|60|73|24|62|30|48|53|59|65|259293|International
+South Africa|Olwethu Makhanya|South Africa|CB|65|73|21|74|33|44|49|66|68|278688|International
+South Africa|Kamogelo Sebelebele|South Africa|RB|61|67|22|74|43|49|54|57|58|86128|International
+Indonesia|Maarten Paes|Indonesia|GK|71|74|27|72|68|68|71|31|72|236571|International
+Indonesia|Sandy Walsh|Indonesia|RB|68|68|30|58|37|61|64|66|72|205618|International
+Indonesia|Kevin Diks|Indonesia|CB|76|77|28|74|64|70|70|75|79|224841|International
+Indonesia|Jay Idzes|Indonesia|CB|73|77|25|52|46|60|59|73|80|262396|International
+Indonesia|Calvin Verdonk|Indonesia|LB|72|72|28|76|58|69|67|69|74|227794|International
+Indonesia|Thom Haye|Indonesia|CM|71|71|30|50|65|77|70|57|63|209316|International
+Indonesia|Joey Pelupessy|Indonesia|CDM|65|65|32|60|54|61|63|63|68|209701|International
+Indonesia|Ole Romeny|Indonesia|RM|67|70|25|69|69|60|68|31|67|259114|International
+Indonesia|Eliano Reijnders|Indonesia|LM|65|68|24|75|52|61|68|53|47|246231|International
+Indonesia|Stefano Lilipaly|Indonesia|CAM|66|66|35|77|60|63|69|40|62|205383|International
+Indonesia|Ramadhan Sananta|Indonesia|ST|64|68|22|77|63|42|61|25|68|84125|International
+Indonesia|Beckham Putra|Indonesia|RW|60|65|23|70|58|58|60|35|55|84132|International
+Indonesia|Miliano Jonathans|Indonesia|RM|66|77|21|75|61|62|68|23|55|268727|International
+Indonesia|Jordi Amat Maas|Indonesia|CB|70|70|33|58|48|53|56|70|74|198198|International
+Indonesia|Dean James|Indonesia|LB|70|73|25|82|56|65|66|64|65|269247|International
+Indonesia|Shayne Pattynama|Indonesia|LB|65|66|26|80|51|60|61|57|68|262098|International
+Indonesia|Nathan Tjoe-A-On|Indonesia|LB|64|71|23|73|39|53|57|58|67|269467|International
+Indonesia|Emil Audero|Indonesia|GK|79|79|28|80|75|72|81|53|77|228413|International
+Indonesia|Mees Hilgers|Indonesia|CB|72|77|24|73|43|54|60|72|74|259163|International
+Indonesia|Ragnar Oratmangoen|Indonesia|LM|65|65|27|68|57|62|65|39|62|262267|International
+Indonesia|Justin Hubner|Indonesia|CB|65|75|21|58|40|54|56|64|69|258926|International
+Indonesia|Rizky Ridho|Indonesia|CB|63|67|23|66|46|47|48|63|69|84122|International
+Indonesia|Nadeo Argawinata|Indonesia|GK|59|60|28|58|57|58|58|20|59|84631|International
+Indonesia|Ricky Kambuaya|Indonesia|CAM|63|63|29|68|60|63|61|45|64|84272|International
+Indonesia|Dony Tri Pamungkas|Indonesia|LB|55|62|20|63|27|37|53|52|48|85308|International
+Indonesia|Marc Klok|Indonesia|CDM|61|61|32|66|43|55|62|59|64|216225|International
+Qatar|Mahmoud Abunada|Qatar|GK|64|69|25|62|63|56|64|41|66|268979|International
+Qatar|Ayoub Al Oui|Qatar|RB|60|71|20|67|34|43|56|62|69|81834|International
+Qatar|Pedro Miguel C. Deus Correia|Qatar|RB|68|68|34|73|38|60|61|64|78|268781|International
+Qatar|Boualem Khoukhi|Qatar|CB|71|71|34|60|60|57|54|71|76|268771|International
+Qatar|Homam Al Amin|Qatar|LB|67|70|25|74|48|59|60|61|70|268776|International
+Qatar|Jassem Gaber|Qatar|CDM|63|72|23|64|44|54|55|63|72|268982|International
+Qatar|Issa Laye|Qatar|CB|65|66|27|61|36|47|48|63|74|84621|International
+Qatar|Ahmed Fathi|Qatar|CDM|67|67|32|71|38|55|58|67|74|268879|International
+Qatar|Edmilson Junior da Silva|Qatar|LW|74|74|30|86|72|68|77|44|65|228352|International
+Qatar|Akram Afif|Qatar|LW|78|78|28|87|76|73|80|32|55|234051|International
+Qatar|Hassan Al Haydos|Qatar|RM|70|70|34|74|66|68|73|34|43|180561|International
+Qatar|Almoez Ali|Qatar|ST|73|73|28|74|74|58|67|25|72|268772|International
+Qatar|Ahmed Al Ganehi|Qatar|RW|67|70|24|72|62|60|68|25|51|74236|International
+Qatar|Ahmed Alaaeldin|Qatar|ST|67|67|32|81|63|48|65|26|60|268779|International
+Qatar|Karim Boudiaf|Qatar|CM|71|71|34|50|62|71|69|67|74|268778|International
+Qatar|Abdulaziz Hatim|Qatar|CM|68|68|34|59|66|67|68|61|69|215911|International
+Qatar|Sultan Al Brake|Qatar|LB|68|68|29|79|44|61|64|61|61|268985|International
+Qatar|Meshaal Barsham|Qatar|GK|69|72|27|70|67|58|72|53|67|268783|International
+Qatar|Mohammed Muntari|Qatar|ST|66|66|31|63|66|48|60|27|69|268780|International
+Qatar|Assim Madibo|Qatar|CDM|65|65|28|82|38|53|61|65|75|239878|International
+Qatar|Salah Zakaria|Qatar|GK|64|68|26|66|61|56|61|25|63|272472|International
+Qatar|Yusuf Abdurisag|Qatar|RW|65|66|25|82|56|57|68|30|51|268877|International
+Qatar|Lucas Michel Mendes|Qatar|CB|68|68|34|58|57|58|57|68|68|203244|International
+Qatar|Al Hashmi Hussein|Qatar|CB|58|71|21|71|35|48|48|58|59|76232|International
+Qatar|Mohamed Al Manai|Qatar|CAM|60|67|21|62|55|56|60|52|63|80131|International
+Qatar|Tahsin Mohammed|Qatar|LW|58|72|19|69|55|49|62|25|50|81956|International
+Haiti|Johny Placide|Haiti|GK|69|69|37|65|68|67|68|54|71|178363|International
+Haiti|Jean-Kévin Duverne|Haiti|CB|72|72|27|60|38|62|67|72|73|229705|International
+Haiti|Ricardo Adé|Haiti|CB|72|72|35|71|36|58|57|71|77|265610|International
+Haiti|Hannes Delcroix|Haiti|CB|70|73|26|66|35|60|61|70|69|237440|International
+Haiti|Martin Expérience|Haiti|LB|63|64|26|68|52|55|62|58|66|78651|International
+Haiti|Josué Casimir|Haiti|RM|71|76|23|82|68|63|71|43|67|260943|International
+Haiti|Danley Jean Jacques|Haiti|CM|70|73|25|69|56|66|70|67|74|268805|International
+Haiti|Jean-Ricner Bellegarde|Haiti|CAM|75|76|27|79|64|72|79|70|72|235456|International
+Haiti|Ruben Providence|Haiti|LW|67|73|23|83|63|57|70|29|55|264311|International
+Haiti|Frantzdy Pierrot|Haiti|ST|69|69|30|63|70|54|60|32|81|244949|International
+Haiti|Wilson Isidor|France|ST|75|78|24|82|73|62|71|32|73|247335|International
+Haiti|Duckens Nazon|Haiti|ST|68|68|31|76|69|51|67|24|62|227573|International
+Haiti|Lenny Joseph|France|RW|68|71|24|81|62|59|71|27|65|262652|International
+Haiti|Derrick Etienne Jr.|Haiti|LM|65|65|28|81|60|60|68|40|60|166539|International
+Haiti|Dominique Simon|Haiti|CDM|62|67|24|67|55|56|59|59|70|85960|International
+Haiti|Carlens Arcus|Haiti|RB|72|72|29|75|44|66|68|67|75|228591|International
+Haiti|Duke Lacroix|Haiti|LB|60|60|31|61|33|45|56|60|56|82407|International
+Haiti|Alexandre Pierre|Haiti|GK|62|68|24|62|59|64|63|19|60|259668|International
+Haiti|Don Deedson Louicius|Haiti|RW|64|67|24|82|62|54|66|22|57|252416|International
+Haiti|Carl Fred Sainté|Haiti|CDM|60|70|22|60|35|51|52|56|72|73669|International
+Haiti|Yassin Fortuné|Haiti|ST|60|61|26|71|58|54|64|27|62|232500|International
+Haiti|Garven Metusala|Haiti|CB|61|65|25|71|26|40|51|61|69|82408|International
+Haiti|Josué Duverger|Haiti|GK|60|65|25|57|62|54|67|42|54|82409|International
+Haiti|Wilguens Paugain|Haiti|RB|61|65|23|62|36|55|61|58|64|78421|International
+Haiti|Keeto Thermoncy|Haiti|CB|57|70|19|58|28|37|42|57|59|82203|International
+Haiti|Woodensky Pierre|Haiti|CDM|57|66|20|75|47|54|53|56|57|84610|International
+Uzbekistan|Utkir Yusupov|Uzbekistan|GK|69|69|34|66|66|67|68|25|70|81921|International
+Uzbekistan|Abdukodir Khusanov|Uzbekistan|CB|80|86|21|90|39|61|65|80|79|277031|International
+Uzbekistan|Abdulla Abdullaev|Uzbekistan|CDM|62|62|27|64|51|58|60|59|62|81928|International
+Uzbekistan|Rustamzhon Ashurmatov|Uzbekistan|CB|68|69|28|71|43|54|60|67|74|247468|International
+Uzbekistan|Bekhruz Karimov|Uzbekistan|RB|60|77|17|71|41|54|61|55|52|86240|International
+Uzbekistan|Otabek Shukurov|Uzbekistan|CM|69|69|29|68|66|67|69|67|73|271294|International
+Uzbekistan|Akmal Mozgovoy|Uzbekistan|CM|62|63|26|64|56|59|62|54|56|81930|International
+Uzbekistan|Sherzod Nasrullaev|Uzbekistan|LB|66|67|26|74|42|56|62|63|57|81925|International
+Uzbekistan|Abbosbek Fayzullaev|Uzbekistan|CAM|67|78|21|70|63|69|71|44|53|80304|International
+Uzbekistan|Oston Urunov|Uzbekistan|CAM|66|71|24|74|60|64|68|41|68|257858|International
+Uzbekistan|Eldor Shomurodov|Uzbekistan|ST|75|75|30|79|74|66|75|40|70|239964|International
+Uzbekistan|Igor Sergeev|Uzbekistan|ST|68|68|32|61|69|53|63|36|63|220376|International
+Uzbekistan|Ruslanbek Jiyanov|Uzbekistan|LW|65|69|24|75|63|61|64|28|53|81932|International
+Uzbekistan|Azizbek Amanov|Uzbekistan|ST|60|60|27|60|59|50|58|23|52|81933|International
+Uzbekistan|Odildzhon Khamrobekov|Uzbekistan|CDM|67|67|29|61|52|60|64|65|66|81922|International
+Uzbekistan|Avazbek Ulmasaliev|Uzbekistan|CB|64|69|25|59|31|46|56|63|68|86241|International
+Uzbekistan|Farrukh Sayfiev|Uzbekistan|LB|63|63|34|68|38|54|59|61|58|81926|International
+Uzbekistan|Abduvokhid Nematov|Uzbekistan|GK|67|72|24|65|65|67|66|29|65|81953|International
+Uzbekistan|Dostonbek Khamdamov|Uzbekistan|RM|69|69|28|77|62|65|69|37|59|242970|International
+Uzbekistan|Jamshid Iskanderov|Uzbekistan|CAM|65|65|31|66|60|63|63|51|62|220375|International
+Uzbekistan|Jakhongir Urozov|Uzbekistan|CB|62|71|21|60|26|44|58|61|63|72737|International
+Uzbekistan|Sherzod Esanov|Uzbekistan|CM|62|70|22|62|59|59|62|55|65|86239|International
+Uzbekistan|Aziz Ganiev|Uzbekistan|CM|65|65|27|65|61|65|63|52|56|81938|International
+Uzbekistan|Botirali Ergashev|Uzbekistan|GK|62|62|30|60|61|60|62|21|64|81952|International
+Uzbekistan|Khozhiakbar Alizhonov|Uzbekistan|RB|67|67|28|77|55|56|65|62|57|81924|International
+Uzbekistan|Umar Eshmurodov|Uzbekistan|CB|66|66|32|54|40|47|58|66|66|81927|International
+Curacao|Tyrone Rafaela|Curacao|GK|65|65|21|63|64|67|68|44|65|84294|International
+Curacao|Jameson Albertus|Curacao|RB|71|71|25|80|55|66|67|68|61|84298|International
+Curacao|Kelmer Martis|Curacao|CB|73|76|21|70|46|58|60|73|73|84307|International
+Curacao|Rijairo Alexander|Curacao|CB|71|78|21|70|57|64|64|72|71|84299|International
+Curacao|Reangelo Heimers|Curacao|LB|67|67|25|68|54|63|59|66|60|84296|International
+Curacao|Romero van Rooi|Curacao|CM|70|70|25|69|68|70|70|66|68|84302|International
+Curacao|Jorge Anastatia|Curacao|CDM|69|69|29|65|62|66|65|67|73|84306|International
+Curacao|Gerandruw Manuel|Curacao|RM|69|70|25|82|66|63|70|31|61|84310|International
+Curacao|Lalito Macks|Curacao|LM|69|69|29|81|66|65|70|36|56|84300|International
+Curacao|Dairon Nigellus|Curacao|CAM|70|70|29|66|68|70|71|55|59|84305|International
+Curacao|Ryan Rosamaria|Curacao|ST|66|66|25|63|68|57|62|38|69|84297|International
+Curacao|Cheto Merencia|Curacao|RM|68|68|25|73|67|65|69|39|58|84303|International
+Curacao|Luuk Bernardina|Curacao|LM|67|75|21|77|62|65|67|42|54|84312|International
+Curacao|Dieguinho Scholten|Curacao|CDM|63|73|17|68|54|61|60|61|62|84315|International
+Curacao|Remy Fabricia|Curacao|CB|68|68|29|70|36|47|51|67|72|84308|International
+Curacao|Elimarkus Henriquez|Curacao|CB|68|71|25|68|52|56|59|69|66|84318|International
+Curacao|Joenathan Amelia|Curacao|RB|67|74|21|72|49|61|64|64|63|84311|International
+Curacao|Ranger Eustacia|Curacao|GK|64|72|21|64|63|67|68|32|62|84295|International
+Curacao|Roystin Schoop|Curacao|CAM|65|71|21|68|63|64|66|36|58|84313|International
+Curacao|Sander Apolonia|Curacao|ST|65|65|29|75|66|61|68|32|59|84301|International
+Curacao|Jeromar Croes|Curacao|ST|65|73|21|80|65|59|70|38|54|84316|International
+Curacao|Carlson de Ridder|Curacao|CB|67|70|25|73|49|56|59|66|70|84309|International
+Curacao|Elivelton Meulens|Curacao|LB|66|71|21|77|52|61|65|61|59|84304|International
+Curacao|Quinton Josephia|Curacao|RM|66|66|29|83|62|62|65|47|55|84317|International
+Curacao|Claudemuner Andreia|Curacao|LM|65|66|25|80|61|59|68|41|51|84314|International
+Curacao|Joniarty Jansen|Curacao|GK|62|72|17|65|63|64|63|27|58|84320|International
+Jordan|Naseem Rousani|Jordan|GK|66|66|21|67|68|64|64|23|65|85483|International
+Jordan|Khalil Dewidar|Jordan|RB|65|65|29|69|35|54|59|63|62|85498|International
+Jordan|Rami Tayibeen|Jordan|CB|67|67|21|58|26|45|54|68|68|85485|International
+Jordan|Tariq Ibn Fayhan|Jordan|CB|72|72|21|69|29|46|52|73|76|85480|International
+Jordan|Rafiq Al Sarhan|Jordan|LB|66|74|21|78|51|59|61|62|61|85481|International
+Jordan|Muath Al Shuraymiz|Jordan|RM|67|67|29|76|64|64|66|32|66|85501|International
+Jordan|Odeh Sakka|Jordan|CM|66|66|29|63|61|62|64|55|60|85497|International
+Jordan|Nawaf Maarouf|Jordan|CDM|66|67|21|63|43|60|60|64|69|85486|International
+Jordan|Ghassan Al Muqaddam|Jordan|LM|72|72|25|73|70|68|75|56|66|85479|International
+Jordan|Mustafa Al Rawabiah|Jordan|ST|63|71|21|79|61|41|61|23|61|85482|International
+Jordan|Talal Al Awazim|Jordan|ST|70|73|21|72|70|58|69|28|64|85484|International
+Jordan|Qais Bannoura|Jordan|LM|69|70|21|70|69|65|67|35|60|85487|International
+Jordan|Munther Abu Diab|Jordan|LM|65|65|25|71|62|62|65|27|50|85488|International
+Jordan|Kareem Baramki|Jordan|CM|64|64|25|64|58|62|61|58|59|85489|International
+Jordan|Saif Darwaza|Jordan|CB|64|64|25|53|30|42|53|64|63|85490|International
+Jordan|Ghassan Nuseibeh|Jordan|CB|64|69|25|56|29|45|53|65|63|85493|International
+Jordan|Nadim Maari|Jordan|LB|63|63|25|69|45|56|60|59|67|85491|International
+Jordan|Fares Al Tamriziq|Jordan|GK|63|63|25|63|61|58|66|28|58|85492|International
+Jordan|Marei Al Shorafa|Jordan|RM|62|62|29|71|61|54|63|26|62|85500|International
+Jordan|Zain Mohtasebi|Jordan|ST|62|62|21|58|64|48|59|20|57|85504|International
+Jordan|Laith Wakid|Jordan|CB|63|63|25|51|29|42|45|64|63|85494|International
+Jordan|Jassim Zaghlool|Jordan|RB|63|63|29|70|38|48|52|61|67|85495|International
+Jordan|Yasin Badarini|Jordan|RM|62|62|29|79|61|55|62|34|68|85502|International
+Jordan|Talal Mohasseb|Jordan|CM|62|62|29|62|58|56|62|50|66|85496|International
+Jordan|Mahmoud Awazimi|Jordan|CB|60|60|25|55|29|42|52|59|65|85503|International
+Jordan|Ammer Al Sharkawi|Jordan|GK|61|61|29|64|66|59|60|24|59|85499|International
+Iraq|Adnan Rafidaini|Iraq|GK|69|69|29|69|68|67|68|26|70|85467|International
+Iraq|Mahdi Al Jazrawi|Iraq|RB|64|64|21|71|55|57|60|60|71|85450|International
+Iraq|Karim Al Anbaruni|Iraq|CB|63|63|25|36|27|41|38|64|71|85460|International
+Iraq|Tawfiq Shattari|Iraq|CB|64|64|29|54|28|44|49|64|62|85468|International
+Iraq|Ammar Dijlawi|Iraq|LB|68|69|25|75|54|64|72|63|65|85464|International
+Iraq|Khalid Al Maysani|Iraq|RM|66|78|21|80|59|58|70|40|62|85456|International
+Iraq|Mustafa Bayrani|Iraq|CM|68|71|21|68|64|68|69|62|66|85451|International
+Iraq|Hossam Al Babilawi|Iraq|CM|66|66|21|68|58|66|64|61|71|85455|International
+Iraq|Karim Moslawi|Iraq|LM|67|68|25|81|60|60|67|31|69|85461|International
+Iraq|Mohanad Habbani|Iraq|ST|65|72|21|79|63|47|64|18|73|85457|International
+Iraq|Bassel Al Furatani|Iraq|ST|62|67|21|72|61|51|66|17|63|85454|International
+Iraq|Haitham Al Qarawli|Iraq|CDM|67|77|21|62|47|61|68|62|67|85453|International
+Iraq|Raed Al Burjawi|Iraq|CDM|67|76|21|64|60|64|71|63|65|85458|International
+Iraq|Faris Al Ramadi|Iraq|CM|65|65|21|66|63|67|69|56|58|85449|International
+Iraq|Yasser Al Nahraniq|Iraq|LM|62|63|25|71|62|57|62|22|65|85463|International
+Iraq|Qusay Najafi|Iraq|RB|63|68|21|74|34|49|59|58|63|85452|International
+Iraq|Nader Al Habbani|Iraq|CB|61|61|29|58|27|43|52|62|59|85469|International
+Iraq|Hakam Diyalawi|Iraq|GK|65|66|25|66|65|63|66|26|65|85465|International
+Iraq|Saad Ubaidi|Iraq|LM|65|66|21|79|65|58|64|59|74|85462|International
+Iraq|Firas Al Anbaruni|Iraq|ST|62|62|21|74|62|49|58|22|59|85459|International
+Iraq|Tawfiq Daraji|Iraq|CB|60|60|29|58|28|43|50|61|60|85470|International
+Iraq|Rayyan Nimri|Iraq|CDM|62|62|29|59|35|56|55|60|59|85473|International
+Iraq|Walid Al Biblawi|Iraq|RM|62|62|29|69|64|57|61|33|61|85474|International
+Iraq|Nabih Furatani|Iraq|RB|60|60|29|64|29|50|55|57|59|85472|International
+Iraq|Diyan Qaysi|Iraq|LB|60|60|29|64|33|51|54|58|58|85471|International
+Iraq|Iyad Wasiti|Iraq|GK|62|62|25|62|61|59|60|34|59|85466|International
