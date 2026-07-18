@@ -10,6 +10,7 @@ import { MLB_LOGOS, NHL_LOGOS, NFL_LOGOS } from '@/lib/proLogos'
 import { aliasCanonicalNames } from '@/lib/teamAliases'
 import { MLB_TEAMS, NHL_TEAMS, NFL_TEAMS, MLB_DIVISIONS, NHL_DIVISIONS, NFL_DIVISIONS } from '@/lib/proTeams'
 import { computeTeamOverall, positionBreakdown, mlbGmSummary } from '@/lib/rosterMetrics'
+import { franchiseProgress } from '@/lib/baseline'
 
 const GAMES = [
   { id: 'EA FC 26', label: 'EA FC 26', sub: 'Soccer', status: 'live' },
@@ -187,7 +188,7 @@ const FC_POSITION_ORDER = ['GK', 'DEF', 'MID', 'FWD']
 
 const FC_STAT_DEFS = {
   overall: { label: 'Overall', isCurrency: false, decimals: 1, get: function(s) { return s.teamOverall !== null && s.teamOverall !== undefined ? s.teamOverall : s.avgOverall } },
-  potential: { label: 'Potential', isCurrency: false, decimals: 0, get: function(s) { return s.avgPotential } },
+  potential: { label: 'Potential', isCurrency: false, decimals: 1, get: function(s) { return s.avgPotential } },
   value: { label: 'Club Value', isCurrency: true, get: function(s) { return s.totalValue } },
   wages: { label: 'Weekly Wages', isCurrency: true, get: function(s) { return s.totalWage } }
 }
@@ -288,15 +289,29 @@ function StarDisplay({ count }) {
   )
 }
 
-function StackedStat({ label, value, isCurrency, decimals }) {
+function StackedStat({ label, value, isCurrency, decimals, progress }) {
   const displayVal = isCurrency
     ? formatEuro(value)
     : (value !== null && value !== undefined ? value.toFixed(decimals) : '-')
   const valueColor = isCurrency ? 'text-neutral-100' : valueColorForTier(value)
+
+  // Day-one comparison, shown only once a save has actually moved players —
+  // an untouched franchise would just read "+0.0 from itself".
+  const showProgress = progress && progress.start !== null && progress.start !== undefined && progress.delta !== null
+  const d = showProgress ? progress.delta : 0
+  const deltaColor = d > 0.05 ? 'text-emerald-400' : (d < -0.05 ? 'text-red-400' : 'text-neutral-500')
+  const sign = d > 0.05 ? '+' : ''
+
   return (
     <div className="rounded-lg px-4 py-2 text-center bg-neutral-900/70 border border-neutral-800 min-w-[92px]">
       <p className="text-neutral-500 text-[9px] font-semibold uppercase tracking-[0.14em] mb-0.5">{label}</p>
       <p className={'font-bold text-2xl leading-none ' + valueColor}>{displayVal}</p>
+      {showProgress && (
+        <p className="text-[9px] mt-1 leading-none whitespace-nowrap">
+          <span className={deltaColor + ' font-semibold'}>{sign}{d.toFixed(decimals)}</span>
+          <span className="text-neutral-600"> from {progress.start.toFixed(decimals)}</span>
+        </p>
+      )}
     </div>
   )
 }
@@ -443,6 +458,7 @@ export default function Home() {
   const [user, setUser] = useState(null)
   const [franchises, setFranchises] = useState([])
   const [playersByFranchise, setPlayersByFranchise] = useState({})
+  const [transfersByFranchise, setTransfersByFranchise] = useState({})
   const [loading, setLoading] = useState(true)
   const [showCreatePanel, setShowCreatePanel] = useState(false)
   const [selectedGame, setSelectedGame] = useState(null)
@@ -652,6 +668,7 @@ export default function Home() {
   const loadPlayersForFranchises = async (franchiseIds) => {
     if (!franchiseIds || franchiseIds.length === 0) {
       setPlayersByFranchise({})
+      setTransfersByFranchise({})
       return
     }
     const result = await supabase
@@ -667,6 +684,23 @@ export default function Home() {
         grouped[p.franchise_id].push(p)
       }
       setPlayersByFranchise(grouped)
+    }
+
+    // Transfers are what let the cards rebuild the day-one squad — see
+    // lib/baseline.js. A franchise with none simply shows no change.
+    const moves = await supabase
+      .from('transfer_history')
+      .select('franchise_id, player_name, transfer_type, player_snapshot')
+      .in('franchise_id', franchiseIds)
+
+    if (!moves.error) {
+      const grouped = {}
+      for (let i = 0; i < moves.data.length; i++) {
+        const t = moves.data[i]
+        if (!grouped[t.franchise_id]) grouped[t.franchise_id] = []
+        grouped[t.franchise_id].push(t)
+      }
+      setTransfersByFranchise(grouped)
     }
   }
 
@@ -1211,6 +1245,8 @@ export default function Home() {
                 // Broadcast-style mini ticker filling the card's open space,
                 // computed from the franchise's real roster.
                 const roster = playersByFranchise[f.id] || []
+                // Day-one squad vs today, rebuilt from transfer history.
+                const progress = franchiseProgress(roster, transfersByFranchise[f.id] || [], f.game)
                 const ratedRoster = roster.filter(function(p) { return p.overall_rating != null })
                 const cardTicker = []
                 if (ratedRoster.length > 0) {
@@ -1258,6 +1294,10 @@ export default function Home() {
                           {enabledStats.map(function(s) {
                             const def = statDefs[s.key]
                             const value = def.get(stats)
+                            // Only the two rating tiles have a day-one equivalent.
+                            const prog = progress && progress.changed && (s.key === 'overall' || s.key === 'potential')
+                              ? progress[s.key]
+                              : null
                             return (
                               <StackedStat
                                 key={s.key}
@@ -1265,6 +1305,7 @@ export default function Home() {
                                 value={value}
                                 isCurrency={!!def.isCurrency}
                                 decimals={def.decimals}
+                                progress={prog}
                               />
                             )
                           })}
