@@ -318,6 +318,29 @@ function median(nums) {
   return valid.length % 2 === 0 ? (valid[mid - 1] + valid[mid]) / 2 : valid[mid]
 }
 
+// PostgREST caps an unbounded select at 1000 rows, and a query with no ORDER BY
+// gets an arbitrary 1000 — so a plain .select() silently returns a shifting
+// slice of a growing table rather than all of it. That is what emptied the
+// league benchmarks: once the reference table passed 1000 rows, whichever
+// leagues happened to fall outside the slice vanished from the comparison pool,
+// and filtering for one of them produced "No benchmark data" with no error
+// anywhere. Page explicitly, ordered by id so the windows can't overlap or skip.
+async function fetchAllRows(supabase, table, columns, pageSize = 1000) {
+  const out = []
+  for (let from = 0; ; from += pageSize) {
+    const { data, error } = await supabase
+      .from(table)
+      .select(columns)
+      .order('id', { ascending: true })
+      .range(from, from + pageSize - 1)
+    if (error) return out.length ? out : null
+    if (!data || data.length === 0) break
+    out.push.apply(out, data)
+    if (data.length < pageSize) break
+  }
+  return out
+}
+
 function MiniBenchmarkBar({ ownValue, benchmark, isCurrency, decimals }) {
   if (!benchmark || ownValue === null || ownValue === undefined) {
     return <p className="text-neutral-600 text-[10px] mt-2">No benchmark data</p>
@@ -515,13 +538,12 @@ export default function FranchisePage() {
     if (!franchise || isCfb || fcReferenceRows !== null) return
 
     const loadReference = async () => {
-      const { data, error } = await supabase
-        .from('player_reference')
-        .select('active_club, age, overall_rating, potential_rating, value_eur, wage_eur_wk')
-
-      if (!error) {
-        setFcReferenceRows(data)
-      }
+      const data = await fetchAllRows(
+        supabase,
+        'player_reference',
+        'active_club, league, age, overall_rating, potential_rating, value_eur, wage_eur_wk'
+      )
+      if (data) setFcReferenceRows(data)
     }
 
     loadReference()
@@ -534,6 +556,9 @@ export default function FranchisePage() {
     for (let i = 0; i < fcReferenceRows.length; i++) {
       const p = fcReferenceRows[i]
       if (!p.active_club) continue
+      // National squads live in this table too, keyed by country rather than
+      // club. They are not clubs and would distort a league comparison.
+      if (p.league === 'International') continue
       if (!byClub[p.active_club]) byClub[p.active_club] = []
       byClub[p.active_club].push(p)
     }
@@ -542,7 +567,9 @@ export default function FranchisePage() {
       const rows = byClub[club]
       return {
         club: club,
-        league: CLUB_LEAGUE_MAP[club] || null,
+        // Fall back to the league recorded on the row, so leagues imported
+        // after CLUB_LEAGUE_MAP was written still get benchmarks.
+        league: CLUB_LEAGUE_MAP[club] || rows[0].league || null,
         squadSize: rows.length,
         avgAge: average(rows.map(function(r) { return r.age })),
         avgOverall: average(rows.map(function(r) { return r.overall_rating })),
@@ -572,13 +599,8 @@ export default function FranchisePage() {
     if (!franchise || !isCfb || cfbReferenceRows !== null) return
 
     const loadCfbReference = async () => {
-      const { data, error } = await supabase
-        .from('cfb_player_reference')
-        .select('team, position, overall_rating')
-
-      if (!error) {
-        setCfbReferenceRows(data)
-      }
+      const data = await fetchAllRows(supabase, 'cfb_player_reference', 'team, position, overall_rating')
+      if (data) setCfbReferenceRows(data)
     }
 
     loadCfbReference()
