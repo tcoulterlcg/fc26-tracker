@@ -671,10 +671,14 @@ export default function Home() {
       setTransfersByFranchise({})
       return
     }
+    // Academy players are excluded here for the same reason as on the franchise
+    // page: these cards show senior-squad quality, and youth ratings would drag
+    // every card's overall down. They are counted on the Youth Academy page.
     const result = await supabase
       .from('players')
       .select('*')
       .in('franchise_id', franchiseIds)
+      .or('status.is.null,status.neq.youth')
 
     if (!result.error) {
       const grouped = {}

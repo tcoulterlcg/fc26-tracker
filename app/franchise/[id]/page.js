@@ -464,8 +464,8 @@ export default function FranchisePage() {
     if (!franchise) return
     const tabStorageKey = 'roster_hq_tab_order_' + (isCfb ? 'cfb' : 'fc')
     const defaultOrder = isCfb
-      ? ['dashboard', 'roster', 'depth', 'progression', 'teamstats', 'playerstats', 'teamneeds', 'history']
-      : ['dashboard', 'roster', 'squad', 'progression', 'teamstats', 'playerstats', 'teamneeds', 'history']
+      ? ['dashboard', 'roster', 'depth', 'progression', 'teamstats', 'playerstats', 'youth', 'teamneeds', 'history']
+      : ['dashboard', 'roster', 'squad', 'progression', 'teamstats', 'playerstats', 'youth', 'teamneeds', 'history']
     try {
       const saved = window.localStorage.getItem(tabStorageKey)
       if (saved) {
@@ -788,7 +788,12 @@ export default function FranchisePage() {
         const diff = (p.overall_rating != null && beg != null) ? p.overall_rating - beg : null
         return Object.assign({}, p, { base_overall: beg, ovr_diff: diff })
       })
-      setPlayers(enriched)
+      // Academy players are kept out of `players` entirely. Everything on this
+      // page derives from that array — team overall, squad size, best XI, the
+      // ticker, league benchmarks — and a squad of 16-year-olds rated in the
+      // 50s would drag every one of those down. They are a separate squad, not
+      // deep bench, so they are counted separately on the Youth Academy page.
+      setPlayers(enriched.filter(function(p) { return p.status !== 'youth' }))
     }
   }
 
@@ -1655,6 +1660,7 @@ export default function FranchisePage() {
     progression: { type: 'tab', label: 'Progression' },
     teamstats: { type: 'link', label: 'Team Stats', href: '/franchise/' + franchiseId + '/team-stats' },
     playerstats: { type: 'link', label: 'Player Stats', href: '/franchise/' + franchiseId + '/stats' },
+    youth: { type: 'link', label: 'Youth Academy', href: '/franchise/' + franchiseId + '/youth-academy' },
     teamneeds: { type: 'link', label: 'Notes', href: '/franchise/' + franchiseId + '/notes' },
     history: {
       type: 'link',
