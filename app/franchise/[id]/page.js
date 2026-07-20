@@ -1655,7 +1655,7 @@ export default function FranchisePage() {
     progression: { type: 'tab', label: 'Progression' },
     teamstats: { type: 'link', label: 'Team Stats', href: '/franchise/' + franchiseId + '/team-stats' },
     playerstats: { type: 'link', label: 'Player Stats', href: '/franchise/' + franchiseId + '/stats' },
-    teamneeds: { type: 'link', label: 'Team Needs', href: '/franchise/' + franchiseId + '/team-needs' },
+    teamneeds: { type: 'link', label: 'Notes', href: '/franchise/' + franchiseId + '/notes' },
     history: {
       type: 'link',
       label: isCfb ? 'Recruiting History' : 'Transfer History',
