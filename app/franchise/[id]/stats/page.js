@@ -4,12 +4,95 @@ import { useEffect, useState } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
 
+// The season stats FC 26 tracks per player in Career Mode. Keys are stored in
+// the player_season_stats.stats JSON; labels are derived by un-underscoring.
+const SOCCER_PLAYER_STATS = [
+  'appearances', 'goals', 'assists', 'shots', 'shots_on_target', 'pass_accuracy',
+  'chances_created', 'tackles', 'interceptions', 'clean_sheets',
+  'yellow_cards', 'red_cards', 'avg_rating', 'man_of_the_match'
+]
+
+// Team record fields map to the season_team_stats columns (ties = draws,
+// points_for/against = goals for/against) so soccer reuses the same table.
+const SOCCER_TEAM_FIELDS = [
+  ['wins', 'Wins'], ['ties', 'Draws'], ['losses', 'Losses'],
+  ['points_for', 'Goals For'], ['points_against', 'Goals Against']
+]
+const GENERIC_TEAM_FIELDS = [
+  ['wins', 'Wins'], ['losses', 'Losses'], ['ties', 'Ties'],
+  ['points_for', 'Points For'], ['points_against', 'Points Against']
+]
+const TEAM_COLS = ['wins', 'losses', 'ties', 'points_for', 'points_against']
+
+// Only FC gets a pre-seeded zero roster. Other games keep the upload-only flow
+// until their own stat sets are defined, rather than showing soccer stats.
+const playerStatKeys = (game) => (game === 'EA FC 26' ? SOCCER_PLAYER_STATS : null)
+const teamFields = (game) => (game === 'EA FC 26' ? SOCCER_TEAM_FIELDS : GENERIC_TEAM_FIELDS)
+const zeroStats = (keys) => keys.reduce((o, k) => { o[k] = 0; return o }, {})
+
+function buildBlank(players, keys) {
+  return {
+    team_summary: { wins: 0, losses: 0, ties: 0, points_for: 0, points_against: 0 },
+    player_stats: (players || []).map((p) => ({ name: p.name, position: p.position || '', stats: zeroStats(keys) }))
+  }
+}
+
+// Start from the current roster (so everyone shows at zero) and overlay whatever
+// was already saved for the season. Players who've since left the club but have
+// saved stats are appended so their season isn't lost.
+function buildFromSaved(teamRow, playerRows, players, keys) {
+  const base = buildBlank(players, keys)
+  if (teamRow) TEAM_COLS.forEach((f) => { base.team_summary[f] = teamRow[f] != null ? teamRow[f] : 0 })
+  const byName = {}
+  ;(playerRows || []).forEach((r) => { byName[(r.player_name || '').toLowerCase()] = r.stats || {} })
+  base.player_stats = base.player_stats.map((p) => {
+    const s = byName[p.name.toLowerCase()]
+    return s ? Object.assign({}, p, { stats: Object.assign({}, p.stats, s) }) : p
+  })
+  const rosterNames = new Set((players || []).map((p) => (p.name || '').toLowerCase()))
+  ;(playerRows || []).forEach((r) => {
+    const n = (r.player_name || '').toLowerCase()
+    if (n && !rosterNames.has(n)) base.player_stats.push({ name: r.player_name, position: '', stats: Object.assign({}, zeroStats(keys), r.stats || {}) })
+  })
+  return base
+}
+
+// Overlay an uploaded screenshot's values onto the editable table: match players
+// by name, append any the roster didn't have, and only touch fields the photo
+// actually reported (leaving the rest at their current value).
+function mergeExtraction(base, result, keys) {
+  const next = base
+    ? { team_summary: Object.assign({}, base.team_summary), player_stats: base.player_stats.map((p) => Object.assign({}, p, { stats: Object.assign({}, p.stats) })) }
+    : buildBlank([], keys)
+  if (result.team_summary) {
+    TEAM_COLS.forEach((f) => {
+      const v = result.team_summary[f]
+      if (v !== null && v !== undefined) next.team_summary[f] = v
+    })
+  }
+  const idxByName = {}
+  next.player_stats.forEach((p, i) => { idxByName[p.name.toLowerCase()] = i })
+  ;(result.player_stats || []).forEach((rp) => {
+    if (!rp.name) return
+    const i = idxByName[rp.name.toLowerCase()]
+    if (i !== undefined) {
+      next.player_stats[i].stats = Object.assign({}, next.player_stats[i].stats, rp.stats || {})
+    } else {
+      next.player_stats.push({ name: rp.name, position: '', stats: Object.assign({}, zeroStats(keys), rp.stats || {}) })
+      idxByName[rp.name.toLowerCase()] = next.player_stats.length - 1
+    }
+  })
+  return next
+}
+
 export default function StatsPage() {
   const [franchise, setFranchise] = useState(null)
+  const [roster, setRoster] = useState([])
   const [loading, setLoading] = useState(true)
   const [analyzing, setAnalyzing] = useState(false)
   const [error, setError] = useState('')
   const [extracted, setExtracted] = useState(null)
+  const [justUploaded, setJustUploaded] = useState(false)
   const [saving, setSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
 
@@ -44,8 +127,22 @@ export default function StatsPage() {
     }
 
     setFranchise(franchiseData)
-    await loadHistory()
+    const players = await loadRoster()
+    const history = await loadHistory()
+    initEditable(franchiseData, players, history.team, history.players)
     setLoading(false)
+  }
+
+  const loadRoster = async () => {
+    const { data } = await supabase
+      .from('players')
+      .select('name, position, overall_rating')
+      .eq('franchise_id', franchiseId)
+      .or('status.is.null,status.neq.youth')
+      .order('overall_rating', { ascending: false })
+    const r = data || []
+    setRoster(r)
+    return r
   }
 
   const loadHistory = async () => {
@@ -54,20 +151,31 @@ export default function StatsPage() {
       .select('*')
       .eq('franchise_id', franchiseId)
       .order('season', { ascending: true })
-
-    if (!teamResult.error) {
-      setTeamHistory(teamResult.data)
-    }
+    const team = teamResult.error ? [] : teamResult.data
+    setTeamHistory(team)
 
     const playerResult = await supabase
       .from('player_season_stats')
       .select('*')
       .eq('franchise_id', franchiseId)
       .order('season', { ascending: true })
+    const players = playerResult.error ? [] : playerResult.data
+    setPlayerHistory(players)
 
-    if (!playerResult.error) {
-      setPlayerHistory(playerResult.data)
-    }
+    return { team: team, players: players }
+  }
+
+  // Seed the editable table: saved data for the current season if present,
+  // otherwise the roster at zero. Non-FC games stay upload-only for now.
+  const initEditable = (fr, players, teamRows, playerRows) => {
+    const keys = playerStatKeys(fr.game)
+    if (!keys) { setExtracted(null); return }
+    const season = fr.current_season
+    const teamRow = (teamRows || []).find((t) => t.season === season) || null
+    const seasonPlayers = (playerRows || []).filter((p) => p.season === season)
+    setJustUploaded(false)
+    if (teamRow || seasonPlayers.length) setExtracted(buildFromSaved(teamRow, seasonPlayers, players, keys))
+    else setExtracted(buildBlank(players, keys))
   }
 
   const handleFileChange = (e) => {
@@ -75,7 +183,6 @@ export default function StatsPage() {
     if (!file) return
 
     setError('')
-    setExtracted(null)
     setSaveMessage('')
     setAnalyzing(true)
 
@@ -97,7 +204,9 @@ export default function StatsPage() {
         if (!response.ok) {
           setError(result.error || 'Something went wrong analyzing the image.')
         } else {
-          setExtracted(result)
+          const keys = playerStatKeys(franchise.game)
+          setExtracted((prev) => (keys ? mergeExtraction(prev, result, keys) : result))
+          setJustUploaded(true)
         }
       } catch (err) {
         setError('Failed to analyze image. Please try again.')
@@ -174,8 +283,8 @@ export default function StatsPage() {
 
     setSaving(false)
     setSaveMessage('Saved to Season ' + season + '.')
-    setExtracted(null)
-    await loadHistory()
+    const history = await loadHistory()
+    initEditable(franchise, roster, history.team, history.players)
   }
 
   if (loading) {
@@ -185,6 +294,10 @@ export default function StatsPage() {
       </div>
     )
   }
+
+  const isFc = franchise.game === 'EA FC 26'
+  const pastTeamHistory = teamHistory.filter(function(r) { return r.season !== franchise.current_season })
+  const pastPlayerHistory = playerHistory.filter(function(r) { return r.season !== franchise.current_season })
 
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
@@ -196,7 +309,9 @@ export default function StatsPage() {
 
         <h1 className="text-4xl font-bold uppercase tracking-tight mt-5 mb-1.5">Stats Import</h1>
         <p className="text-neutral-400 text-sm mb-8">
-          Upload a photo of your in-game stats screen. Season {franchise.current_season}.
+          {isFc
+            ? 'Enter your season stats below, or upload a photo of your in-game stats screen to fill them in. Season ' + franchise.current_season + '.'
+            : 'Upload a photo of your in-game stats screen. Season ' + franchise.current_season + '.'}
         </p>
 
         <div className="bg-neutral-900/60 border border-neutral-800 rounded-xl p-6 mb-6">
@@ -227,74 +342,52 @@ export default function StatsPage() {
 
         {extracted && (
           <div className="bg-neutral-900/60 border border-neutral-800 rounded-xl p-6 mb-6">
-            <h2 className="text-xl font-bold uppercase tracking-wide text-neutral-100 mb-1">Review Before Saving</h2>
+            <h2 className="text-xl font-bold uppercase tracking-wide text-neutral-100 mb-1">Season {franchise.current_season} Stats</h2>
             <p className="text-neutral-400 text-sm mb-6">
-              Double-check everything below — AI extraction can make mistakes. Edit any field before saving.
+              {justUploaded
+                ? 'Filled in from your screenshot — double-check everything, AI extraction can make mistakes.'
+                : 'Everyone starts at zero. Fill these in as the season goes, or upload a screenshot to auto-fill.'}
             </p>
 
-            <h3 className="text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-3">Season Record</h3>
+            <h3 className="text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-3">Team Record</h3>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8">
-              <div>
-                <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Wins</label>
-                <input
-                  type="number"
-                  value={extracted.team_summary && extracted.team_summary.wins !== null && extracted.team_summary.wins !== undefined ? extracted.team_summary.wins : ''}
-                  onChange={(e) => updateTeamField('wins', e.target.value)}
-                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm tabular-nums focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                />
-              </div>
-              <div>
-                <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Losses</label>
-                <input
-                  type="number"
-                  value={extracted.team_summary && extracted.team_summary.losses !== null && extracted.team_summary.losses !== undefined ? extracted.team_summary.losses : ''}
-                  onChange={(e) => updateTeamField('losses', e.target.value)}
-                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm tabular-nums focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                />
-              </div>
-              <div>
-                <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Ties</label>
-                <input
-                  type="number"
-                  value={extracted.team_summary && extracted.team_summary.ties !== null && extracted.team_summary.ties !== undefined ? extracted.team_summary.ties : ''}
-                  onChange={(e) => updateTeamField('ties', e.target.value)}
-                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm tabular-nums focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                />
-              </div>
-              <div>
-                <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Points For</label>
-                <input
-                  type="number"
-                  value={extracted.team_summary && extracted.team_summary.points_for !== null && extracted.team_summary.points_for !== undefined ? extracted.team_summary.points_for : ''}
-                  onChange={(e) => updateTeamField('points_for', e.target.value)}
-                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm tabular-nums focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                />
-              </div>
-              <div>
-                <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">Points Against</label>
-                <input
-                  type="number"
-                  value={extracted.team_summary && extracted.team_summary.points_against !== null && extracted.team_summary.points_against !== undefined ? extracted.team_summary.points_against : ''}
-                  onChange={(e) => updateTeamField('points_against', e.target.value)}
-                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm tabular-nums focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                />
-              </div>
+              {teamFields(franchise.game).map(function(field) {
+                const key = field[0]
+                const label = field[1]
+                const raw = extracted.team_summary ? extracted.team_summary[key] : null
+                return (
+                  <div key={key}>
+                    <label className="block text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-1.5">{label}</label>
+                    <input
+                      type="number"
+                      value={raw !== null && raw !== undefined ? raw : ''}
+                      onChange={(e) => updateTeamField(key, e.target.value)}
+                      className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-sm tabular-nums focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                    />
+                  </div>
+                )
+              })}
             </div>
 
             {extracted.player_stats && extracted.player_stats.length > 0 && (
               <>
-                <h3 className="text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-3">Player Stats</h3>
+                <h3 className="text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-3">
+                  Player Stats <span className="text-neutral-600">{extracted.player_stats.length}</span>
+                </h3>
                 <div className="space-y-3 mb-6">
                   {extracted.player_stats.map(function(p, idx) {
                     return (
                       <div key={idx} className="bg-neutral-950/50 border border-neutral-800 rounded-lg p-4">
                         <div className="flex justify-between items-center gap-3 mb-3">
-                          <input
-                            type="text"
-                            value={p.name || ''}
-                            onChange={(e) => updatePlayerName(idx, e.target.value)}
-                            className="bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-1.5 text-sm font-semibold w-48 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                          />
+                          <div className="flex items-center gap-2 min-w-0">
+                            <input
+                              type="text"
+                              value={p.name || ''}
+                              onChange={(e) => updatePlayerName(idx, e.target.value)}
+                              className="bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-1.5 text-sm font-semibold w-48 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                            />
+                            {p.position && <span className="text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em]">{p.position}</span>}
+                          </div>
                           <button
                             onClick={() => removePlayerRow(idx)}
                             className="text-red-400 hover:text-red-300 text-[10px] font-semibold uppercase tracking-[0.14em] transition-colors"
@@ -334,29 +427,29 @@ export default function StatsPage() {
           </div>
         )}
 
-        {teamHistory.length > 0 && (
+        {pastTeamHistory.length > 0 && (
           <div className="bg-neutral-900/60 border border-neutral-800 rounded-xl p-6 mb-6">
-            <h2 className="text-xl font-bold uppercase tracking-wide text-neutral-100 mb-4">Season Records</h2>
+            <h2 className="text-xl font-bold uppercase tracking-wide text-neutral-100 mb-4">Past Seasons</h2>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="text-neutral-400 text-[11px] uppercase tracking-wide border-b border-neutral-800">
                     <th className="text-left py-2 px-3">Season</th>
                     <th className="text-left py-2 px-3">W</th>
-                    <th className="text-left py-2 px-3">L</th>
-                    <th className="text-left py-2 px-3">T</th>
-                    <th className="text-left py-2 px-3">PF</th>
-                    <th className="text-left py-2 px-3">PA</th>
+                    <th className="text-left py-2 px-3">{isFc ? 'D' : 'L'}</th>
+                    <th className="text-left py-2 px-3">{isFc ? 'L' : 'T'}</th>
+                    <th className="text-left py-2 px-3">{isFc ? 'GF' : 'PF'}</th>
+                    <th className="text-left py-2 px-3">{isFc ? 'GA' : 'PA'}</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {teamHistory.map(function(row, idx) {
+                  {pastTeamHistory.map(function(row) {
                     return (
                       <tr key={row.id} className="border-b border-neutral-800/60 hover:bg-neutral-800/40 transition-colors">
                         <td className="py-2.5 px-3 font-semibold">Season {row.season}</td>
                         <td className="py-2.5 px-3 text-violet-400 tabular-nums">{row.wins !== null ? row.wins : '-'}</td>
-                        <td className="py-2.5 px-3 text-red-400 tabular-nums">{row.losses !== null ? row.losses : '-'}</td>
-                        <td className="py-2.5 px-3 text-neutral-400 tabular-nums">{row.ties !== null ? row.ties : '-'}</td>
+                        <td className="py-2.5 px-3 tabular-nums">{(isFc ? row.ties : row.losses) != null ? (isFc ? row.ties : row.losses) : '-'}</td>
+                        <td className="py-2.5 px-3 tabular-nums">{(isFc ? row.losses : row.ties) != null ? (isFc ? row.losses : row.ties) : '-'}</td>
                         <td className="py-2.5 px-3 text-neutral-300 tabular-nums">{row.points_for !== null ? row.points_for : '-'}</td>
                         <td className="py-2.5 px-3 text-neutral-300 tabular-nums">{row.points_against !== null ? row.points_against : '-'}</td>
                       </tr>
@@ -368,12 +461,12 @@ export default function StatsPage() {
           </div>
         )}
 
-        {playerHistory.length > 0 && (
+        {pastPlayerHistory.length > 0 && (
           <div className="bg-neutral-900/60 border border-neutral-800 rounded-xl p-6">
             <h2 className="text-xl font-bold uppercase tracking-wide text-neutral-100 mb-4">Player Stats History</h2>
             <div className="space-y-6">
-              {Array.from(new Set(playerHistory.map(function(p) { return p.season }))).sort(function(a, b) { return a - b }).map(function(season) {
-                const seasonPlayers = playerHistory.filter(function(p) { return p.season === season })
+              {Array.from(new Set(pastPlayerHistory.map(function(p) { return p.season }))).sort(function(a, b) { return a - b }).map(function(season) {
+                const seasonPlayers = pastPlayerHistory.filter(function(p) { return p.season === season })
                 return (
                   <div key={season}>
                     <h3 className="text-violet-400 text-[10px] font-semibold uppercase tracking-[0.14em] mb-3">Season {season}</h3>
