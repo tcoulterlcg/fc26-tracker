@@ -109,6 +109,8 @@ export default function StatsPage() {
   const [justUploaded, setJustUploaded] = useState(false)
   const [saving, setSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
+  const [sortKey, setSortKey] = useState(null)
+  const [sortDir, setSortDir] = useState('desc')
 
   const [teamHistory, setTeamHistory] = useState([])
   const [playerHistory, setPlayerHistory] = useState([])
@@ -278,6 +280,34 @@ export default function StatsPage() {
     })
   }
 
+  // Sort the rows in place on an explicit click, not on every keystroke — so a
+  // value you're typing doesn't make its row jump around while you edit. Names
+  // default A→Z; stats default high→low (top scorers first); clicking the same
+  // column again flips the direction.
+  const sortBy = (key) => {
+    const nextDir = sortKey === key ? (sortDir === 'desc' ? 'asc' : 'desc') : (key === 'name' ? 'asc' : 'desc')
+    setSortKey(key)
+    setSortDir(nextDir)
+    const num = (v) => (v === null || v === undefined || v === '' || isNaN(v) ? null : parseFloat(v))
+    setExtracted(function(prev) {
+      if (!prev || !prev.player_stats) return prev
+      const arr = prev.player_stats.slice()
+      arr.sort(function(a, b) {
+        const byName = (a.name || '').localeCompare(b.name || '')
+        if (key === 'name') return nextDir === 'asc' ? byName : -byName
+        const av = num(a.stats ? a.stats[key] : null)
+        const bv = num(b.stats ? b.stats[key] : null)
+        // Blank cells sit at the bottom whichever way you sort.
+        if (av === null && bv === null) return byName
+        if (av === null) return 1
+        if (bv === null) return -1
+        if (av === bv) return byName
+        return nextDir === 'asc' ? av - bv : bv - av
+      })
+      return Object.assign({}, prev, { player_stats: arr })
+    })
+  }
+
   const handleSave = async () => {
     if (!extracted) return
     setSaving(true)
@@ -406,11 +436,32 @@ export default function StatsPage() {
 
             {extracted.player_stats && (
               <>
-                <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center justify-between gap-3 mb-3 flex-wrap">
                   <h3 className="text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em]">
                     Player Stats <span className="text-neutral-600">{extracted.player_stats.length}</span>
                   </h3>
-                  <span className="text-neutral-600 text-[10px]">Click any cell to edit</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-neutral-600 text-[10px] font-semibold uppercase tracking-[0.14em]">Sort</span>
+                    <select
+                      value={sortKey || ''}
+                      onChange={(e) => { if (e.target.value) sortBy(e.target.value) }}
+                      className="bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1 text-xs text-neutral-200 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                    >
+                      <option value="" disabled>Choose…</option>
+                      <option value="name">Player</option>
+                      {statColumns.map(function(col) {
+                        return <option key={col} value={col}>{statFull(col)}</option>
+                      })}
+                    </select>
+                    <button
+                      onClick={() => sortKey && sortBy(sortKey)}
+                      disabled={!sortKey}
+                      title="Flip direction"
+                      className="bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1 text-xs text-neutral-300 hover:border-violet-500 disabled:opacity-40 transition-colors"
+                    >
+                      {sortDir === 'desc' ? 'High → Low' : 'Low → High'}
+                    </button>
+                  </div>
                 </div>
 
                 {/* Spreadsheet: player rows × stat columns. Frozen header and name
@@ -419,13 +470,23 @@ export default function StatsPage() {
                   <table className="border-collapse w-full min-w-max">
                     <thead>
                       <tr>
-                        <th className="sticky top-0 left-0 z-30 bg-neutral-900 border-b border-r border-neutral-800 px-3 py-2 text-left text-[10px] font-semibold uppercase tracking-[0.14em] text-neutral-400">
-                          Player
+                        <th
+                          onClick={() => sortBy('name')}
+                          title="Sort by player name"
+                          className="sticky top-0 left-0 z-30 bg-neutral-900 border-b border-r border-neutral-800 px-3 py-2 text-left text-[10px] font-semibold uppercase tracking-[0.14em] text-neutral-400 cursor-pointer hover:text-neutral-100 select-none"
+                        >
+                          Player{sortKey === 'name' ? (sortDir === 'desc' ? ' ▾' : ' ▴') : ''}
                         </th>
                         {statColumns.map(function(col) {
+                          const active = sortKey === col
                           return (
-                            <th key={col} title={statFull(col)} className="sticky top-0 z-20 bg-neutral-900 border-b border-l border-neutral-800 px-2 py-2 text-[10px] font-semibold uppercase tracking-wide text-neutral-400 text-right whitespace-nowrap">
-                              {statLabel(col)}
+                            <th
+                              key={col}
+                              onClick={() => sortBy(col)}
+                              title={'Sort by ' + statFull(col)}
+                              className={'sticky top-0 z-20 bg-neutral-900 border-b border-l border-neutral-800 px-2 py-2 text-[10px] font-semibold uppercase tracking-wide text-right whitespace-nowrap cursor-pointer hover:text-neutral-100 select-none ' + (active ? 'text-violet-300' : 'text-neutral-400')}
+                            >
+                              {statLabel(col)}{active ? (sortDir === 'desc' ? ' ▾' : ' ▴') : ''}
                             </th>
                           )
                         })}
