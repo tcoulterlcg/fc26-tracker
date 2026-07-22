@@ -12,6 +12,20 @@ const SOCCER_PLAYER_STATS = [
   'yellow_cards', 'red_cards', 'avg_rating', 'man_of_the_match'
 ]
 
+// Compact column headers for the stats sheet; full names show on hover.
+const STAT_LABELS = {
+  appearances: 'Apps', goals: 'G', assists: 'A', shots: 'Sh', shots_on_target: 'SoT',
+  pass_accuracy: 'Pass %', chances_created: 'CC', tackles: 'Tkl', interceptions: 'Int',
+  clean_sheets: 'CS', yellow_cards: 'YC', red_cards: 'RC', avg_rating: 'Rating', man_of_the_match: 'MOTM'
+}
+const STAT_FULL = {
+  shots_on_target: 'Shots on Target', pass_accuracy: 'Pass Accuracy %', chances_created: 'Chances Created',
+  clean_sheets: 'Clean Sheets', yellow_cards: 'Yellow Cards', red_cards: 'Red Cards',
+  avg_rating: 'Average Match Rating', man_of_the_match: 'Man of the Match'
+}
+const statLabel = (k) => STAT_LABELS[k] || k.replace(/_/g, ' ')
+const statFull = (k) => STAT_FULL[k] || k.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
+
 // Team record fields map to the season_team_stats columns (ties = draws,
 // points_for/against = goals for/against) so soccer reuses the same table.
 const SOCCER_TEAM_FIELDS = [
@@ -255,6 +269,15 @@ export default function StatsPage() {
     })
   }
 
+  const addPlayerRow = (columns) => {
+    setExtracted(function(prev) {
+      const next = Object.assign({}, prev)
+      next.player_stats = prev.player_stats.slice()
+      next.player_stats.push({ name: '', position: '', stats: zeroStats(columns) })
+      return next
+    })
+  }
+
   const handleSave = async () => {
     if (!extracted) return
     setSaving(true)
@@ -299,9 +322,21 @@ export default function StatsPage() {
   const pastTeamHistory = teamHistory.filter(function(r) { return r.season !== franchise.current_season })
   const pastPlayerHistory = playerHistory.filter(function(r) { return r.season !== franchise.current_season })
 
+  // Sheet columns: the game's canonical stat order first, then any extra keys an
+  // uploaded screenshot introduced, so every player lines up under one header.
+  const statColumns = (function() {
+    if (!extracted || !extracted.player_stats) return []
+    const seen = new Set()
+    const cols = []
+    const add = (k) => { if (!seen.has(k)) { seen.add(k); cols.push(k) } }
+    ;(playerStatKeys(franchise.game) || []).forEach(add)
+    extracted.player_stats.forEach((p) => Object.keys(p.stats || {}).forEach(add))
+    return cols
+  })()
+
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
-      <div className="max-w-5xl mx-auto px-6 py-10">
+      <div className="max-w-7xl mx-auto px-6 py-10">
 
         <a href={'/franchise/' + franchiseId} className="inline-flex items-center gap-1 text-violet-400 hover:text-violet-300 text-sm font-medium transition-colors">
           &larr; Back to {franchise.club_name}
@@ -369,51 +404,86 @@ export default function StatsPage() {
               })}
             </div>
 
-            {extracted.player_stats && extracted.player_stats.length > 0 && (
+            {extracted.player_stats && (
               <>
-                <h3 className="text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-3">
-                  Player Stats <span className="text-neutral-600">{extracted.player_stats.length}</span>
-                </h3>
-                <div className="space-y-3 mb-6">
-                  {extracted.player_stats.map(function(p, idx) {
-                    return (
-                      <div key={idx} className="bg-neutral-950/50 border border-neutral-800 rounded-lg p-4">
-                        <div className="flex justify-between items-center gap-3 mb-3">
-                          <div className="flex items-center gap-2 min-w-0">
-                            <input
-                              type="text"
-                              value={p.name || ''}
-                              onChange={(e) => updatePlayerName(idx, e.target.value)}
-                              className="bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-1.5 text-sm font-semibold w-48 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                            />
-                            {p.position && <span className="text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em]">{p.position}</span>}
-                          </div>
-                          <button
-                            onClick={() => removePlayerRow(idx)}
-                            className="text-red-400 hover:text-red-300 text-[10px] font-semibold uppercase tracking-[0.14em] transition-colors"
-                          >
-                            Remove
-                          </button>
-                        </div>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
-                          {Object.keys(p.stats || {}).map(function(statKey) {
-                            return (
-                              <div key={statKey}>
-                                <label className="block text-[10px] text-neutral-500 font-semibold uppercase tracking-[0.14em] mb-1">{statKey.replace(/_/g, ' ')}</label>
-                                <input
-                                  type="number"
-                                  value={p.stats[statKey] !== null && p.stats[statKey] !== undefined ? p.stats[statKey] : ''}
-                                  onChange={(e) => updatePlayerStat(idx, statKey, e.target.value)}
-                                  className="w-full bg-neutral-800 border border-neutral-700 rounded-lg px-2 py-1.5 text-xs tabular-nums focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-                                />
-                              </div>
-                            )
-                          })}
-                        </div>
-                      </div>
-                    )
-                  })}
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em]">
+                    Player Stats <span className="text-neutral-600">{extracted.player_stats.length}</span>
+                  </h3>
+                  <span className="text-neutral-600 text-[10px]">Click any cell to edit</span>
                 </div>
+
+                {/* Spreadsheet: player rows × stat columns. Frozen header and name
+                    column stay put while you scroll; each cell is a click-in input. */}
+                <div className="overflow-auto max-h-[68vh] border border-neutral-800 rounded-lg mb-3">
+                  <table className="border-collapse w-full min-w-max">
+                    <thead>
+                      <tr>
+                        <th className="sticky top-0 left-0 z-30 bg-neutral-900 border-b border-r border-neutral-800 px-3 py-2 text-left text-[10px] font-semibold uppercase tracking-[0.14em] text-neutral-400">
+                          Player
+                        </th>
+                        {statColumns.map(function(col) {
+                          return (
+                            <th key={col} title={statFull(col)} className="sticky top-0 z-20 bg-neutral-900 border-b border-l border-neutral-800 px-2 py-2 text-[10px] font-semibold uppercase tracking-wide text-neutral-400 text-right whitespace-nowrap">
+                              {statLabel(col)}
+                            </th>
+                          )
+                        })}
+                        <th className="sticky top-0 z-20 bg-neutral-900 border-b border-neutral-800 w-8"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {extracted.player_stats.map(function(p, idx) {
+                        return (
+                          <tr key={idx} className="group">
+                            <th scope="row" className="sticky left-0 z-10 bg-neutral-950 border-b border-r border-neutral-800 p-0 text-left font-normal">
+                              <div className="flex items-center gap-1.5 pl-1 pr-2">
+                                <input
+                                  type="text"
+                                  value={p.name || ''}
+                                  onChange={(e) => updatePlayerName(idx, e.target.value)}
+                                  placeholder="Player"
+                                  className="w-40 bg-transparent px-2 py-1.5 text-sm font-medium text-neutral-100 rounded outline-none focus:bg-neutral-800 placeholder:text-neutral-700"
+                                />
+                                {p.position && <span className="text-neutral-600 text-[9px] font-semibold uppercase tracking-wide">{p.position}</span>}
+                              </div>
+                            </th>
+                            {statColumns.map(function(col) {
+                              const v = p.stats ? p.stats[col] : undefined
+                              return (
+                                <td key={col} className="border-b border-l border-neutral-800/70 p-0">
+                                  <input
+                                    type="number"
+                                    step={col === 'avg_rating' ? '0.1' : '1'}
+                                    value={v !== null && v !== undefined ? v : ''}
+                                    onChange={(e) => updatePlayerStat(idx, col, e.target.value)}
+                                    className="w-16 bg-transparent px-2 py-1.5 text-right text-sm tabular-nums text-neutral-200 outline-none focus:bg-neutral-800 focus:ring-1 focus:ring-inset focus:ring-violet-500"
+                                  />
+                                </td>
+                              )
+                            })}
+                            <td className="border-b border-neutral-800/70 text-center px-1">
+                              <button
+                                onClick={() => removePlayerRow(idx)}
+                                title="Remove row"
+                                className="text-neutral-700 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity text-base leading-none"
+                              >
+                                &times;
+                              </button>
+                            </td>
+                          </tr>
+                        )
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+
+                <button
+                  onClick={() => addPlayerRow(statColumns)}
+                  className="text-violet-400 hover:text-violet-300 text-[11px] font-semibold uppercase tracking-[0.14em] mb-6 transition-colors"
+                >
+                  + Add player
+                </button>
               </>
             )}
 
