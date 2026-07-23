@@ -2385,6 +2385,16 @@ export default function FranchisePage() {
           const depthGroups = POS_ORDER.map(function(pos) {
             return { pos: pos, list: byOvr.filter(function(p) { return (p.position || '').toUpperCase() === pos }) }
           }).filter(function(g) { return g.list.length > 0 })
+          // Depth chart, grouped into units and ranked within each position (1 =
+          // starter). byPos keeps the OVR-sorted list per position code.
+          const byPos = {}
+          depthGroups.forEach(function(g) { byPos[g.pos] = g.list })
+          const DEPTH_UNITS = [
+            { key: 'gk', label: 'Goalkeepers', pos: ['GK'] },
+            { key: 'def', label: 'Defence', pos: ['RB', 'RWB', 'CB', 'LB', 'LWB'] },
+            { key: 'mid', label: 'Midfield', pos: ['CDM', 'CM', 'CAM', 'RM', 'LM'] },
+            { key: 'att', label: 'Attack', pos: ['RW', 'LW', 'CF', 'ST'] }
+          ]
 
           const shortName = function(n) { const parts = (n || '').trim().split(/\s+/); return parts.length > 1 ? parts[parts.length - 1] : (n || '') }
 
@@ -2441,7 +2451,7 @@ export default function FranchisePage() {
                     </select>
                   </label>
                 </div>
-                <div className="relative w-full rounded-xl overflow-hidden ring-1 ring-emerald-900/60" style={{ aspectRatio: '4 / 5', background: 'linear-gradient(0deg, #0c3d22, #0a3620)' }}>
+                <div className="relative w-full max-w-[430px] mx-auto rounded-xl overflow-hidden ring-1 ring-emerald-900/60" style={{ aspectRatio: '3 / 4', background: 'linear-gradient(0deg, #0c3d22, #0a3620)' }}>
                   <div className="absolute inset-0 pointer-events-none" style={{ background: 'repeating-linear-gradient(0deg, rgba(255,255,255,0.035) 0, rgba(255,255,255,0.035) 9%, rgba(0,0,0,0.03) 9%, rgba(0,0,0,0.03) 18%)' }} />
                   <div className="absolute inset-3 border border-white/15 rounded-sm pointer-events-none" />
                   <div className="absolute left-3 right-3 top-1/2 border-t border-white/15 pointer-events-none" />
@@ -2459,27 +2469,44 @@ export default function FranchisePage() {
                 </div>
               </div>
               <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-2xl p-6">
-                <p className="text-violet-300 text-[11px] font-semibold uppercase tracking-[0.16em] mb-4">Positional Depth</p>
-                <div className="space-y-3">
-                  {depthGroups.map(function(g) {
-                    return (
-                      <div key={g.pos} className="flex items-start gap-3">
-                        <span className="w-10 shrink-0 text-neutral-400 text-xs font-bold uppercase pt-0.5">{g.pos}</span>
-                        <div className="flex flex-wrap gap-x-3 gap-y-1">
-                          {g.list.map(function(p, i) {
-                            return (
-                              <span key={p.id} className="text-xs whitespace-nowrap">
-                                <span className={i === 0 ? 'text-neutral-100 font-semibold' : 'text-neutral-400'}>{p.name}</span>
-                                <span className={'ml-1 font-bold tabular-nums ' + statTextColor(p.overall_rating)}>{p.overall_rating != null ? p.overall_rating : '-'}</span>
-                              </span>
-                            )
-                          })}
+                <p className="text-violet-300 text-[11px] font-semibold uppercase tracking-[0.16em] mb-4">Depth Chart</p>
+                {depthGroups.length === 0 ? (
+                  <p className="text-neutral-500 text-sm">No players yet.</p>
+                ) : (
+                  <div className="space-y-5">
+                    {DEPTH_UNITS.map(function(unit) {
+                      const posInUnit = unit.pos.filter(function(pos) { return byPos[pos] && byPos[pos].length })
+                      if (posInUnit.length === 0) return null
+                      return (
+                        <div key={unit.key}>
+                          <p className="text-neutral-600 text-[9px] font-bold uppercase tracking-[0.18em] mb-2">{unit.label}</p>
+                          <div className="space-y-2.5">
+                            {posInUnit.map(function(pos) {
+                              return (
+                                <div key={pos} className="flex gap-3">
+                                  <span className="w-9 shrink-0 text-neutral-500 text-[11px] font-bold uppercase pt-1.5">{pos}</span>
+                                  <div className="flex-1 min-w-0 divide-y divide-neutral-800/70">
+                                    {byPos[pos].map(function(p, i) {
+                                      return (
+                                        <div key={p.id} className="flex items-center justify-between gap-2 py-1.5">
+                                          <div className="flex items-center gap-2 min-w-0">
+                                            <span className={'text-[9px] font-bold w-3 text-center shrink-0 ' + (i === 0 ? 'text-violet-300' : 'text-neutral-600')}>{i + 1}</span>
+                                            <span className={'truncate text-xs ' + (i === 0 ? 'text-neutral-100 font-semibold' : 'text-neutral-400')}>{p.name}</span>
+                                          </div>
+                                          <span className={'text-xs font-bold tabular-nums shrink-0 ' + statTextColor(p.overall_rating)}>{p.overall_rating != null ? p.overall_rating : '-'}</span>
+                                        </div>
+                                      )
+                                    })}
+                                  </div>
+                                </div>
+                              )
+                            })}
+                          </div>
                         </div>
-                      </div>
-                    )
-                  })}
-                  {depthGroups.length === 0 && <p className="text-neutral-500 text-sm">No players yet.</p>}
-                </div>
+                      )
+                    })}
+                  </div>
+                )}
               </div>
             </div>
           )
