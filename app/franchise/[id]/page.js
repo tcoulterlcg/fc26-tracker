@@ -2386,13 +2386,44 @@ export default function FranchisePage() {
             return { pos: pos, list: byOvr.filter(function(p) { return (p.position || '').toUpperCase() === pos }) }
           }).filter(function(g) { return g.list.length > 0 })
 
-          const Chip = function(props) {
+          const shortName = function(n) { const parts = (n || '').trim().split(/\s+/); return parts.length > 1 ? parts[parts.length - 1] : (n || '') }
+
+          // FIFA-style pitch: lay each line out as evenly-spaced tokens, attack at
+          // the top (low y%) down to the keeper at the bottom. Even horizontal
+          // spread gives the wide fullback / wide winger look across every shape.
+          const tokens = []
+          const place = function(arr, y) { const n = arr.length; arr.forEach(function(p, j) { tokens.push({ p: p, x: (j + 1) / (n + 1) * 100, y: y }) }) }
+          place(attP, 13)
+          if (midSplit.length <= 1) { if (midSplit[0]) place(midSplit[0], 45) }
+          else midSplit.forEach(function(row, i) { place(row, 58 - i * (26 / (midSplit.length - 1))) })
+          place(defP, 72)
+          place(gkP, 90)
+
+          const PitchToken = function(props) {
+            const p = props.p
+            const gk = (p.position || '').toUpperCase() === 'GK'
+            return (
+              <div className="absolute flex flex-col items-center" style={{ left: props.x + '%', top: props.y + '%', transform: 'translate(-50%, -50%)' }}>
+                <div className="relative">
+                  <div className={'w-11 h-11 md:w-12 md:h-12 rounded-full flex items-center justify-center shadow-lg ring-1 ' + (gk ? 'bg-gradient-to-b from-amber-400 to-amber-600 ring-amber-200/50' : 'bg-gradient-to-b from-violet-400 to-violet-600 ring-violet-200/50')}>
+                    <span className="text-white text-base md:text-lg font-black tabular-nums" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.55)' }}>{p.overall_rating != null ? p.overall_rating : '-'}</span>
+                  </div>
+                  <span className="absolute -top-1.5 -right-1.5 bg-neutral-950 text-[8px] font-bold uppercase text-violet-200 px-1 py-0.5 rounded leading-none ring-1 ring-white/10">{p.position}</span>
+                </div>
+                <span className="mt-1 px-1.5 py-0.5 rounded bg-black/75 text-white text-[10px] font-semibold whitespace-nowrap max-w-[96px] truncate leading-none">{shortName(p.name)}</span>
+              </div>
+            )
+          }
+
+          const BenchChip = function(props) {
             const p = props.p
             return (
-              <div className="flex flex-col items-center gap-1 w-24">
-                <span className={'text-lg font-bold tabular-nums leading-none ' + statTextColor(p.overall_rating)}>{p.overall_rating != null ? p.overall_rating : '-'}</span>
-                <span className="text-[11px] font-semibold text-neutral-100 text-center leading-tight">{p.name}</span>
-                <span className="text-[9px] font-semibold uppercase tracking-wide text-violet-300">{p.position}</span>
+              <div className="flex flex-col items-center w-16">
+                <div className="w-9 h-9 rounded-full bg-neutral-800 ring-1 ring-neutral-700 flex items-center justify-center">
+                  <span className={'text-xs font-bold tabular-nums ' + statTextColor(p.overall_rating)}>{p.overall_rating != null ? p.overall_rating : '-'}</span>
+                </div>
+                <span className="mt-1 text-[9px] text-neutral-300 text-center leading-tight truncate w-full">{shortName(p.name)}</span>
+                <span className="text-[8px] text-violet-300 font-semibold uppercase leading-none">{p.position}</span>
               </div>
             )
           }
@@ -2410,15 +2441,21 @@ export default function FranchisePage() {
                     </select>
                   </label>
                 </div>
-                <div className="space-y-7">
-                  <div className="flex justify-center gap-6 flex-wrap">{attP.map(function(p) { return <Chip key={p.id} p={p} /> })}</div>
-                  {midSplit.slice().reverse().map(function(row, ri) { return <div key={ri} className="flex justify-center gap-6 flex-wrap">{row.map(function(p) { return <Chip key={p.id} p={p} /> })}</div> })}
-                  <div className="flex justify-center gap-4 flex-wrap">{defP.map(function(p) { return <Chip key={p.id} p={p} /> })}</div>
-                  <div className="flex justify-center">{gkP.map(function(p) { return <Chip key={p.id} p={p} /> })}</div>
+                <div className="relative w-full rounded-xl overflow-hidden ring-1 ring-emerald-900/60" style={{ aspectRatio: '4 / 5', background: 'linear-gradient(0deg, #0c3d22, #0a3620)' }}>
+                  <div className="absolute inset-0 pointer-events-none" style={{ background: 'repeating-linear-gradient(0deg, rgba(255,255,255,0.035) 0, rgba(255,255,255,0.035) 9%, rgba(0,0,0,0.03) 9%, rgba(0,0,0,0.03) 18%)' }} />
+                  <div className="absolute inset-3 border border-white/15 rounded-sm pointer-events-none" />
+                  <div className="absolute left-3 right-3 top-1/2 border-t border-white/15 pointer-events-none" />
+                  <div className="absolute left-1/2 top-1/2 w-24 h-24 rounded-full border border-white/15 pointer-events-none" style={{ transform: 'translate(-50%, -50%)' }} />
+                  <div className="absolute left-1/2 top-1/2 w-1.5 h-1.5 rounded-full bg-white/25 pointer-events-none" style={{ transform: 'translate(-50%, -50%)' }} />
+                  <div className="absolute left-1/2 -translate-x-1/2 top-3 w-2/5 h-[13%] border border-t-0 border-white/15 pointer-events-none" />
+                  <div className="absolute left-1/2 -translate-x-1/2 bottom-3 w-2/5 h-[13%] border border-b-0 border-white/15 pointer-events-none" />
+                  <div className="absolute left-1/2 -translate-x-1/2 top-3 w-1/5 h-[6%] border border-t-0 border-white/15 pointer-events-none" />
+                  <div className="absolute left-1/2 -translate-x-1/2 bottom-3 w-1/5 h-[6%] border border-b-0 border-white/15 pointer-events-none" />
+                  {tokens.map(function(t) { return <PitchToken key={t.p.id} p={t.p} x={t.x} y={t.y} /> })}
                 </div>
-                <div className="mt-7 pt-5 border-t border-neutral-800">
+                <div className="mt-5 pt-4 border-t border-neutral-800">
                   <p className="text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-3">Bench</p>
-                  <div className="flex gap-4 flex-wrap">{bench.map(function(p) { return <Chip key={p.id} p={p} /> })}</div>
+                  <div className="flex gap-3 flex-wrap justify-center sm:justify-start">{bench.map(function(p) { return <BenchChip key={p.id} p={p} /> })}</div>
                 </div>
               </div>
               <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-2xl p-6">
