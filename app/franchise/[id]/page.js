@@ -2380,7 +2380,9 @@ export default function FranchisePage() {
           const midSplit = []; let mi = 0; for (const c of midRows) { midSplit.push(midP.slice(mi, mi + c)); mi += c }
           const xi = [].concat(gkP, defP, midP, attP)
           const xiIds = new Set(xi.map(function(p) { return p.id }))
-          const bench = byOvr.filter(function(p) { return !xiIds.has(p.id) }).slice(0, 7)
+          const nonStarters = byOvr.filter(function(p) { return !xiIds.has(p.id) })
+          const bench = nonStarters.slice(0, 7)
+          const reserves = nonStarters.slice(7)
           const POS_ORDER = ['GK', 'RB', 'RWB', 'CB', 'LB', 'LWB', 'CDM', 'CM', 'CAM', 'LM', 'RM', 'LW', 'RW', 'CF', 'ST']
           const depthGroups = POS_ORDER.map(function(pos) {
             return { pos: pos, list: byOvr.filter(function(p) { return (p.position || '').toUpperCase() === pos }) }
@@ -2467,6 +2469,12 @@ export default function FranchisePage() {
                   <p className="text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-3">Bench</p>
                   <div className="flex gap-3 flex-wrap justify-center sm:justify-start">{bench.map(function(p) { return <BenchChip key={p.id} p={p} /> })}</div>
                 </div>
+                {reserves.length > 0 && (
+                  <div className="mt-5 pt-4 border-t border-neutral-800">
+                    <p className="text-neutral-500 text-[10px] font-semibold uppercase tracking-[0.14em] mb-3">Reserves</p>
+                    <div className="flex gap-3 flex-wrap justify-center sm:justify-start">{reserves.map(function(p) { return <BenchChip key={p.id} p={p} /> })}</div>
+                  </div>
+                )}
               </div>
               <div className="bg-gradient-to-br from-violet-600/10 via-neutral-900 to-neutral-900 border border-neutral-800 rounded-2xl p-6">
                 <p className="text-violet-300 text-[11px] font-semibold uppercase tracking-[0.16em] mb-4">Depth Chart</p>
